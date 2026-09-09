@@ -1,0 +1,8 @@
+import { createRoot } from "react-dom/client";
+import "./style.css";
+
+const assets = [
+  ["BTC", "Bitcoin", "$65,101", "+1.82%", "$1.28T"], ["ETH", "Ethereum", "$3,204", "-0.60%", "$385B"], ["SOL", "Solana", "$145.20", "+2.40%", "$68B"], ["BNB", "BNB", "$598.40", "+0.51%", "$87B"],
+];
+function App() { return <div className="shell"><aside><b>◆ CRYPTO//PANEL</b><nav><a className="on">Overview</a><a>Assets</a><a>Analytics</a><a>Watchlist</a></nav><small>DATA REFRESH<br/><strong>05:00 MINUTES</strong><br/>USD · ENGLISH</small></aside><main><header><div><label>MARKET TERMINAL</label><h1>Overview</h1></div><div className="live">● LIVE DATA <button>Sign out</button></div></header><section className="kpis"><Card t="Global market cap" v="$2.43T"/><Card t="24h volume" v="$84.2B"/><Card t="BTC dominance" v="52.7%"/><Card t="Market breadth" v="68 ↑ / 31 ↓"/></section><section className="panel"><div className="panelhead"><h2>Top assets</h2><span>CoinGecko Basic · Top 100 by market cap</span></div><div className="row head"><span># Asset</span><span>Price</span><span>24h</span><span>Market cap</span><span>RSI 14</span></div>{assets.map((a,i)=><div className="row" key={a[0]}><span><i>{i+1}</i> <b>{a[0]}</b> <em>{a[1]}</em></span><span>{a[2]}</span><span className={a[3][0]==="-"?"down":"up"}>{a[3]}</span><span>{a[4]}</span><span>—</span></div>)}</section><footer>NOT INVESTMENT ADVICE · All metrics identify source, observation time, coverage and stale status.</footer></main></div> }
+function Card({t,v}:{t:string;v:string}) { return <article><span>{t}</span><strong>{v}</strong></article> } createRoot(document.getElementById("root")!).render(<App/>);

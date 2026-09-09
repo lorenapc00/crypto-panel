@@ -1,0 +1,5 @@
+{
+  "name": "@crypto-panel/api", "private": true, "type": "module",
+  "scripts": { "dev": "tsx watch src/server.ts", "build": "tsc -p tsconfig.json", "test": "node --test" },
+  "devDependencies": { "tsx": "^4.19.0", "typescript": "^5.6.0", "@types/node": "^22.0.0" }
+}

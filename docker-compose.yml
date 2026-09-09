@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: { POSTGRES_DB: crypto_panel, POSTGRES_USER: crypto_panel, POSTGRES_PASSWORD: crypto_panel_dev }
+    ports: ["127.0.0.1:5432:5432"]
+  redis:
+    image: redis:7-alpine
+    ports: ["127.0.0.1:6379:6379"]
+  mailpit:
+    image: axllent/mailpit:v1.20
+    ports: ["127.0.0.1:8025:8025", "127.0.0.1:1025:1025"]
