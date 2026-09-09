@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-09-09",
+  "planningMonthDays": 31,
+  "status": "design-budget-not-yet-enforced-by-a-worker",
+  "assumptions": {
+    "marketUniverseSize": 1000,
+    "marketPageSize": 250,
+    "hyperliquidNamespaces": 11,
+    "orderBooksPerHour": 20,
+    "fundingMarketsPerHour": 20,
+    "defillamaProtocols": 20,
+    "spotTokensEnrichedPerHour": 40
+  },
+  "providers": [
+    {
+      "id": "coingecko",
+      "documentedLimit": {
+        "requestsPerMinute": 100,
+        "requestsPerMonth": 10000,
+        "appliesTo": "Authenticated Demo only; keyless IP limits are dynamic",
+        "source": "https://www.coingecko.com/en/api/pricing"
+      },
+      "localLimit": {
+        "requestsPerMinute": 5,
+        "requestsPerMonth": 6000
+      },
+      "jobs": [
+        {
+          "id": "market-pages",
+          "requestsPerCycle": 4,
+          "cyclesPerDay": 24
+        },
+        {
+          "id": "global",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 24
+        },
+        {
+          "id": "priority-daily-charts",
+          "requestsPerCycle": 4,
+          "cyclesPerDay": 1
+        },
+        {
+          "id": "category-catalog",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        }
+      ],
+      "bootstrapRequests": 1000,
+      "notes": "Backfill at most 1000 assets once, queued within the same monthly cap. Retain daily samples from hourly snapshots thereafter; do not request daily history per asset. Failures/retries and probes consume the same reserve. Revalidate Demo access with a free key before expanding to this universe."
+    },
+    {
+      "id": "coinmetrics",
+      "documentedLimit": {
+        "requestsPerWindow": 10,
+        "windowSeconds": 6,
+        "source": "https://docs.coinmetrics.io/api"
+      },
+      "localLimit": {
+        "requestsPerMinute": 30,
+        "requestsPerMonth": 100
+      },
+      "jobs": [
+        {
+          "id": "btc-metric-batch",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        }
+      ],
+      "bootstrapRequests": 1,
+      "notes": "One full BTC batch fits within 10000 rows now. Follow pagination and recalculate if this changes. GitHub archive is a manual fallback, not the daily feed."
+    },
+    {
+      "id": "defillama",
+      "documentedLimit": {
+        "requestsPerMinute": null,
+        "source": "https://raw.githubusercontent.com/DefiLlama/api-docs/main/llms.txt",
+        "note": "Free limit described as Standard, without a numeric guarantee."
+      },
+      "localLimit": {
+        "requestsPerMinute": 10,
+        "requestsPerMonth": 4000
+      },
+      "jobs": [
+        {
+          "id": "protocol-catalog",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        },
+        {
+          "id": "open-interest-aggregate",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        },
+        {
+          "id": "stablecoin-history",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        },
+        {
+          "id": "protocol-fees-revenue-holder-revenue-tvl",
+          "requestsPerCycle": 80,
+          "cyclesPerDay": 1
+        },
+        {
+          "id": "eth-sol-chain-fees-tvl",
+          "requestsPerCycle": 4,
+          "cyclesPerDay": 1
+        }
+      ],
+      "bootstrapRequests": 0,
+      "notes": "20 selected protocols x 4 metrics; success for Hyperliquid does not establish coverage for all peers. Each metric independently unavailable on failed verification. Full histories arrive in the scheduled summary calls. Paid perp-volume calls are excluded."
+    },
+    {
+      "id": "hyperliquid",
+      "documentedLimit": {
+        "weightPerMinute": 1200,
+        "source": "https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/rate-limits-and-user-limits"
+      },
+      "localLimit": {
+        "weightPerMinute": 300,
+        "requestsPerMonth": 50000
+      },
+      "jobs": [
+        {
+          "id": "namespace-catalog",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 24,
+          "weightPerRequest": 20
+        },
+        {
+          "id": "namespace-contexts",
+          "requestsPerCycle": 11,
+          "cyclesPerDay": 24,
+          "weightPerRequest": 20
+        },
+        {
+          "id": "selected-order-books",
+          "requestsPerCycle": 20,
+          "cyclesPerDay": 24,
+          "weightPerRequest": 2
+        },
+        {
+          "id": "selected-funding-history",
+          "requestsPerCycle": 20,
+          "cyclesPerDay": 24,
+          "weightPerRequest": 21
+        }
+      ],
+      "bootstrapRequests": 0,
+      "notes": "Funding estimate requests only the last two hours (20 base weight plus one response-item increment). Longer history needs a separate weighted backfill budget. Recompute when namespace count or selected markets changes; preserve explicit coverage."
+    },
+    {
+      "id": "geckoterminal",
+      "documentedLimit": {
+        "requestsPerMinute": 10,
+        "approximate": true,
+        "source": "https://api.geckoterminal.com/docs/index.html"
+      },
+      "localLimit": {
+        "requestsPerMinute": 5,
+        "requestsPerMonth": 30000
+      },
+      "jobs": [
+        {
+          "id": "solana-base-latest-pools",
+          "requestsPerCycle": 2,
+          "cyclesPerDay": 288
+        }
+      ],
+      "bootstrapRequests": 0,
+      "notes": "First page of 20 pools per chain every 5 minutes; sampled discovery with no completeness promise. Additional pages require an explicit budget update."
+    },
+    {
+      "id": "dexscreener",
+      "documentedLimit": {
+        "requestsPerMinute": 60,
+        "marketDataRequestsPerMinute": 300,
+        "source": "https://docs.dexscreener.com/api/reference"
+      },
+      "localLimit": {
+        "requestsPerMinute": 30,
+        "requestsPerMonth": 80000
+      },
+      "jobs": [
+        {
+          "id": "profiles-and-boosts",
+          "requestsPerCycle": 2,
+          "cyclesPerDay": 24
+        },
+        {
+          "id": "selected-token-pairs",
+          "requestsPerCycle": 40,
+          "cyclesPerDay": 24
+        },
+        {
+          "id": "selected-paid-order-checks",
+          "requestsPerCycle": 40,
+          "cyclesPerDay": 24
+        }
+      ],
+      "bootstrapRequests": 0,
+      "notes": "40 tokens total across Solana/Base per hour, one pair lookup and one paid-order check each. Archive promotion independently from trading evidence."
+    },
+    {
+      "id": "mempool",
+      "documentedLimit": {
+        "requestsPerMinute": null,
+        "source": "https://mempool.space/docs/api/rest",
+        "note": "No numerical free rate guarantee verified."
+      },
+      "localLimit": {
+        "requestsPerMinute": 1,
+        "requestsPerMonth": 1000
+      },
+      "jobs": [
+        {
+          "id": "tip-height",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 24
+        }
+      ],
+      "bootstrapRequests": 0,
+      "notes": "Current tip only; no historical issuance vintages."
+    },
+    {
+      "id": "solana-rpc",
+      "documentedLimit": {
+        "requestsPerWindow": 100,
+        "windowSeconds": 10,
+        "singleMethodRequestsPerWindow": 40,
+        "source": "https://solana.com/docs/references/clusters"
+      },
+      "localLimit": {
+        "requestsPerMinute": 1,
+        "requestsPerMonth": 1000
+      },
+      "jobs": [
+        {
+          "id": "inflation",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 24
+        }
+      ],
+      "bootstrapRequests": 0,
+      "notes": "Public RPC best effort; not a production SLA."
+    },
+    {
+      "id": "fred",
+      "documentedLimit": {
+        "requestsPerMinute": null,
+        "source": "https://fred.stlouisfed.org/docs/api/fred/",
+        "note": "Free key required; numeric limit not verified in this spike."
+      },
+      "localLimit": {
+        "requestsPerMinute": 5,
+        "requestsPerMonth": 250
+      },
+      "jobs": [
+        {
+          "id": "three-series-vintage-window",
+          "requestsPerCycle": 3,
+          "cyclesPerDay": 1
+        }
+      ],
+      "bootstrapRequests": 3,
+      "enabled": false,
+      "notes": "Reserved only. Reprobe DFII10, DTWEXBGS and SP500 with FRED_API_KEY. Verify license and vintage coverage per series. Pagination/revisions may require more calls."
+    },
+    {
+      "id": "glassnode",
+      "documentedLimit": {
+        "requestsPerMinute": null,
+        "source": "https://docs.glassnode.com/basic-api/endpoints/indicators"
+      },
+      "localLimit": {
+        "requestsPerMinute": 0,
+        "requestsPerMonth": 0
+      },
+      "jobs": [],
+      "bootstrapRequests": 0,
+      "enabled": false,
+      "notes": "No verified free credentials/feed for required holder metrics; no scheduled requests."
+    }
+  ]
+}

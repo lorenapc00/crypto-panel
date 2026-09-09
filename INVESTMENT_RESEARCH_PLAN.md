@@ -1,5 +1,7 @@
 # Crypto Panel: investment research, BTC cycles, and altcoin discovery
 
+**Progress — 2026-09-09:** stage 0 is complete as a capability decision. The [capability manifest](docs/data/CAPABILITY_MANIFEST.md), dated HTTP evidence, repeatable probe, and [executable quota budget](docs/data/quota-budget.json) now constrain this plan. Stage 1 is next; the scheduled archive and new interfaces have not been implemented. The 1,000-asset CoinGecko expansion remains conditional on verifying a free Demo key; macro and unsupported feeds stay gated.
+
 ## 1. Product direction and priorities
 
 Build a personal research workspace that answers four questions:
@@ -11,7 +13,7 @@ Build a personal research workspace that answers four questions:
 
 Agreed defaults: weeks-to-years investment horizon; daily/weekly analysis; free data first; explainable signals; separate emerging-project and early-launch tracks. Prioritize both new perp DEX projects/tokens (including pre-token projects) and newly listed perpetual markets within Early Launches. Solana and Base remain the initial chains for general spot-token launches; perp DEX coverage follows supported protocols and venues across chains. Portfolio tracking, trade execution, and multi-user accounts are outside this version.
 
-The current React/TypeScript/PostgreSQL stack is sufficient. Keep it. But this plan describes a platform that does not exist yet, not a reorganization of one that does. The repository today is a working prototype of roughly 1,980 lines: about 570 lines of API across eight files, a single 822-line `main.tsx`, and 536 lines of global CSS. There is no worker, no authentication, no HTTP router, no request validation, no migration versioning, no chart library, and no lint or CI. `packages/shared/` is an empty directory without a `package.json`. Everything below §1 is new construction.
+The current React/TypeScript/PostgreSQL stack is sufficient. Keep it. But this plan describes a platform that does not exist yet, not a reorganization of one that does. Before stage 0 tooling, the repository was a working prototype of roughly 1,980 lines: about 570 lines of API across eight files, a single 822-line `main.tsx`, and 536 lines of global CSS. There is still no worker, no authentication, no HTTP router, no request validation, no migration versioning, no chart library, and no lint or CI. `packages/shared/` is an empty directory without a `package.json`. The application features below remain new construction.
 
 ### Correctness issues that must come first
 
@@ -31,7 +33,7 @@ The following are confirmed in the current code and block anything built on top 
 - **Asset taxonomy is a hardcoded ten-entry TypeScript object**, while the `assets.category` column exists in the schema and is always written `null`.
 - **There is no authentication despite the README's claim.** The development session endpoint mints a token for any email address, its `expiresAt` is never enforced, and `access-control-allow-origin: *` is returned on every response.
 
-The five existing tests cover indicator arithmetic and tokenomics derivation only. They may not run at all: the test script globs `src/**/*.test.ts`, and under `sh` the `**` degrades to `*`, expanding to `src/*/*.test.ts`, which matches nothing because both test files sit directly in `src/`. Verify the suite executes before trusting it.
+The five original API tests cover indicator arithmetic and tokenomics derivation only. Stage 0 verified that all five execute on the installed Node 26/tsx toolchain and that the build passes; the suspected glob failure did not reproduce there. Twelve additional tests cover capability evidence and quota decisions. Stage 1 still needs portable test discovery and an asserted execution count, alongside the application-level regression cases below.
 
 ## 2. Overall experience and important KPIs
 
@@ -39,7 +41,7 @@ Use five primary tabs, with a persistent research watchlist and a secondary Data
 
 | Workspace | Main purpose | Proposed content |
 |---|---|---|
-| Market Overview | Understand conditions and changes | BTC regime summary, market breadth, liquidity, sector leadership, notable signal changes |
+| Market Overview | Understand conditions and changes | BTC regime summary, market breadth, liquidity, notable signal changes; sector leadership after taxonomy coverage is verified |
 | BTC Cycles | Evaluate trend and cycle conditions | Long-term charts, valuation, holders, leverage, macro, historical cycle comparisons |
 | Altcoin Discovery | Find evidence-backed candidates | Emerging Projects and Early Launches; prioritize Perp DEX Projects and New Perp Listings, with separate filters, evidence, risk flags, and historical outcomes |
 | Asset Research | Investigate a candidate | Price, relative strength, fundamentals, token value capture, dilution, peers, thesis notes |
@@ -66,15 +68,19 @@ This system's value rests on an archive accumulating unattended, so Data Health 
 
 ### Market and asset KPI priorities
 
+The following is the initial build shortlist after stage 0. Accessible endpoints are not implemented adapters: verify each asset/protocol's coverage and metric definition before exposing it.
+
 | Category | KPIs to add | Decision supported |
 |---|---|---|
-| Market participation | True market cap and BTC dominance; percentage above 50D/200D averages; advance/decline breadth; sector returns | Is strength broadening or concentrated? |
-| Relative performance | 7D/30D/90D returns in USD and versus BTC; sector-relative returns | Is an altcoin outperforming the opportunity cost of holding BTC? |
-| Liquidity | Stablecoin supply and 30D change; spot volume trends; spreads, depth, and estimated trade impact where available | Is capital entering, and can a position realistically be traded? |
+| Market participation | Provider global market cap and BTC dominance; percentage above 50D/200D averages where complete history exists; advance/decline breadth within archived membership | Is strength broadening or concentrated? |
+| Relative performance | 7D/30D/90D returns in USD and versus BTC from aligned completed daily price samples | Is an altcoin outperforming the opportunity cost of holding BTC? |
+| Liquidity | Covered USD-pegged stablecoin supply and 30D change; sampled reported 24H volume trends; selected Hyperliquid order-book spreads, depth and estimated impact | Is capital entering, and can a position realistically be traded? |
 | Risk | 30D/90D realized volatility, maximum drawdown, recovery time, BTC correlation and beta | How much downside and shared market exposure exists? |
-| Adoption | Fees, protocol revenue, trading/borrowing activity, active addresses, retention where supported, TVL and net inflows | Is usage growing beyond price speculation? |
-| Token economics | Circulating/total/max supply; FDV/market cap; 30D/90D unlocks as percentage of circulating supply; net issuance | Could dilution offset business growth? |
-| Value capture | Revenue reaching token holders, distributions, buybacks, sector-relative valuation multiples | Does protocol success benefit the token? |
+| Adoption | Scoped DefiLlama fees, retained revenue and TVL histories; BTC active addresses where useful, labeled as addresses | Is usage growing beyond price speculation? |
+| Token economics | Circulating/total/max supply; FDV/market cap; observed BTC subsidy era and Solana inflation parameter, distinguished from realized net issuance | Could dilution offset business growth? |
+| Value capture | Provider-defined holder revenue for individually verified protocols, with recipient/mechanism and coverage | Does protocol success benefit the token? |
+
+Deferred from the initial interface: sector-relative returns/multiples until asset-sector mappings and membership are verified; broad perp-volume/share comparisons; retention, protocol active users, net inflows, unlock schedules and general net issuance; separate buyback/distribution amounts without verified mechanism-level data. Do not design populated metric rows for these feeds yet.
 
 Use trailing 30D/90D fundamentals and their growth rates; avoid annualizing one unusually strong day. Compare like-for-like sectors. Addresses are not users, TVL growth is not necessarily net inflow, and protocol revenue is not automatically token-holder income.
 
@@ -87,13 +93,14 @@ The BTC page should separate **trend**, **valuation**, **positioning**, and **li
 | Lens | Metrics | Interpretation |
 |---|---|---|
 | Trend | 50D/200D SMA, 20W SMA/21W EMA, 200W SMA, moving-average slopes, weekly RSI, drawdown from ATH | Direction, durability, and distance from long-term reference levels |
-| Valuation | Realized price, MVRV, MVRV Z-score, NUPL, Mayer Multiple | Price relative to on-chain cost-basis proxies and its own history |
-| Holder behavior | SOPR/aSOPR, short-/long-term holder realized prices, supply in profit, realized profit/loss, holder supply changes | Selling pressure, profit-taking, and ownership transitions |
-| Mining | Puell Multiple, hash rate, difficulty, Hash Ribbons | Miner revenue conditions and network stress |
-| Leverage | Funding, open interest and OI/market cap, futures basis, liquidations, options IV/skew | Crowding and vulnerability to forced unwinds |
-| Capital and macro | ETF net flows, stablecoin supply change, exchange flows, real yields, broad dollar index, equity correlations | Demand and the wider liquidity environment |
+| Valuation | Mayer Multiple; Coin Metrics MVRV; optionally derived realized price using matching market cap, MVRV and circulating supply | Price relative to provider-defined cost-basis proxies and its own history |
+| Mining | Coin Metrics hash rate and USD issuance inputs; observed BTC tip/subsidy era | Network conditions; derived mining signals require separately validated definitions |
+| Leverage | Hyperliquid BTC funding and native-unit OI; estimated quote notional/OI-to-market-cap only with explicit conversion and coverage | Crowding within the covered venue, not market-wide positioning |
+| Capital | Covered USD-pegged stablecoin supply change | One liquidity proxy with declared asset coverage |
 
-Implement price-derived metrics first. Connect on-chain and derivatives metrics individually when coverage is verified; unavailable metrics remain explicitly unavailable. Most of the valuation, holder, and mining rows above — MVRV, NUPL, SOPR, realized price, Puell, Hash Ribbons — plus ETF flows and options IV/skew have no free API. The capability spike in §5 decides which of these survive into the build, and it runs before any of this interface is designed.
+Implement price-derived metrics first. Stage 0 verified free Coin Metrics Community daily BTC price and MVRV from July 2010 through 2026-09-08, plus supply, hash rate, active addresses and USD issuance. Use its API as primary: the sampled GitHub archive's populated metrics stopped on 2026-05-23. Historical downloads are reconstruction, not proof of prior availability. Direct realized-cap, difficulty, miner-revenue, SOPR and NUPL metric requests were denied; do not assume a similarly named metric is interchangeable. [Observed coverage and definitions](docs/data/CAPABILITY_MANIFEST.md#coin-metrics-use-the-community-api-for-btc).
+
+Deferred: MVRV Z-score, NUPL variants, SOPR/aSOPR, holder cohorts/profit metrics, difficulty, Puell/Hash Ribbons until their inputs and methods are specified, futures basis, liquidations, options IV/skew, ETF and exchange flows. Macro inputs (`DFII10`, `DTWEXBGS`, `SP500`) need a free FRED key and successful vintage checks. These are per-feed gates, not a blanket claim that the concepts have no free source.
 
 MVRV, NUPL, and related measures share underlying inputs. Group them as related evidence instead of counting each as an independent bullish or bearish vote. Provider definitions and adjustment methods must remain attached to each series. [Glassnode indicator reference](https://docs.glassnode.com/basic-api/endpoints/indicators)
 
@@ -103,10 +110,10 @@ This is a transparent baseline to test, not a claim that a moving average identi
 
 **Required historical charts:**
 
-- Log BTC price with long-term averages, realized price, halving dates, and regime shading.
+- Log BTC price with long-term averages, halving dates and regime shading; optional derived realized price labeled with its Coin Metrics formula and coverage.
 - Cycle returns normalized to 100 at each halving.
 - Drawdown from running ATH and time to recover.
-- MVRV, SOPR, and other available metrics compared at equivalent cycle stages.
+- MVRV compared at equivalent cycle stages; add other metrics only after their individual access/methodology gates pass.
 - Forward 30D/90D/180D/365D return distributions after selected signals, including downside and sample count.
 
 Allow overlays aligned to historical peaks and troughs, but label those anchors as hindsight-based and exclude them from predictive backtests. Show individual cycles and their actual coverage; do not extrapolate an average cycle into a price target. Pi Cycle and similar historical heuristics belong in an optional research layer.
@@ -117,7 +124,7 @@ Allow overlays aligned to historical peaks and troughs, but label those anchors 
 
 ### Emerging Projects
 
-Expand discovery beyond today's top 100. Default to assets with at least 90 days of price history, market cap of $10M-$2B, and median daily reported volume of at least $1M over 30 days. Exclude stablecoins and duplicate wrapped representations.
+Expand discovery beyond today's top 100 to a budgeted, rank-selected acquisition universe of up to 1,000 assets, conditional on verified Demo access. This is not exhaustive coverage of the market-cap band. Default to assets with at least 90 days of price history, market cap of $10M-$2B, and a 30-day median of reported trailing-24-hour volume samples of at least $1M, sampled at a consistent daily boundary. Exclude stablecoins and duplicate wrapped representations.
 
 These are editable research defaults, not validated investment thresholds. Offer "young projects" as a filter using verified launch dates; keep overlooked older projects discoverable.
 
@@ -125,7 +132,7 @@ Provide separate attention, fundamentals, valuation, and risk columns. The initi
 
 - 40% cross-sectional percentile of 90D excess return over BTC.
 - 30% percentile of 30D excess return over BTC.
-- 30% percentile of recent volume acceleration: average daily volume over 7 days divided by the preceding 30 days.
+- 30% percentile of reported 24H-volume acceleration: the mean of daily sampled trailing-24-hour volumes over 7 days divided by the preceding 30 days. Preserve sampling times; these are not candle-traded volumes.
 
 Compute within the eligible universe on each date. Missing required inputs mean "unranked." Label the result **Attention**, not expected investment return.
 
@@ -160,7 +167,7 @@ Default the early-project filter to verified protocol or token launches within 1
 
 Compare order-book, AMM, and liquidity-pool models within appropriate peer groups. Reported and normalized volume must remain separate series; normalization is provider-defined, not proof that all remaining activity is organic. DefiLlama documents perp volume normalization and separates aggregator volume to avoid double counting. [DefiLlama data definitions](https://docs.llama.fi/analysts/data-definitions)
 
-Start with a sortable evidence table, defaulting to 30D market-share change in percentage points within a consistent covered universe. Require complete comparable windows; otherwise show insufficient history. Show volume, revenue, incentives, risks, and coverage beside the sort value. Each protocol gets a "why watch," contradictory evidence, and milestone history panel; pre-token entries support research watchlisting without simulated token returns.
+Start with a sortable evidence table. **Stage 0 gate:** DefiLlama's perp-volume overview and Hyperliquid volume-summary endpoints returned HTTP 402, while the protocol catalog, OI aggregate and sampled fee/TVL histories were accessible. Initially sort by most recent verified protocol/token milestone, with undated entries last and stable protocol-ID tie-breaking. Keep 30D market-share-change sorting disabled until comparable free volume windows and consistent covered-universe membership are verified. Direct Hyperliquid volume is venue evidence, not a replacement denominator for the protocol universe. Show available revenue, risks, and coverage; missing volume/incentive metrics remain unavailable. Each protocol gets a "why watch," contradictory evidence, and milestone history panel; pre-token entries support research watchlisting without simulated token returns.
 
 #### New Perp Listings
 
@@ -184,7 +191,7 @@ Show liquidity and its change, volume acceleration, buy/sell transaction imbalan
 
 Separate **attention** from **risk status**. Unverified contract checks stay "unknown"; they do not become a passing result. Exclude known sell restrictions and unresolved critical risk flags from the default shortlist, while preserving them in historical records.
 
-Use DEX Screener for pair-level enrichment and explicitly identify paid boosts as promotion. Its documented API exposes paid orders and boosts separately from trading data. [DEX Screener API](https://docs.dexscreener.com/api/reference)
+Use GeckoTerminal's new-pool endpoints for a sampled discovery feed: initially the first 20 pools on each of Solana and Base every five minutes. Stage 0 received both feeds, including missing Base liquidity values that must stay unknown. Use DEX Screener for pair-level enrichment and explicitly identify paid boosts as promotion. Its documented API exposes paid orders and boosts separately from trading data. [GeckoTerminal API](https://api.geckoterminal.com/docs/index.html), [DEX Screener API](https://docs.dexscreener.com/api/reference)
 
 Under the free-first constraint, launch discovery is a sampled radar with declared coverage—not a claim to capture every launch. Start archiving immediately.
 
@@ -238,11 +245,11 @@ Label datasets/results as **point-in-time**, **historical reconstruction**, or *
 
 **Free-first data strategy**
 
-Use CoinGecko for market snapshots, Coin Metrics community data for supported long BTC histories, DefiLlama for accessible fundamentals, and source-specific public feeds for additional context.
+Use CoinGecko for market snapshots, the Coin Metrics Community API for supported long BTC histories, DefiLlama for accessible fundamentals, and source-specific public feeds for additional context. The [stage 0 capability manifest](docs/data/CAPABILITY_MANIFEST.md) records actual endpoint results and controls the initial scope.
 
-For perp discovery, use DefiLlama's covered protocol catalog and accessible volume/fundamental history, then direct venue APIs for listings and market context. Verify free API access per metric; website visibility does not establish free historical API access. Keep reported/normalized volume, OI, and revenue definitions versioned and label every aggregate with its actual venue/protocol coverage. [DefiLlama perp dashboard](https://defillama.com/perps)
+For perp discovery, use DefiLlama's covered protocol catalog and individually verified fundamental histories, then direct venue APIs for listings and market context. Broad perp-volume history is deferred after HTTP 402 responses; website visibility did not establish free API access. Keep reported/normalized volume, OI, and revenue definitions versioned and label every aggregate with its actual venue/protocol coverage. In particular, DefiLlama's documented OI convention counts both sides; do not merge it with direct-venue OI without explicit normalization. [DefiLlama data definitions](https://docs.llama.fi/analysts/data-definitions)
 
-Do not assume the existing CoinGecko feed can supply multiple cycles: Demo historical chart access is restricted to the past 365 days. Coin Metrics provides community archives, but metric coverage must be checked and its noncommercial license recorded. [CoinGecko historical limits](https://docs.coingecko.com/demo/reference/coins-id-market-chart), [Coin Metrics archives](https://github.com/coinmetrics/data)
+Do not assume the existing CoinGecko feed can supply multiple cycles: Demo historical chart access is restricted to the past 365 days. Coin Metrics Community API coverage was verified; its GitHub archive was stale in the sample, so check per-metric freshness before using it as fallback. Retain the noncommercial license and attribution. [CoinGecko historical limits](https://docs.coingecko.com/demo/reference/coins-id-market-chart), [Coin Metrics archives](https://github.com/coinmetrics/data)
 
 Build a capability manifest recording actual endpoints, history, quotas, licensing, and revision behavior. Free credentials are supported; no paid subscriptions are assumed. Unlocks and other advanced fundamentals are gated where free access is unavailable. [DefiLlama API coverage](https://defillama.com/docs/api)
 
@@ -250,9 +257,11 @@ Use ALFRED vintages for macro inputs in historical tests. [ALFRED documentation]
 
 **Rate limits and quota budget**
 
-Provider quotas are the binding constraint on this entire plan, and they are currently unmanaged. Every external call today is unauthenticated free tier — the code calls `api.coingecko.com` rather than the pro host, and the only environment variables read anywhere in the codebase are `DATABASE_URL` and `PORT`. There is no API-key plumbing at all, no retries, no backoff, and no request scheduling; the only throttle is a five-minute module-level cache.
+Provider quotas are the binding constraint on this entire plan, and they are currently unmanaged in the application. Its external calls use unauthenticated public endpoints, and its only environment variables are `DATABASE_URL` and `PORT`. Application adapters still lack API-key plumbing, retries, backoff and request scheduling; the only throttle is a five-minute module-level cache. Stage 0 adds optional free keys and request pacing to the standalone probe only.
 
-Before committing to a universe size, produce a per-provider budget: documented rate limit, calls required per ingestion cycle, cycle frequency, and the resulting headroom. That budget decides whether the §4 eligible universe is 300 assets or 3,000 — it is a product decision disguised as an infrastructure one. Implement ingestion as a queue with a per-provider token bucket, explicit backoff, and recorded quota consumption surfaced on Data Health.
+Stage 0 produced a [per-provider budget](docs/data/quota-budget.json), recalculated by `pnpm research:budget`. The initial CoinGecko design is 1,000 acquired assets at 250 per page, hourly market/global snapshots, four daily priority charts and one category-catalog call. A 31-day month plus 1,000 one-time history calls totals **4,875**; a local 6,000-call ceiling leaves 1,125 for errors/retries and extra lookups. This is conditional on authenticated Demo access, whose documented allowance is 10,000/month; keyless limits remain dynamic. A 3,000-asset equivalent would cost 12,827 and is excluded. Daily per-asset history refetches are excluded too: archive daily samples from snapshots after bootstrap, preserving their distinct source/frequency.
+
+The budget also covers 11 Hyperliquid namespaces hourly, selected books/funding, daily protocol fundamentals and sampled spot discovery. Unknown provider quotas remain unknown; local ceilings are not advertised provider guarantees. Implement ingestion as a queue with per-provider token buckets (weighted for Hyperliquid), monthly ceilings, explicit backoff, and recorded quota consumption surfaced on Data Health. Probe scripts perform bounded checks; they do not implement this production worker.
 
 **Delivery sequence**
 
@@ -267,6 +276,14 @@ Step 0 is a gate, not a deliverable: it produces a decision, and the metric tabl
 | 4 | **Perp discovery interface** | Perp DEX Projects and New Perp Listings views, lifecycle tracking, evidence, risk flags, and in-app alerts, built on data that has been archiving since stage 1. |
 | 5 | **Broader altcoin research** | Emerging Projects and general Solana/Base spot-token launches, evidence panels, sector comparisons, risk filtering. |
 | 6 | **Backtest Lab and expanded evidence** | Historical replay, strategy templates, reproducible reports, coverage-aware results, separate perp-project and listing studies; additional on-chain, unlock, ETF, and derivatives feeds as verified access permits. |
+
+**Execution status**
+
+- [x] Stage 0: repeatable read-only endpoint probes and dated evidence; actual free/denied access and history checks; per-provider budget with bootstrap/retry headroom; prune initial KPI/metric commitments.
+- [x] Verify the original five API tests execute and the application builds; add twelve tests for interval/coverage evidence, credentials, response validation, and quota arithmetic.
+- [ ] Stage 1 next: versioned transactional migrations and quarantine legacy candles before refresh; revision-aware storage, provenance and coverage records.
+- [ ] Stage 1 continued: scheduled worker and quota enforcement; begin protocol/venue/pool archiving with baseline semantics; fix daily calculations, persisted-only reads and research state; Data Health.
+- [ ] Stages 2–6: deliver the remaining interfaces and research tools in the sequence above, subject to the recorded feed gates.
 
 Two ordering decisions are deliberate and depart from an earlier draft of this plan.
 

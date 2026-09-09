@@ -1,0 +1,681 @@
+{
+  "schemaVersion": 1,
+  "description": "Read-only stage-0 samples. Success verifies this payload only, not historical availability or production reliability.",
+  "providerSpacingMs": {
+    "coingecko": 12000,
+    "coinmetrics": 1000,
+    "coinmetrics-archive": 1000,
+    "defillama": 2000,
+    "hyperliquid": 1500,
+    "geckoterminal": 12000,
+    "dexscreener": 1100,
+    "fred": 1000,
+    "glassnode": 1000,
+    "mempool": 1000,
+    "solana-rpc": 1000
+  },
+  "probes": [
+    {
+      "id": "cg-global",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/global",
+      "summary": {
+        "kind": "object",
+        "required": [
+          "data.total_market_cap.usd",
+          "data.market_cap_percentage.btc",
+          "data.updated_at"
+        ]
+      }
+    },
+    {
+      "id": "cg-markets",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h,7d,30d",
+      "summary": {
+        "kind": "rows",
+        "path": [],
+        "fields": [
+          "id",
+          "market_cap",
+          "total_volume",
+          "last_updated"
+        ]
+      }
+    },
+    {
+      "id": "cg-ohlc-90d",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=90",
+      "summary": {
+        "kind": "series",
+        "path": [],
+        "time": 0,
+        "unit": "ms",
+        "metrics": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    {
+      "id": "cg-chart-365d",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365&interval=daily",
+      "summary": {
+        "kind": "cg-chart"
+      }
+    },
+    {
+      "id": "cg-chart-outside-demo",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=730&interval=daily",
+      "summary": {
+        "kind": "cg-chart"
+      }
+    },
+    {
+      "id": "cm-btc-archive",
+      "provider": "coinmetrics-archive",
+      "url": "https://raw.githubusercontent.com/coinmetrics/data/master/csv/btc.csv",
+      "summary": {
+        "kind": "csv",
+        "metrics": [
+          "PriceUSD",
+          "CapMrktCurUSD",
+          "CapRealUSD",
+          "CapMVRVCur",
+          "SplyCur",
+          "HashRate",
+          "DiffMean",
+          "RevUSD",
+          "FeeTotUSD",
+          "AdrActCnt",
+          "SOPR",
+          "NUPL"
+        ]
+      },
+      "format": "csv"
+    },
+    {
+      "id": "cm-PriceUSD",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=PriceUSD&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "PriceUSD"
+        ]
+      }
+    },
+    {
+      "id": "cm-CapRealUSD",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=CapRealUSD&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "CapRealUSD"
+        ]
+      }
+    },
+    {
+      "id": "cm-CapMVRVCur",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=CapMVRVCur&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "CapMVRVCur"
+        ]
+      }
+    },
+    {
+      "id": "cm-SplyCur",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=SplyCur&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "SplyCur"
+        ]
+      }
+    },
+    {
+      "id": "cm-HashRate",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=HashRate&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "HashRate"
+        ]
+      }
+    },
+    {
+      "id": "cm-DiffMean",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=DiffMean&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "DiffMean"
+        ]
+      }
+    },
+    {
+      "id": "cm-RevUSD",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=RevUSD&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "RevUSD"
+        ]
+      }
+    },
+    {
+      "id": "cm-AdrActCnt",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=AdrActCnt&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "AdrActCnt"
+        ]
+      }
+    },
+    {
+      "id": "cm-SOPR",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=SOPR&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "SOPR"
+        ]
+      }
+    },
+    {
+      "id": "cm-NUPL",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=NUPL&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "NUPL"
+        ]
+      }
+    },
+    {
+      "id": "llama-protocols",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/protocols",
+      "summary": {
+        "kind": "rows",
+        "path": [],
+        "fields": [
+          "slug",
+          "category",
+          "gecko_id"
+        ]
+      }
+    },
+    {
+      "id": "llama-perp-volume",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/overview/derivatives?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true",
+      "summary": {
+        "kind": "llama"
+      }
+    },
+    {
+      "id": "llama-hyperliquid-volume",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/summary/derivatives/hyperliquid?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true",
+      "summary": {
+        "kind": "llama"
+      }
+    },
+    {
+      "id": "llama-open-interest",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/overview/open-interest?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true",
+      "summary": {
+        "kind": "llama"
+      }
+    },
+    {
+      "id": "llama-hyperliquid-dailyFees",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/summary/fees/hyperliquid?dataType=dailyFees",
+      "summary": {
+        "kind": "llama"
+      }
+    },
+    {
+      "id": "llama-hyperliquid-dailyRevenue",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/summary/fees/hyperliquid?dataType=dailyRevenue",
+      "summary": {
+        "kind": "llama"
+      }
+    },
+    {
+      "id": "llama-hyperliquid-dailyHoldersRevenue",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/summary/fees/hyperliquid?dataType=dailyHoldersRevenue",
+      "summary": {
+        "kind": "llama"
+      }
+    },
+    {
+      "id": "llama-hyperliquid-tvl",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/protocol/hyperliquid",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "tvl"
+        ],
+        "time": "date",
+        "unit": "s",
+        "metrics": [
+          "totalLiquidityUSD"
+        ]
+      }
+    },
+    {
+      "id": "llama-ethereum-tvl",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/v2/historicalChainTvl/Ethereum",
+      "summary": {
+        "kind": "series",
+        "path": [],
+        "time": "date",
+        "unit": "s",
+        "metrics": [
+          "tvl"
+        ]
+      }
+    },
+    {
+      "id": "llama-stablecoin-supply",
+      "provider": "defillama",
+      "url": "https://stablecoins.llama.fi/stablecoincharts/all",
+      "summary": {
+        "kind": "series",
+        "path": [],
+        "time": "date",
+        "unit": "s",
+        "metrics": [
+          "totalCirculatingUSD.peggedUSD"
+        ]
+      }
+    },
+    {
+      "id": "hl-namespaces",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "summary": {
+        "kind": "namespaces"
+      },
+      "body": {
+        "type": "perpDexs"
+      }
+    },
+    {
+      "id": "hl-contexts-native",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "summary": {
+        "kind": "contexts"
+      },
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": ""
+      }
+    },
+    {
+      "id": "hl-btc-book",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "summary": {
+        "kind": "book"
+      },
+      "body": {
+        "type": "l2Book",
+        "coin": "BTC"
+      }
+    },
+    {
+      "id": "hl-btc-funding",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "summary": {
+        "kind": "series",
+        "path": [],
+        "time": "time",
+        "unit": "ms",
+        "metrics": [
+          "fundingRate",
+          "premium"
+        ]
+      },
+      "body": {
+        "type": "fundingHistory",
+        "coin": "BTC",
+        "startTime": "$sevenDaysAgo"
+      }
+    },
+    {
+      "id": "gecko-solana-new-pools",
+      "provider": "geckoterminal",
+      "url": "https://api.geckoterminal.com/api/v2/networks/solana/new_pools?page=1",
+      "summary": {
+        "kind": "rows",
+        "path": [
+          "data"
+        ],
+        "fields": [
+          "id",
+          "attributes.pool_created_at",
+          "attributes.reserve_in_usd",
+          "attributes.volume_usd.h24"
+        ]
+      }
+    },
+    {
+      "id": "gecko-base-new-pools",
+      "provider": "geckoterminal",
+      "url": "https://api.geckoterminal.com/api/v2/networks/base/new_pools?page=1",
+      "summary": {
+        "kind": "rows",
+        "path": [
+          "data"
+        ],
+        "fields": [
+          "id",
+          "attributes.pool_created_at",
+          "attributes.reserve_in_usd",
+          "attributes.volume_usd.h24"
+        ]
+      }
+    },
+    {
+      "id": "dex-profiles",
+      "provider": "dexscreener",
+      "url": "https://api.dexscreener.com/token-profiles/latest/v1",
+      "summary": {
+        "kind": "rows",
+        "path": [],
+        "fields": [
+          "chainId",
+          "tokenAddress"
+        ]
+      }
+    },
+    {
+      "id": "dex-boosts",
+      "provider": "dexscreener",
+      "url": "https://api.dexscreener.com/token-boosts/latest/v1",
+      "summary": {
+        "kind": "rows",
+        "path": [],
+        "fields": [
+          "chainId",
+          "tokenAddress",
+          "amount"
+        ]
+      }
+    },
+    {
+      "id": "dex-solana-pairs",
+      "provider": "dexscreener",
+      "url": "https://api.dexscreener.com/token-pairs/v1/solana/So11111111111111111111111111111111111111112",
+      "summary": {
+        "kind": "rows",
+        "path": [],
+        "fields": [
+          "pairAddress",
+          "liquidity.usd",
+          "pairCreatedAt",
+          "volume.h24"
+        ]
+      }
+    },
+    {
+      "id": "dex-base-pairs",
+      "provider": "dexscreener",
+      "url": "https://api.dexscreener.com/token-pairs/v1/base/0x4200000000000000000000000000000000000006",
+      "summary": {
+        "kind": "rows",
+        "path": [],
+        "fields": [
+          "pairAddress",
+          "liquidity.usd",
+          "pairCreatedAt",
+          "volume.h24"
+        ]
+      }
+    },
+    {
+      "id": "dex-paid-orders",
+      "provider": "dexscreener",
+      "url": "https://api.dexscreener.com/orders/v1/solana/So11111111111111111111111111111111111111112",
+      "summary": {
+        "kind": "object",
+        "required": [
+          "orders",
+          "boosts"
+        ]
+      }
+    },
+    {
+      "id": "fred-DFII10",
+      "provider": "fred",
+      "url": "https://api.stlouisfed.org/fred/series/observations?series_id=DFII10&file_type=json&observation_start=2020-01-01&observation_end=2020-01-10&vintage_dates=2020-01-15",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "observations"
+        ],
+        "time": "date",
+        "unit": "iso",
+        "metrics": [
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "fred-DTWEXBGS",
+      "provider": "fred",
+      "url": "https://api.stlouisfed.org/fred/series/observations?series_id=DTWEXBGS&file_type=json&observation_start=2020-01-01&observation_end=2020-01-10&vintage_dates=2020-01-15",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "observations"
+        ],
+        "time": "date",
+        "unit": "iso",
+        "metrics": [
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "fred-SP500",
+      "provider": "fred",
+      "url": "https://api.stlouisfed.org/fred/series/observations?series_id=SP500&file_type=json&observation_start=2020-01-01&observation_end=2020-01-10&vintage_dates=2020-01-15",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "observations"
+        ],
+        "time": "date",
+        "unit": "iso",
+        "metrics": [
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "glassnode-sopr",
+      "provider": "glassnode",
+      "url": "https://api.glassnode.com/v1/metrics/indicators/sopr?a=BTC&i=24h&s=1577836800&u=1578614400",
+      "summary": {
+        "kind": "series",
+        "path": [],
+        "time": "t",
+        "unit": "s",
+        "metrics": [
+          "v"
+        ]
+      }
+    },
+    {
+      "id": "mempool-tip",
+      "provider": "mempool",
+      "url": "https://mempool.space/api/blocks/tip/height",
+      "summary": {
+        "kind": "integer"
+      },
+      "format": "text"
+    },
+    {
+      "id": "solana-inflation",
+      "provider": "solana-rpc",
+      "url": "https://api.mainnet-beta.solana.com",
+      "summary": {
+        "kind": "object",
+        "required": [
+          "result.total",
+          "result.epoch"
+        ]
+      },
+      "body": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "getInflationRate",
+        "params": []
+      }
+    },
+    {
+      "id": "cm-btc-core-batch",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=PriceUSD,CapMrktCurUSD,CapMVRVCur,HashRate,SplyCur,AdrActCnt,IssTotUSD&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "summary": {
+        "kind": "series",
+        "path": [
+          "data"
+        ],
+        "time": "time",
+        "unit": "iso",
+        "metrics": [
+          "PriceUSD",
+          "CapMrktCurUSD",
+          "CapMVRVCur",
+          "HashRate",
+          "SplyCur",
+          "AdrActCnt",
+          "IssTotUSD"
+        ]
+      }
+    },
+    {
+      "id": "cg-categories",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/categories/list",
+      "summary": {
+        "kind": "rows",
+        "path": [],
+        "fields": [
+          "category_id",
+          "name"
+        ]
+      }
+    },
+    {
+      "id": "llama-ethereum-fees",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/overview/fees/Ethereum?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true",
+      "summary": {
+        "kind": "llama"
+      }
+    },
+    {
+      "id": "llama-solana-fees",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/overview/fees/Solana?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true",
+      "summary": {
+        "kind": "llama"
+      }
+    },
+    {
+      "id": "llama-solana-tvl",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/v2/historicalChainTvl/Solana",
+      "summary": {
+        "kind": "series",
+        "path": [],
+        "time": "date",
+        "unit": "s",
+        "metrics": [
+          "tvl"
+        ]
+      }
+    }
+  ]
+}

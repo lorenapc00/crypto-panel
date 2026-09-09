@@ -3,3 +3,4 @@ dist/
 *.tsbuildinfo
 .env
 package-lock.json
+.reports/

@@ -1,0 +1,5865 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-09-09T12:00:35.337Z",
+  "manifestSha256": "9dc293f6f2ace6b3ab2baea9bfb4f088cf6226833665b96b788bb13ad711abf8",
+  "classification": "capability-samples-not-an-ingestion-archive",
+  "results": [
+    {
+      "id": "cg-global",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/global",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:35.342Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:00:35 GMT",
+        "etag": "W/\"0ed40fa4101d58d8ce024941b67a293d\""
+      },
+      "bytes": 3673,
+      "sha256": "70dd60df0f02020a3873aea3c4e82d137dea4f43f42035d44aac028812e90ae5",
+      "summary": {
+        "fields": {
+          "data.total_market_cap.usd": 2693088089312.9336,
+          "data.market_cap_percentage.btc": 58.949673977082085,
+          "data.updated_at": 1788954668
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:35.664Z",
+      "durationMs": 319
+    },
+    {
+      "id": "cg-markets",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h,7d,30d",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:37.844Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:00:38 GMT",
+        "etag": "W/\"5f2d0f7d2c66f2e580166efb455bda86\""
+      },
+      "bytes": 234054,
+      "sha256": "dd913f7d2e6baf6cdb7051c1ea7c606ef83ae63c9584d53f1db419c36168dc95",
+      "summary": {
+        "rows": 250,
+        "fields": {
+          "id": {
+            "presentRows": 250
+          },
+          "market_cap": {
+            "presentRows": 250
+          },
+          "total_volume": {
+            "presentRows": 250
+          },
+          "last_updated": {
+            "presentRows": 250
+          }
+        },
+        "sampleIds": [
+          "bitcoin",
+          "ethereum",
+          "tether"
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:38.023Z",
+      "durationMs": 179
+    },
+    {
+      "id": "cg-ohlc-90d",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=90",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:40.343Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:00:40 GMT",
+        "etag": "W/\"89051725929fee13fd08548c649a4fc9\""
+      },
+      "bytes": 1105,
+      "sha256": "8079370d89e3ff6c225c8fe6ff786736539ece271821a319c1f891d009572b37",
+      "summary": {
+        "rows": 23,
+        "first": "2026-06-12T00:00:00.000Z",
+        "last": "2026-09-08T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 345600,
+        "intervalHistogram": [
+          {
+            "seconds": 345600,
+            "count": 22
+          }
+        ],
+        "metrics": {
+          "1": {
+            "numericRows": 23,
+            "missingRows": 0,
+            "first": "2026-06-12T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          },
+          "2": {
+            "numericRows": 23,
+            "missingRows": 0,
+            "first": "2026-06-12T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          },
+          "3": {
+            "numericRows": 23,
+            "missingRows": 0,
+            "first": "2026-06-12T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          },
+          "4": {
+            "numericRows": 23,
+            "missingRows": 0,
+            "first": "2026-06-12T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:40.500Z",
+      "durationMs": 156
+    },
+    {
+      "id": "cg-chart-365d",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365&interval=daily",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:42.845Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:00:42 GMT",
+        "etag": "W/\"5d22de7d4758484d11926aea4d4fa4f3\""
+      },
+      "bytes": 37763,
+      "sha256": "f350e833a3d74bea4bb259560397dec2afe999c03e222798875409c9cdfc5561",
+      "summary": {
+        "prices": {
+          "rows": 366,
+          "first": "2025-09-10T00:00:00.000Z",
+          "last": "2026-09-09T11:58:50.000Z",
+          "invalidTimestamps": 0,
+          "duplicateTimestamps": 0,
+          "ascending": true,
+          "regular": false,
+          "intervalSeconds": null,
+          "intervalHistogram": [
+            {
+              "seconds": 86400,
+              "count": 364
+            },
+            {
+              "seconds": 43130,
+              "count": 1
+            }
+          ],
+          "metrics": {
+            "1": {
+              "numericRows": 366,
+              "missingRows": 0,
+              "first": "2025-09-10T00:00:00.000Z",
+              "last": "2026-09-09T11:58:50.000Z"
+            }
+          }
+        },
+        "market_caps": {
+          "rows": 366,
+          "first": "2025-09-10T00:00:00.000Z",
+          "last": "2026-09-09T11:58:50.000Z",
+          "invalidTimestamps": 0,
+          "duplicateTimestamps": 0,
+          "ascending": true,
+          "regular": false,
+          "intervalSeconds": null,
+          "intervalHistogram": [
+            {
+              "seconds": 86400,
+              "count": 364
+            },
+            {
+              "seconds": 43130,
+              "count": 1
+            }
+          ],
+          "metrics": {
+            "1": {
+              "numericRows": 366,
+              "missingRows": 0,
+              "first": "2025-09-10T00:00:00.000Z",
+              "last": "2026-09-09T11:58:50.000Z"
+            }
+          }
+        },
+        "total_volumes": {
+          "rows": 366,
+          "first": "2025-09-10T00:00:00.000Z",
+          "last": "2026-09-09T11:58:50.000Z",
+          "invalidTimestamps": 0,
+          "duplicateTimestamps": 0,
+          "ascending": true,
+          "regular": false,
+          "intervalSeconds": null,
+          "intervalHistogram": [
+            {
+              "seconds": 86400,
+              "count": 364
+            },
+            {
+              "seconds": 43130,
+              "count": 1
+            }
+          ],
+          "metrics": {
+            "1": {
+              "numericRows": 366,
+              "missingRows": 0,
+              "first": "2025-09-10T00:00:00.000Z",
+              "last": "2026-09-09T11:58:50.000Z"
+            }
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:42.880Z",
+      "durationMs": 35
+    },
+    {
+      "id": "cg-chart-outside-demo",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=730&interval=daily",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:45.345Z",
+      "httpStatus": 429,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:45 GMT",
+        "retry-after": "60"
+      },
+      "bytes": 187,
+      "sha256": "6529e19eb4c125e9bf94e997ea53c292ea8f4d6d0a8f8c25fb400947c088da2e",
+      "outcome": "rate-limited",
+      "completedAt": "2026-09-09T12:00:45.358Z",
+      "durationMs": 12
+    },
+    {
+      "id": "cm-btc-archive",
+      "provider": "coinmetrics-archive",
+      "url": "https://raw.githubusercontent.com/coinmetrics/data/master/csv/btc.csv",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:45.360Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "text/plain; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:00:46 GMT",
+        "etag": "W/\"2693b12090cea49ba68e7e355b0243b652c88a162a8e8ca6336e960f312a8079\""
+      },
+      "bytes": 2482497,
+      "sha256": "06495ff8e643432e6948b7b4686ce44fc106217287dabdc1b38351d9ddec46c3",
+      "summary": {
+        "columns": [
+          "time",
+          "AdrActCnt",
+          "AdrBalCnt",
+          "AssetCompletionTime",
+          "AssetEODCompletionTime",
+          "BlkCnt",
+          "CapMVRVCur",
+          "CapMrktCurUSD",
+          "CapMrktEstUSD",
+          "FeeTotNtv",
+          "FlowInExNtv",
+          "FlowInExUSD",
+          "FlowOutExNtv",
+          "FlowOutExUSD",
+          "HashRate",
+          "IssTotNtv",
+          "IssTotUSD",
+          "PriceBTC",
+          "PriceUSD",
+          "ROI1yr",
+          "ROI30d",
+          "ReferenceRate",
+          "ReferenceRateETH",
+          "ReferenceRateEUR",
+          "ReferenceRateUSD",
+          "SplyCur",
+          "SplyExNtv",
+          "SplyExUSD",
+          "SplyExpFut10yr",
+          "TxCnt",
+          "TxTfrCnt",
+          "volume_reported_spot_usd_1d"
+        ],
+        "rows": 6351,
+        "first": "2009-01-03T00:00:00.000Z",
+        "last": "2026-05-24T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 6350
+          }
+        ],
+        "metrics": {
+          "PriceUSD": {
+            "numericRows": 5789,
+            "missingRows": 562,
+            "first": "2010-07-18T00:00:00.000Z",
+            "last": "2026-05-23T00:00:00.000Z"
+          },
+          "CapMrktCurUSD": {
+            "numericRows": 5789,
+            "missingRows": 562,
+            "first": "2010-07-18T00:00:00.000Z",
+            "last": "2026-05-23T00:00:00.000Z"
+          },
+          "CapRealUSD": {
+            "numericRows": 0,
+            "missingRows": 6351,
+            "first": null,
+            "last": null
+          },
+          "CapMVRVCur": {
+            "numericRows": 5789,
+            "missingRows": 562,
+            "first": "2010-07-18T00:00:00.000Z",
+            "last": "2026-05-23T00:00:00.000Z"
+          },
+          "SplyCur": {
+            "numericRows": 6350,
+            "missingRows": 1,
+            "first": "2009-01-03T00:00:00.000Z",
+            "last": "2026-05-23T00:00:00.000Z"
+          },
+          "HashRate": {
+            "numericRows": 6344,
+            "missingRows": 7,
+            "first": "2009-01-09T00:00:00.000Z",
+            "last": "2026-05-23T00:00:00.000Z"
+          },
+          "DiffMean": {
+            "numericRows": 0,
+            "missingRows": 6351,
+            "first": null,
+            "last": null
+          },
+          "RevUSD": {
+            "numericRows": 0,
+            "missingRows": 6351,
+            "first": null,
+            "last": null
+          },
+          "FeeTotUSD": {
+            "numericRows": 0,
+            "missingRows": 6351,
+            "first": null,
+            "last": null
+          },
+          "AdrActCnt": {
+            "numericRows": 6350,
+            "missingRows": 1,
+            "first": "2009-01-03T00:00:00.000Z",
+            "last": "2026-05-23T00:00:00.000Z"
+          },
+          "SOPR": {
+            "numericRows": 0,
+            "missingRows": 6351,
+            "first": null,
+            "last": null
+          },
+          "NUPL": {
+            "numericRows": 0,
+            "missingRows": 6351,
+            "first": null,
+            "last": null
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:46.686Z",
+      "durationMs": 1326
+    },
+    {
+      "id": "cm-PriceUSD",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=PriceUSD&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:46.688Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:47 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5999",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 505098,
+      "sha256": "d786c0fd83b9be573bf7c5c0a6afd462bc820d39718e56670fb463796d600072",
+      "summary": {
+        "rows": 5897,
+        "first": "2010-07-18T00:00:00.000Z",
+        "last": "2026-09-08T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 5896
+          }
+        ],
+        "metrics": {
+          "PriceUSD": {
+            "numericRows": 5897,
+            "missingRows": 0,
+            "first": "2010-07-18T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:47.538Z",
+      "durationMs": 850
+    },
+    {
+      "id": "cm-CapRealUSD",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=CapRealUSD&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:47.688Z",
+      "httpStatus": 403,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:47 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5999",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 152,
+      "sha256": "79bcb4a2c52a377337662b4e657df79b767d5cb9987e4e9ac8cb9855fb560489",
+      "outcome": "access-denied",
+      "completedAt": "2026-09-09T12:00:47.878Z",
+      "durationMs": 190
+    },
+    {
+      "id": "cm-CapMVRVCur",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=CapMVRVCur&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:48.688Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:48 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5998",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 494866,
+      "sha256": "47601bbed5727076c21e708c02d77901aeb75b88d5a6b87446d5157013765fb7",
+      "summary": {
+        "rows": 5897,
+        "first": "2010-07-18T00:00:00.000Z",
+        "last": "2026-09-08T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 5896
+          }
+        ],
+        "metrics": {
+          "CapMVRVCur": {
+            "numericRows": 5897,
+            "missingRows": 0,
+            "first": "2010-07-18T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:49.298Z",
+      "durationMs": 610
+    },
+    {
+      "id": "cm-SplyCur",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=SplyCur&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:49.689Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:50 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5996",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 518231,
+      "sha256": "41f4a0372a0159e466bed87e40d2b72dc24190264387cb851f1b1d42dc777852",
+      "summary": {
+        "rows": 6095,
+        "first": "2010-01-01T00:00:00.000Z",
+        "last": "2026-09-08T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 6094
+          }
+        ],
+        "metrics": {
+          "SplyCur": {
+            "numericRows": 6095,
+            "missingRows": 0,
+            "first": "2010-01-01T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:50.146Z",
+      "durationMs": 457
+    },
+    {
+      "id": "cm-HashRate",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=HashRate&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:50.690Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:50 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5996",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 577557,
+      "sha256": "a5f5a7bf6e2412b91003d94855b054df0bb788316ac16c659e1ae21a8bbc5b95",
+      "summary": {
+        "rows": 6095,
+        "first": "2010-01-01T00:00:00.000Z",
+        "last": "2026-09-08T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 6094
+          }
+        ],
+        "metrics": {
+          "HashRate": {
+            "numericRows": 6095,
+            "missingRows": 0,
+            "first": "2010-01-01T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:51.287Z",
+      "durationMs": 597
+    },
+    {
+      "id": "cm-DiffMean",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=DiffMean&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:51.691Z",
+      "httpStatus": 403,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:51 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5995",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 150,
+      "sha256": "6edd1270d735affe6dd91ce87d495c3aecbfedac983dacfa3b3d410477dadc5b",
+      "outcome": "access-denied",
+      "completedAt": "2026-09-09T12:00:51.880Z",
+      "durationMs": 189
+    },
+    {
+      "id": "cm-RevUSD",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=RevUSD&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:52.692Z",
+      "httpStatus": 403,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:52 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5995",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 148,
+      "sha256": "745c03968c07fa1492ea7a9644c8111134ca3c3831ce1fda6406702973fde4bd",
+      "outcome": "access-denied",
+      "completedAt": "2026-09-09T12:00:52.903Z",
+      "durationMs": 211
+    },
+    {
+      "id": "cm-AdrActCnt",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=AdrActCnt&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:53.693Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:54 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5994",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 467586,
+      "sha256": "b9462d156e453ac2268bc5fd16579e25f53c3ba4ec87b56a15017f37e28102c9",
+      "summary": {
+        "rows": 6095,
+        "first": "2010-01-01T00:00:00.000Z",
+        "last": "2026-09-08T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 6094
+          }
+        ],
+        "metrics": {
+          "AdrActCnt": {
+            "numericRows": 6095,
+            "missingRows": 0,
+            "first": "2010-01-01T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:54.329Z",
+      "durationMs": 636
+    },
+    {
+      "id": "cm-SOPR",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=SOPR&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:54.693Z",
+      "httpStatus": 403,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:54 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5994",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 146,
+      "sha256": "3f6d29de14e928baf617fc47c89210d9b7df4d4fe9582cc68e999dff4e1089cf",
+      "outcome": "access-denied",
+      "completedAt": "2026-09-09T12:00:54.882Z",
+      "durationMs": 189
+    },
+    {
+      "id": "cm-NUPL",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=NUPL&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:55.694Z",
+      "httpStatus": 403,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:55 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5993",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 146,
+      "sha256": "b508fed262ebaf7c1db05d8fdf7011734d72c4e4ec8800097b0902cb410d3e86",
+      "outcome": "access-denied",
+      "completedAt": "2026-09-09T12:00:55.885Z",
+      "durationMs": 191
+    },
+    {
+      "id": "llama-protocols",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/protocols",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:55.887Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:00:56 GMT",
+        "etag": "\"6aa13de4-85c0d8\"",
+        "last-modified": "Wed, 09 Sep 2026 11:07:16 GMT"
+      },
+      "bytes": 8765656,
+      "sha256": "e27f480de7b467f48ad47426562ca9e6e83deb8326acdf2b752c741ea3ebfae6",
+      "summary": {
+        "rows": 8208,
+        "fields": {
+          "slug": {
+            "presentRows": 8208
+          },
+          "category": {
+            "presentRows": 8208
+          },
+          "gecko_id": {
+            "presentRows": 2366
+          }
+        },
+        "sampleIds": [
+          "2269",
+          "2272",
+          "182"
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:00:56.473Z",
+      "durationMs": 586
+    },
+    {
+      "id": "llama-perp-volume",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/overview/derivatives?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:57.888Z",
+      "httpStatus": 402,
+      "responseHeaders": {
+        "content-type": "text/plain",
+        "date": "Wed, 09 Sep 2026 12:00:57 GMT"
+      },
+      "bytes": 66,
+      "sha256": "77af6ecfa9bf69c017f1d642d816fa1db0e8bdb8a5dd77009c8454b6441c0f2a",
+      "outcome": "http-error",
+      "completedAt": "2026-09-09T12:00:57.897Z",
+      "durationMs": 9
+    },
+    {
+      "id": "llama-hyperliquid-volume",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/summary/derivatives/hyperliquid?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:00:59.889Z",
+      "httpStatus": 402,
+      "responseHeaders": {
+        "content-type": "text/plain",
+        "date": "Wed, 09 Sep 2026 12:00:59 GMT"
+      },
+      "bytes": 66,
+      "sha256": "77af6ecfa9bf69c017f1d642d816fa1db0e8bdb8a5dd77009c8454b6441c0f2a",
+      "outcome": "http-error",
+      "completedAt": "2026-09-09T12:00:59.902Z",
+      "durationMs": 12
+    },
+    {
+      "id": "llama-open-interest",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/overview/open-interest?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:01.890Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:11 GMT",
+        "last-modified": "Wed, 09 Sep 2026 12:01:11 GMT"
+      },
+      "bytes": 195231,
+      "sha256": "b17b85550e5d89a655e71f437556432feec7e96809eb7aaeb66762d6ab5d35c1",
+      "summary": {
+        "name": null,
+        "dataType": null,
+        "total24h": 25454734655,
+        "protocols": [
+          {
+            "name": "Synthetix v1+v2",
+            "id": "115"
+          },
+          {
+            "name": "dYdX V3",
+            "id": "144"
+          },
+          {
+            "name": "GMX V1 Perps",
+            "id": "337"
+          },
+          {
+            "name": "Polymarket International",
+            "id": "711"
+          },
+          {
+            "name": "Drift Trade",
+            "id": "970"
+          },
+          {
+            "name": "Gains Network",
+            "id": "1018"
+          },
+          {
+            "name": "ApeX Pro",
+            "id": "1878"
+          },
+          {
+            "name": "Demex Perp",
+            "id": "2001"
+          },
+          {
+            "name": "MUX Perps",
+            "id": "2254"
+          },
+          {
+            "name": "Aevo Perps",
+            "id": "2797"
+          },
+          {
+            "name": "RabbitX",
+            "id": "2886"
+          },
+          {
+            "name": "HoldStation DeFutures",
+            "id": "2959"
+          },
+          {
+            "name": "Satori Perp",
+            "id": "2982"
+          },
+          {
+            "name": "Pika V4",
+            "id": "3281"
+          },
+          {
+            "name": "KiloEx",
+            "id": "3329"
+          },
+          {
+            "name": "GMX V2 Perps",
+            "id": "3365"
+          },
+          {
+            "name": "SwapBased Perp",
+            "id": "3373"
+          },
+          {
+            "name": "BMX Classic Perps",
+            "id": "3530"
+          },
+          {
+            "name": "THENA PERPS",
+            "id": "3537"
+          },
+          {
+            "name": "Contango V2",
+            "id": "3602"
+          },
+          {
+            "name": "Storm Trade",
+            "id": "3883"
+          },
+          {
+            "name": "Derive V2",
+            "id": "3923"
+          },
+          {
+            "name": "FWX Derivatives",
+            "id": "4026"
+          },
+          {
+            "name": "dYdX V4",
+            "id": "4067"
+          },
+          {
+            "name": "Jupiter Perpetual Exchange",
+            "id": "4077"
+          },
+          {
+            "name": "FlashTrade",
+            "id": "4107"
+          },
+          {
+            "name": "Avantis",
+            "id": "4108"
+          },
+          {
+            "name": "SynFutures V3",
+            "id": "4215"
+          },
+          {
+            "name": "MYX Finance",
+            "id": "4319"
+          },
+          {
+            "name": "Vest Markets",
+            "id": "4400"
+          },
+          {
+            "name": "Synthetix V3",
+            "id": "4446"
+          },
+          {
+            "name": "Apex Omni",
+            "id": "4822"
+          },
+          {
+            "name": "Ostium",
+            "id": "4932"
+          },
+          {
+            "name": "Reya Perps",
+            "id": "4978"
+          },
+          {
+            "name": "Helix Perp",
+            "id": "5074"
+          },
+          {
+            "name": "Capybara Perps",
+            "id": "5257"
+          },
+          {
+            "name": "Defx",
+            "id": "5273"
+          },
+          {
+            "name": "Mars Perps",
+            "id": "5498"
+          },
+          {
+            "name": "Hyperliquid Perps",
+            "id": "5507"
+          },
+          {
+            "name": "SATOSHI PERPS",
+            "id": "5571"
+          },
+          {
+            "name": "Moonlander",
+            "id": "5658"
+          },
+          {
+            "name": "SX Bet",
+            "id": "5724"
+          },
+          {
+            "name": "Extended Perps",
+            "id": "5887"
+          },
+          {
+            "name": "ZO Perps",
+            "id": "6018"
+          },
+          {
+            "name": "Strike Finance Perpetuals",
+            "id": "6173"
+          },
+          {
+            "name": "Carbon.inc",
+            "id": "6409"
+          },
+          {
+            "name": "Bluefin Pro",
+            "id": "6451"
+          },
+          {
+            "name": "Hibachi",
+            "id": "6467"
+          },
+          {
+            "name": "Evedex",
+            "id": "6497"
+          },
+          {
+            "name": "Boros",
+            "id": "6536"
+          },
+          {
+            "name": "Orderly Perps",
+            "id": "6647"
+          },
+          {
+            "name": "edgeX Perps",
+            "id": "6663"
+          },
+          {
+            "name": "Paradex Perps",
+            "id": "6664"
+          },
+          {
+            "name": "Pacifica Perps",
+            "id": "6682"
+          },
+          {
+            "name": "Kalshi",
+            "id": "6689"
+          },
+          {
+            "name": "Aster Perps",
+            "id": "6726"
+          },
+          {
+            "name": "Injective Perps",
+            "id": "6749"
+          },
+          {
+            "name": "Lighter Perps",
+            "id": "6751"
+          },
+          {
+            "name": "SYMMIO",
+            "id": "6783"
+          },
+          {
+            "name": "Grvt Perps",
+            "id": "6826"
+          },
+          {
+            "name": "SpookySwap Perps",
+            "id": "6844"
+          },
+          {
+            "name": "Xpanse Perps",
+            "id": "6845"
+          },
+          {
+            "name": "LODE",
+            "id": "6846"
+          },
+          {
+            "name": "Treble Perps",
+            "id": "6847"
+          },
+          {
+            "name": "BeFi Perps",
+            "id": "6848"
+          },
+          {
+            "name": "Vibe Trading",
+            "id": "6850"
+          },
+          {
+            "name": "Rho X",
+            "id": "6894"
+          },
+          {
+            "name": "Ethereal DEX",
+            "id": "6910"
+          },
+          {
+            "name": "OPINION",
+            "id": "6926"
+          },
+          {
+            "name": "DipCoin Perps",
+            "id": "6967"
+          },
+          {
+            "name": "Astros Perp",
+            "id": "6977"
+          },
+          {
+            "name": "Felix Perps",
+            "id": "7009"
+          },
+          {
+            "name": "tradeXYZ",
+            "id": "7010"
+          },
+          {
+            "name": "Ventuals",
+            "id": "7011"
+          },
+          {
+            "name": "Antarctic",
+            "id": "7016"
+          },
+          {
+            "name": "LeverUp",
+            "id": "7041"
+          },
+          {
+            "name": "Gate Perp",
+            "id": "7049"
+          },
+          {
+            "name": "Monday Trade Perps",
+            "id": "7061"
+          },
+          {
+            "name": "HYENA",
+            "id": "7093"
+          },
+          {
+            "name": "Nado Perps",
+            "id": "7097"
+          },
+          {
+            "name": "Variational",
+            "id": "7194"
+          },
+          {
+            "name": "StandX Perps",
+            "id": "7221"
+          },
+          {
+            "name": "SunX",
+            "id": "7251"
+          },
+          {
+            "name": "GMTrade",
+            "id": "7297"
+          },
+          {
+            "name": "Sai",
+            "id": "7306"
+          },
+          {
+            "name": "Dreamcash Markets",
+            "id": "7321"
+          },
+          {
+            "name": "SoDEX Perps",
+            "id": "7325"
+          },
+          {
+            "name": "Denaria",
+            "id": "7339"
+          },
+          {
+            "name": "01 Exchange",
+            "id": "7373"
+          },
+          {
+            "name": "Decibel",
+            "id": "7467"
+          },
+          {
+            "name": "Perpl",
+            "id": "7532"
+          },
+          {
+            "name": "Neony Exchange Perp",
+            "id": "7536"
+          },
+          {
+            "name": "Aftermath Perps",
+            "id": "7540"
+          },
+          {
+            "name": "PERPTools",
+            "id": "7542"
+          },
+          {
+            "name": "Rocket Perp",
+            "id": "7565"
+          },
+          {
+            "name": "Kinetiq Markets",
+            "id": "7584"
+          },
+          {
+            "name": "Phoenix Perp",
+            "id": "7592"
+          },
+          {
+            "name": "Hotstuff Perps",
+            "id": "7605"
+          },
+          {
+            "name": "Katana Perps",
+            "id": "7614"
+          },
+          {
+            "name": "Paragon",
+            "id": "7615"
+          },
+          {
+            "name": "GameClub",
+            "id": "7624"
+          },
+          {
+            "name": "Bullbit PERP DEX",
+            "id": "7625"
+          },
+          {
+            "name": "Tristero Margin",
+            "id": "7639"
+          },
+          {
+            "name": "Polymarket US",
+            "id": "7656"
+          },
+          {
+            "name": "Bounce.Tech",
+            "id": "7669"
+          },
+          {
+            "name": "TxFlow Perps",
+            "id": "7733"
+          },
+          {
+            "name": "Bullet Perps",
+            "id": "7761"
+          },
+          {
+            "name": "Dango Perps",
+            "id": "7777"
+          },
+          {
+            "name": "RISEx",
+            "id": "7806"
+          },
+          {
+            "name": "Synthetix V4",
+            "id": "7857"
+          },
+          {
+            "name": "Challenge4Trading Perp",
+            "id": "7869"
+          },
+          {
+            "name": "edgeX V2",
+            "id": "7927"
+          },
+          {
+            "name": "Ondo Perps",
+            "id": "7992"
+          },
+          {
+            "name": "OBSDN",
+            "id": "8051"
+          },
+          {
+            "name": "AFX Perps",
+            "id": "8073"
+          },
+          {
+            "name": "Rubin Trade",
+            "id": "8108"
+          },
+          {
+            "name": "GUM Perps",
+            "id": "8134"
+          },
+          {
+            "name": "Arcus Perps",
+            "id": "8141"
+          },
+          {
+            "name": "Meridian Predict",
+            "id": "8151"
+          },
+          {
+            "name": "QFEX",
+            "id": "8152"
+          },
+          {
+            "name": "Lighter Robinhood Perps",
+            "id": "8261"
+          },
+          {
+            "name": "Primit Perps",
+            "id": "8347"
+          },
+          {
+            "name": "Drake Exchange",
+            "id": "8475"
+          },
+          {
+            "name": "entropy.io",
+            "id": "8498"
+          },
+          {
+            "name": "HertzFlow",
+            "id": "8534"
+          },
+          {
+            "name": "Polymarket Perps",
+            "id": "8583"
+          }
+        ],
+        "history": {
+          "rows": 2023,
+          "first": "2021-02-25T00:00:00.000Z",
+          "last": "2026-09-09T00:00:00.000Z",
+          "invalidTimestamps": 0,
+          "duplicateTimestamps": 0,
+          "ascending": true,
+          "regular": true,
+          "intervalSeconds": 86400,
+          "intervalHistogram": [
+            {
+              "seconds": 86400,
+              "count": 2022
+            }
+          ],
+          "metrics": {
+            "1": {
+              "numericRows": 2023,
+              "missingRows": 0,
+              "first": "2021-02-25T00:00:00.000Z",
+              "last": "2026-09-09T00:00:00.000Z"
+            }
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:12.213Z",
+      "durationMs": 10323
+    },
+    {
+      "id": "llama-hyperliquid-dailyFees",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/summary/fees/hyperliquid?dataType=dailyFees",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:12.215Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:13 GMT",
+        "last-modified": "Wed, 09 Sep 2026 12:01:13 GMT"
+      },
+      "bytes": 94602,
+      "sha256": "592cffa4b5a971607726e9ba6d24386bd2e135a782e88ce07367f730e43a211f",
+      "summary": {
+        "name": "Hyperliquid",
+        "dataType": null,
+        "total24h": 2354182,
+        "protocols": null,
+        "history": {
+          "rows": 621,
+          "first": "2024-12-23T00:00:00.000Z",
+          "last": "2026-09-08T00:00:00.000Z",
+          "invalidTimestamps": 0,
+          "duplicateTimestamps": 0,
+          "ascending": true,
+          "regular": false,
+          "intervalSeconds": null,
+          "intervalHistogram": [
+            {
+              "seconds": 86400,
+              "count": 618
+            },
+            {
+              "seconds": 259200,
+              "count": 2
+            }
+          ],
+          "metrics": {
+            "1": {
+              "numericRows": 621,
+              "missingRows": 0,
+              "first": "2024-12-23T00:00:00.000Z",
+              "last": "2026-09-08T00:00:00.000Z"
+            }
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:13.278Z",
+      "durationMs": 1063
+    },
+    {
+      "id": "llama-hyperliquid-dailyRevenue",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/summary/fees/hyperliquid?dataType=dailyRevenue",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:14.215Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:14 GMT",
+        "last-modified": "Wed, 09 Sep 2026 11:45:03 GMT"
+      },
+      "bytes": 92053,
+      "sha256": "62ae9829887bc541eba44ab985b48ef500f89977954f719451bacbe715dd2c61",
+      "summary": {
+        "name": "Hyperliquid",
+        "dataType": null,
+        "total24h": 1800584,
+        "protocols": null,
+        "history": {
+          "rows": 621,
+          "first": "2024-12-23T00:00:00.000Z",
+          "last": "2026-09-08T00:00:00.000Z",
+          "invalidTimestamps": 0,
+          "duplicateTimestamps": 0,
+          "ascending": true,
+          "regular": false,
+          "intervalSeconds": null,
+          "intervalHistogram": [
+            {
+              "seconds": 86400,
+              "count": 618
+            },
+            {
+              "seconds": 259200,
+              "count": 2
+            }
+          ],
+          "metrics": {
+            "1": {
+              "numericRows": 621,
+              "missingRows": 0,
+              "first": "2024-12-23T00:00:00.000Z",
+              "last": "2026-09-08T00:00:00.000Z"
+            }
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:14.240Z",
+      "durationMs": 25
+    },
+    {
+      "id": "llama-hyperliquid-dailyHoldersRevenue",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/summary/fees/hyperliquid?dataType=dailyHoldersRevenue",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:16.216Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:17 GMT",
+        "last-modified": "Wed, 09 Sep 2026 12:01:17 GMT"
+      },
+      "bytes": 79833,
+      "sha256": "c270f7e08b5878088a740aaa28a05710bb9d749abb59ffd395d4a1e8bd28fe50",
+      "summary": {
+        "name": "Hyperliquid",
+        "dataType": null,
+        "total24h": 1800584,
+        "protocols": null,
+        "history": {
+          "rows": 621,
+          "first": "2024-12-23T00:00:00.000Z",
+          "last": "2026-09-08T00:00:00.000Z",
+          "invalidTimestamps": 0,
+          "duplicateTimestamps": 0,
+          "ascending": true,
+          "regular": false,
+          "intervalSeconds": null,
+          "intervalHistogram": [
+            {
+              "seconds": 86400,
+              "count": 618
+            },
+            {
+              "seconds": 259200,
+              "count": 2
+            }
+          ],
+          "metrics": {
+            "1": {
+              "numericRows": 621,
+              "missingRows": 0,
+              "first": "2024-12-23T00:00:00.000Z",
+              "last": "2026-09-08T00:00:00.000Z"
+            }
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:17.217Z",
+      "durationMs": 1002
+    },
+    {
+      "id": "llama-hyperliquid-tvl",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/protocol/hyperliquid",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:18.217Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:18 GMT",
+        "last-modified": "Wed, 09 Sep 2026 11:30:09 GMT"
+      },
+      "bytes": 534412,
+      "sha256": "095cc9f5951a4d4ee72f78d7d1d42a7c92d5e6b44a0185529d5a46caff969658",
+      "summary": {
+        "rows": 1190,
+        "first": "2023-06-09T00:00:00.000Z",
+        "last": "2026-09-09T10:00:11.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": false,
+        "intervalSeconds": null,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 1188
+          },
+          {
+            "seconds": 36011,
+            "count": 1
+          }
+        ],
+        "metrics": {
+          "totalLiquidityUSD": {
+            "numericRows": 1190,
+            "missingRows": 0,
+            "first": "2023-06-09T00:00:00.000Z",
+            "last": "2026-09-09T10:00:11.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:18.258Z",
+      "durationMs": 41
+    },
+    {
+      "id": "llama-ethereum-tvl",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/v2/historicalChainTvl/Ethereum",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:20.217Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:20 GMT",
+        "etag": "\"6aa13e3a-1d76e\"",
+        "last-modified": "Wed, 09 Sep 2026 11:08:42 GMT"
+      },
+      "bytes": 120686,
+      "sha256": "7eba0d72230f5af20e7a757baf379853e98fa90293b42ae3ff1ea5fefae77009",
+      "summary": {
+        "rows": 3270,
+        "first": "2017-09-27T00:00:00.000Z",
+        "last": "2026-09-09T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 3269
+          }
+        ],
+        "metrics": {
+          "tvl": {
+            "numericRows": 3270,
+            "missingRows": 0,
+            "first": "2017-09-27T00:00:00.000Z",
+            "last": "2026-09-09T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:20.248Z",
+      "durationMs": 32
+    },
+    {
+      "id": "llama-stablecoin-supply",
+      "provider": "defillama",
+      "url": "https://stablecoins.llama.fi/stablecoincharts/all",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:22.219Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:22 GMT",
+        "etag": "\"6aa13367-13616a\"",
+        "last-modified": "Wed, 09 Sep 2026 10:22:31 GMT"
+      },
+      "bytes": 1270122,
+      "sha256": "6ae3a2252be9d1170e06234b505a660c12b2cc95ec67a709aa7403987e3e3b5f",
+      "summary": {
+        "rows": 3207,
+        "first": "2017-11-29T00:00:00.000Z",
+        "last": "2026-09-09T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 3206
+          }
+        ],
+        "metrics": {
+          "totalCirculatingUSD.peggedUSD": {
+            "numericRows": 3207,
+            "missingRows": 0,
+            "first": "2017-11-29T00:00:00.000Z",
+            "last": "2026-09-09T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:22.313Z",
+      "durationMs": 94
+    },
+    {
+      "id": "hl-namespaces",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "perpDexs"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:22.315Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:22 GMT"
+      },
+      "bytes": 19728,
+      "sha256": "028503905dd86f4d34905ecc64f5123c170e20c327e84ecb7f2f5afb1ad74a89",
+      "summary": {
+        "namespaces": [
+          {
+            "index": 0,
+            "name": ""
+          },
+          {
+            "index": 1,
+            "name": "xyz"
+          },
+          {
+            "index": 2,
+            "name": "flx"
+          },
+          {
+            "index": 3,
+            "name": "vntl"
+          },
+          {
+            "index": 4,
+            "name": "hyna"
+          },
+          {
+            "index": 5,
+            "name": "km"
+          },
+          {
+            "index": 6,
+            "name": "abcd"
+          },
+          {
+            "index": 7,
+            "name": "cash"
+          },
+          {
+            "index": 8,
+            "name": "para"
+          },
+          {
+            "index": 9,
+            "name": "mkts"
+          },
+          {
+            "index": 10,
+            "name": "io"
+          }
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:22.884Z",
+      "durationMs": 569
+    },
+    {
+      "id": "hl-contexts-native",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": ""
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:23.815Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:24 GMT"
+      },
+      "bytes": 72199,
+      "sha256": "40818794c98fcdb21ca9579f462e0032f3eb6c0eced33ceaeb1778fe85e95f11",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "BTC",
+            "delisted": false
+          },
+          {
+            "index": 1,
+            "name": "ETH",
+            "delisted": false
+          },
+          {
+            "index": 2,
+            "name": "ATOM",
+            "delisted": false
+          },
+          {
+            "index": 3,
+            "name": "MATIC",
+            "delisted": true
+          },
+          {
+            "index": 4,
+            "name": "DYDX",
+            "delisted": false
+          },
+          {
+            "index": 5,
+            "name": "SOL",
+            "delisted": false
+          },
+          {
+            "index": 6,
+            "name": "AVAX",
+            "delisted": false
+          },
+          {
+            "index": 7,
+            "name": "BNB",
+            "delisted": false
+          },
+          {
+            "index": 8,
+            "name": "APE",
+            "delisted": false
+          },
+          {
+            "index": 9,
+            "name": "OP",
+            "delisted": false
+          },
+          {
+            "index": 10,
+            "name": "LTC",
+            "delisted": false
+          },
+          {
+            "index": 11,
+            "name": "ARB",
+            "delisted": false
+          },
+          {
+            "index": 12,
+            "name": "DOGE",
+            "delisted": false
+          },
+          {
+            "index": 13,
+            "name": "INJ",
+            "delisted": false
+          },
+          {
+            "index": 14,
+            "name": "SUI",
+            "delisted": false
+          },
+          {
+            "index": 15,
+            "name": "kPEPE",
+            "delisted": false
+          },
+          {
+            "index": 16,
+            "name": "CRV",
+            "delisted": false
+          },
+          {
+            "index": 17,
+            "name": "LDO",
+            "delisted": false
+          },
+          {
+            "index": 18,
+            "name": "LINK",
+            "delisted": false
+          },
+          {
+            "index": 19,
+            "name": "STX",
+            "delisted": false
+          },
+          {
+            "index": 20,
+            "name": "RNDR",
+            "delisted": true
+          },
+          {
+            "index": 21,
+            "name": "CFX",
+            "delisted": false
+          },
+          {
+            "index": 22,
+            "name": "FTM",
+            "delisted": true
+          },
+          {
+            "index": 23,
+            "name": "GMX",
+            "delisted": false
+          },
+          {
+            "index": 24,
+            "name": "SNX",
+            "delisted": false
+          },
+          {
+            "index": 25,
+            "name": "XRP",
+            "delisted": false
+          },
+          {
+            "index": 26,
+            "name": "BCH",
+            "delisted": false
+          },
+          {
+            "index": 27,
+            "name": "APT",
+            "delisted": false
+          },
+          {
+            "index": 28,
+            "name": "AAVE",
+            "delisted": false
+          },
+          {
+            "index": 29,
+            "name": "COMP",
+            "delisted": false
+          },
+          {
+            "index": 30,
+            "name": "MKR",
+            "delisted": true
+          },
+          {
+            "index": 31,
+            "name": "WLD",
+            "delisted": false
+          },
+          {
+            "index": 32,
+            "name": "FXS",
+            "delisted": true
+          },
+          {
+            "index": 33,
+            "name": "HPOS",
+            "delisted": true
+          },
+          {
+            "index": 34,
+            "name": "RLB",
+            "delisted": true
+          },
+          {
+            "index": 35,
+            "name": "UNIBOT",
+            "delisted": true
+          },
+          {
+            "index": 36,
+            "name": "YGG",
+            "delisted": false
+          },
+          {
+            "index": 37,
+            "name": "TRX",
+            "delisted": false
+          },
+          {
+            "index": 38,
+            "name": "kSHIB",
+            "delisted": false
+          },
+          {
+            "index": 39,
+            "name": "UNI",
+            "delisted": false
+          },
+          {
+            "index": 40,
+            "name": "SEI",
+            "delisted": false
+          },
+          {
+            "index": 41,
+            "name": "RUNE",
+            "delisted": false
+          },
+          {
+            "index": 42,
+            "name": "OX",
+            "delisted": true
+          },
+          {
+            "index": 43,
+            "name": "FRIEND",
+            "delisted": true
+          },
+          {
+            "index": 44,
+            "name": "SHIA",
+            "delisted": true
+          },
+          {
+            "index": 45,
+            "name": "CYBER",
+            "delisted": true
+          },
+          {
+            "index": 46,
+            "name": "ZRO",
+            "delisted": false
+          },
+          {
+            "index": 47,
+            "name": "BLZ",
+            "delisted": true
+          },
+          {
+            "index": 48,
+            "name": "DOT",
+            "delisted": false
+          },
+          {
+            "index": 49,
+            "name": "BANANA",
+            "delisted": false
+          },
+          {
+            "index": 50,
+            "name": "TRB",
+            "delisted": false
+          },
+          {
+            "index": 51,
+            "name": "FTT",
+            "delisted": true
+          },
+          {
+            "index": 52,
+            "name": "LOOM",
+            "delisted": true
+          },
+          {
+            "index": 53,
+            "name": "OGN",
+            "delisted": true
+          },
+          {
+            "index": 54,
+            "name": "RDNT",
+            "delisted": true
+          },
+          {
+            "index": 55,
+            "name": "ARK",
+            "delisted": true
+          },
+          {
+            "index": 56,
+            "name": "BNT",
+            "delisted": true
+          },
+          {
+            "index": 57,
+            "name": "CANTO",
+            "delisted": true
+          },
+          {
+            "index": 58,
+            "name": "REQ",
+            "delisted": true
+          },
+          {
+            "index": 59,
+            "name": "BIGTIME",
+            "delisted": false
+          },
+          {
+            "index": 60,
+            "name": "KAS",
+            "delisted": false
+          },
+          {
+            "index": 61,
+            "name": "ORBS",
+            "delisted": true
+          },
+          {
+            "index": 62,
+            "name": "BLUR",
+            "delisted": false
+          },
+          {
+            "index": 63,
+            "name": "TIA",
+            "delisted": false
+          },
+          {
+            "index": 64,
+            "name": "BSV",
+            "delisted": false
+          },
+          {
+            "index": 65,
+            "name": "ADA",
+            "delisted": false
+          },
+          {
+            "index": 66,
+            "name": "TON",
+            "delisted": true
+          },
+          {
+            "index": 67,
+            "name": "MINA",
+            "delisted": false
+          },
+          {
+            "index": 68,
+            "name": "POLYX",
+            "delisted": false
+          },
+          {
+            "index": 69,
+            "name": "GAS",
+            "delisted": false
+          },
+          {
+            "index": 70,
+            "name": "PENDLE",
+            "delisted": false
+          },
+          {
+            "index": 71,
+            "name": "STG",
+            "delisted": true
+          },
+          {
+            "index": 72,
+            "name": "FET",
+            "delisted": false
+          },
+          {
+            "index": 73,
+            "name": "STRAX",
+            "delisted": true
+          },
+          {
+            "index": 74,
+            "name": "NEAR",
+            "delisted": false
+          },
+          {
+            "index": 75,
+            "name": "MEME",
+            "delisted": false
+          },
+          {
+            "index": 76,
+            "name": "ORDI",
+            "delisted": false
+          },
+          {
+            "index": 77,
+            "name": "BADGER",
+            "delisted": true
+          },
+          {
+            "index": 78,
+            "name": "NEO",
+            "delisted": false
+          },
+          {
+            "index": 79,
+            "name": "ZEN",
+            "delisted": false
+          },
+          {
+            "index": 80,
+            "name": "FIL",
+            "delisted": false
+          },
+          {
+            "index": 81,
+            "name": "PYTH",
+            "delisted": false
+          },
+          {
+            "index": 82,
+            "name": "SUSHI",
+            "delisted": false
+          },
+          {
+            "index": 83,
+            "name": "ILV",
+            "delisted": true
+          },
+          {
+            "index": 84,
+            "name": "IMX",
+            "delisted": false
+          },
+          {
+            "index": 85,
+            "name": "kBONK",
+            "delisted": false
+          },
+          {
+            "index": 86,
+            "name": "GMT",
+            "delisted": false
+          },
+          {
+            "index": 87,
+            "name": "SUPER",
+            "delisted": false
+          },
+          {
+            "index": 88,
+            "name": "USTC",
+            "delisted": true
+          },
+          {
+            "index": 89,
+            "name": "NFTI",
+            "delisted": true
+          },
+          {
+            "index": 90,
+            "name": "JUP",
+            "delisted": false
+          },
+          {
+            "index": 91,
+            "name": "kLUNC",
+            "delisted": false
+          },
+          {
+            "index": 92,
+            "name": "RSR",
+            "delisted": false
+          },
+          {
+            "index": 93,
+            "name": "GALA",
+            "delisted": false
+          },
+          {
+            "index": 94,
+            "name": "JTO",
+            "delisted": false
+          },
+          {
+            "index": 95,
+            "name": "NTRN",
+            "delisted": true
+          },
+          {
+            "index": 96,
+            "name": "ACE",
+            "delisted": false
+          },
+          {
+            "index": 97,
+            "name": "MAV",
+            "delisted": true
+          },
+          {
+            "index": 98,
+            "name": "WIF",
+            "delisted": false
+          },
+          {
+            "index": 99,
+            "name": "CAKE",
+            "delisted": false
+          },
+          {
+            "index": 100,
+            "name": "PEOPLE",
+            "delisted": false
+          },
+          {
+            "index": 101,
+            "name": "ENS",
+            "delisted": false
+          },
+          {
+            "index": 102,
+            "name": "ETC",
+            "delisted": false
+          },
+          {
+            "index": 103,
+            "name": "XAI",
+            "delisted": false
+          },
+          {
+            "index": 104,
+            "name": "MANTA",
+            "delisted": false
+          },
+          {
+            "index": 105,
+            "name": "UMA",
+            "delisted": false
+          },
+          {
+            "index": 106,
+            "name": "ONDO",
+            "delisted": false
+          },
+          {
+            "index": 107,
+            "name": "ALT",
+            "delisted": false
+          },
+          {
+            "index": 108,
+            "name": "ZETA",
+            "delisted": false
+          },
+          {
+            "index": 109,
+            "name": "DYM",
+            "delisted": false
+          },
+          {
+            "index": 110,
+            "name": "MAVIA",
+            "delisted": true
+          },
+          {
+            "index": 111,
+            "name": "W",
+            "delisted": false
+          },
+          {
+            "index": 112,
+            "name": "PANDORA",
+            "delisted": true
+          },
+          {
+            "index": 113,
+            "name": "STRK",
+            "delisted": false
+          },
+          {
+            "index": 114,
+            "name": "PIXEL",
+            "delisted": true
+          },
+          {
+            "index": 115,
+            "name": "AI",
+            "delisted": true
+          },
+          {
+            "index": 116,
+            "name": "TAO",
+            "delisted": false
+          },
+          {
+            "index": 117,
+            "name": "AR",
+            "delisted": false
+          },
+          {
+            "index": 118,
+            "name": "MYRO",
+            "delisted": true
+          },
+          {
+            "index": 119,
+            "name": "kFLOKI",
+            "delisted": false
+          },
+          {
+            "index": 120,
+            "name": "BOME",
+            "delisted": false
+          },
+          {
+            "index": 121,
+            "name": "ETHFI",
+            "delisted": false
+          },
+          {
+            "index": 122,
+            "name": "ENA",
+            "delisted": false
+          },
+          {
+            "index": 123,
+            "name": "MNT",
+            "delisted": false
+          },
+          {
+            "index": 124,
+            "name": "TNSR",
+            "delisted": false
+          },
+          {
+            "index": 125,
+            "name": "SAGA",
+            "delisted": false
+          },
+          {
+            "index": 126,
+            "name": "MERL",
+            "delisted": false
+          },
+          {
+            "index": 127,
+            "name": "HBAR",
+            "delisted": false
+          },
+          {
+            "index": 128,
+            "name": "POPCAT",
+            "delisted": false
+          },
+          {
+            "index": 129,
+            "name": "OMNI",
+            "delisted": true
+          },
+          {
+            "index": 130,
+            "name": "EIGEN",
+            "delisted": false
+          },
+          {
+            "index": 131,
+            "name": "REZ",
+            "delisted": false
+          },
+          {
+            "index": 132,
+            "name": "NOT",
+            "delisted": false
+          },
+          {
+            "index": 133,
+            "name": "TURBO",
+            "delisted": false
+          },
+          {
+            "index": 134,
+            "name": "BRETT",
+            "delisted": false
+          },
+          {
+            "index": 135,
+            "name": "IO",
+            "delisted": false
+          },
+          {
+            "index": 136,
+            "name": "ZK",
+            "delisted": false
+          },
+          {
+            "index": 137,
+            "name": "BLAST",
+            "delisted": true
+          },
+          {
+            "index": 138,
+            "name": "LISTA",
+            "delisted": true
+          },
+          {
+            "index": 139,
+            "name": "MEW",
+            "delisted": true
+          },
+          {
+            "index": 140,
+            "name": "RENDER",
+            "delisted": false
+          },
+          {
+            "index": 141,
+            "name": "kDOGS",
+            "delisted": true
+          },
+          {
+            "index": 142,
+            "name": "POL",
+            "delisted": false
+          },
+          {
+            "index": 143,
+            "name": "CATI",
+            "delisted": true
+          },
+          {
+            "index": 144,
+            "name": "CELO",
+            "delisted": false
+          },
+          {
+            "index": 145,
+            "name": "HMSTR",
+            "delisted": false
+          },
+          {
+            "index": 146,
+            "name": "SCR",
+            "delisted": true
+          },
+          {
+            "index": 147,
+            "name": "NEIROETH",
+            "delisted": true
+          },
+          {
+            "index": 148,
+            "name": "kNEIRO",
+            "delisted": false
+          },
+          {
+            "index": 149,
+            "name": "GOAT",
+            "delisted": false
+          },
+          {
+            "index": 150,
+            "name": "MOODENG",
+            "delisted": false
+          },
+          {
+            "index": 151,
+            "name": "GRASS",
+            "delisted": false
+          },
+          {
+            "index": 152,
+            "name": "PURR",
+            "delisted": false
+          },
+          {
+            "index": 153,
+            "name": "PNUT",
+            "delisted": false
+          },
+          {
+            "index": 154,
+            "name": "XLM",
+            "delisted": false
+          },
+          {
+            "index": 155,
+            "name": "CHILLGUY",
+            "delisted": true
+          },
+          {
+            "index": 156,
+            "name": "SAND",
+            "delisted": false
+          },
+          {
+            "index": 157,
+            "name": "IOTA",
+            "delisted": false
+          },
+          {
+            "index": 158,
+            "name": "ALGO",
+            "delisted": false
+          },
+          {
+            "index": 159,
+            "name": "HYPE",
+            "delisted": false
+          },
+          {
+            "index": 160,
+            "name": "ME",
+            "delisted": false
+          },
+          {
+            "index": 161,
+            "name": "MOVE",
+            "delisted": false
+          },
+          {
+            "index": 162,
+            "name": "VIRTUAL",
+            "delisted": false
+          },
+          {
+            "index": 163,
+            "name": "PENGU",
+            "delisted": false
+          },
+          {
+            "index": 164,
+            "name": "USUAL",
+            "delisted": false
+          },
+          {
+            "index": 165,
+            "name": "FARTCOIN",
+            "delisted": false
+          },
+          {
+            "index": 166,
+            "name": "AI16Z",
+            "delisted": true
+          },
+          {
+            "index": 167,
+            "name": "AIXBT",
+            "delisted": false
+          },
+          {
+            "index": 168,
+            "name": "ZEREBRO",
+            "delisted": true
+          },
+          {
+            "index": 169,
+            "name": "BIO",
+            "delisted": false
+          },
+          {
+            "index": 170,
+            "name": "GRIFFAIN",
+            "delisted": false
+          },
+          {
+            "index": 171,
+            "name": "SPX",
+            "delisted": false
+          },
+          {
+            "index": 172,
+            "name": "S",
+            "delisted": false
+          },
+          {
+            "index": 173,
+            "name": "MORPHO",
+            "delisted": false
+          },
+          {
+            "index": 174,
+            "name": "TRUMP",
+            "delisted": false
+          },
+          {
+            "index": 175,
+            "name": "MELANIA",
+            "delisted": false
+          },
+          {
+            "index": 176,
+            "name": "ANIME",
+            "delisted": false
+          },
+          {
+            "index": 177,
+            "name": "VINE",
+            "delisted": true
+          },
+          {
+            "index": 178,
+            "name": "VVV",
+            "delisted": false
+          },
+          {
+            "index": 179,
+            "name": "JELLY",
+            "delisted": true
+          },
+          {
+            "index": 180,
+            "name": "BERA",
+            "delisted": false
+          },
+          {
+            "index": 181,
+            "name": "TST",
+            "delisted": true
+          },
+          {
+            "index": 182,
+            "name": "LAYER",
+            "delisted": false
+          },
+          {
+            "index": 183,
+            "name": "IP",
+            "delisted": true
+          },
+          {
+            "index": 184,
+            "name": "OM",
+            "delisted": true
+          },
+          {
+            "index": 185,
+            "name": "KAITO",
+            "delisted": false
+          },
+          {
+            "index": 186,
+            "name": "NIL",
+            "delisted": false
+          },
+          {
+            "index": 187,
+            "name": "PAXG",
+            "delisted": false
+          },
+          {
+            "index": 188,
+            "name": "PROMPT",
+            "delisted": true
+          },
+          {
+            "index": 189,
+            "name": "BABY",
+            "delisted": false
+          },
+          {
+            "index": 190,
+            "name": "WCT",
+            "delisted": false
+          },
+          {
+            "index": 191,
+            "name": "HYPER",
+            "delisted": false
+          },
+          {
+            "index": 192,
+            "name": "ZORA",
+            "delisted": false
+          },
+          {
+            "index": 193,
+            "name": "INIT",
+            "delisted": false
+          },
+          {
+            "index": 194,
+            "name": "DOOD",
+            "delisted": true
+          },
+          {
+            "index": 195,
+            "name": "LAUNCHCOIN",
+            "delisted": true
+          },
+          {
+            "index": 196,
+            "name": "NXPC",
+            "delisted": false
+          },
+          {
+            "index": 197,
+            "name": "SOPH",
+            "delisted": false
+          },
+          {
+            "index": 198,
+            "name": "RESOLV",
+            "delisted": false
+          },
+          {
+            "index": 199,
+            "name": "SYRUP",
+            "delisted": false
+          },
+          {
+            "index": 200,
+            "name": "PUMP",
+            "delisted": false
+          },
+          {
+            "index": 201,
+            "name": "PROVE",
+            "delisted": false
+          },
+          {
+            "index": 202,
+            "name": "YZY",
+            "delisted": true
+          },
+          {
+            "index": 203,
+            "name": "XPL",
+            "delisted": false
+          },
+          {
+            "index": 204,
+            "name": "WLFI",
+            "delisted": false
+          },
+          {
+            "index": 205,
+            "name": "LINEA",
+            "delisted": false
+          },
+          {
+            "index": 206,
+            "name": "SKY",
+            "delisted": false
+          },
+          {
+            "index": 207,
+            "name": "ASTER",
+            "delisted": false
+          },
+          {
+            "index": 208,
+            "name": "AVNT",
+            "delisted": false
+          },
+          {
+            "index": 209,
+            "name": "STBL",
+            "delisted": false
+          },
+          {
+            "index": 210,
+            "name": "0G",
+            "delisted": false
+          },
+          {
+            "index": 211,
+            "name": "HEMI",
+            "delisted": false
+          },
+          {
+            "index": 212,
+            "name": "APEX",
+            "delisted": false
+          },
+          {
+            "index": 213,
+            "name": "2Z",
+            "delisted": false
+          },
+          {
+            "index": 214,
+            "name": "ZEC",
+            "delisted": false
+          },
+          {
+            "index": 215,
+            "name": "MON",
+            "delisted": false
+          },
+          {
+            "index": 216,
+            "name": "MET",
+            "delisted": false
+          },
+          {
+            "index": 217,
+            "name": "MEGA",
+            "delisted": false
+          },
+          {
+            "index": 218,
+            "name": "CC",
+            "delisted": false
+          },
+          {
+            "index": 219,
+            "name": "ICP",
+            "delisted": false
+          },
+          {
+            "index": 220,
+            "name": "AERO",
+            "delisted": false
+          },
+          {
+            "index": 221,
+            "name": "STABLE",
+            "delisted": false
+          },
+          {
+            "index": 222,
+            "name": "FOGO",
+            "delisted": false
+          },
+          {
+            "index": 223,
+            "name": "LIT",
+            "delisted": false
+          },
+          {
+            "index": 224,
+            "name": "XMR",
+            "delisted": false
+          },
+          {
+            "index": 225,
+            "name": "AXS",
+            "delisted": false
+          },
+          {
+            "index": 226,
+            "name": "DASH",
+            "delisted": false
+          },
+          {
+            "index": 227,
+            "name": "SKR",
+            "delisted": false
+          },
+          {
+            "index": 228,
+            "name": "AZTEC",
+            "delisted": false
+          },
+          {
+            "index": 229,
+            "name": "CHIP",
+            "delisted": false
+          },
+          {
+            "index": 230,
+            "name": "GRAM",
+            "delisted": false
+          },
+          {
+            "index": 231,
+            "name": "CASHCAT",
+            "delisted": false
+          },
+          {
+            "index": 232,
+            "name": "PONS",
+            "delisted": false
+          },
+          {
+            "index": 233,
+            "name": "USELESS",
+            "delisted": false
+          }
+        ],
+        "contexts": {
+          "rows": 234,
+          "fields": {
+            "openInterest": {
+              "presentRows": 234
+            },
+            "markPx": {
+              "presentRows": 234
+            },
+            "oraclePx": {
+              "presentRows": 234
+            },
+            "funding": {
+              "presentRows": 234
+            },
+            "dayNtlVlm": {
+              "presentRows": 234
+            },
+            "impactPxs": {
+              "presentRows": 178
+            }
+          },
+          "sampleIds": [
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:24.354Z",
+      "durationMs": 539
+    },
+    {
+      "id": "hl-btc-book",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "l2Book",
+        "coin": "BTC"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:25.316Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:25 GMT"
+      },
+      "bytes": 1575,
+      "sha256": "58e7ba25e6805225ec07ef05917141ffe2ab737b6a167d6055d6bdb892e48d50",
+      "summary": {
+        "coin": "BTC",
+        "observedAt": "2026-09-09T12:01:25.306Z",
+        "levelsPerSide": [
+          20,
+          20
+        ],
+        "bestBid": {
+          "px": "79354.0",
+          "sz": "12.18202",
+          "n": 39
+        },
+        "bestAsk": {
+          "px": "79355.0",
+          "sz": "0.99796",
+          "n": 9
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:25.634Z",
+      "durationMs": 318
+    },
+    {
+      "id": "hl-btc-funding",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "fundingHistory",
+        "coin": "BTC",
+        "startTime": 1788350486817
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:26.817Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:01:27 GMT"
+      },
+      "bytes": 14947,
+      "sha256": "737f46229c39b66cd8417ebf290d3c11151965b674bc614e1d2012e72c60fb1e",
+      "summary": {
+        "rows": 168,
+        "first": "2026-09-02T13:00:00.073Z",
+        "last": "2026-09-09T12:00:00.034Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": false,
+        "intervalSeconds": null,
+        "intervalHistogram": [
+          {
+            "seconds": 3599.998,
+            "count": 5
+          },
+          {
+            "seconds": 3600,
+            "count": 5
+          },
+          {
+            "seconds": 3600.026,
+            "count": 5
+          },
+          {
+            "seconds": 3600.004,
+            "count": 4
+          },
+          {
+            "seconds": 3600.006,
+            "count": 4
+          },
+          {
+            "seconds": 3600.017,
+            "count": 4
+          },
+          {
+            "seconds": 3600.032,
+            "count": 4
+          },
+          {
+            "seconds": 3599.971,
+            "count": 3
+          },
+          {
+            "seconds": 3599.978,
+            "count": 3
+          },
+          {
+            "seconds": 3599.983,
+            "count": 3
+          },
+          {
+            "seconds": 3599.984,
+            "count": 3
+          },
+          {
+            "seconds": 3599.986,
+            "count": 3
+          },
+          {
+            "seconds": 3599.995,
+            "count": 3
+          },
+          {
+            "seconds": 3599.996,
+            "count": 3
+          },
+          {
+            "seconds": 3600.008,
+            "count": 3
+          },
+          {
+            "seconds": 3600.01,
+            "count": 3
+          },
+          {
+            "seconds": 3600.015,
+            "count": 3
+          },
+          {
+            "seconds": 3600.019,
+            "count": 3
+          },
+          {
+            "seconds": 3599.938,
+            "count": 2
+          },
+          {
+            "seconds": 3599.951,
+            "count": 2
+          },
+          {
+            "seconds": 3599.955,
+            "count": 2
+          },
+          {
+            "seconds": 3599.959,
+            "count": 2
+          },
+          {
+            "seconds": 3599.96,
+            "count": 2
+          },
+          {
+            "seconds": 3599.965,
+            "count": 2
+          },
+          {
+            "seconds": 3599.969,
+            "count": 2
+          },
+          {
+            "seconds": 3599.97,
+            "count": 2
+          },
+          {
+            "seconds": 3599.972,
+            "count": 2
+          },
+          {
+            "seconds": 3599.974,
+            "count": 2
+          },
+          {
+            "seconds": 3599.975,
+            "count": 2
+          },
+          {
+            "seconds": 3599.977,
+            "count": 2
+          },
+          {
+            "seconds": 3599.985,
+            "count": 2
+          },
+          {
+            "seconds": 3599.987,
+            "count": 2
+          },
+          {
+            "seconds": 3599.989,
+            "count": 2
+          },
+          {
+            "seconds": 3599.991,
+            "count": 2
+          },
+          {
+            "seconds": 3599.992,
+            "count": 2
+          },
+          {
+            "seconds": 3599.994,
+            "count": 2
+          },
+          {
+            "seconds": 3599.999,
+            "count": 2
+          },
+          {
+            "seconds": 3600.003,
+            "count": 2
+          },
+          {
+            "seconds": 3600.005,
+            "count": 2
+          },
+          {
+            "seconds": 3600.007,
+            "count": 2
+          },
+          {
+            "seconds": 3600.009,
+            "count": 2
+          },
+          {
+            "seconds": 3600.012,
+            "count": 2
+          },
+          {
+            "seconds": 3600.013,
+            "count": 2
+          },
+          {
+            "seconds": 3600.024,
+            "count": 2
+          },
+          {
+            "seconds": 3600.029,
+            "count": 2
+          },
+          {
+            "seconds": 3600.031,
+            "count": 2
+          },
+          {
+            "seconds": 3600.033,
+            "count": 2
+          },
+          {
+            "seconds": 3600.034,
+            "count": 2
+          },
+          {
+            "seconds": 3599.88,
+            "count": 1
+          },
+          {
+            "seconds": 3599.922,
+            "count": 1
+          },
+          {
+            "seconds": 3599.931,
+            "count": 1
+          },
+          {
+            "seconds": 3599.94,
+            "count": 1
+          },
+          {
+            "seconds": 3599.944,
+            "count": 1
+          },
+          {
+            "seconds": 3599.954,
+            "count": 1
+          },
+          {
+            "seconds": 3599.956,
+            "count": 1
+          },
+          {
+            "seconds": 3599.957,
+            "count": 1
+          },
+          {
+            "seconds": 3599.966,
+            "count": 1
+          },
+          {
+            "seconds": 3599.968,
+            "count": 1
+          },
+          {
+            "seconds": 3599.973,
+            "count": 1
+          },
+          {
+            "seconds": 3599.979,
+            "count": 1
+          },
+          {
+            "seconds": 3599.98,
+            "count": 1
+          },
+          {
+            "seconds": 3599.981,
+            "count": 1
+          },
+          {
+            "seconds": 3599.982,
+            "count": 1
+          },
+          {
+            "seconds": 3599.988,
+            "count": 1
+          },
+          {
+            "seconds": 3599.99,
+            "count": 1
+          },
+          {
+            "seconds": 3599.993,
+            "count": 1
+          },
+          {
+            "seconds": 3599.997,
+            "count": 1
+          },
+          {
+            "seconds": 3600.001,
+            "count": 1
+          },
+          {
+            "seconds": 3600.002,
+            "count": 1
+          },
+          {
+            "seconds": 3600.011,
+            "count": 1
+          },
+          {
+            "seconds": 3600.014,
+            "count": 1
+          },
+          {
+            "seconds": 3600.021,
+            "count": 1
+          },
+          {
+            "seconds": 3600.023,
+            "count": 1
+          },
+          {
+            "seconds": 3600.025,
+            "count": 1
+          },
+          {
+            "seconds": 3600.027,
+            "count": 1
+          },
+          {
+            "seconds": 3600.03,
+            "count": 1
+          },
+          {
+            "seconds": 3600.036,
+            "count": 1
+          },
+          {
+            "seconds": 3600.037,
+            "count": 1
+          },
+          {
+            "seconds": 3600.039,
+            "count": 1
+          },
+          {
+            "seconds": 3600.04,
+            "count": 1
+          },
+          {
+            "seconds": 3600.043,
+            "count": 1
+          },
+          {
+            "seconds": 3600.047,
+            "count": 1
+          },
+          {
+            "seconds": 3600.052,
+            "count": 1
+          },
+          {
+            "seconds": 3600.056,
+            "count": 1
+          },
+          {
+            "seconds": 3600.057,
+            "count": 1
+          },
+          {
+            "seconds": 3600.058,
+            "count": 1
+          },
+          {
+            "seconds": 3600.065,
+            "count": 1
+          },
+          {
+            "seconds": 3600.07,
+            "count": 1
+          },
+          {
+            "seconds": 3600.104,
+            "count": 1
+          },
+          {
+            "seconds": 3600.107,
+            "count": 1
+          },
+          {
+            "seconds": 3600.12,
+            "count": 1
+          }
+        ],
+        "metrics": {
+          "fundingRate": {
+            "numericRows": 168,
+            "missingRows": 0,
+            "first": "2026-09-02T13:00:00.073Z",
+            "last": "2026-09-09T12:00:00.034Z"
+          },
+          "premium": {
+            "numericRows": 168,
+            "missingRows": 0,
+            "first": "2026-09-02T13:00:00.073Z",
+            "last": "2026-09-09T12:00:00.034Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:27.096Z",
+      "durationMs": 279
+    },
+    {
+      "id": "gecko-solana-new-pools",
+      "provider": "geckoterminal",
+      "url": "https://api.geckoterminal.com/api/v2/networks/solana/new_pools?page=1",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:27.099Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:01:27 GMT",
+        "etag": "W/\"ba34d1577587a339f6885341c9a244a8\""
+      },
+      "bytes": 30153,
+      "sha256": "ba34d1577587a339f6885341c9a244a854b4bc580774567f8d75e93f4c4b7636",
+      "summary": {
+        "rows": 20,
+        "fields": {
+          "id": {
+            "presentRows": 20
+          },
+          "attributes.pool_created_at": {
+            "presentRows": 20
+          },
+          "attributes.reserve_in_usd": {
+            "presentRows": 20
+          },
+          "attributes.volume_usd.h24": {
+            "presentRows": 20
+          }
+        },
+        "sampleIds": [
+          "solana_ej9rh8JGELzwwoKSeXxgcX5UxteqkVeqxjjcQ5jGg5f",
+          "solana_Ak76FtsmbASNNmYpcuGzdnfhd6r7j539YFzrf5Dincep",
+          "solana_EQNCGhFgvuwNh4TeBpPWfy1Ft7erYpfCe5LPAGYFkWP9"
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:27.151Z",
+      "durationMs": 52
+    },
+    {
+      "id": "gecko-base-new-pools",
+      "provider": "geckoterminal",
+      "url": "https://api.geckoterminal.com/api/v2/networks/base/new_pools?page=1",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:29.600Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:01:29 GMT",
+        "etag": "W/\"feacb7c1c12d55d31ece96732989801b\""
+      },
+      "bytes": 28772,
+      "sha256": "feacb7c1c12d55d31ece96732989801b265f48477cc06cbb7ee393136a200a60",
+      "summary": {
+        "rows": 20,
+        "fields": {
+          "id": {
+            "presentRows": 20
+          },
+          "attributes.pool_created_at": {
+            "presentRows": 20
+          },
+          "attributes.reserve_in_usd": {
+            "presentRows": 18
+          },
+          "attributes.volume_usd.h24": {
+            "presentRows": 20
+          }
+        },
+        "sampleIds": [
+          "base_0xb59092b4ca70476347bb6dd3a45b42a314e25aa5e8a47f71a4af83bdb215ae71",
+          "base_0xd8cf838c1a20bbc3cf885dfab9f294f029657dc43e5439da436d9ef1c4cfb77d",
+          "base_0x58916a5bc023a36770a4af75d250ebe9a628d886651ed29000eca7cfc4209595"
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:29.619Z",
+      "durationMs": 19
+    },
+    {
+      "id": "dex-profiles",
+      "provider": "dexscreener",
+      "url": "https://api.dexscreener.com/token-profiles/latest/v1",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:29.621Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:01:29 GMT",
+        "etag": "W/\"5a5a-5tN3j1Q87lZpGti+JyceSZrtgS4\""
+      },
+      "bytes": 23130,
+      "sha256": "0085bcadead5b0f955e54ebd99fec2a2f1cb5d027ad8e48369e48e8b8797c335",
+      "summary": {
+        "rows": 30,
+        "fields": {
+          "chainId": {
+            "presentRows": 30
+          },
+          "tokenAddress": {
+            "presentRows": 30
+          }
+        },
+        "sampleIds": [
+          "0xfCad50476f1EEa557464f9e249155DC8d0a87777",
+          "0x31a068ea5668027afc7eD6c22422681458bbD7d5",
+          "EeBYdnFBkKVjhP9uCtf6mpPgZkK6kLjvsbJBhW2oKuWB"
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:29.797Z",
+      "durationMs": 175
+    },
+    {
+      "id": "dex-boosts",
+      "provider": "dexscreener",
+      "url": "https://api.dexscreener.com/token-boosts/latest/v1",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:30.723Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:01:30 GMT",
+        "etag": "W/\"5fde-uBUklu3tXCcBdIANZUFIuUy7rsc\""
+      },
+      "bytes": 24542,
+      "sha256": "908676117b0ee2fa69a99bc6401044feb0dd2a2c8083c467c5fca29d2dcbee41",
+      "summary": {
+        "rows": 29,
+        "fields": {
+          "chainId": {
+            "presentRows": 29
+          },
+          "tokenAddress": {
+            "presentRows": 29
+          },
+          "amount": {
+            "presentRows": 29
+          }
+        },
+        "sampleIds": [
+          "uuxWwFL6G9UjiYRZvWxJrSB18V1oKBgYrmueamREK57",
+          "AFNHhHDorwwitTFyVCWYgWDDJD5FE2dkrQYjdswqpump",
+          "0x5437a2C0169d637339a2ed1ae9DECF3F1E5b7B5c"
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:30.860Z",
+      "durationMs": 138
+    },
+    {
+      "id": "dex-solana-pairs",
+      "provider": "dexscreener",
+      "url": "https://api.dexscreener.com/token-pairs/v1/solana/So11111111111111111111111111111111111111112",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:31.823Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:01:32 GMT",
+        "etag": "W/\"a451-Wr3ha5GSeAqU3wKEF8YWlhufxnc\""
+      },
+      "bytes": 42065,
+      "sha256": "d8ef9dd520ed609f9ecbb0dacbcb2d874295c12fb8dca89b7af3e8e772c001c6",
+      "summary": {
+        "rows": 30,
+        "fields": {
+          "pairAddress": {
+            "presentRows": 30
+          },
+          "liquidity.usd": {
+            "presentRows": 30
+          },
+          "pairCreatedAt": {
+            "presentRows": 30
+          },
+          "volume.h24": {
+            "presentRows": 30
+          }
+        },
+        "sampleIds": [
+          "58oQChx4yWmvKdwLLZzBi4ChoCc2fqCUWBkwMihLYQo2",
+          "Czfq3xZZDmsdGdUyrNLtRhGc47cXcZtLG4crryfu44zE",
+          "8sLbNZoA1cfnvMJLPfp98ZLAnFSYCFApfJKMbiXNLwxj"
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:31.962Z",
+      "durationMs": 139
+    },
+    {
+      "id": "dex-base-pairs",
+      "provider": "dexscreener",
+      "url": "https://api.dexscreener.com/token-pairs/v1/base/0x4200000000000000000000000000000000000006",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:32.924Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:01:33 GMT",
+        "etag": "W/\"8499-RAzEkbOQttzLRTr1aT6z+I3sVh0\""
+      },
+      "bytes": 33945,
+      "sha256": "51ff04badd96668090bbb82e9285dc240558229db92056ef4c073dd9bd246f84",
+      "summary": {
+        "rows": 30,
+        "fields": {
+          "pairAddress": {
+            "presentRows": 30
+          },
+          "liquidity.usd": {
+            "presentRows": 30
+          },
+          "pairCreatedAt": {
+            "presentRows": 21
+          },
+          "volume.h24": {
+            "presentRows": 30
+          }
+        },
+        "sampleIds": [
+          "0x72AB388E2E2F6FaceF59E3C3FA2C4E29011c2D38",
+          "0xb4CB800910B228ED3d0834cF79D697127BBB00e5",
+          "0x6c561B446416E1A00E8E93E221854d6eA4171372"
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:33.204Z",
+      "durationMs": 280
+    },
+    {
+      "id": "dex-paid-orders",
+      "provider": "dexscreener",
+      "url": "https://api.dexscreener.com/orders/v1/solana/So11111111111111111111111111111111111111112",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:34.025Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:01:34 GMT",
+        "etag": "W/\"8a7-XxoWAXJFMZP0HOiC+k8FSj8YB1Y\""
+      },
+      "bytes": 2215,
+      "sha256": "716b2ea18dd7feccb94dcaacc3dbde612fd87eee899b8ed6cf56984a1587b718",
+      "summary": {
+        "fields": {
+          "orders": [
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "type": "tokenAd",
+              "status": "on-hold",
+              "paymentTimestamp": 1767714338784
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "type": "tokenProfile",
+              "status": "cancelled",
+              "paymentTimestamp": 1748404091997
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "type": "tokenProfile",
+              "status": "cancelled",
+              "paymentTimestamp": 1740352427623
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "type": "tokenProfile",
+              "status": "approved",
+              "paymentTimestamp": 1734108738379
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "type": "tokenProfile",
+              "status": "approved",
+              "paymentTimestamp": 1732282568744
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "type": "tokenProfile",
+              "status": "approved",
+              "paymentTimestamp": 1731165257994
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "type": "tokenProfile",
+              "status": "approved",
+              "paymentTimestamp": 1730219434686
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "type": "communityTakeover",
+              "status": "cancelled",
+              "paymentTimestamp": 1727829967602
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "type": "tokenProfile",
+              "status": "approved",
+              "paymentTimestamp": 1727829946625
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "type": "tokenProfile",
+              "status": "approved",
+              "paymentTimestamp": 1727828558872
+            }
+          ],
+          "boosts": [
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "id": "AnC6VBRyKuj87OwlXieg",
+              "amount": 10,
+              "paymentTimestamp": 1763531526741
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "id": "K0qcA7WyPdWXt3sbIWoK",
+              "amount": 10,
+              "paymentTimestamp": 1761360597015
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "id": "5UZwp1MCCY8SHRc7Duhi",
+              "amount": 10,
+              "paymentTimestamp": 1756671597419
+            },
+            {
+              "chainId": "solana",
+              "tokenAddress": "So11111111111111111111111111111111111111112",
+              "id": "E6p1GiqAM6kAGnUEleck",
+              "amount": 10,
+              "paymentTimestamp": 1734551479263
+            }
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:01:34.324Z",
+      "durationMs": 298
+    },
+    {
+      "id": "fred-DFII10",
+      "provider": "fred",
+      "url": "https://api.stlouisfed.org/fred/series/observations?series_id=DFII10&file_type=json&observation_start=2020-01-01&observation_end=2020-01-10&vintage_dates=2020-01-15",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:34.326Z",
+      "httpStatus": 400,
+      "responseHeaders": {
+        "content-type": "application/json; charset=UTF-8",
+        "date": "Wed, 09 Sep 2026 12:01:40 GMT"
+      },
+      "bytes": 162,
+      "sha256": "da3c632f9a98b4c8f641de2b0763d513b4642316fe56d52d883002e011a892ff",
+      "outcome": "http-error",
+      "completedAt": "2026-09-09T12:01:40.606Z",
+      "durationMs": 6280
+    },
+    {
+      "id": "fred-DTWEXBGS",
+      "provider": "fred",
+      "url": "https://api.stlouisfed.org/fred/series/observations?series_id=DTWEXBGS&file_type=json&observation_start=2020-01-01&observation_end=2020-01-10&vintage_dates=2020-01-15",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:40.609Z",
+      "httpStatus": 400,
+      "responseHeaders": {
+        "content-type": "application/json; charset=UTF-8",
+        "date": "Wed, 09 Sep 2026 12:01:55 GMT"
+      },
+      "bytes": 162,
+      "sha256": "da3c632f9a98b4c8f641de2b0763d513b4642316fe56d52d883002e011a892ff",
+      "outcome": "http-error",
+      "completedAt": "2026-09-09T12:01:55.545Z",
+      "durationMs": 14937
+    },
+    {
+      "id": "fred-SP500",
+      "provider": "fred",
+      "url": "https://api.stlouisfed.org/fred/series/observations?series_id=SP500&file_type=json&observation_start=2020-01-01&observation_end=2020-01-10&vintage_dates=2020-01-15",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:01:55.548Z",
+      "httpStatus": 400,
+      "responseHeaders": {
+        "content-type": "application/json; charset=UTF-8",
+        "date": "Wed, 09 Sep 2026 12:02:10 GMT"
+      },
+      "bytes": 162,
+      "sha256": "da3c632f9a98b4c8f641de2b0763d513b4642316fe56d52d883002e011a892ff",
+      "outcome": "http-error",
+      "completedAt": "2026-09-09T12:02:10.737Z",
+      "durationMs": 15188
+    },
+    {
+      "id": "glassnode-sopr",
+      "provider": "glassnode",
+      "url": "https://api.glassnode.com/v1/metrics/indicators/sopr?a=BTC&i=24h&s=1577836800&u=1578614400",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:10.739Z",
+      "httpStatus": 401,
+      "responseHeaders": {
+        "content-type": "text/html",
+        "date": "Wed, 09 Sep 2026 12:02:11 GMT"
+      },
+      "bytes": 1110,
+      "sha256": "968b252a6bb3eeb377e72c6aeecec16b8b8c4122d0b6c19f1a0a5ff792409d50",
+      "outcome": "access-denied",
+      "completedAt": "2026-09-09T12:02:10.989Z",
+      "durationMs": 249
+    },
+    {
+      "id": "mempool-tip",
+      "provider": "mempool",
+      "url": "https://mempool.space/api/blocks/tip/height",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:10.991Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "text/plain",
+        "date": "Wed, 09 Sep 2026 12:02:11 GMT"
+      },
+      "bytes": 6,
+      "sha256": "dfe9e31b40328c8425cc5039243da281e5a4366dbc12762c631fb529d197e892",
+      "summary": {
+        "value": 966201
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:11.409Z",
+      "durationMs": 418
+    },
+    {
+      "id": "solana-inflation",
+      "provider": "solana-rpc",
+      "url": "https://api.mainnet-beta.solana.com",
+      "method": "POST",
+      "body": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "getInflationRate",
+        "params": []
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:11.412Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:02:11 GMT",
+        "x-ratelimit-conn-limit": "40",
+        "x-ratelimit-conn-remaining": "39",
+        "x-ratelimit-connrate-limit": "40",
+        "x-ratelimit-connrate-remaining": "39",
+        "x-ratelimit-endpoint-limit": "unlimited",
+        "x-ratelimit-endpoint-remaining": "-6380",
+        "x-ratelimit-method-limit": "150",
+        "x-ratelimit-method-remaining": "149",
+        "x-ratelimit-pubsub-limit": "10",
+        "x-ratelimit-pubsub-remaining": "10",
+        "x-ratelimit-rps-limit": "250",
+        "x-ratelimit-rps-remaining": "249",
+        "x-ratelimit-tier": "free"
+      },
+      "bytes": 128,
+      "sha256": "4e272812e9a1eec2f5f70b436c341161bad7a87cf282d5fb2c0b1ece28816d24",
+      "summary": {
+        "fields": {
+          "result.total": 0.036565890431683554,
+          "result.epoch": 1031
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:11.891Z",
+      "durationMs": 479
+    },
+    {
+      "id": "hl-contexts-xyz",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": "xyz"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:11.894Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:02:12 GMT"
+      },
+      "bytes": 53726,
+      "sha256": "08d82c52988120a75c1380bbd7ed56bd9ed18954a4e5502fb60f6cec316ab9bd",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "xyz:XYZ100",
+            "delisted": false
+          },
+          {
+            "index": 1,
+            "name": "xyz:TSLA",
+            "delisted": false
+          },
+          {
+            "index": 2,
+            "name": "xyz:NVDA",
+            "delisted": false
+          },
+          {
+            "index": 3,
+            "name": "xyz:GOLD",
+            "delisted": false
+          },
+          {
+            "index": 4,
+            "name": "xyz:HOOD",
+            "delisted": false
+          },
+          {
+            "index": 5,
+            "name": "xyz:INTC",
+            "delisted": false
+          },
+          {
+            "index": 6,
+            "name": "xyz:PLTR",
+            "delisted": false
+          },
+          {
+            "index": 7,
+            "name": "xyz:COIN",
+            "delisted": false
+          },
+          {
+            "index": 8,
+            "name": "xyz:META",
+            "delisted": false
+          },
+          {
+            "index": 9,
+            "name": "xyz:AAPL",
+            "delisted": false
+          },
+          {
+            "index": 10,
+            "name": "xyz:MSFT",
+            "delisted": false
+          },
+          {
+            "index": 11,
+            "name": "xyz:ORCL",
+            "delisted": false
+          },
+          {
+            "index": 12,
+            "name": "xyz:GOOGL",
+            "delisted": false
+          },
+          {
+            "index": 13,
+            "name": "xyz:AMZN",
+            "delisted": false
+          },
+          {
+            "index": 14,
+            "name": "xyz:AMD",
+            "delisted": false
+          },
+          {
+            "index": 15,
+            "name": "xyz:MU",
+            "delisted": false
+          },
+          {
+            "index": 16,
+            "name": "xyz:SNDK",
+            "delisted": false
+          },
+          {
+            "index": 17,
+            "name": "xyz:MSTR",
+            "delisted": false
+          },
+          {
+            "index": 18,
+            "name": "xyz:CRCL",
+            "delisted": false
+          },
+          {
+            "index": 19,
+            "name": "xyz:NFLX",
+            "delisted": false
+          },
+          {
+            "index": 20,
+            "name": "xyz:COST",
+            "delisted": false
+          },
+          {
+            "index": 21,
+            "name": "xyz:LLY",
+            "delisted": false
+          },
+          {
+            "index": 22,
+            "name": "xyz:SKHX",
+            "delisted": false
+          },
+          {
+            "index": 23,
+            "name": "xyz:TSM",
+            "delisted": false
+          },
+          {
+            "index": 24,
+            "name": "xyz:JPY",
+            "delisted": false
+          },
+          {
+            "index": 25,
+            "name": "xyz:EUR",
+            "delisted": false
+          },
+          {
+            "index": 26,
+            "name": "xyz:SILVER",
+            "delisted": false
+          },
+          {
+            "index": 27,
+            "name": "xyz:RIVN",
+            "delisted": false
+          },
+          {
+            "index": 28,
+            "name": "xyz:BABA",
+            "delisted": false
+          },
+          {
+            "index": 29,
+            "name": "xyz:CL",
+            "delisted": false
+          },
+          {
+            "index": 30,
+            "name": "xyz:COPPER",
+            "delisted": false
+          },
+          {
+            "index": 31,
+            "name": "xyz:NATGAS",
+            "delisted": false
+          },
+          {
+            "index": 32,
+            "name": "xyz:URANIUM",
+            "delisted": true
+          },
+          {
+            "index": 33,
+            "name": "xyz:ALUMINIUM",
+            "delisted": true
+          },
+          {
+            "index": 34,
+            "name": "xyz:SMSN",
+            "delisted": false
+          },
+          {
+            "index": 35,
+            "name": "xyz:PLATINUM",
+            "delisted": false
+          },
+          {
+            "index": 36,
+            "name": "xyz:USAR",
+            "delisted": false
+          },
+          {
+            "index": 37,
+            "name": "xyz:CRWV",
+            "delisted": false
+          },
+          {
+            "index": 38,
+            "name": "xyz:URNM",
+            "delisted": false
+          },
+          {
+            "index": 39,
+            "name": "xyz:PALLADIUM",
+            "delisted": false
+          },
+          {
+            "index": 40,
+            "name": "xyz:DXY",
+            "delisted": true
+          },
+          {
+            "index": 41,
+            "name": "xyz:GME",
+            "delisted": false
+          },
+          {
+            "index": 42,
+            "name": "xyz:KR200",
+            "delisted": false
+          },
+          {
+            "index": 43,
+            "name": "xyz:SOFTBANK",
+            "delisted": false
+          },
+          {
+            "index": 44,
+            "name": "xyz:JP225",
+            "delisted": false
+          },
+          {
+            "index": 45,
+            "name": "xyz:HYUNDAI",
+            "delisted": false
+          },
+          {
+            "index": 46,
+            "name": "xyz:KIOXIA",
+            "delisted": false
+          },
+          {
+            "index": 47,
+            "name": "xyz:EWY",
+            "delisted": false
+          },
+          {
+            "index": 48,
+            "name": "xyz:EWJ",
+            "delisted": false
+          },
+          {
+            "index": 49,
+            "name": "xyz:BRENTOIL",
+            "delisted": false
+          },
+          {
+            "index": 50,
+            "name": "xyz:VIX",
+            "delisted": true
+          },
+          {
+            "index": 51,
+            "name": "xyz:HIMS",
+            "delisted": false
+          },
+          {
+            "index": 52,
+            "name": "xyz:SP500",
+            "delisted": false
+          },
+          {
+            "index": 53,
+            "name": "xyz:DKNG",
+            "delisted": false
+          },
+          {
+            "index": 54,
+            "name": "xyz:LITE",
+            "delisted": false
+          },
+          {
+            "index": 55,
+            "name": "xyz:CORN",
+            "delisted": true
+          },
+          {
+            "index": 56,
+            "name": "xyz:XLE",
+            "delisted": false
+          },
+          {
+            "index": 57,
+            "name": "xyz:WHEAT",
+            "delisted": true
+          },
+          {
+            "index": 58,
+            "name": "xyz:TTF",
+            "delisted": true
+          },
+          {
+            "index": 59,
+            "name": "xyz:BX",
+            "delisted": false
+          },
+          {
+            "index": 60,
+            "name": "xyz:PURRDAT",
+            "delisted": false
+          },
+          {
+            "index": 61,
+            "name": "xyz:MRVL",
+            "delisted": false
+          },
+          {
+            "index": 62,
+            "name": "xyz:RKLB",
+            "delisted": false
+          },
+          {
+            "index": 63,
+            "name": "xyz:BIRD",
+            "delisted": false
+          },
+          {
+            "index": 64,
+            "name": "xyz:VOL",
+            "delisted": true
+          },
+          {
+            "index": 65,
+            "name": "xyz:DRAM",
+            "delisted": false
+          },
+          {
+            "index": 66,
+            "name": "xyz:CBRS",
+            "delisted": false
+          },
+          {
+            "index": 67,
+            "name": "xyz:EWZ",
+            "delisted": false
+          },
+          {
+            "index": 68,
+            "name": "xyz:KRW",
+            "delisted": true
+          },
+          {
+            "index": 69,
+            "name": "xyz:ZM",
+            "delisted": false
+          },
+          {
+            "index": 70,
+            "name": "xyz:EBAY",
+            "delisted": false
+          },
+          {
+            "index": 71,
+            "name": "xyz:H100",
+            "delisted": true
+          },
+          {
+            "index": 72,
+            "name": "xyz:NIFTY",
+            "delisted": true
+          },
+          {
+            "index": 73,
+            "name": "xyz:ARM",
+            "delisted": false
+          },
+          {
+            "index": 74,
+            "name": "xyz:EWT",
+            "delisted": false
+          },
+          {
+            "index": 75,
+            "name": "xyz:GBP",
+            "delisted": false
+          },
+          {
+            "index": 76,
+            "name": "xyz:SPCX",
+            "delisted": false
+          },
+          {
+            "index": 77,
+            "name": "xyz:IBOV",
+            "delisted": true
+          },
+          {
+            "index": 78,
+            "name": "xyz:ASML",
+            "delisted": false
+          },
+          {
+            "index": 79,
+            "name": "xyz:MINIMAX",
+            "delisted": false
+          },
+          {
+            "index": 80,
+            "name": "xyz:BB",
+            "delisted": false
+          },
+          {
+            "index": 81,
+            "name": "xyz:QNT",
+            "delisted": false
+          },
+          {
+            "index": 82,
+            "name": "xyz:DELL",
+            "delisted": false
+          },
+          {
+            "index": 83,
+            "name": "xyz:IBM",
+            "delisted": false
+          },
+          {
+            "index": 84,
+            "name": "xyz:AVGO",
+            "delisted": false
+          },
+          {
+            "index": 85,
+            "name": "xyz:NOW",
+            "delisted": false
+          },
+          {
+            "index": 86,
+            "name": "xyz:NBIS",
+            "delisted": false
+          },
+          {
+            "index": 87,
+            "name": "xyz:WDC",
+            "delisted": false
+          },
+          {
+            "index": 88,
+            "name": "xyz:NOK",
+            "delisted": false
+          },
+          {
+            "index": 89,
+            "name": "xyz:SMH",
+            "delisted": false
+          },
+          {
+            "index": 90,
+            "name": "xyz:BE",
+            "delisted": false
+          },
+          {
+            "index": 91,
+            "name": "xyz:ZHIPU",
+            "delisted": false
+          },
+          {
+            "index": 92,
+            "name": "xyz:QCOM",
+            "delisted": false
+          },
+          {
+            "index": 93,
+            "name": "xyz:STRC",
+            "delisted": false
+          },
+          {
+            "index": 94,
+            "name": "xyz:BOT",
+            "delisted": false
+          },
+          {
+            "index": 95,
+            "name": "xyz:AMAT",
+            "delisted": false
+          },
+          {
+            "index": 96,
+            "name": "xyz:IBIDEN",
+            "delisted": true
+          },
+          {
+            "index": 97,
+            "name": "xyz:GIGADEV",
+            "delisted": false
+          },
+          {
+            "index": 98,
+            "name": "xyz:SHAZ",
+            "delisted": false
+          },
+          {
+            "index": 99,
+            "name": "xyz:SKHY",
+            "delisted": false
+          },
+          {
+            "index": 100,
+            "name": "xyz:KSTR",
+            "delisted": true
+          },
+          {
+            "index": 101,
+            "name": "xyz:CXMT",
+            "delisted": false
+          },
+          {
+            "index": 102,
+            "name": "xyz:GEV",
+            "delisted": false
+          },
+          {
+            "index": 103,
+            "name": "xyz:KORU",
+            "delisted": false
+          },
+          {
+            "index": 104,
+            "name": "xyz:UNITREE",
+            "delisted": false
+          },
+          {
+            "index": 105,
+            "name": "xyz:LYTE",
+            "delisted": false
+          },
+          {
+            "index": 106,
+            "name": "xyz:NCLD",
+            "delisted": false
+          },
+          {
+            "index": 107,
+            "name": "xyz:SOXL",
+            "delisted": false
+          },
+          {
+            "index": 108,
+            "name": "xyz:MAGS",
+            "delisted": false
+          },
+          {
+            "index": 109,
+            "name": "xyz:IREN",
+            "delisted": false
+          },
+          {
+            "index": 110,
+            "name": "xyz:NET",
+            "delisted": false
+          },
+          {
+            "index": 111,
+            "name": "xyz:CRWD",
+            "delisted": false
+          },
+          {
+            "index": 112,
+            "name": "xyz:RDDT",
+            "delisted": false
+          },
+          {
+            "index": 113,
+            "name": "xyz:AAOI",
+            "delisted": false
+          },
+          {
+            "index": 114,
+            "name": "xyz:MRNA",
+            "delisted": false
+          },
+          {
+            "index": 115,
+            "name": "xyz:XBI",
+            "delisted": false
+          },
+          {
+            "index": 116,
+            "name": "xyz:SHEIN",
+            "delisted": false
+          },
+          {
+            "index": 117,
+            "name": "xyz:YMTC",
+            "delisted": true
+          },
+          {
+            "index": 118,
+            "name": "xyz:BMNR",
+            "delisted": false
+          }
+        ],
+        "contexts": {
+          "rows": 119,
+          "fields": {
+            "openInterest": {
+              "presentRows": 119
+            },
+            "markPx": {
+              "presentRows": 119
+            },
+            "oraclePx": {
+              "presentRows": 119
+            },
+            "funding": {
+              "presentRows": 119
+            },
+            "dayNtlVlm": {
+              "presentRows": 119
+            },
+            "impactPxs": {
+              "presentRows": 104
+            }
+          },
+          "sampleIds": [
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:12.210Z",
+      "durationMs": 316
+    },
+    {
+      "id": "hl-contexts-flx",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": "flx"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:13.396Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:02:13 GMT"
+      },
+      "bytes": 7346,
+      "sha256": "14bccb696f1b4d90fdee80a46d4bc3983f5375ff8e14fafbcd1b2ff574576ad7",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "flx:TSLA",
+            "delisted": true
+          },
+          {
+            "index": 1,
+            "name": "flx:NVDA",
+            "delisted": true
+          },
+          {
+            "index": 2,
+            "name": "flx:CRCL",
+            "delisted": true
+          },
+          {
+            "index": 3,
+            "name": "flx:COIN",
+            "delisted": true
+          },
+          {
+            "index": 4,
+            "name": "flx:XMR",
+            "delisted": true
+          },
+          {
+            "index": 5,
+            "name": "flx:GOLD",
+            "delisted": true
+          },
+          {
+            "index": 6,
+            "name": "flx:SILVER",
+            "delisted": true
+          },
+          {
+            "index": 7,
+            "name": "flx:OIL",
+            "delisted": true
+          },
+          {
+            "index": 8,
+            "name": "flx:GAS",
+            "delisted": true
+          },
+          {
+            "index": 9,
+            "name": "flx:BTC",
+            "delisted": true
+          },
+          {
+            "index": 10,
+            "name": "flx:COPPER",
+            "delisted": true
+          },
+          {
+            "index": 11,
+            "name": "flx:PALLADIUM",
+            "delisted": true
+          },
+          {
+            "index": 12,
+            "name": "flx:PLATINUM",
+            "delisted": true
+          },
+          {
+            "index": 13,
+            "name": "flx:USDE",
+            "delisted": true
+          },
+          {
+            "index": 14,
+            "name": "flx:USA500",
+            "delisted": true
+          },
+          {
+            "index": 15,
+            "name": "flx:USA100",
+            "delisted": true
+          }
+        ],
+        "contexts": {
+          "rows": 16,
+          "fields": {
+            "openInterest": {
+              "presentRows": 16
+            },
+            "markPx": {
+              "presentRows": 16
+            },
+            "oraclePx": {
+              "presentRows": 16
+            },
+            "funding": {
+              "presentRows": 16
+            },
+            "dayNtlVlm": {
+              "presentRows": 16
+            },
+            "impactPxs": {
+              "presentRows": 0
+            }
+          },
+          "sampleIds": [
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:13.675Z",
+      "durationMs": 280
+    },
+    {
+      "id": "hl-contexts-vntl",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": "vntl"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:14.897Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:02:15 GMT"
+      },
+      "bytes": 6278,
+      "sha256": "ea2faedcb4e9a63a0881569f1df6f8edabb742347cd17aedc19138a196ed6603",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "vntl:SPACEX",
+            "delisted": true
+          },
+          {
+            "index": 1,
+            "name": "vntl:OPENAI",
+            "delisted": true
+          },
+          {
+            "index": 2,
+            "name": "vntl:ANTHROPIC",
+            "delisted": true
+          },
+          {
+            "index": 3,
+            "name": "vntl:MAG7",
+            "delisted": true
+          },
+          {
+            "index": 4,
+            "name": "vntl:SEMIS",
+            "delisted": true
+          },
+          {
+            "index": 5,
+            "name": "vntl:ROBOT",
+            "delisted": true
+          },
+          {
+            "index": 6,
+            "name": "vntl:INFOTECH",
+            "delisted": true
+          },
+          {
+            "index": 7,
+            "name": "vntl:NUCLEAR",
+            "delisted": true
+          },
+          {
+            "index": 8,
+            "name": "vntl:DEFENSE",
+            "delisted": true
+          },
+          {
+            "index": 9,
+            "name": "vntl:ENERGY",
+            "delisted": true
+          },
+          {
+            "index": 10,
+            "name": "vntl:BIOTECH",
+            "delisted": true
+          },
+          {
+            "index": 11,
+            "name": "vntl:GOLDJM",
+            "delisted": true
+          },
+          {
+            "index": 12,
+            "name": "vntl:SILVERJM",
+            "delisted": true
+          },
+          {
+            "index": 13,
+            "name": "vntl:WHEAT",
+            "delisted": true
+          },
+          {
+            "index": 14,
+            "name": "vntl:SOY",
+            "delisted": true
+          }
+        ],
+        "contexts": {
+          "rows": 15,
+          "fields": {
+            "openInterest": {
+              "presentRows": 15
+            },
+            "markPx": {
+              "presentRows": 15
+            },
+            "oraclePx": {
+              "presentRows": 15
+            },
+            "funding": {
+              "presentRows": 15
+            },
+            "dayNtlVlm": {
+              "presentRows": 15
+            },
+            "impactPxs": {
+              "presentRows": 0
+            }
+          },
+          "sampleIds": [
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:15.288Z",
+      "durationMs": 391
+    },
+    {
+      "id": "hl-contexts-hyna",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": "hyna"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:16.398Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:02:16 GMT"
+      },
+      "bytes": 9180,
+      "sha256": "7b30efd9091ea0f166f9233452e0796411e762a49e619c9accb98a88ccfca8e7",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "hyna:BTC",
+            "delisted": true
+          },
+          {
+            "index": 1,
+            "name": "hyna:ETH",
+            "delisted": true
+          },
+          {
+            "index": 2,
+            "name": "hyna:HYPE",
+            "delisted": true
+          },
+          {
+            "index": 3,
+            "name": "hyna:SOL",
+            "delisted": true
+          },
+          {
+            "index": 4,
+            "name": "hyna:LIT",
+            "delisted": true
+          },
+          {
+            "index": 5,
+            "name": "hyna:ZEC",
+            "delisted": true
+          },
+          {
+            "index": 6,
+            "name": "hyna:XRP",
+            "delisted": true
+          },
+          {
+            "index": 7,
+            "name": "hyna:LIGHTER",
+            "delisted": true
+          },
+          {
+            "index": 8,
+            "name": "hyna:BNB",
+            "delisted": true
+          },
+          {
+            "index": 9,
+            "name": "hyna:DOGE",
+            "delisted": true
+          },
+          {
+            "index": 10,
+            "name": "hyna:SUI",
+            "delisted": true
+          },
+          {
+            "index": 11,
+            "name": "hyna:PUMP",
+            "delisted": true
+          },
+          {
+            "index": 12,
+            "name": "hyna:FARTCOIN",
+            "delisted": true
+          },
+          {
+            "index": 13,
+            "name": "hyna:ENA",
+            "delisted": true
+          },
+          {
+            "index": 14,
+            "name": "hyna:XMR",
+            "delisted": true
+          },
+          {
+            "index": 15,
+            "name": "hyna:LTC",
+            "delisted": true
+          },
+          {
+            "index": 16,
+            "name": "hyna:LINK",
+            "delisted": true
+          },
+          {
+            "index": 17,
+            "name": "hyna:XPL",
+            "delisted": true
+          },
+          {
+            "index": 18,
+            "name": "hyna:IP",
+            "delisted": true
+          },
+          {
+            "index": 19,
+            "name": "hyna:BCH",
+            "delisted": true
+          },
+          {
+            "index": 20,
+            "name": "hyna:ADA",
+            "delisted": true
+          },
+          {
+            "index": 21,
+            "name": "hyna:1000PEPE",
+            "delisted": true
+          },
+          {
+            "index": 22,
+            "name": "hyna:SILVER",
+            "delisted": true
+          },
+          {
+            "index": 23,
+            "name": "hyna:GOLD",
+            "delisted": true
+          },
+          {
+            "index": 24,
+            "name": "hyna:BASED",
+            "delisted": true
+          }
+        ],
+        "contexts": {
+          "rows": 25,
+          "fields": {
+            "openInterest": {
+              "presentRows": 25
+            },
+            "markPx": {
+              "presentRows": 25
+            },
+            "oraclePx": {
+              "presentRows": 25
+            },
+            "funding": {
+              "presentRows": 25
+            },
+            "dayNtlVlm": {
+              "presentRows": 25
+            },
+            "impactPxs": {
+              "presentRows": 0
+            }
+          },
+          "sampleIds": [
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:16.671Z",
+      "durationMs": 273
+    },
+    {
+      "id": "hl-contexts-km",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": "km"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:17.899Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:02:18 GMT"
+      },
+      "bytes": 9660,
+      "sha256": "8676296637710a512d5eed3406f535e50460a86a017dc1428c0487deff9ea167",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "km:US500",
+            "delisted": true
+          },
+          {
+            "index": 1,
+            "name": "km:BABA",
+            "delisted": true
+          },
+          {
+            "index": 2,
+            "name": "km:EUR",
+            "delisted": true
+          },
+          {
+            "index": 3,
+            "name": "km:USBOND",
+            "delisted": true
+          },
+          {
+            "index": 4,
+            "name": "km:SMALL2000",
+            "delisted": true
+          },
+          {
+            "index": 5,
+            "name": "km:USTECH",
+            "delisted": true
+          },
+          {
+            "index": 6,
+            "name": "km:USENERGY",
+            "delisted": true
+          },
+          {
+            "index": 7,
+            "name": "km:USOIL",
+            "delisted": true
+          },
+          {
+            "index": 8,
+            "name": "km:TSLA",
+            "delisted": true
+          },
+          {
+            "index": 9,
+            "name": "km:SILVER",
+            "delisted": true
+          },
+          {
+            "index": 10,
+            "name": "km:GOLD",
+            "delisted": true
+          },
+          {
+            "index": 11,
+            "name": "km:AAPL",
+            "delisted": true
+          },
+          {
+            "index": 12,
+            "name": "km:GOOGL",
+            "delisted": true
+          },
+          {
+            "index": 13,
+            "name": "km:SEMI",
+            "delisted": true
+          },
+          {
+            "index": 14,
+            "name": "km:GLDMINE",
+            "delisted": true
+          },
+          {
+            "index": 15,
+            "name": "km:NVDA",
+            "delisted": true
+          },
+          {
+            "index": 16,
+            "name": "km:TENCENT",
+            "delisted": true
+          },
+          {
+            "index": 17,
+            "name": "km:JPN225",
+            "delisted": true
+          },
+          {
+            "index": 18,
+            "name": "km:MU",
+            "delisted": true
+          },
+          {
+            "index": 19,
+            "name": "km:PLTR",
+            "delisted": true
+          },
+          {
+            "index": 20,
+            "name": "km:XIAOMI",
+            "delisted": true
+          },
+          {
+            "index": 21,
+            "name": "km:BMNR",
+            "delisted": true
+          },
+          {
+            "index": 22,
+            "name": "km:RTX",
+            "delisted": true
+          }
+        ],
+        "contexts": {
+          "rows": 23,
+          "fields": {
+            "openInterest": {
+              "presentRows": 23
+            },
+            "markPx": {
+              "presentRows": 23
+            },
+            "oraclePx": {
+              "presentRows": 23
+            },
+            "funding": {
+              "presentRows": 23
+            },
+            "dayNtlVlm": {
+              "presentRows": 23
+            },
+            "impactPxs": {
+              "presentRows": 0
+            }
+          },
+          "sampleIds": [
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:18.223Z",
+      "durationMs": 324
+    },
+    {
+      "id": "hl-contexts-abcd",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": "abcd"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:19.399Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:02:19 GMT"
+      },
+      "bytes": 537,
+      "sha256": "4af9ed5e3c8fe2c3010a71c4260c1d6e4b378a692fade538aa4813ed435cf992",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "abcd:USA500",
+            "delisted": true
+          }
+        ],
+        "contexts": {
+          "rows": 1,
+          "fields": {
+            "openInterest": {
+              "presentRows": 1
+            },
+            "markPx": {
+              "presentRows": 1
+            },
+            "oraclePx": {
+              "presentRows": 1
+            },
+            "funding": {
+              "presentRows": 1
+            },
+            "dayNtlVlm": {
+              "presentRows": 1
+            },
+            "impactPxs": {
+              "presentRows": 0
+            }
+          },
+          "sampleIds": [
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:19.670Z",
+      "durationMs": 271
+    },
+    {
+      "id": "hl-contexts-cash",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": "cash"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:20.899Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:02:21 GMT"
+      },
+      "bytes": 6560,
+      "sha256": "73101b7701cde6b65752ac67ead2fff55375551605901999801dabfaf2eb95bb",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "cash:USA500",
+            "delisted": true
+          },
+          {
+            "index": 1,
+            "name": "cash:TSLA",
+            "delisted": true
+          },
+          {
+            "index": 2,
+            "name": "cash:NVDA",
+            "delisted": true
+          },
+          {
+            "index": 3,
+            "name": "cash:HOOD",
+            "delisted": true
+          },
+          {
+            "index": 4,
+            "name": "cash:GOOGL",
+            "delisted": true
+          },
+          {
+            "index": 5,
+            "name": "cash:INTC",
+            "delisted": true
+          },
+          {
+            "index": 6,
+            "name": "cash:AMZN",
+            "delisted": true
+          },
+          {
+            "index": 7,
+            "name": "cash:MSFT",
+            "delisted": true
+          },
+          {
+            "index": 8,
+            "name": "cash:META",
+            "delisted": true
+          },
+          {
+            "index": 9,
+            "name": "cash:GOLD",
+            "delisted": true
+          },
+          {
+            "index": 10,
+            "name": "cash:SILVER",
+            "delisted": true
+          },
+          {
+            "index": 11,
+            "name": "cash:EWY",
+            "delisted": true
+          },
+          {
+            "index": 12,
+            "name": "cash:WTI",
+            "delisted": true
+          },
+          {
+            "index": 13,
+            "name": "cash:BTC",
+            "delisted": true
+          },
+          {
+            "index": 14,
+            "name": "cash:KWEB",
+            "delisted": true
+          },
+          {
+            "index": 15,
+            "name": "cash:ETH",
+            "delisted": true
+          },
+          {
+            "index": 16,
+            "name": "cash:CAR",
+            "delisted": true
+          }
+        ],
+        "contexts": {
+          "rows": 17,
+          "fields": {
+            "openInterest": {
+              "presentRows": 17
+            },
+            "markPx": {
+              "presentRows": 17
+            },
+            "oraclePx": {
+              "presentRows": 17
+            },
+            "funding": {
+              "presentRows": 17
+            },
+            "dayNtlVlm": {
+              "presentRows": 17
+            },
+            "impactPxs": {
+              "presentRows": 0
+            }
+          },
+          "sampleIds": [
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:21.215Z",
+      "durationMs": 316
+    },
+    {
+      "id": "hl-contexts-para",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": "para"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:22.399Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:02:22 GMT"
+      },
+      "bytes": 14885,
+      "sha256": "79feef078c6ba9b75cc081a1a45182dffd42273d1f7b50483f654371bfc58f76",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "para:TOTAL2",
+            "delisted": false
+          },
+          {
+            "index": 1,
+            "name": "para:OTHERS",
+            "delisted": false
+          },
+          {
+            "index": 2,
+            "name": "para:BTCD",
+            "delisted": false
+          },
+          {
+            "index": 3,
+            "name": "para:H100",
+            "delisted": true
+          },
+          {
+            "index": 4,
+            "name": "para:AVGO",
+            "delisted": false
+          },
+          {
+            "index": 5,
+            "name": "para:COHR",
+            "delisted": false
+          },
+          {
+            "index": 6,
+            "name": "para:GLW",
+            "delisted": false
+          },
+          {
+            "index": 7,
+            "name": "para:CRDO",
+            "delisted": false
+          },
+          {
+            "index": 8,
+            "name": "para:LRCX",
+            "delisted": false
+          },
+          {
+            "index": 9,
+            "name": "para:NET",
+            "delisted": false
+          },
+          {
+            "index": 10,
+            "name": "para:STX",
+            "delisted": false
+          },
+          {
+            "index": 11,
+            "name": "para:IREN",
+            "delisted": false
+          },
+          {
+            "index": 12,
+            "name": "para:VST",
+            "delisted": false
+          },
+          {
+            "index": 13,
+            "name": "para:TER",
+            "delisted": false
+          },
+          {
+            "index": 14,
+            "name": "para:AAOI",
+            "delisted": false
+          },
+          {
+            "index": 15,
+            "name": "para:10Y",
+            "delisted": false
+          },
+          {
+            "index": 16,
+            "name": "para:CIEN",
+            "delisted": false
+          },
+          {
+            "index": 17,
+            "name": "para:NAVER",
+            "delisted": true
+          },
+          {
+            "index": 18,
+            "name": "para:RDDT",
+            "delisted": false
+          },
+          {
+            "index": 19,
+            "name": "para:UNITREE",
+            "delisted": false
+          },
+          {
+            "index": 20,
+            "name": "para:CRWD",
+            "delisted": false
+          },
+          {
+            "index": 21,
+            "name": "para:TENCENT",
+            "delisted": true
+          },
+          {
+            "index": 22,
+            "name": "para:CAMBRICON",
+            "delisted": true
+          },
+          {
+            "index": 23,
+            "name": "para:MELI",
+            "delisted": false
+          },
+          {
+            "index": 24,
+            "name": "para:SMCI",
+            "delisted": false
+          },
+          {
+            "index": 25,
+            "name": "para:ANSEM",
+            "delisted": false
+          },
+          {
+            "index": 26,
+            "name": "para:INNOLIGHT",
+            "delisted": true
+          },
+          {
+            "index": 27,
+            "name": "para:30Y",
+            "delisted": true
+          },
+          {
+            "index": 28,
+            "name": "para:2Y",
+            "delisted": true
+          },
+          {
+            "index": 29,
+            "name": "para:IGV",
+            "delisted": false
+          },
+          {
+            "index": 30,
+            "name": "para:SOFI",
+            "delisted": false
+          },
+          {
+            "index": 31,
+            "name": "para:ANTH",
+            "delisted": true
+          },
+          {
+            "index": 32,
+            "name": "para:TTWO",
+            "delisted": false
+          },
+          {
+            "index": 33,
+            "name": "para:CIFR",
+            "delisted": true
+          },
+          {
+            "index": 34,
+            "name": "para:TREAD",
+            "delisted": true
+          }
+        ],
+        "contexts": {
+          "rows": 35,
+          "fields": {
+            "openInterest": {
+              "presentRows": 35
+            },
+            "markPx": {
+              "presentRows": 35
+            },
+            "oraclePx": {
+              "presentRows": 35
+            },
+            "funding": {
+              "presentRows": 35
+            },
+            "dayNtlVlm": {
+              "presentRows": 35
+            },
+            "impactPxs": {
+              "presentRows": 25
+            }
+          },
+          "sampleIds": [
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:22.925Z",
+      "durationMs": 526
+    },
+    {
+      "id": "hl-contexts-mkts",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": "mkts"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:23.900Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:02:24 GMT"
+      },
+      "bytes": 9502,
+      "sha256": "0bd75b2f477afcdf65e427f1d8ee41e20a89b706d794432dde2366a411331b7a",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "mkts:US500",
+            "delisted": false
+          },
+          {
+            "index": 1,
+            "name": "mkts:BABA",
+            "delisted": true
+          },
+          {
+            "index": 2,
+            "name": "mkts:EUR",
+            "delisted": true
+          },
+          {
+            "index": 3,
+            "name": "mkts:USBOND",
+            "delisted": false
+          },
+          {
+            "index": 4,
+            "name": "mkts:SMALL2000",
+            "delisted": false
+          },
+          {
+            "index": 5,
+            "name": "mkts:USTECH",
+            "delisted": false
+          },
+          {
+            "index": 6,
+            "name": "mkts:USENERGY",
+            "delisted": true
+          },
+          {
+            "index": 7,
+            "name": "mkts:USOIL",
+            "delisted": true
+          },
+          {
+            "index": 8,
+            "name": "mkts:TSLA",
+            "delisted": true
+          },
+          {
+            "index": 9,
+            "name": "mkts:SILVER",
+            "delisted": true
+          },
+          {
+            "index": 10,
+            "name": "mkts:GOLD",
+            "delisted": true
+          },
+          {
+            "index": 11,
+            "name": "mkts:AAPL",
+            "delisted": true
+          },
+          {
+            "index": 12,
+            "name": "mkts:GOOGL",
+            "delisted": true
+          },
+          {
+            "index": 13,
+            "name": "mkts:SEMI",
+            "delisted": true
+          },
+          {
+            "index": 14,
+            "name": "mkts:GLDMINE",
+            "delisted": true
+          },
+          {
+            "index": 15,
+            "name": "mkts:NVDA",
+            "delisted": true
+          },
+          {
+            "index": 16,
+            "name": "mkts:TENCENT",
+            "delisted": true
+          },
+          {
+            "index": 17,
+            "name": "mkts:JPN225",
+            "delisted": true
+          },
+          {
+            "index": 18,
+            "name": "mkts:MU",
+            "delisted": true
+          },
+          {
+            "index": 19,
+            "name": "mkts:PLTR",
+            "delisted": true
+          },
+          {
+            "index": 20,
+            "name": "mkts:XIAOMI",
+            "delisted": true
+          },
+          {
+            "index": 21,
+            "name": "mkts:BMNR",
+            "delisted": true
+          },
+          {
+            "index": 22,
+            "name": "mkts:RTX",
+            "delisted": true
+          }
+        ],
+        "contexts": {
+          "rows": 23,
+          "fields": {
+            "openInterest": {
+              "presentRows": 23
+            },
+            "markPx": {
+              "presentRows": 23
+            },
+            "oraclePx": {
+              "presentRows": 23
+            },
+            "funding": {
+              "presentRows": 23
+            },
+            "dayNtlVlm": {
+              "presentRows": 23
+            },
+            "impactPxs": {
+              "presentRows": 4
+            }
+          },
+          "sampleIds": [
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:24.181Z",
+      "durationMs": 282
+    },
+    {
+      "id": "hl-contexts-io",
+      "provider": "hyperliquid",
+      "url": "https://api.hyperliquid.xyz/info",
+      "method": "POST",
+      "body": {
+        "type": "metaAndAssetCtxs",
+        "dex": "io"
+      },
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:02:25.401Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:02:25 GMT"
+      },
+      "bytes": 3837,
+      "sha256": "bfd1f84f9d7d68352e2703003180cd7ab977cbe86cdade3e425a9462bf2c602b",
+      "summary": {
+        "instruments": [
+          {
+            "index": 0,
+            "name": "io:OAI",
+            "delisted": false
+          },
+          {
+            "index": 1,
+            "name": "io:ANTH",
+            "delisted": false
+          },
+          {
+            "index": 2,
+            "name": "io:SNDK",
+            "delisted": false
+          },
+          {
+            "index": 3,
+            "name": "io:IONQ",
+            "delisted": true
+          },
+          {
+            "index": 4,
+            "name": "io:NBIS",
+            "delisted": false
+          },
+          {
+            "index": 5,
+            "name": "io:EWY",
+            "delisted": true
+          },
+          {
+            "index": 6,
+            "name": "io:GPRO",
+            "delisted": false
+          },
+          {
+            "index": 7,
+            "name": "io:SBE",
+            "delisted": true
+          },
+          {
+            "index": 8,
+            "name": "io:TCNT",
+            "delisted": true
+          }
+        ],
+        "contexts": {
+          "rows": 9,
+          "fields": {
+            "openInterest": {
+              "presentRows": 9
+            },
+            "markPx": {
+              "presentRows": 9
+            },
+            "oraclePx": {
+              "presentRows": 9
+            },
+            "funding": {
+              "presentRows": 9
+            },
+            "dayNtlVlm": {
+              "presentRows": 9
+            },
+            "impactPxs": {
+              "presentRows": 5
+            }
+          },
+          "sampleIds": [
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:02:25.708Z",
+      "durationMs": 307
+    }
+  ],
+  "completedAt": "2026-09-09T12:02:25.710Z",
+  "attemptedRequests": 53
+}

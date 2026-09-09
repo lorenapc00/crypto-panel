@@ -4,5 +4,5 @@
   "version": "0.1.0",
   "packageManager": "pnpm@10.15.1",
   "workspaces": ["apps/*", "packages/*"],
-  "scripts": { "dev": "pnpm --filter @crypto-panel/web dev", "dev:api": "pnpm --filter @crypto-panel/api dev", "build": "pnpm -r run build", "test": "pnpm --filter @crypto-panel/api test" }
+  "scripts": { "dev": "pnpm --filter @crypto-panel/web dev", "dev:api": "pnpm --filter @crypto-panel/api dev", "build": "pnpm -r run build", "test": "node --test scripts/*.test.mjs && pnpm --filter @crypto-panel/api test", "research:probe": "node scripts/probe-capabilities.mjs", "research:budget": "node scripts/quota-budget.mjs" }
 }

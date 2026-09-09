@@ -1,0 +1,3766 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-09-09T12:07:47.333Z",
+  "manifestSha256": "6ccc456865c1f6f0614dca80b75b615fdc7ae5bb05c21e01ce56343a92a2a4dc",
+  "classification": "capability-samples-not-an-ingestion-archive",
+  "results": [
+    {
+      "id": "llama-ethereum-fees",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/overview/fees/Ethereum?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:07:47.338Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:07:48 GMT",
+        "last-modified": "Wed, 09 Sep 2026 12:07:48 GMT"
+      },
+      "bytes": 1041788,
+      "sha256": "14110983782f66fbd87d0e427b21ddc1dce8b0e01203916171c8794dc7955ec0",
+      "summary": {
+        "name": null,
+        "dataType": null,
+        "total24h": 10929345.32999999,
+        "protocols": [
+          {
+            "name": "WBTC",
+            "id": "2"
+          },
+          {
+            "name": "Curve DEX",
+            "id": "3"
+          },
+          {
+            "name": "Aave V2",
+            "id": "111"
+          },
+          {
+            "name": "Yearn Finance",
+            "id": "113"
+          },
+          {
+            "name": "Compound V2",
+            "id": "114"
+          },
+          {
+            "name": "Synthetix v1+v2",
+            "id": "115"
+          },
+          {
+            "name": "Balancer V1",
+            "id": "116"
+          },
+          {
+            "name": "Sky Lending",
+            "id": "118"
+          },
+          {
+            "name": "SushiSwap",
+            "id": "119"
+          },
+          {
+            "name": "Nexus Mutual",
+            "id": "122"
+          },
+          {
+            "name": "KyberSwap Classic",
+            "id": "127"
+          },
+          {
+            "name": "dYdX V3",
+            "id": "144"
+          },
+          {
+            "name": "DODO AMM",
+            "id": "146"
+          },
+          {
+            "name": "Tornado Cash",
+            "id": "148"
+          },
+          {
+            "name": "Idle",
+            "id": "150"
+          },
+          {
+            "name": "Bancor V2.1",
+            "id": "162"
+          },
+          {
+            "name": "Index Coop",
+            "id": "172"
+          },
+          {
+            "name": "Badger DAO",
+            "id": "173"
+          },
+          {
+            "name": "Defi Saver Asset Management",
+            "id": "177"
+          },
+          {
+            "name": "Lido",
+            "id": "182"
+          },
+          {
+            "name": "Chamber Vaults",
+            "id": "190"
+          },
+          {
+            "name": "PancakeSwap AMM",
+            "id": "194"
+          },
+          {
+            "name": "Sablier Legacy",
+            "id": "199"
+          },
+          {
+            "name": "Saddle Finance",
+            "id": "202"
+          },
+          {
+            "name": "Alchemix V2",
+            "id": "204"
+          },
+          {
+            "name": "Venus Core Pool",
+            "id": "212"
+          },
+          {
+            "name": "Vesper",
+            "id": "220"
+          },
+          {
+            "name": "Defi Swap",
+            "id": "221"
+          },
+          {
+            "name": "Enzyme Finance",
+            "id": "225"
+          },
+          {
+            "name": "Stake DAO Yield",
+            "id": "249"
+          },
+          {
+            "name": "Liquity V1",
+            "id": "270"
+          },
+          {
+            "name": "StakeWise V3",
+            "id": "277"
+          },
+          {
+            "name": "Ankr",
+            "id": "278"
+          },
+          {
+            "name": "Ribbon",
+            "id": "281"
+          },
+          {
+            "name": "Integral",
+            "id": "291"
+          },
+          {
+            "name": "Swapr V2",
+            "id": "292"
+          },
+          {
+            "name": "Convex Finance",
+            "id": "319"
+          },
+          {
+            "name": "Beefy",
+            "id": "326"
+          },
+          {
+            "name": "Olympus DAO",
+            "id": "340"
+          },
+          {
+            "name": "Impermax V2",
+            "id": "343"
+          },
+          {
+            "name": "Abracadabra Spell",
+            "id": "347"
+          },
+          {
+            "name": "Gamma",
+            "id": "355"
+          },
+          {
+            "name": "Frax",
+            "id": "359"
+          },
+          {
+            "name": "Volmex",
+            "id": "364"
+          },
+          {
+            "name": "Premia V2",
+            "id": "381"
+          },
+          {
+            "name": "Pendle V2",
+            "id": "382"
+          },
+          {
+            "name": "Firebird",
+            "id": "384"
+          },
+          {
+            "name": "ShibaSwap V1",
+            "id": "397"
+          },
+          {
+            "name": "ApeSwap AMM",
+            "id": "398"
+          },
+          {
+            "name": "Tokenlon AMM",
+            "id": "405"
+          },
+          {
+            "name": "THORChain DEX",
+            "id": "412"
+          },
+          {
+            "name": "Elk",
+            "id": "420"
+          },
+          {
+            "name": "Origin Dollar",
+            "id": "427"
+          },
+          {
+            "name": "Hop Protocol",
+            "id": "435"
+          },
+          {
+            "name": "AUTOfinance",
+            "id": "438"
+          },
+          {
+            "name": "Illuvium",
+            "id": "447"
+          },
+          {
+            "name": "Allbridge Classic",
+            "id": "577"
+          },
+          {
+            "name": "Maple",
+            "id": "587"
+          },
+          {
+            "name": "Strike",
+            "id": "589"
+          },
+          {
+            "name": "Clipper",
+            "id": "622"
+          },
+          {
+            "name": "Reserve Protocol",
+            "id": "626"
+          },
+          {
+            "name": "Synapse Cross Chain Bridge",
+            "id": "657"
+          },
+          {
+            "name": "Goldfinch",
+            "id": "703"
+          },
+          {
+            "name": "DefiPlaza",
+            "id": "728"
+          },
+          {
+            "name": "Furucombo",
+            "id": "742"
+          },
+          {
+            "name": "Angle",
+            "id": "756"
+          },
+          {
+            "name": "Rubicon",
+            "id": "799"
+          },
+          {
+            "name": "EmpireDEX",
+            "id": "812"
+          },
+          {
+            "name": "Velora",
+            "id": "894"
+          },
+          {
+            "name": "Rocket Pool",
+            "id": "900"
+          },
+          {
+            "name": "Stader",
+            "id": "1044"
+          },
+          {
+            "name": "MooniSwap",
+            "id": "1053"
+          },
+          {
+            "name": "Gearbox",
+            "id": "1108"
+          },
+          {
+            "name": "Zunami Protocol",
+            "id": "1201"
+          },
+          {
+            "name": "Across",
+            "id": "1207"
+          },
+          {
+            "name": "LooksRare",
+            "id": "1229"
+          },
+          {
+            "name": "Iron Bank",
+            "id": "1303"
+          },
+          {
+            "name": "Railgun",
+            "id": "1320"
+          },
+          {
+            "name": "Api3",
+            "id": "1339"
+          },
+          {
+            "name": "Kromatika",
+            "id": "1397"
+          },
+          {
+            "name": "X2Y2",
+            "id": "1431"
+          },
+          {
+            "name": "deBridge",
+            "id": "1462"
+          },
+          {
+            "name": "Portal",
+            "id": "1541"
+          },
+          {
+            "name": "Concentrator",
+            "id": "1544"
+          },
+          {
+            "name": "Kleros",
+            "id": "1554"
+          },
+          {
+            "name": "Stargate V1",
+            "id": "1571"
+          },
+          {
+            "name": "Symbiosis",
+            "id": "1594"
+          },
+          {
+            "name": "Aave V3",
+            "id": "1599"
+          },
+          {
+            "name": "RadioShack",
+            "id": "1616"
+          },
+          {
+            "name": "Clearpool Lending",
+            "id": "1635"
+          },
+          {
+            "name": "Wombat Exchange",
+            "id": "1700"
+          },
+          {
+            "name": "CLever",
+            "id": "1707"
+          },
+          {
+            "name": "Verse",
+            "id": "1732"
+          },
+          {
+            "name": "UNCX Network V2",
+            "id": "1765"
+          },
+          {
+            "name": "BendDAO Lending V1",
+            "id": "1773"
+          },
+          {
+            "name": "VaultCraft",
+            "id": "1791"
+          },
+          {
+            "name": "PinkSale",
+            "id": "1807"
+          },
+          {
+            "name": "Swapsicle V1",
+            "id": "1824"
+          },
+          {
+            "name": "Moonwell Lending",
+            "id": "1853"
+          },
+          {
+            "name": "ApeX Pro",
+            "id": "1878"
+          },
+          {
+            "name": "Toros",
+            "id": "1881"
+          },
+          {
+            "name": "SideShift",
+            "id": "1895"
+          },
+          {
+            "name": "Sudoswap V1",
+            "id": "1917"
+          },
+          {
+            "name": "Aura",
+            "id": "1918"
+          },
+          {
+            "name": "Bancor V3",
+            "id": "1995"
+          },
+          {
+            "name": "Silo V1",
+            "id": "2020"
+          },
+          {
+            "name": "Fraxlend",
+            "id": "2076"
+          },
+          {
+            "name": "Compound V3",
+            "id": "2088"
+          },
+          {
+            "name": "Frax Swap",
+            "id": "2121"
+          },
+          {
+            "name": "Sommelier",
+            "id": "2139"
+          },
+          {
+            "name": "Dolomite",
+            "id": "2187"
+          },
+          {
+            "name": "Uniswap V1",
+            "id": "2196"
+          },
+          {
+            "name": "Uniswap V2",
+            "id": "2197"
+          },
+          {
+            "name": "Uniswap V3",
+            "id": "2198"
+          },
+          {
+            "name": "Frax Ether",
+            "id": "2221"
+          },
+          {
+            "name": "Axelar",
+            "id": "2237"
+          },
+          {
+            "name": "Llamalend",
+            "id": "2252"
+          },
+          {
+            "name": "Opensea Seaport",
+            "id": "2258"
+          },
+          {
+            "name": "GhostMarket",
+            "id": "2290"
+          },
+          {
+            "name": "stake.link liquid",
+            "id": "2378"
+          },
+          {
+            "name": "Joe V2",
+            "id": "2393"
+          },
+          {
+            "name": "Gyroscope Protocol",
+            "id": "2397"
+          },
+          {
+            "name": "Solidly V2",
+            "id": "2400"
+          },
+          {
+            "name": "Blur Bids",
+            "id": "2414"
+          },
+          {
+            "name": "Metronome Synth",
+            "id": "2428"
+          },
+          {
+            "name": "Inverse Finance FiRM",
+            "id": "2433"
+          },
+          {
+            "name": "GETH",
+            "id": "2454"
+          },
+          {
+            "name": "Rarible",
+            "id": "2504"
+          },
+          {
+            "name": "ENS",
+            "id": "2519"
+          },
+          {
+            "name": "Nouns",
+            "id": "2522"
+          },
+          {
+            "name": "PancakeSwap StableSwap",
+            "id": "2529"
+          },
+          {
+            "name": "tBTC",
+            "id": "2535"
+          },
+          {
+            "name": "Flux Finance",
+            "id": "2537"
+          },
+          {
+            "name": "Ondo Yield Assets",
+            "id": "2542"
+          },
+          {
+            "name": "Frax FPI",
+            "id": "2607"
+          },
+          {
+            "name": "ZORA Marketplace",
+            "id": "2610"
+          },
+          {
+            "name": "Balancer V2",
+            "id": "2611"
+          },
+          {
+            "name": "KyberSwap Elastic",
+            "id": "2615"
+          },
+          {
+            "name": "Chainlink Requests",
+            "id": "2623"
+          },
+          {
+            "name": "ether.fi Stake",
+            "id": "2626"
+          },
+          {
+            "name": "OpenSea V1",
+            "id": "2630"
+          },
+          {
+            "name": "OpenSea V2",
+            "id": "2631"
+          },
+          {
+            "name": "CoWSwap",
+            "id": "2643"
+          },
+          {
+            "name": "Maverick V1",
+            "id": "2644"
+          },
+          {
+            "name": "Arrakis V2",
+            "id": "2667"
+          },
+          {
+            "name": "SMARDEX AMM",
+            "id": "2695"
+          },
+          {
+            "name": "Radiant V2",
+            "id": "2706"
+          },
+          {
+            "name": "Blast API",
+            "id": "2734"
+          },
+          {
+            "name": "PLEXUS",
+            "id": "2740"
+          },
+          {
+            "name": "PancakeSwap AMM V3",
+            "id": "2769"
+          },
+          {
+            "name": "SushiSwap V3",
+            "id": "2776"
+          },
+          {
+            "name": "Aktionariat",
+            "id": "2782"
+          },
+          {
+            "name": "MatrixDock STBT",
+            "id": "2807"
+          },
+          {
+            "name": "Bedrock uniETH",
+            "id": "2832"
+          },
+          {
+            "name": "Juicebox V1",
+            "id": "2833"
+          },
+          {
+            "name": "WAGMI",
+            "id": "2837"
+          },
+          {
+            "name": "Ensuro",
+            "id": "2867"
+          },
+          {
+            "name": "Carbon Defi",
+            "id": "2890"
+          },
+          {
+            "name": "Swell Liquid Staking",
+            "id": "2901"
+          },
+          {
+            "name": "Lybra V1",
+            "id": "2904"
+          },
+          {
+            "name": "Joe V2.1",
+            "id": "2906"
+          },
+          {
+            "name": "Binance staked ETH",
+            "id": "2914"
+          },
+          {
+            "name": "SparkLend",
+            "id": "2929"
+          },
+          {
+            "name": "Origin Ether",
+            "id": "2950"
+          },
+          {
+            "name": "AirSwap",
+            "id": "2954"
+          },
+          {
+            "name": "Satori Perp",
+            "id": "2982"
+          },
+          {
+            "name": "NodeDAO",
+            "id": "2993"
+          },
+          {
+            "name": "crvUSD",
+            "id": "2994"
+          },
+          {
+            "name": "Maestro",
+            "id": "3019"
+          },
+          {
+            "name": "MetaMask Wallet",
+            "id": "3031"
+          },
+          {
+            "name": "Rainbow Wallet",
+            "id": "3038"
+          },
+          {
+            "name": "Houdini Swap",
+            "id": "3041"
+          },
+          {
+            "name": "Steer Protocol",
+            "id": "3043"
+          },
+          {
+            "name": "OpenEden TBILL",
+            "id": "3057"
+          },
+          {
+            "name": "Penpie",
+            "id": "3083"
+          },
+          {
+            "name": "Equilibria",
+            "id": "3091"
+          },
+          {
+            "name": "Sudoswap V2",
+            "id": "3095"
+          },
+          {
+            "name": "Ambient",
+            "id": "3104"
+          },
+          {
+            "name": "Unibot",
+            "id": "3106"
+          },
+          {
+            "name": "EigenCloud",
+            "id": "3107"
+          },
+          {
+            "name": "Scatter",
+            "id": "3146"
+          },
+          {
+            "name": "Foundation",
+            "id": "3168"
+          },
+          {
+            "name": "Kinza Finance",
+            "id": "3171"
+          },
+          {
+            "name": "stUSDT",
+            "id": "3193"
+          },
+          {
+            "name": "Ajna V1",
+            "id": "3233"
+          },
+          {
+            "name": "ZeroLend Lending",
+            "id": "3243"
+          },
+          {
+            "name": "0x0.ai",
+            "id": "3264"
+          },
+          {
+            "name": "Safe",
+            "id": "3320"
+          },
+          {
+            "name": "Banana Gun",
+            "id": "3336"
+          },
+          {
+            "name": "None Trading",
+            "id": "3337"
+          },
+          {
+            "name": "fx Protocol",
+            "id": "3344"
+          },
+          {
+            "name": "Sweep n Flip",
+            "id": "3370"
+          },
+          {
+            "name": "Liquid Collective",
+            "id": "3391"
+          },
+          {
+            "name": "Meta Pool ETH",
+            "id": "3405"
+          },
+          {
+            "name": "Meowl",
+            "id": "3418"
+          },
+          {
+            "name": "BackedFi",
+            "id": "3467"
+          },
+          {
+            "name": "Lybra V2",
+            "id": "3468"
+          },
+          {
+            "name": "PrismaLST",
+            "id": "3473"
+          },
+          {
+            "name": "Solidly V3",
+            "id": "3481"
+          },
+          {
+            "name": "FriendRoom",
+            "id": "3493"
+          },
+          {
+            "name": "Liquis",
+            "id": "3498"
+          },
+          {
+            "name": "Ekubo",
+            "id": "3499"
+          },
+          {
+            "name": "Manga FI",
+            "id": "3532"
+          },
+          {
+            "name": "Radpie",
+            "id": "3555"
+          },
+          {
+            "name": "StakeStone STONE",
+            "id": "3558"
+          },
+          {
+            "name": "DigiFT",
+            "id": "3580"
+          },
+          {
+            "name": "Coinbase Wrapped Staked ETH",
+            "id": "3594"
+          },
+          {
+            "name": "Contango V2",
+            "id": "3602"
+          },
+          {
+            "name": "Amphor",
+            "id": "3643"
+          },
+          {
+            "name": "Uniswap Labs",
+            "id": "3657"
+          },
+          {
+            "name": "Shuriken",
+            "id": "3687"
+          },
+          {
+            "name": "PoolTogether V5",
+            "id": "3693"
+          },
+          {
+            "name": "Circle USYC",
+            "id": "3698"
+          },
+          {
+            "name": "PAAL AI",
+            "id": "3723"
+          },
+          {
+            "name": "Frankencoin",
+            "id": "3790"
+          },
+          {
+            "name": "Sumer.money",
+            "id": "3814"
+          },
+          {
+            "name": "Charm Finance V2",
+            "id": "3869"
+          },
+          {
+            "name": "Wildcat Protocol",
+            "id": "3871"
+          },
+          {
+            "name": "Aimbot",
+            "id": "3875"
+          },
+          {
+            "name": "mETH Protocol",
+            "id": "3882"
+          },
+          {
+            "name": "Chainlink Staking",
+            "id": "3905"
+          },
+          {
+            "name": "Dinero (pxETH)",
+            "id": "3912"
+          },
+          {
+            "name": "Renzo",
+            "id": "3933"
+          },
+          {
+            "name": "Allbridge Core",
+            "id": "3944"
+          },
+          {
+            "name": "Kelp",
+            "id": "3946"
+          },
+          {
+            "name": "ODOS",
+            "id": "3951"
+          },
+          {
+            "name": "Yearn Ether",
+            "id": "3973"
+          },
+          {
+            "name": "KyberSwap Aggregator",
+            "id": "3982"
+          },
+          {
+            "name": "Cakepie",
+            "id": "4007"
+          },
+          {
+            "name": "Bank AI",
+            "id": "4017"
+          },
+          {
+            "name": "Ajna V2",
+            "id": "4019"
+          },
+          {
+            "name": "Morpho Blue",
+            "id": "4025"
+          },
+          {
+            "name": "FWX Derivatives",
+            "id": "4026"
+          },
+          {
+            "name": "Zerion Wallet",
+            "id": "4049"
+          },
+          {
+            "name": "Peapods Finance",
+            "id": "4063"
+          },
+          {
+            "name": "Swell Liquid Restaking",
+            "id": "4078"
+          },
+          {
+            "name": "Garden",
+            "id": "4086"
+          },
+          {
+            "name": "Puffer Stake",
+            "id": "4088"
+          },
+          {
+            "name": "Ethena USDe",
+            "id": "4133"
+          },
+          {
+            "name": "KPK",
+            "id": "4146"
+          },
+          {
+            "name": "Fluid Lending",
+            "id": "4167"
+          },
+          {
+            "name": "Dinari",
+            "id": "4196"
+          },
+          {
+            "name": "Juice Finance",
+            "id": "4208"
+          },
+          {
+            "name": "Ring Swap",
+            "id": "4222"
+          },
+          {
+            "name": "Zircuit Staking",
+            "id": "4238"
+          },
+          {
+            "name": "Definitive",
+            "id": "4257"
+          },
+          {
+            "name": "Invesco USTB",
+            "id": "4265"
+          },
+          {
+            "name": "Curve LlamaLend",
+            "id": "4321"
+          },
+          {
+            "name": "Aera V2",
+            "id": "4323"
+          },
+          {
+            "name": "River Omni-CDP",
+            "id": "4411"
+          },
+          {
+            "name": "ether.fi Liquid",
+            "id": "4429"
+          },
+          {
+            "name": "Superform",
+            "id": "4448"
+          },
+          {
+            "name": "fly.trade",
+            "id": "4457"
+          },
+          {
+            "name": "Avalon Finance",
+            "id": "4473"
+          },
+          {
+            "name": "Fjord V2",
+            "id": "4505"
+          },
+          {
+            "name": "MorpheusAI",
+            "id": "4553"
+          },
+          {
+            "name": "Fjord V1",
+            "id": "4557"
+          },
+          {
+            "name": "Origami Finance",
+            "id": "4592"
+          },
+          {
+            "name": "vfat.io",
+            "id": "4602"
+          },
+          {
+            "name": "Whales Market",
+            "id": "4605"
+          },
+          {
+            "name": "YieldNest",
+            "id": "4606"
+          },
+          {
+            "name": "SolvBTC",
+            "id": "4620"
+          },
+          {
+            "name": "Native Credit Pool",
+            "id": "4663"
+          },
+          {
+            "name": "Spectra V2",
+            "id": "4725"
+          },
+          {
+            "name": "Coinbase Commerce",
+            "id": "4737"
+          },
+          {
+            "name": "Summer.fi Pro",
+            "id": "4741"
+          },
+          {
+            "name": "Fluid Lite",
+            "id": "4742"
+          },
+          {
+            "name": "Maverick V2",
+            "id": "4752"
+          },
+          {
+            "name": "Mellow Restaking",
+            "id": "4756"
+          },
+          {
+            "name": "Symbiotic",
+            "id": "4757"
+          },
+          {
+            "name": "Clusters",
+            "id": "4777"
+          },
+          {
+            "name": "SOFA.org",
+            "id": "4779"
+          },
+          {
+            "name": "TermMax",
+            "id": "4799"
+          },
+          {
+            "name": "Threshold thUSD",
+            "id": "4812"
+          },
+          {
+            "name": "Apex Omni",
+            "id": "4822"
+          },
+          {
+            "name": "Stargate V2",
+            "id": "4831"
+          },
+          {
+            "name": "Napier",
+            "id": "4834"
+          },
+          {
+            "name": "D2 Finance",
+            "id": "4846"
+          },
+          {
+            "name": "BlackRock BUIDL",
+            "id": "4853"
+          },
+          {
+            "name": "Paxos Gold",
+            "id": "4862"
+          },
+          {
+            "name": "Tether Gold",
+            "id": "4863"
+          },
+          {
+            "name": "LayerZero V2",
+            "id": "4867"
+          },
+          {
+            "name": "Midas RWA",
+            "id": "4873"
+          },
+          {
+            "name": "Usual USD0",
+            "id": "4882"
+          },
+          {
+            "name": "Rheo",
+            "id": "4904"
+          },
+          {
+            "name": "Boson Protocol",
+            "id": "4916"
+          },
+          {
+            "name": "BitFi BTC",
+            "id": "4917"
+          },
+          {
+            "name": "Spiko",
+            "id": "4980"
+          },
+          {
+            "name": "DEX Screener",
+            "id": "4990"
+          },
+          {
+            "name": "Capyfi",
+            "id": "5001"
+          },
+          {
+            "name": "manifold.xyz",
+            "id": "5005"
+          },
+          {
+            "name": "DEXTools",
+            "id": "5006"
+          },
+          {
+            "name": "Helio",
+            "id": "5007"
+          },
+          {
+            "name": "Circle USDC",
+            "id": "5008"
+          },
+          {
+            "name": "Euler V2",
+            "id": "5044"
+          },
+          {
+            "name": "SushiSwap Agg",
+            "id": "5061"
+          },
+          {
+            "name": "Apex DeFi",
+            "id": "5065"
+          },
+          {
+            "name": "Level",
+            "id": "5090"
+          },
+          {
+            "name": "Ethervista",
+            "id": "5092"
+          },
+          {
+            "name": "Lombard LBTC",
+            "id": "5097"
+          },
+          {
+            "name": "Superchain",
+            "id": "5111"
+          },
+          {
+            "name": "Bitwise USCC",
+            "id": "5120"
+          },
+          {
+            "name": "Treehouse Protocol",
+            "id": "5131"
+          },
+          {
+            "name": "Elixir",
+            "id": "5140"
+          },
+          {
+            "name": "Lombard Vaults",
+            "id": "5143"
+          },
+          {
+            "name": "Fusion by IPOR",
+            "id": "5145"
+          },
+          {
+            "name": "Pocket Universe",
+            "id": "5189"
+          },
+          {
+            "name": "GraFun",
+            "id": "5195"
+          },
+          {
+            "name": "Folks Finance xChain",
+            "id": "5199"
+          },
+          {
+            "name": "OKX Swap",
+            "id": "5201"
+          },
+          {
+            "name": "NTM.ai",
+            "id": "5212"
+          },
+          {
+            "name": "Jeton",
+            "id": "5213"
+          },
+          {
+            "name": "Kerberus",
+            "id": "5233"
+          },
+          {
+            "name": "Stables Labs USDX",
+            "id": "5234"
+          },
+          {
+            "name": "M0",
+            "id": "5241"
+          },
+          {
+            "name": "Arrakis Modular",
+            "id": "5266"
+          },
+          {
+            "name": "Origin ARM",
+            "id": "5280"
+          },
+          {
+            "name": "Plume Vaults",
+            "id": "5284"
+          },
+          {
+            "name": "Bedrock uniBTC",
+            "id": "5295"
+          },
+          {
+            "name": "maxAPY",
+            "id": "5306"
+          },
+          {
+            "name": "Avalon USDa",
+            "id": "5312"
+          },
+          {
+            "name": "Fluid DEX",
+            "id": "5317"
+          },
+          {
+            "name": "Royco V1",
+            "id": "5337"
+          },
+          {
+            "name": "Reservoir Protocol",
+            "id": "5343"
+          },
+          {
+            "name": "Mantle Restaking",
+            "id": "5351"
+          },
+          {
+            "name": "CIAN Yield Layer",
+            "id": "5376"
+          },
+          {
+            "name": "BlazingApp",
+            "id": "5377"
+          },
+          {
+            "name": "Phantom Wallet",
+            "id": "5398"
+          },
+          {
+            "name": "GMGN",
+            "id": "5408"
+          },
+          {
+            "name": "DeBank Cloud",
+            "id": "5410"
+          },
+          {
+            "name": "clanker",
+            "id": "5446"
+          },
+          {
+            "name": "Upshift",
+            "id": "5460"
+          },
+          {
+            "name": "Swing",
+            "id": "5474"
+          },
+          {
+            "name": "Balancer V3",
+            "id": "5491"
+          },
+          {
+            "name": "Theo Straddle Vaults",
+            "id": "5545"
+          },
+          {
+            "name": "Lagoon",
+            "id": "5547"
+          },
+          {
+            "name": "Zivoe",
+            "id": "5551"
+          },
+          {
+            "name": "Gondi V3",
+            "id": "5561"
+          },
+          {
+            "name": "Virtuals Protocol",
+            "id": "5575"
+          },
+          {
+            "name": "Trust Wallet Wallet",
+            "id": "5577"
+          },
+          {
+            "name": "Base App",
+            "id": "5587"
+          },
+          {
+            "name": "YieldFi",
+            "id": "5588"
+          },
+          {
+            "name": "VolBoost",
+            "id": "5598"
+          },
+          {
+            "name": "Silo V2",
+            "id": "5611"
+          },
+          {
+            "name": "Resolv USR",
+            "id": "5655"
+          },
+          {
+            "name": "Liquity V2",
+            "id": "5656"
+          },
+          {
+            "name": "SuperSwap Ink DEX Aggregator",
+            "id": "5668"
+          },
+          {
+            "name": "KAIO",
+            "id": "5689"
+          },
+          {
+            "name": "Uniswap V4",
+            "id": "5690"
+          },
+          {
+            "name": "Rabby Wallet",
+            "id": "5714"
+          },
+          {
+            "name": "Noon",
+            "id": "5721"
+          },
+          {
+            "name": "Looter",
+            "id": "5728"
+          },
+          {
+            "name": "Bunni V2",
+            "id": "5734"
+          },
+          {
+            "name": "Concrete",
+            "id": "5751"
+          },
+          {
+            "name": "BitFi Basis",
+            "id": "5785"
+          },
+          {
+            "name": "Doppler Finance",
+            "id": "5786"
+          },
+          {
+            "name": "Lazy Summer Protocol",
+            "id": "5796"
+          },
+          {
+            "name": "GoPlus Locker V2",
+            "id": "5807"
+          },
+          {
+            "name": "Flashbots",
+            "id": "5809"
+          },
+          {
+            "name": "Coinbase Bridge",
+            "id": "5810"
+          },
+          {
+            "name": "Veda",
+            "id": "5825"
+          },
+          {
+            "name": "Hedgey",
+            "id": "5846"
+          },
+          {
+            "name": "ERC Burner",
+            "id": "5859"
+          },
+          {
+            "name": "Puffer Vaults",
+            "id": "5867"
+          },
+          {
+            "name": "Tea-Fi",
+            "id": "5875"
+          },
+          {
+            "name": "USDD",
+            "id": "5898"
+          },
+          {
+            "name": "Multipli.fi",
+            "id": "5905"
+          },
+          {
+            "name": "YO Protocol",
+            "id": "5915"
+          },
+          {
+            "name": "Mayan DEX Aggregator",
+            "id": "5925"
+          },
+          {
+            "name": "Aave-Chan",
+            "id": "5926"
+          },
+          {
+            "name": "Centrifuge Protocol",
+            "id": "5948"
+          },
+          {
+            "name": "Resupply",
+            "id": "5963"
+          },
+          {
+            "name": "Privacy Pools",
+            "id": "5977"
+          },
+          {
+            "name": "Spark Liquidity Layer",
+            "id": "5989"
+          },
+          {
+            "name": "OpenEden USDO",
+            "id": "5995"
+          },
+          {
+            "name": "Mainstreet",
+            "id": "6022"
+          },
+          {
+            "name": "Aegis YUSD",
+            "id": "6024"
+          },
+          {
+            "name": "Lista Lending",
+            "id": "6056"
+          },
+          {
+            "name": "LI.FI Bridge Aggregator",
+            "id": "6093"
+          },
+          {
+            "name": "SOCKET Protocol",
+            "id": "6097"
+          },
+          {
+            "name": "Axie Infinity",
+            "id": "6102"
+          },
+          {
+            "name": "Yala",
+            "id": "6147"
+          },
+          {
+            "name": "Bungee Bridge Aggregator",
+            "id": "6188"
+          },
+          {
+            "name": "9Summits",
+            "id": "6194"
+          },
+          {
+            "name": "AlphaPing",
+            "id": "6195"
+          },
+          {
+            "name": "Apostro",
+            "id": "6196"
+          },
+          {
+            "name": "B.Protocol Curator",
+            "id": "6197"
+          },
+          {
+            "name": "Block Analitica",
+            "id": "6198"
+          },
+          {
+            "name": "Clearstar",
+            "id": "6199"
+          },
+          {
+            "name": "Euler DAO",
+            "id": "6200"
+          },
+          {
+            "name": "Fence Finance",
+            "id": "6201"
+          },
+          {
+            "name": "Gauntlet",
+            "id": "6202"
+          },
+          {
+            "name": "Hakutora",
+            "id": "6203"
+          },
+          {
+            "name": "Hyperithm",
+            "id": "6204"
+          },
+          {
+            "name": "K3 Capital",
+            "id": "6205"
+          },
+          {
+            "name": "LlamaRisk",
+            "id": "6206"
+          },
+          {
+            "name": "M11 Credit",
+            "id": "6207"
+          },
+          {
+            "name": "MEV Capital",
+            "id": "6208"
+          },
+          {
+            "name": "Ouroboros Capital",
+            "id": "6209"
+          },
+          {
+            "name": "Re7 Labs",
+            "id": "6210"
+          },
+          {
+            "name": "Relend Network",
+            "id": "6211"
+          },
+          {
+            "name": "Steakhouse Financial",
+            "id": "6212"
+          },
+          {
+            "name": "Tulipa Capital",
+            "id": "6213"
+          },
+          {
+            "name": "Alterscope",
+            "id": "6215"
+          },
+          {
+            "name": "Silent Protocol",
+            "id": "6217"
+          },
+          {
+            "name": "SMARDEX P2P Lending",
+            "id": "6228"
+          },
+          {
+            "name": "Eden Relay",
+            "id": "6232"
+          },
+          {
+            "name": "infiniFi",
+            "id": "6245"
+          },
+          {
+            "name": "Skate AMM",
+            "id": "6246"
+          },
+          {
+            "name": "Asymmetry USDaf",
+            "id": "6247"
+          },
+          {
+            "name": "Yearn Curating",
+            "id": "6251"
+          },
+          {
+            "name": "Permute",
+            "id": "6256"
+          },
+          {
+            "name": "Haiku",
+            "id": "6266"
+          },
+          {
+            "name": "Seamless V2",
+            "id": "6286"
+          },
+          {
+            "name": "Vault Bridge",
+            "id": "6296"
+          },
+          {
+            "name": "Almanak",
+            "id": "6297"
+          },
+          {
+            "name": "GlueX",
+            "id": "6334"
+          },
+          {
+            "name": "Smithii",
+            "id": "6349"
+          },
+          {
+            "name": "EulerSwap",
+            "id": "6358"
+          },
+          {
+            "name": "SSV Network",
+            "id": "6359"
+          },
+          {
+            "name": "MoneyFi",
+            "id": "6370"
+          },
+          {
+            "name": "Rango",
+            "id": "6382"
+          },
+          {
+            "name": "Aera V3",
+            "id": "6387"
+          },
+          {
+            "name": "1776.MEME",
+            "id": "6396"
+          },
+          {
+            "name": "BIM Yield",
+            "id": "6402"
+          },
+          {
+            "name": "Ebisu V2",
+            "id": "6423"
+          },
+          {
+            "name": "YBTC.B",
+            "id": "6474"
+          },
+          {
+            "name": "Angstrom",
+            "id": "6483"
+          },
+          {
+            "name": "Varlamore Capital",
+            "id": "6487"
+          },
+          {
+            "name": "Parallel Protocol V3",
+            "id": "6500"
+          },
+          {
+            "name": "Bracket LST",
+            "id": "6503"
+          },
+          {
+            "name": "Bracket Vaults",
+            "id": "6504"
+          },
+          {
+            "name": "DeFi Dollar",
+            "id": "6509"
+          },
+          {
+            "name": "Tree News",
+            "id": "6515"
+          },
+          {
+            "name": "WisdomTree",
+            "id": "6516"
+          },
+          {
+            "name": "Odyssey Finance",
+            "id": "6529"
+          },
+          {
+            "name": "GAIB",
+            "id": "6535"
+          },
+          {
+            "name": "cap",
+            "id": "6579"
+          },
+          {
+            "name": "Apollo Diversified Credit Securitize Fund",
+            "id": "6582"
+          },
+          {
+            "name": "Fluid DEX Lite",
+            "id": "6586"
+          },
+          {
+            "name": "Frax USD",
+            "id": "6598"
+          },
+          {
+            "name": "Binance Alpha",
+            "id": "6599"
+          },
+          {
+            "name": "ZeroLend Vaults",
+            "id": "6608"
+          },
+          {
+            "name": "VanEck Treasury Fund",
+            "id": "6639"
+          },
+          {
+            "name": "Privacy Cash",
+            "id": "6642"
+          },
+          {
+            "name": "3Jane Lending",
+            "id": "6659"
+          },
+          {
+            "name": "edgeX Perps",
+            "id": "6663"
+          },
+          {
+            "name": "Theo Network thBill",
+            "id": "6702"
+          },
+          {
+            "name": "Hamilton Lane Senior Credit Opportunities Securitize Fund",
+            "id": "6712"
+          },
+          {
+            "name": "GeckoTerminal",
+            "id": "6724"
+          },
+          {
+            "name": "Musical Chairs",
+            "id": "6729"
+          },
+          {
+            "name": "Cashmere",
+            "id": "6736"
+          },
+          {
+            "name": "Interface Social",
+            "id": "6744"
+          },
+          {
+            "name": "Migrate.Fun",
+            "id": "6753"
+          },
+          {
+            "name": "Yield Basis",
+            "id": "6771"
+          },
+          {
+            "name": "Legion",
+            "id": "6784"
+          },
+          {
+            "name": "Telos Consilium",
+            "id": "6785"
+          },
+          {
+            "name": "Falcon Finance",
+            "id": "6790"
+          },
+          {
+            "name": "MetaMask USD",
+            "id": "6800"
+          },
+          {
+            "name": "alphagrowth",
+            "id": "6804"
+          },
+          {
+            "name": "Avantgarde",
+            "id": "6805"
+          },
+          {
+            "name": "Sentora Curator",
+            "id": "6807"
+          },
+          {
+            "name": "SingularV",
+            "id": "6808"
+          },
+          {
+            "name": "TokenWorks",
+            "id": "6809"
+          },
+          {
+            "name": "ShibaSwap V2",
+            "id": "6815"
+          },
+          {
+            "name": "Solid Yield",
+            "id": "6816"
+          },
+          {
+            "name": "Lorenzo sUSD1+",
+            "id": "6840"
+          },
+          {
+            "name": "mStable V2",
+            "id": "6864"
+          },
+          {
+            "name": "CheapGM",
+            "id": "6868"
+          },
+          {
+            "name": "Gate Swap Spot",
+            "id": "6871"
+          },
+          {
+            "name": "Element NFT Marketplace",
+            "id": "6872"
+          },
+          {
+            "name": "Strata Markets",
+            "id": "6873"
+          },
+          {
+            "name": "Open Stablecoin Index",
+            "id": "6886"
+          },
+          {
+            "name": "UltraYield Vaults",
+            "id": "6890"
+          },
+          {
+            "name": "Shift Protocol",
+            "id": "6901"
+          },
+          {
+            "name": "Avant avETH",
+            "id": "6905"
+          },
+          {
+            "name": "FOOM Cash",
+            "id": "6908"
+          },
+          {
+            "name": "THORSwap",
+            "id": "6941"
+          },
+          {
+            "name": "Unlock Protocol",
+            "id": "6945"
+          },
+          {
+            "name": "Obol",
+            "id": "6948"
+          },
+          {
+            "name": "RockSolid Network",
+            "id": "6963"
+          },
+          {
+            "name": "Makina",
+            "id": "6964"
+          },
+          {
+            "name": "GTBTC",
+            "id": "6989"
+          },
+          {
+            "name": "Yuzu Money",
+            "id": "6997"
+          },
+          {
+            "name": "Piku Finance",
+            "id": "7012"
+          },
+          {
+            "name": "Spaace NFT Marketplace",
+            "id": "7019"
+          },
+          {
+            "name": "Mu Digital",
+            "id": "7055"
+          },
+          {
+            "name": "Stabull Finance",
+            "id": "7077"
+          },
+          {
+            "name": "Accountable",
+            "id": "7092"
+          },
+          {
+            "name": "Lista RWA",
+            "id": "7116"
+          },
+          {
+            "name": "Tristero Darkpool",
+            "id": "7133"
+          },
+          {
+            "name": "TAU Labs",
+            "id": "7149"
+          },
+          {
+            "name": "Chatter Shield",
+            "id": "7158"
+          },
+          {
+            "name": "Re",
+            "id": "7182"
+          },
+          {
+            "name": "OmniHub",
+            "id": "7187"
+          },
+          {
+            "name": "Securitize Tokenized AAA CLO Fund",
+            "id": "7196"
+          },
+          {
+            "name": "o1.exchange Trading Terminal",
+            "id": "7214"
+          },
+          {
+            "name": "Infinex Spot",
+            "id": "7220"
+          },
+          {
+            "name": "Hastra",
+            "id": "7266"
+          },
+          {
+            "name": "SectorOne DLMM",
+            "id": "7304"
+          },
+          {
+            "name": "Flying Tulip Yield",
+            "id": "7307"
+          },
+          {
+            "name": "Fira",
+            "id": "7329"
+          },
+          {
+            "name": "SecondSwap",
+            "id": "7350"
+          },
+          {
+            "name": "BeaverBuild",
+            "id": "7356"
+          },
+          {
+            "name": "Quasar Builder",
+            "id": "7357"
+          },
+          {
+            "name": "ShimmerBlocks",
+            "id": "7358"
+          },
+          {
+            "name": "Titan Builder",
+            "id": "7359"
+          },
+          {
+            "name": "Supernova AMM",
+            "id": "7381"
+          },
+          {
+            "name": "Supernova CL",
+            "id": "7382"
+          },
+          {
+            "name": "Lunar Finance Aggregator",
+            "id": "7394"
+          },
+          {
+            "name": "Lunar Finance Bridge Aggregator",
+            "id": "7395"
+          },
+          {
+            "name": "Zenland",
+            "id": "7433"
+          },
+          {
+            "name": "Cooler Loans",
+            "id": "7437"
+          },
+          {
+            "name": "Printr",
+            "id": "7447"
+          },
+          {
+            "name": "Hyperlane",
+            "id": "7468"
+          },
+          {
+            "name": "Pyth Core",
+            "id": "7483"
+          },
+          {
+            "name": "Aave Labs",
+            "id": "7488"
+          },
+          {
+            "name": "Wswap",
+            "id": "7501"
+          },
+          {
+            "name": "Human ID",
+            "id": "7503"
+          },
+          {
+            "name": "Matcha",
+            "id": "7555"
+          },
+          {
+            "name": "Edel",
+            "id": "7578"
+          },
+          {
+            "name": "Grove Finance",
+            "id": "7583"
+          },
+          {
+            "name": "RockawayX",
+            "id": "7588"
+          },
+          {
+            "name": "Aave V4",
+            "id": "7594"
+          },
+          {
+            "name": "Lista DEX",
+            "id": "7599"
+          },
+          {
+            "name": "Aori",
+            "id": "7600"
+          },
+          {
+            "name": "Arkada",
+            "id": "7606"
+          },
+          {
+            "name": "Pistachio",
+            "id": "7608"
+          },
+          {
+            "name": "Layer3",
+            "id": "7611"
+          },
+          {
+            "name": "Apyx Protocol",
+            "id": "7618"
+          },
+          {
+            "name": "Ave.ai",
+            "id": "7626"
+          },
+          {
+            "name": "Saturn",
+            "id": "7646"
+          },
+          {
+            "name": "DexFi Aggregator",
+            "id": "7649"
+          },
+          {
+            "name": "UniversalX",
+            "id": "7650"
+          },
+          {
+            "name": "LilSwap",
+            "id": "7658"
+          },
+          {
+            "name": "Circle CCTP",
+            "id": "7714"
+          },
+          {
+            "name": "Alchemix V3",
+            "id": "7749"
+          },
+          {
+            "name": "Flying Tulip Lend",
+            "id": "7750"
+          },
+          {
+            "name": "eva Markets",
+            "id": "7751"
+          },
+          {
+            "name": "WeDeFin",
+            "id": "7757"
+          },
+          {
+            "name": "LayerZero V1",
+            "id": "7758"
+          },
+          {
+            "name": "Flying Tulip ftUSD",
+            "id": "7759"
+          },
+          {
+            "name": "Terminal",
+            "id": "7768"
+          },
+          {
+            "name": "XAUE Protocol",
+            "id": "7788"
+          },
+          {
+            "name": "RERANGE",
+            "id": "7803"
+          },
+          {
+            "name": "MetaLeX",
+            "id": "7831"
+          },
+          {
+            "name": "AlloX",
+            "id": "7833"
+          },
+          {
+            "name": "Fidelity Digital Interest Token",
+            "id": "7845"
+          },
+          {
+            "name": "Synthetix V4",
+            "id": "7857"
+          },
+          {
+            "name": "BendDAO Lending V2",
+            "id": "7859"
+          },
+          {
+            "name": "Aegis JUSD",
+            "id": "7871"
+          },
+          {
+            "name": "Silo V3",
+            "id": "7876"
+          },
+          {
+            "name": "Sky Money",
+            "id": "7883"
+          },
+          {
+            "name": "Flex",
+            "id": "7889"
+          },
+          {
+            "name": "Armitage by Wintermute",
+            "id": "7895"
+          },
+          {
+            "name": "Galaxy Curation",
+            "id": "7904"
+          },
+          {
+            "name": "Clutch Anvil AMM",
+            "id": "7918"
+          },
+          {
+            "name": "3F",
+            "id": "7923"
+          },
+          {
+            "name": "basedbid",
+            "id": "7935"
+          },
+          {
+            "name": "Brix",
+            "id": "7967"
+          },
+          {
+            "name": "Propr",
+            "id": "7978"
+          },
+          {
+            "name": "Curve LlamaLend V2",
+            "id": "8009"
+          },
+          {
+            "name": "Avici",
+            "id": "8034"
+          },
+          {
+            "name": "Panoptic V2",
+            "id": "8039"
+          },
+          {
+            "name": "HookOS",
+            "id": "8067"
+          },
+          {
+            "name": "Circle Gateway",
+            "id": "8111"
+          },
+          {
+            "name": "DashsWallet",
+            "id": "8126"
+          },
+          {
+            "name": "Ophis",
+            "id": "8153"
+          },
+          {
+            "name": "Gwei Name Service",
+            "id": "8160"
+          },
+          {
+            "name": "Wei Name Service",
+            "id": "8161"
+          },
+          {
+            "name": "TeraSwap",
+            "id": "8172"
+          },
+          {
+            "name": "7.exchange",
+            "id": "8194"
+          },
+          {
+            "name": "DropSwap",
+            "id": "8198"
+          },
+          {
+            "name": "1inch Aqua",
+            "id": "8209"
+          },
+          {
+            "name": "Barker",
+            "id": "8216"
+          },
+          {
+            "name": "Ammalgam DLEX",
+            "id": "8278"
+          },
+          {
+            "name": "Fake World Assets",
+            "id": "8292"
+          },
+          {
+            "name": "Yieldzio",
+            "id": "8330"
+          },
+          {
+            "name": "Elara Finance",
+            "id": "8336"
+          },
+          {
+            "name": "Boardwalk",
+            "id": "8345"
+          },
+          {
+            "name": "Caldera",
+            "id": "8368"
+          },
+          {
+            "name": "House of Joshi",
+            "id": "8392"
+          },
+          {
+            "name": "Wise Token",
+            "id": "8449"
+          },
+          {
+            "name": "Lyra Protocol",
+            "id": "8464"
+          },
+          {
+            "name": "Immunefi",
+            "id": "8500"
+          },
+          {
+            "name": "HyperFX",
+            "id": "8526"
+          },
+          {
+            "name": "MatrixDock XAGM",
+            "id": "8536"
+          },
+          {
+            "name": "Keyrock",
+            "id": "8546"
+          },
+          {
+            "name": "Pennysia",
+            "id": "8575"
+          },
+          {
+            "name": "Ethereum",
+            "id": "chain#ethereum"
+          },
+          {
+            "name": "OpenTrade",
+            "id": "<5471>"
+          }
+        ],
+        "history": {
+          "rows": 3084,
+          "first": "2018-03-26T00:00:00.000Z",
+          "last": "2026-09-09T00:00:00.000Z",
+          "invalidTimestamps": 0,
+          "duplicateTimestamps": 0,
+          "ascending": true,
+          "regular": false,
+          "intervalSeconds": null,
+          "intervalHistogram": [
+            {
+              "seconds": 86400,
+              "count": 3078
+            },
+            {
+              "seconds": 172800,
+              "count": 4
+            },
+            {
+              "seconds": 259200,
+              "count": 1
+            }
+          ],
+          "metrics": {
+            "1": {
+              "numericRows": 3084,
+              "missingRows": 0,
+              "first": "2018-03-26T00:00:00.000Z",
+              "last": "2026-09-09T00:00:00.000Z"
+            }
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:07:49.116Z",
+      "durationMs": 1775
+    },
+    {
+      "id": "llama-solana-fees",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/overview/fees/Solana?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:07:49.338Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:07:50 GMT",
+        "last-modified": "Wed, 09 Sep 2026 12:07:50 GMT"
+      },
+      "bytes": 531850,
+      "sha256": "d62aa37b574598759554ef51c318e290921fe76f31b32dcd1495ce0d11e56338",
+      "summary": {
+        "name": null,
+        "dataType": null,
+        "total24h": 16561511.380000003,
+        "protocols": [
+          {
+            "name": "Raydium AMM",
+            "id": "214"
+          },
+          {
+            "name": "Orca DEX",
+            "id": "283"
+          },
+          {
+            "name": "Meteora DAMM V1",
+            "id": "385"
+          },
+          {
+            "name": "THORChain DEX",
+            "id": "412"
+          },
+          {
+            "name": "Saber",
+            "id": "419"
+          },
+          {
+            "name": "Save",
+            "id": "458"
+          },
+          {
+            "name": "Marinade Liquid Staking",
+            "id": "484"
+          },
+          {
+            "name": "Allbridge Classic",
+            "id": "577"
+          },
+          {
+            "name": "Drift Trade",
+            "id": "970"
+          },
+          {
+            "name": "JPool",
+            "id": "1173"
+          },
+          {
+            "name": "Across",
+            "id": "1207"
+          },
+          {
+            "name": "Saros AMM",
+            "id": "1262"
+          },
+          {
+            "name": "deBridge",
+            "id": "1462"
+          },
+          {
+            "name": "Portal",
+            "id": "1541"
+          },
+          {
+            "name": "Invariant",
+            "id": "1788"
+          },
+          {
+            "name": "PinkSale",
+            "id": "1807"
+          },
+          {
+            "name": "Kamino Liquidity",
+            "id": "2062"
+          },
+          {
+            "name": "Jupiter Aggregator",
+            "id": "2141"
+          },
+          {
+            "name": "Lifinity V1",
+            "id": "2154"
+          },
+          {
+            "name": "Jito Liquid Staking",
+            "id": "2308"
+          },
+          {
+            "name": "HawkFi",
+            "id": "2511"
+          },
+          {
+            "name": "Ondo Yield Assets",
+            "id": "2542"
+          },
+          {
+            "name": "marginfi Lending",
+            "id": "2570"
+          },
+          {
+            "name": "Streamflow",
+            "id": "2608"
+          },
+          {
+            "name": "PancakeSwap AMM V3",
+            "id": "2769"
+          },
+          {
+            "name": "Bonkswap",
+            "id": "2822"
+          },
+          {
+            "name": "Sharky",
+            "id": "2842"
+          },
+          {
+            "name": "BlazeStake",
+            "id": "2931"
+          },
+          {
+            "name": "Maestro",
+            "id": "3019"
+          },
+          {
+            "name": "MetaMask Wallet",
+            "id": "3031"
+          },
+          {
+            "name": "FluxBeam",
+            "id": "3053"
+          },
+          {
+            "name": "OpenEden TBILL",
+            "id": "3057"
+          },
+          {
+            "name": "Phoenix Spot",
+            "id": "3170"
+          },
+          {
+            "name": "Mango Markets V4 Perps",
+            "id": "3174"
+          },
+          {
+            "name": "Banana Gun",
+            "id": "3336"
+          },
+          {
+            "name": "Sanctum Reserve",
+            "id": "3388"
+          },
+          {
+            "name": "BackedFi",
+            "id": "3467"
+          },
+          {
+            "name": "marginfi LST",
+            "id": "3570"
+          },
+          {
+            "name": "DigiFT",
+            "id": "3580"
+          },
+          {
+            "name": "Marinade Native",
+            "id": "3672"
+          },
+          {
+            "name": "Shuriken",
+            "id": "3687"
+          },
+          {
+            "name": "Kamino Lend",
+            "id": "3770"
+          },
+          {
+            "name": "Solana Name Service",
+            "id": "3877"
+          },
+          {
+            "name": "Rain.fi",
+            "id": "3903"
+          },
+          {
+            "name": "Parcl V3",
+            "id": "3950"
+          },
+          {
+            "name": "Jupiter Perpetual Exchange",
+            "id": "4077"
+          },
+          {
+            "name": "Garden",
+            "id": "4086"
+          },
+          {
+            "name": "FlashTrade",
+            "id": "4107"
+          },
+          {
+            "name": "Edgevana",
+            "id": "4129"
+          },
+          {
+            "name": "Meteora DLMM",
+            "id": "4148"
+          },
+          {
+            "name": "Crypto.com Liquid Staking",
+            "id": "4158"
+          },
+          {
+            "name": "Fluid Lending",
+            "id": "4167"
+          },
+          {
+            "name": "BONKbot",
+            "id": "4227"
+          },
+          {
+            "name": "Definitive",
+            "id": "4257"
+          },
+          {
+            "name": "Trojan",
+            "id": "4293"
+          },
+          {
+            "name": "Geodnet",
+            "id": "4304"
+          },
+          {
+            "name": "Sanctum Infinity",
+            "id": "4368"
+          },
+          {
+            "name": "Sanctum Validator LSTs",
+            "id": "4371"
+          },
+          {
+            "name": "pump.fun",
+            "id": "4449"
+          },
+          {
+            "name": "Whales Market",
+            "id": "4605"
+          },
+          {
+            "name": "SolvBTC",
+            "id": "4620"
+          },
+          {
+            "name": "bloXroute",
+            "id": "4695"
+          },
+          {
+            "name": "stabble Stableswap",
+            "id": "4734"
+          },
+          {
+            "name": "The Vault Liquid Staking",
+            "id": "4751"
+          },
+          {
+            "name": "moon.it",
+            "id": "4813"
+          },
+          {
+            "name": "Step Finance",
+            "id": "4837"
+          },
+          {
+            "name": "BlackRock BUIDL",
+            "id": "4853"
+          },
+          {
+            "name": "Ape Jupiter",
+            "id": "4860"
+          },
+          {
+            "name": "SolTradingBot",
+            "id": "4909"
+          },
+          {
+            "name": "MEVX",
+            "id": "4945"
+          },
+          {
+            "name": "Metaplex",
+            "id": "4959"
+          },
+          {
+            "name": "Photon",
+            "id": "4981"
+          },
+          {
+            "name": "DEX Screener",
+            "id": "4990"
+          },
+          {
+            "name": "Bonk Staked SOL",
+            "id": "4994"
+          },
+          {
+            "name": "Helius Staked SOL",
+            "id": "4995"
+          },
+          {
+            "name": "Jupiter Staked SOL",
+            "id": "4996"
+          },
+          {
+            "name": "Lulo",
+            "id": "5002"
+          },
+          {
+            "name": "DEXTools",
+            "id": "5006"
+          },
+          {
+            "name": "Helio",
+            "id": "5007"
+          },
+          {
+            "name": "RayBot",
+            "id": "5022"
+          },
+          {
+            "name": "MEMECAST.AI",
+            "id": "5027"
+          },
+          {
+            "name": "Drift Staked SOL",
+            "id": "5046"
+          },
+          {
+            "name": "Bitwise USCC",
+            "id": "5120"
+          },
+          {
+            "name": "Binance Staked SOL",
+            "id": "5135"
+          },
+          {
+            "name": "Bybit Staked SOL",
+            "id": "5179"
+          },
+          {
+            "name": "moonshot.money",
+            "id": "5188"
+          },
+          {
+            "name": "prerich",
+            "id": "5196"
+          },
+          {
+            "name": "NTM.ai",
+            "id": "5212"
+          },
+          {
+            "name": "Falcon Bot",
+            "id": "5237"
+          },
+          {
+            "name": "makenow.meme",
+            "id": "5246"
+          },
+          {
+            "name": "RateX DEX",
+            "id": "5265"
+          },
+          {
+            "name": "Fragmetric",
+            "id": "5286"
+          },
+          {
+            "name": "Kyros",
+            "id": "5294"
+          },
+          {
+            "name": "Bitget SOL",
+            "id": "5330"
+          },
+          {
+            "name": "Hubra Staked SOL",
+            "id": "5338"
+          },
+          {
+            "name": "Adrena Protocol",
+            "id": "5353"
+          },
+          {
+            "name": "Solayer Restaking",
+            "id": "5359"
+          },
+          {
+            "name": "BlazingApp",
+            "id": "5377"
+          },
+          {
+            "name": "Lavarage",
+            "id": "5381"
+          },
+          {
+            "name": "Phantom Wallet",
+            "id": "5398"
+          },
+          {
+            "name": "BullX",
+            "id": "5407"
+          },
+          {
+            "name": "GMGN",
+            "id": "5408"
+          },
+          {
+            "name": "Vectis Finance",
+            "id": "5465"
+          },
+          {
+            "name": "Swing",
+            "id": "5474"
+          },
+          {
+            "name": "Neutral Trade",
+            "id": "5548"
+          },
+          {
+            "name": "Virtuals Protocol",
+            "id": "5575"
+          },
+          {
+            "name": "VECTOR.FUN",
+            "id": "5653"
+          },
+          {
+            "name": "Tribe.run",
+            "id": "5669"
+          },
+          {
+            "name": "KAIO",
+            "id": "5689"
+          },
+          {
+            "name": "Exponent Yield Exchange",
+            "id": "5722"
+          },
+          {
+            "name": "Looter",
+            "id": "5728"
+          },
+          {
+            "name": "Bloom Trading Bot",
+            "id": "5806"
+          },
+          {
+            "name": "Coinbase Bridge",
+            "id": "5810"
+          },
+          {
+            "name": "Pico Staked SOL",
+            "id": "5814"
+          },
+          {
+            "name": "Jupiter DCA",
+            "id": "5841"
+          },
+          {
+            "name": "TradeWiz",
+            "id": "5886"
+          },
+          {
+            "name": "DefiTuna AMM",
+            "id": "5907"
+          },
+          {
+            "name": "Mayan DEX Aggregator",
+            "id": "5925"
+          },
+          {
+            "name": "Finder Bot",
+            "id": "5934"
+          },
+          {
+            "name": "PumpSwap",
+            "id": "5936"
+          },
+          {
+            "name": "Magnum Bot",
+            "id": "5945"
+          },
+          {
+            "name": "DexToro",
+            "id": "5954"
+          },
+          {
+            "name": "Axiom",
+            "id": "6049"
+          },
+          {
+            "name": "LaunchLab",
+            "id": "6074"
+          },
+          {
+            "name": "Beezie",
+            "id": "6075"
+          },
+          {
+            "name": "Solomon USDv",
+            "id": "6077"
+          },
+          {
+            "name": "Save SOL",
+            "id": "6085"
+          },
+          {
+            "name": "boop.fun",
+            "id": "6129"
+          },
+          {
+            "name": "Sentinel Trader Bot",
+            "id": "6130"
+          },
+          {
+            "name": "Launch Coin on Believe",
+            "id": "6159"
+          },
+          {
+            "name": "Jito MEV Tips",
+            "id": "6169"
+          },
+          {
+            "name": "Phantom SOL",
+            "id": "6189"
+          },
+          {
+            "name": "Gauntlet",
+            "id": "6202"
+          },
+          {
+            "name": "Skate AMM",
+            "id": "6246"
+          },
+          {
+            "name": "Saros DLMM",
+            "id": "6250"
+          },
+          {
+            "name": "Permute",
+            "id": "6256"
+          },
+          {
+            "name": "Marinade Select",
+            "id": "6275"
+          },
+          {
+            "name": "BONK.fun Launchpad",
+            "id": "6282"
+          },
+          {
+            "name": "Meteora DAMM V2",
+            "id": "6288"
+          },
+          {
+            "name": "Meteora Dynamic Bonding Curve",
+            "id": "6290"
+          },
+          {
+            "name": "Nova",
+            "id": "6326"
+          },
+          {
+            "name": "Pepeboost",
+            "id": "6327"
+          },
+          {
+            "name": "Padre",
+            "id": "6328"
+          },
+          {
+            "name": "Bags",
+            "id": "6332"
+          },
+          {
+            "name": "Smithii",
+            "id": "6349"
+          },
+          {
+            "name": "Byreal",
+            "id": "6368"
+          },
+          {
+            "name": "Moonshot Create",
+            "id": "6380"
+          },
+          {
+            "name": "Rango",
+            "id": "6382"
+          },
+          {
+            "name": "UnicornX",
+            "id": "6385"
+          },
+          {
+            "name": "Jupiter Studio",
+            "id": "6398"
+          },
+          {
+            "name": "ApeBot",
+            "id": "6420"
+          },
+          {
+            "name": "OnRe",
+            "id": "6432"
+          },
+          {
+            "name": "Pumper",
+            "id": "6436"
+          },
+          {
+            "name": "Laine SOL",
+            "id": "6460"
+          },
+          {
+            "name": "Loopscale",
+            "id": "6461"
+          },
+          {
+            "name": "Stronghold Staked SOL",
+            "id": "6471"
+          },
+          {
+            "name": "Graphite Protocol",
+            "id": "6478"
+          },
+          {
+            "name": "Hylo Protocol",
+            "id": "6493"
+          },
+          {
+            "name": "Tree News",
+            "id": "6515"
+          },
+          {
+            "name": "Adrastea LST",
+            "id": "6532"
+          },
+          {
+            "name": "Sendshot",
+            "id": "6551"
+          },
+          {
+            "name": "HumidiFi",
+            "id": "6554"
+          },
+          {
+            "name": "Jito DAO",
+            "id": "6571"
+          },
+          {
+            "name": "Aqua",
+            "id": "6575"
+          },
+          {
+            "name": "Apollo Diversified Credit Securitize Fund",
+            "id": "6582"
+          },
+          {
+            "name": "DSX",
+            "id": "6585"
+          },
+          {
+            "name": "Heaven",
+            "id": "6592"
+          },
+          {
+            "name": "Jupiter Lend",
+            "id": "6600"
+          },
+          {
+            "name": "Helium Network",
+            "id": "6631"
+          },
+          {
+            "name": "Vibes",
+            "id": "6636"
+          },
+          {
+            "name": "VanEck Treasury Fund",
+            "id": "6639"
+          },
+          {
+            "name": "Privacy Cash",
+            "id": "6642"
+          },
+          {
+            "name": "Hylo LSTs",
+            "id": "6648"
+          },
+          {
+            "name": "Collector Crypt",
+            "id": "6675"
+          },
+          {
+            "name": "Zapzy",
+            "id": "6677"
+          },
+          {
+            "name": "Pacifica Perps",
+            "id": "6682"
+          },
+          {
+            "name": "Phygitals",
+            "id": "6684"
+          },
+          {
+            "name": "GeckoTerminal",
+            "id": "6724"
+          },
+          {
+            "name": "LAB Terminal",
+            "id": "6732"
+          },
+          {
+            "name": "Emporium",
+            "id": "6742"
+          },
+          {
+            "name": "HyperTek",
+            "id": "6743"
+          },
+          {
+            "name": "Migrate.Fun",
+            "id": "6753"
+          },
+          {
+            "name": "DefiTuna Liquidity",
+            "id": "6760"
+          },
+          {
+            "name": "XTrade Protocol Spot",
+            "id": "6776"
+          },
+          {
+            "name": "Solstice",
+            "id": "6789"
+          },
+          {
+            "name": "Sentora Curator",
+            "id": "6807"
+          },
+          {
+            "name": "Quanto",
+            "id": "6819"
+          },
+          {
+            "name": "Gate Swap Spot",
+            "id": "6871"
+          },
+          {
+            "name": "ORE Protocol",
+            "id": "6893"
+          },
+          {
+            "name": "fomo Wallet",
+            "id": "6922"
+          },
+          {
+            "name": "DoubleZero Network",
+            "id": "6939"
+          },
+          {
+            "name": "DoubleZero Staked SOL",
+            "id": "6976"
+          },
+          {
+            "name": "Beamable Network",
+            "id": "7018"
+          },
+          {
+            "name": "Hivemapper",
+            "id": "7020"
+          },
+          {
+            "name": "GODL protocol",
+            "id": "7024"
+          },
+          {
+            "name": "Kaching",
+            "id": "7040"
+          },
+          {
+            "name": "Futarchy AMM",
+            "id": "7051"
+          },
+          {
+            "name": "ZORB",
+            "id": "7064"
+          },
+          {
+            "name": "Trends Legacy",
+            "id": "7082"
+          },
+          {
+            "name": "Jupiter Prediction",
+            "id": "7089"
+          },
+          {
+            "name": "Macaron.bid",
+            "id": "7120"
+          },
+          {
+            "name": "Polycule",
+            "id": "7125"
+          },
+          {
+            "name": "dfdvSOL",
+            "id": "7159"
+          },
+          {
+            "name": "Forward Industries SOL",
+            "id": "7160"
+          },
+          {
+            "name": "Backpack SOL",
+            "id": "7161"
+          },
+          {
+            "name": "Gate SOL",
+            "id": "7162"
+          },
+          {
+            "name": "Project 0",
+            "id": "7184"
+          },
+          {
+            "name": "PossumLabs",
+            "id": "7188"
+          },
+          {
+            "name": "Securitize Tokenized AAA CLO Fund",
+            "id": "7196"
+          },
+          {
+            "name": "Definity Staked SOL",
+            "id": "7208"
+          },
+          {
+            "name": "o1.exchange Trading Terminal",
+            "id": "7214"
+          },
+          {
+            "name": "AlphaQ",
+            "id": "7218"
+          },
+          {
+            "name": "Infinex Spot",
+            "id": "7220"
+          },
+          {
+            "name": "CHOPCORP",
+            "id": "7226"
+          },
+          {
+            "name": "Chimpions SOL",
+            "id": "7237"
+          },
+          {
+            "name": "Maxbid",
+            "id": "7238"
+          },
+          {
+            "name": "BabyDoge Bridge",
+            "id": "7247"
+          },
+          {
+            "name": "Orynth",
+            "id": "7261"
+          },
+          {
+            "name": "Hastra",
+            "id": "7266"
+          },
+          {
+            "name": "Tread.fi Perps",
+            "id": "7277"
+          },
+          {
+            "name": "stabble CLMM",
+            "id": "7279"
+          },
+          {
+            "name": "GMTrade",
+            "id": "7297"
+          },
+          {
+            "name": "COAL",
+            "id": "7298"
+          },
+          {
+            "name": "STKESOL by SOL Strategies",
+            "id": "7301"
+          },
+          {
+            "name": "Mixoor",
+            "id": "7311"
+          },
+          {
+            "name": "Starke Staked SOL",
+            "id": "7312"
+          },
+          {
+            "name": "Lantern Staked SOL",
+            "id": "7313"
+          },
+          {
+            "name": "JagPool Staked SOL",
+            "id": "7314"
+          },
+          {
+            "name": "SplitSwap",
+            "id": "7324"
+          },
+          {
+            "name": "FlowBot Perps",
+            "id": "7327"
+          },
+          {
+            "name": "Rifts Finance",
+            "id": "7386"
+          },
+          {
+            "name": "Lunar Finance Aggregator",
+            "id": "7394"
+          },
+          {
+            "name": "Lunar Finance Bridge Aggregator",
+            "id": "7395"
+          },
+          {
+            "name": "Fwog.fun",
+            "id": "7398"
+          },
+          {
+            "name": "MineBTC",
+            "id": "7423"
+          },
+          {
+            "name": "PagCrypto",
+            "id": "7428"
+          },
+          {
+            "name": "RoyalBet",
+            "id": "7431"
+          },
+          {
+            "name": "Graveyard Protocol",
+            "id": "7432"
+          },
+          {
+            "name": "Printr",
+            "id": "7447"
+          },
+          {
+            "name": "Pyth Express Relay",
+            "id": "7482"
+          },
+          {
+            "name": "Pyth Core",
+            "id": "7483"
+          },
+          {
+            "name": "Pyth Pro",
+            "id": "7484"
+          },
+          {
+            "name": "Harmonic",
+            "id": "7513"
+          },
+          {
+            "name": "Nozomi",
+            "id": "7514"
+          },
+          {
+            "name": "PigeonHouse",
+            "id": "7543"
+          },
+          {
+            "name": "Orbit Finance",
+            "id": "7552"
+          },
+          {
+            "name": "Jupiter Limit",
+            "id": "7561"
+          },
+          {
+            "name": "Omnipair",
+            "id": "7566"
+          },
+          {
+            "name": "Trends Curve",
+            "id": "7581"
+          },
+          {
+            "name": "RockawayX",
+            "id": "7588"
+          },
+          {
+            "name": "Phoenix Perp",
+            "id": "7592"
+          },
+          {
+            "name": "Ave.ai",
+            "id": "7626"
+          },
+          {
+            "name": "PreStocks",
+            "id": "7701"
+          },
+          {
+            "name": "Anoncoin",
+            "id": "7706"
+          },
+          {
+            "name": "Circle CCTP",
+            "id": "7714"
+          },
+          {
+            "name": "Streamlock",
+            "id": "7747"
+          },
+          {
+            "name": "Terminal",
+            "id": "7768"
+          },
+          {
+            "name": "EasyA Kickstart",
+            "id": "7782"
+          },
+          {
+            "name": "Cube",
+            "id": "7798"
+          },
+          {
+            "name": "Jade",
+            "id": "7799"
+          },
+          {
+            "name": "Rise.rich",
+            "id": "7817"
+          },
+          {
+            "name": "Sour Finance",
+            "id": "7820"
+          },
+          {
+            "name": "Ready Cards",
+            "id": "7824"
+          },
+          {
+            "name": "Worm",
+            "id": "7835"
+          },
+          {
+            "name": "Telemetry",
+            "id": "7899"
+          },
+          {
+            "name": "DoubleZero Edge",
+            "id": "7919"
+          },
+          {
+            "name": "Huma Finance V2",
+            "id": "7930"
+          },
+          {
+            "name": "Onix.Finance",
+            "id": "7931"
+          },
+          {
+            "name": "basedbid",
+            "id": "7935"
+          },
+          {
+            "name": "America.Fun",
+            "id": "7958"
+          },
+          {
+            "name": "ZINC",
+            "id": "7961"
+          },
+          {
+            "name": "Render Network BME",
+            "id": "7966"
+          },
+          {
+            "name": "Pokeliquid",
+            "id": "8007"
+          },
+          {
+            "name": "sendfun Launchpad",
+            "id": "8043"
+          },
+          {
+            "name": "Sendfun DEX",
+            "id": "8044"
+          },
+          {
+            "name": "TinyPlace",
+            "id": "8047"
+          },
+          {
+            "name": "Jupiter Offerbook",
+            "id": "8076"
+          },
+          {
+            "name": "Samsara",
+            "id": "8105"
+          },
+          {
+            "name": "Ayebot",
+            "id": "8120"
+          },
+          {
+            "name": "Overpass",
+            "id": "8121"
+          },
+          {
+            "name": "PEPTIDES",
+            "id": "8173"
+          },
+          {
+            "name": "keep.coffee",
+            "id": "8189"
+          },
+          {
+            "name": "7.exchange",
+            "id": "8194"
+          },
+          {
+            "name": "DropSwap",
+            "id": "8198"
+          },
+          {
+            "name": "GunFun",
+            "id": "8220"
+          },
+          {
+            "name": "Squeeze",
+            "id": "8272"
+          },
+          {
+            "name": "OdinBot",
+            "id": "8297"
+          },
+          {
+            "name": "Jupiter Lend DEX",
+            "id": "8308"
+          },
+          {
+            "name": "Fanex",
+            "id": "8335"
+          },
+          {
+            "name": "Sabre",
+            "id": "8343"
+          },
+          {
+            "name": "Solauncher",
+            "id": "8381"
+          },
+          {
+            "name": "Sat Rush",
+            "id": "8382"
+          },
+          {
+            "name": "pump.fun Mobile App",
+            "id": "8404"
+          },
+          {
+            "name": "ZNS Launchpad",
+            "id": "8418"
+          },
+          {
+            "name": "Stratabook",
+            "id": "8421"
+          },
+          {
+            "name": "MINER",
+            "id": "8434"
+          },
+          {
+            "name": "StonkFun",
+            "id": "8450"
+          },
+          {
+            "name": "PRIZM",
+            "id": "8453"
+          },
+          {
+            "name": "lockin",
+            "id": "8463"
+          },
+          {
+            "name": "AgentRanking",
+            "id": "8468"
+          },
+          {
+            "name": "Kintara",
+            "id": "8484"
+          },
+          {
+            "name": "user.fun",
+            "id": "8495"
+          },
+          {
+            "name": "Ansem.io",
+            "id": "8497"
+          },
+          {
+            "name": "LP Agent",
+            "id": "8504"
+          },
+          {
+            "name": "Ride Markets",
+            "id": "8514"
+          },
+          {
+            "name": "Phase Delegation",
+            "id": "8520"
+          },
+          {
+            "name": "BidGrid",
+            "id": "8524"
+          },
+          {
+            "name": "Archade",
+            "id": "8543"
+          },
+          {
+            "name": "Rapid Launch",
+            "id": "8550"
+          },
+          {
+            "name": "Solana",
+            "id": "chain#solana"
+          }
+        ],
+        "history": {
+          "rows": 1669,
+          "first": "2022-02-14T00:00:00.000Z",
+          "last": "2026-09-09T00:00:00.000Z",
+          "invalidTimestamps": 0,
+          "duplicateTimestamps": 0,
+          "ascending": true,
+          "regular": true,
+          "intervalSeconds": 86400,
+          "intervalHistogram": [
+            {
+              "seconds": 86400,
+              "count": 1668
+            }
+          ],
+          "metrics": {
+            "1": {
+              "numericRows": 1669,
+              "missingRows": 0,
+              "first": "2022-02-14T00:00:00.000Z",
+              "last": "2026-09-09T00:00:00.000Z"
+            }
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:07:50.789Z",
+      "durationMs": 1451
+    },
+    {
+      "id": "llama-solana-tvl",
+      "provider": "defillama",
+      "url": "https://api.llama.fi/v2/historicalChainTvl/Solana",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:07:51.338Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:07:52 GMT",
+        "etag": "\"6aa14630-11fdd\"",
+        "last-modified": "Wed, 09 Sep 2026 11:42:40 GMT"
+      },
+      "bytes": 73693,
+      "sha256": "1702d1ccdd3b9eaa3220c32c31b0783bf835270d890bbc726eb3deb43223c96a",
+      "summary": {
+        "rows": 2003,
+        "first": "2021-03-17T00:00:00.000Z",
+        "last": "2026-09-09T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 2002
+          }
+        ],
+        "metrics": {
+          "tvl": {
+            "numericRows": 2003,
+            "missingRows": 0,
+            "first": "2021-03-17T00:00:00.000Z",
+            "last": "2026-09-09T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:07:52.365Z",
+      "durationMs": 1027
+    }
+  ],
+  "completedAt": "2026-09-09T12:07:52.367Z",
+  "attemptedRequests": 3
+}

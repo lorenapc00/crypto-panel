@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-09-09T12:04:58.964Z",
+  "manifestSha256": "46f296986f5b3057f126f281f4d13466b725e8027ad2d22c6960203055efbb4e",
+  "classification": "capability-samples-not-an-ingestion-archive",
+  "results": [
+    {
+      "id": "cg-chart-outside-demo",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=730&interval=daily",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:04:58.969Z",
+      "httpStatus": 401,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:04:59 GMT"
+      },
+      "bytes": 335,
+      "sha256": "be17ffeb7cf70ae2e7675fe9da138b723f933351b9a5099b6a912a2bd1c576c6",
+      "outcome": "access-denied",
+      "completedAt": "2026-09-09T12:04:59.348Z",
+      "durationMs": 375
+    },
+    {
+      "id": "cm-btc-core-batch",
+      "provider": "coinmetrics",
+      "url": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=PriceUSD,CapMrktCurUSD,CapMVRVCur,HashRate,SplyCur,AdrActCnt,IssTotUSD&frequency=1d&start_time=2010-01-01&page_size=10000",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:04:59.351Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Wed, 09 Sep 2026 12:05:00 GMT",
+        "x-ratelimit-limit": "6000, 6000;w=20;comment=\"sliding window\"",
+        "x-ratelimit-plan": "download",
+        "x-ratelimit-remaining": "5999",
+        "x-ratelimit-reset": "20"
+      },
+      "bytes": 1722124,
+      "sha256": "7dfd43408a2496a2b70a7d3ce357df6091634494a4d87176dfef767c43fa1895",
+      "summary": {
+        "rows": 6095,
+        "first": "2010-01-01T00:00:00.000Z",
+        "last": "2026-09-08T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 6094
+          }
+        ],
+        "metrics": {
+          "PriceUSD": {
+            "numericRows": 5897,
+            "missingRows": 198,
+            "first": "2010-07-18T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          },
+          "CapMrktCurUSD": {
+            "numericRows": 5897,
+            "missingRows": 198,
+            "first": "2010-07-18T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          },
+          "CapMVRVCur": {
+            "numericRows": 5897,
+            "missingRows": 198,
+            "first": "2010-07-18T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          },
+          "HashRate": {
+            "numericRows": 6095,
+            "missingRows": 0,
+            "first": "2010-01-01T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          },
+          "SplyCur": {
+            "numericRows": 6095,
+            "missingRows": 0,
+            "first": "2010-01-01T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          },
+          "AdrActCnt": {
+            "numericRows": 6095,
+            "missingRows": 0,
+            "first": "2010-01-01T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          },
+          "IssTotUSD": {
+            "numericRows": 5897,
+            "missingRows": 198,
+            "first": "2010-07-18T00:00:00.000Z",
+            "last": "2026-09-08T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:05:00.629Z",
+      "durationMs": 1278
+    },
+    {
+      "id": "cg-categories",
+      "provider": "coingecko",
+      "url": "https://api.coingecko.com/api/v3/coins/categories/list",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-09T12:05:10.969Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 12:05:11 GMT",
+        "etag": "W/\"a644bc06f5c20bd4810a7ea543f7809f\""
+      },
+      "bytes": 62892,
+      "sha256": "d25c5c40002e47646e09e71fc73a22131f98ea62e74657e97a1ff8fd9d22735b",
+      "summary": {
+        "rows": 974,
+        "fields": {
+          "category_id": {
+            "presentRows": 974
+          },
+          "name": {
+            "presentRows": 974
+          }
+        },
+        "sampleIds": [
+          null,
+          null,
+          null
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-09T12:05:11.134Z",
+      "durationMs": 164
+    }
+  ],
+  "completedAt": "2026-09-09T12:05:11.135Z",
+  "attemptedRequests": 3
+}
