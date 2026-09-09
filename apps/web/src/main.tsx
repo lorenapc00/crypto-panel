@@ -44,16 +44,33 @@ type Fundamental = {
   available: boolean;
 };
 type Fundamentals = {
-  category: "L1" | "exchange token";
+  category: "L1" | "L2" | "DEX" | "lending" | "stablecoin" | "exchange token";
   fundamentals: Fundamental[];
   tokenomics: {
     circulatingPercent: number | null;
     nonCirculatingSupply: number | null;
     unlocks: { events: []; status: "unavailable"; note: string };
-    emissions: { status: "derived" | "unavailable"; note: string };
+    emissions: {
+      status: "live" | "unavailable";
+      observedAt: string | null;
+      source: string;
+      note: string;
+      metrics: { label: string; value: string }[];
+    };
   };
   observedAt: string | null;
   stale: boolean;
+};
+type TokenomicsEvent = {
+  id: string;
+  type: "unlock" | "emission" | "burn" | "buyback";
+  amount: number;
+  unit: string;
+  effectiveAt: string;
+  publishedAt: string;
+  sourceId: string;
+  coverage: string;
+  verification: "verified" | "reported";
 };
 type AssetDetail = {
   asset: Asset;
@@ -71,6 +88,7 @@ type AssetDetail = {
     macd: number | null;
   };
   fundamentals: Fundamentals;
+  tokenomicsEvents: TokenomicsEvent[];
 };
 type Api<T> = { data: T; metadata: Metadata };
 type Page = "overview" | "assets" | "watchlist";
@@ -419,7 +437,11 @@ function FundamentalsTab({ data }: { data: Fundamentals }) {
       <article className="panel fundamentals">
         <div>
           <h2>
-            Fundamentals <small>{data.category} · {data.fundamentals[0]?.scope ?? "unavailable"} scope</small>
+            Fundamentals{" "}
+            <small>
+              {data.category} · {data.fundamentals[0]?.scope ?? "unavailable"}{" "}
+              scope
+            </small>
           </h2>
           {data.fundamentals.map((metric) => (
             <div key={metric.code}>
@@ -429,32 +451,93 @@ function FundamentalsTab({ data }: { data: Fundamentals }) {
           ))}
           <p>{coverage}</p>
         </div>
-        <Status metadata={{ source: "DefiLlama", observedAt: data.observedAt, coverage, stale: data.stale }} />
+        <Status
+          metadata={{
+            source: "DefiLlama",
+            observedAt: data.observedAt,
+            coverage,
+            stale: data.stale,
+          }}
+        />
       </article>
       <article className="panel metric-notes">
         <h2>How to read this</h2>
-        <p>Values are only shown when the source covers this asset’s category. Chain metrics describe network activity; protocol metrics describe the protocol, not necessarily its token.</p>
+        <p>
+          Values are only shown when the source covers this asset’s category.
+          Chain metrics describe network activity; protocol metrics describe the
+          protocol, not necessarily its token.
+        </p>
       </article>
     </section>
   );
 }
-function TokenomicsTab({ asset, data }: { asset: Asset; data: Fundamentals }) {
+function TokenomicsTab({
+  asset,
+  data,
+  events,
+}: {
+  asset: Asset;
+  data: Fundamentals;
+  events: TokenomicsEvent[];
+}) {
   return (
     <section className="detail-grid tab-grid">
       <article className="panel tokenomics">
         <div>
           <h2>Supply & coverage</h2>
-          <div><span>Circulating supply</span><b>{number(asset.circulatingSupply, 0)}</b></div>
-          <div><span>Total supply</span><b>{number(asset.totalSupply, 0)}</b></div>
-          <div><span>Max supply</span><b>{number(asset.maxSupply, 0)}</b></div>
-          <div><span>Circulating / max</span><b>{data.tokenomics.circulatingPercent === null ? "—" : `${number(data.tokenomics.circulatingPercent)}%`}</b></div>
-          <div><span>Not circulating</span><b>{number(data.tokenomics.nonCirculatingSupply, 0)}</b></div>
+          <div>
+            <span>Circulating supply</span>
+            <b>{number(asset.circulatingSupply, 0)}</b>
+          </div>
+          <div>
+            <span>Total supply</span>
+            <b>{number(asset.totalSupply, 0)}</b>
+          </div>
+          <div>
+            <span>Max supply</span>
+            <b>{number(asset.maxSupply, 0)}</b>
+          </div>
+          <div>
+            <span>Circulating / max</span>
+            <b>
+              {data.tokenomics.circulatingPercent === null
+                ? "—"
+                : `${number(data.tokenomics.circulatingPercent)}%`}
+            </b>
+          </div>
+          <div>
+            <span>Not circulating</span>
+            <b>{number(data.tokenomics.nonCirculatingSupply, 0)}</b>
+          </div>
         </div>
       </article>
       <article className="panel metric-notes">
         <h2>Emissions & unlocks</h2>
-        <p>{data.tokenomics.emissions.note}</p>
-        <p>{data.tokenomics.unlocks.note}</p>
+        {events.length ? (
+          <div className="token-events">
+            {events.map((event) => (
+              <div key={event.id}>
+                <span>
+                  {event.type} ·{" "}
+                  {new Date(event.effectiveAt).toLocaleDateString()}
+                </span>
+                <b>
+                  {number(event.amount, 0)} {event.unit}
+                </b>
+                <small>
+                  {event.verification} · {event.sourceId}
+                </small>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <>
+            <p>{data.tokenomics.emissions.note}</p>
+            {data.tokenomics.emissions.metrics.map(metric => <p key={metric.label}><b>{metric.label}: </b>{metric.value}</p>)}
+            <p>Source: {data.tokenomics.emissions.source}</p>
+            <p>{data.tokenomics.unlocks.note}</p>
+          </>
+        )}
       </article>
     </section>
   );
@@ -469,7 +552,9 @@ function AssetProfile({
   const { result, loading, error, reload } = useData<AssetDetail>(
     `/assets/${assetId}`,
   );
-  const [tab, setTab] = useState<"overview" | "fundamentals" | "tokenomics">("overview");
+  const [tab, setTab] = useState<"overview" | "fundamentals" | "tokenomics">(
+    "overview",
+  );
   if (loading) return <Loading />;
   if (error || !result) return <Failure retry={reload} />;
   const { asset, candles, returns, indicators, fundamentals } = result.data;
@@ -512,101 +597,120 @@ function AssetProfile({
       </nav>
       <nav className="asset-tabs" aria-label="Asset profile sections">
         {(["overview", "fundamentals", "tokenomics"] as const).map((item) => (
-          <button key={item} className={tab === item ? "active" : ""} onClick={() => setTab(item)}>{item}</button>
+          <button
+            key={item}
+            className={tab === item ? "active" : ""}
+            onClick={() => setTab(item)}
+          >
+            {item}
+          </button>
         ))}
       </nav>
-      {tab === "overview" && <>
-      <section className="kpis profile-kpis">
-        <Metric t="Market cap" v={usd(asset.marketCapUsd)} />
-        <Metric
-          t="FDV"
-          v={
-            asset.fullyDilutedValuationUsd === null
-              ? "—"
-              : usd(asset.fullyDilutedValuationUsd)
-          }
-        />
-        <Metric t="24h volume" v={usd(asset.volume24hUsd)} />
-        <Metric t="Circulating supply" v={number(asset.circulatingSupply, 0)} />
-      </section>
-      <section className="detail-grid">
-        <article className="panel">
-          {candles.length ? (
-            <>
-              <Sparkline candles={candles} />
-              <div className="ohlcv">
-                <span>Latest OHLC</span>
-                <b>O {usd(last?.open ?? 0)}</b>
-                <b>H {usd(last?.high ?? 0)}</b>
-                <b>L {usd(last?.low ?? 0)}</b>
-                <b>C {usd(last?.close ?? 0)}</b>
-                <b>V {last?.volume === null ? "—" : usd(last?.volume ?? 0)}</b>
+      {tab === "overview" && (
+        <>
+          <section className="kpis profile-kpis">
+            <Metric t="Market cap" v={usd(asset.marketCapUsd)} />
+            <Metric
+              t="FDV"
+              v={
+                asset.fullyDilutedValuationUsd === null
+                  ? "—"
+                  : usd(asset.fullyDilutedValuationUsd)
+              }
+            />
+            <Metric t="24h volume" v={usd(asset.volume24hUsd)} />
+            <Metric
+              t="Circulating supply"
+              v={number(asset.circulatingSupply, 0)}
+            />
+          </section>
+          <section className="detail-grid">
+            <article className="panel">
+              {candles.length ? (
+                <>
+                  <Sparkline candles={candles} />
+                  <div className="ohlcv">
+                    <span>Latest OHLC</span>
+                    <b>O {usd(last?.open ?? 0)}</b>
+                    <b>H {usd(last?.high ?? 0)}</b>
+                    <b>L {usd(last?.low ?? 0)}</b>
+                    <b>C {usd(last?.close ?? 0)}</b>
+                    <b>
+                      V {last?.volume === null ? "—" : usd(last?.volume ?? 0)}
+                    </b>
+                  </div>
+                </>
+              ) : (
+                <div className="empty">
+                  Historical OHLCV is not available from the source yet.
+                  Snapshot metrics remain available.
+                </div>
+              )}
+            </article>
+            <article className="panel indicators">
+              <h2>Returns & technicals</h2>
+              <div>
+                <span>1D</span>
+                <b className={(returns.day ?? 0) < 0 ? "down" : "up"}>
+                  {returns.day === null ? "—" : pct(returns.day)}
+                </b>
               </div>
-            </>
-          ) : (
-            <div className="empty">
-              Historical OHLCV is not available from the source yet. Snapshot
-              metrics remain available.
+              <div>
+                <span>7D</span>
+                <b className={(returns.week ?? 0) < 0 ? "down" : "up"}>
+                  {returns.week === null ? "—" : pct(returns.week)}
+                </b>
+              </div>
+              <div>
+                <span>30D</span>
+                <b className={(returns.month ?? 0) < 0 ? "down" : "up"}>
+                  {returns.month === null ? "—" : pct(returns.month)}
+                </b>
+              </div>
+              <div>
+                <span>RSI 14</span>
+                <b>{number(indicators.rsi14)}</b>
+              </div>
+              <div>
+                <span>SMA 7 / 30</span>
+                <b>
+                  {number(indicators.sma7)} / {number(indicators.sma30)}
+                </b>
+              </div>
+              <div>
+                <span>MACD</span>
+                <b>{number(indicators.macd, 4)}</b>
+              </div>
+            </article>
+          </section>
+          <section className="panel tokenomics">
+            <div>
+              <h2>Supply & coverage</h2>
+              <div>
+                <span>Total supply</span>
+                <b>{number(asset.totalSupply, 0)}</b>
+              </div>
+              <div>
+                <span>Max supply</span>
+                <b>{number(asset.maxSupply, 0)}</b>
+              </div>
+              <div>
+                <span>Data coverage</span>
+                <b>{candles.length} OHLCV observations</b>
+              </div>
             </div>
-          )}
-        </article>
-        <article className="panel indicators">
-          <h2>Returns & technicals</h2>
-          <div>
-            <span>1D</span>
-            <b className={(returns.day ?? 0) < 0 ? "down" : "up"}>
-              {returns.day === null ? "—" : pct(returns.day)}
-            </b>
-          </div>
-          <div>
-            <span>7D</span>
-            <b className={(returns.week ?? 0) < 0 ? "down" : "up"}>
-              {returns.week === null ? "—" : pct(returns.week)}
-            </b>
-          </div>
-          <div>
-            <span>30D</span>
-            <b className={(returns.month ?? 0) < 0 ? "down" : "up"}>
-              {returns.month === null ? "—" : pct(returns.month)}
-            </b>
-          </div>
-          <div>
-            <span>RSI 14</span>
-            <b>{number(indicators.rsi14)}</b>
-          </div>
-          <div>
-            <span>SMA 7 / 30</span>
-            <b>
-              {number(indicators.sma7)} / {number(indicators.sma30)}
-            </b>
-          </div>
-          <div>
-            <span>MACD</span>
-            <b>{number(indicators.macd, 4)}</b>
-          </div>
-        </article>
-      </section>
-      <section className="panel tokenomics">
-        <div>
-          <h2>Supply & coverage</h2>
-          <div>
-            <span>Total supply</span>
-            <b>{number(asset.totalSupply, 0)}</b>
-          </div>
-          <div>
-            <span>Max supply</span>
-            <b>{number(asset.maxSupply, 0)}</b>
-          </div>
-          <div>
-            <span>Data coverage</span>
-            <b>{candles.length} OHLCV observations</b>
-          </div>
-        </div>
-        <Status metadata={result.metadata} />
-      </section>
-      </>}
+            <Status metadata={result.metadata} />
+          </section>
+        </>
+      )}
       {tab === "fundamentals" && <FundamentalsTab data={fundamentals} />}
-      {tab === "tokenomics" && <TokenomicsTab asset={asset} data={fundamentals} />}
+      {tab === "tokenomics" && (
+        <TokenomicsTab
+          asset={asset}
+          data={fundamentals}
+          events={result.data.tokenomicsEvents}
+        />
+      )}
     </>
   );
 }

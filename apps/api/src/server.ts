@@ -2,6 +2,7 @@ import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
 import { assetDetails, marketData, metadata } from "./market.js";
 import { fundamentals } from "./fundamentals.js";
+import { storedTokenomicsEvents } from "./db.js";
 
 type Asset = Awaited<ReturnType<typeof marketData>>["assets"][number];
 const sessions = new Map<string, { email: string; watchlist: Set<string> }>();
@@ -32,7 +33,7 @@ createServer(async (req, res) => {
     if (url.pathname === "/api/v1/overview") { const snapshot = await marketData(); return send(res, 200, { data: globalOverview(snapshot.assets), metadata: metadata(snapshot.observedAt, snapshot.stale) }); }
     if (url.pathname === "/api/v1/assets") { const snapshot = await marketData(); return send(res, 200, { data: snapshot.assets, metadata: metadata(snapshot.observedAt, snapshot.stale) }); }
     const detail = url.pathname.match(/^\/api\/v1\/assets\/([^/]+)$/);
-    if (detail) { const result = await assetDetails(decodeURIComponent(detail[1])); if (!result) return send(res, 404, { error: "Asset not found" }); const data = { ...result, fundamentals: await fundamentals(result.asset.id, result.asset) }; return send(res, 200, { data, metadata: metadata(data.fundamentals.observedAt ?? result.asset.observedAt, result.stale || data.fundamentals.stale) }); }
+    if (detail) { const result = await assetDetails(decodeURIComponent(detail[1])); if (!result) return send(res, 404, { error: "Asset not found" }); const data = { ...result, fundamentals: await fundamentals(result.asset.id, result.asset), tokenomicsEvents: await storedTokenomicsEvents(result.asset.id).catch(() => []) }; return send(res, 200, { data, metadata: metadata(data.fundamentals.observedAt ?? result.asset.observedAt, result.stale || data.fundamentals.stale) }); }
     if (url.pathname === "/api/v1/watchlist") { const snapshot = await marketData(); return send(res, 200, { data: snapshot.assets.filter(asset => session.watchlist.has(asset.id)), metadata: metadata(snapshot.observedAt, snapshot.stale) }); }
     const watchlist = url.pathname.match(/^\/api\/v1\/watchlist\/([^/]+)$/);
     if (watchlist) { if (req.method === "PUT") session.watchlist.add(watchlist[1]); if (req.method === "DELETE") session.watchlist.delete(watchlist[1]); return send(res, 204, {}); }

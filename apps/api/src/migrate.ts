@@ -25,6 +25,17 @@ create table if not exists candles (
   primary key (asset_id, interval, observed_at, source_id)
 );
 create index if not exists candles_lookup on candles(asset_id, interval, observed_at desc);
+create table if not exists tokenomics_events (
+  id text primary key, asset_id text not null references assets(id),
+  event_type text not null check (event_type in ('unlock','emission','burn','buyback')),
+  amount numeric not null check (amount >= 0), unit text not null,
+  effective_at timestamptz not null, published_at timestamptz not null,
+  source_id text not null references sources(id), coverage text not null,
+  verification text not null check (verification in ('verified','reported')),
+  recorded_at timestamptz not null default now(),
+  unique (asset_id, event_type, effective_at, source_id)
+);
+create index if not exists tokenomics_events_lookup on tokenomics_events(asset_id, effective_at asc);
 `;
 
 const metrics = [

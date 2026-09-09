@@ -76,6 +76,8 @@
 .fundamentals span, .metric-notes p { color: #829589; }
 .fundamentals p, .metric-notes p { font: 11px/1.5 "DM Mono"; }
 .fundamentals .status { border-top: 1px solid #24352d; }
+.token-events > div { display: grid; gap: 6px; padding: 12px 0; border-top: 1px solid #24352d; font: 11px "DM Mono"; }
+.token-events span, .token-events small { color: #829589; }
 .detail-grid {
   display: grid;
   grid-template-columns: 1.7fr 1fr;
