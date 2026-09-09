@@ -1,5 +1,6 @@
 {
   "name": "@crypto-panel/api", "private": true, "type": "module",
-  "scripts": { "dev": "tsx watch src/server.ts", "build": "tsc -p tsconfig.json", "test": "node --test" },
-  "devDependencies": { "tsx": "^4.19.0", "typescript": "^5.6.0", "@types/node": "^22.0.0" }
+  "scripts": { "dev": "tsx watch src/server.ts", "build": "tsc -p tsconfig.json", "test": "tsx --test src/**/*.test.ts", "db:migrate": "tsx src/migrate.ts", "ingest:market": "tsx src/ingest.ts" },
+  "dependencies": { "pg": "^8.16.3" },
+  "devDependencies": { "tsx": "^4.19.0", "typescript": "^5.6.0", "@types/node": "^22.0.0", "@types/pg": "^8.15.5" }
 }

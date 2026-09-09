@@ -7,10 +7,28 @@ metadata. It is a free beta and does not provide investment advice.
 ## Run
 
 ```bash
-npm install
-npm run dev
+pnpm install
+docker compose up -d postgres
+pnpm --filter @crypto-panel/api db:migrate
+# Initial snapshots and OHLCV for BTC, ETH, SOL and HYPE
+pnpm --filter @crypto-panel/api ingest:market
+pnpm dev:api # API: http://127.0.0.1:3100
+pnpm dev     # Web: http://127.0.0.1:5174
 ```
 
-Open the displayed localhost URL and use the local demo sign-in. The API is
-designed to keep provider keys server-side; production authentication should use
-Google OAuth and passwordless magic links.
+The Crypto Panel deliberately uses ports 3100 (API) and 5174 (web), so it can
+run alongside another local project, which uses 3000 and 5173. Authentication is
+currently deferred; the API exposes a temporary shared demo workspace.
+
+## Data model and first asset profiles
+
+PostgreSQL stores assets, source definitions, metric definitions, immutable
+market observations and OHLCV candles. The initial asset profiles are Bitcoin,
+Ethereum, Solana and Hyperliquid (HYPE), available by selecting an asset in the
+market table. Each response includes its provider, observation time, coverage
+and stale status.
+
+The first source is CoinGecko. The ingestion command can be safely rerun:
+duplicate readings from the same source and observation time are ignored.
+CoinGecko rate limits can delay OHLCV acquisition; already persisted snapshots
+remain available and are explicitly marked stale if the live provider fails.
