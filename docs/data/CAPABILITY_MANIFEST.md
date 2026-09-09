@@ -2,6 +2,8 @@
 
 Checked 2026-09-09. **Proceed to stage 1 with BTC history, market snapshots, scoped fundamentals, Hyperliquid catalogs, and sampled spot-pool discovery.** Broad perp-volume market-share rankings, advanced holder metrics, and macro vintages remain gated. These are build decisions; no scheduled archive or new product interface is running yet.
 
+**Implementation update:** the first stage 1 slice now provides versioned migrations, legacy-candle quarantine, raw-response provenance, immutable daily-series revisions, coverage-aware repository reads, and corrected daily history in the existing asset page. Production scheduling, discovery archiving and shared quota enforcement remain next. The evidence below describes the original capability spike.
+
 Evidence: [initial probes](capability-results-2026-09-09.json), [history and batch follow-up](capability-followup-2026-09-09.json), and [chain probes](capability-chains-2026-09-09.json). The three runs made 59 requests covering all 48 defined probes and ten additional discovered namespaces, with one repeated request after throttling. They produced 46 successful samples, 12 other HTTP failures, and one 429. Every result records its request, credential mode, UTC acquisition time, HTTP status, response hash, and available shape/coverage checks. Requests used no credentials. Success means a sample was received; it does not certify every asset, continuous service, metric comparability, or historical publication times. These reports are not the replay archive.
 
 ## Reproduce the spike
@@ -15,7 +17,7 @@ pnpm test
 
 The [probe definitions](../../scripts/capability-probes.json) specify exact GET URLs and read-only POST bodies. Output defaults to ignored `.reports/capabilities.json`; use `--output path` to preserve a dated result. `hl-namespaces` also probes every named namespace returned by the catalog; `hl-contexts-native` checks the native namespace separately. An explicit `--only` list never implies full provider coverage.
 
-Optional exported `COINGECKO_DEMO_API_KEY` and `FRED_API_KEY` are supported by the probe. It does not load `.env` or print keys, request headers, or error bodies. Existing application adapters do not yet use these variables. Negative HTTP results are evidence, not test failures. Transport failures, malformed successful responses, or throttling exit nonzero. A 429 stops further requests to that provider for that run; there are no automatic retries. The original run hit one CoinGecko 429, retained in the evidence. A later follow-up returned 401 for the same 730-day request. Default CoinGecko pacing was subsequently reduced to five requests/minute.
+Optional exported `COINGECKO_DEMO_API_KEY` and `FRED_API_KEY` are supported by the probe. It does not load `.env` or print keys, request headers, or error bodies. The subsequent daily-history adapter also supports the Demo key; older market/fundamental adapters do not. Negative HTTP results are evidence, not test failures. Transport failures, malformed successful responses, or throttling exit nonzero. A 429 stops further requests to that provider for that run; there are no automatic retries. The original run hit one CoinGecko 429, retained in the evidence. A later follow-up returned 401 for the same 730-day request. Default CoinGecko pacing was subsequently reduced to five requests/minute.
 
 ## Capability manifest
 

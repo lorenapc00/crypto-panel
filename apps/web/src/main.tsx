@@ -26,13 +26,9 @@ type Asset = {
   change30d: number | null;
   observedAt: string;
 };
-type Candle = {
+type DailyPrice = {
   observedAt: string;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number | null;
+  close: number | null;
 };
 type Fundamental = {
   code: "tvl_usd" | "fees_24h_usd" | "revenue_24h_usd";
@@ -74,7 +70,7 @@ type TokenomicsEvent = {
 };
 type AssetDetail = {
   asset: Asset;
-  candles: Candle[];
+  priceHistory: { points: DailyPrice[]; metadata: Metadata & { missingIntervals: number; classification: "historical-reconstruction" } };
   returns: {
     day: number | null;
     week: number | null;
@@ -399,29 +395,35 @@ function number(value: number | null, digits = 2) {
         value,
       );
 }
-function Sparkline({ candles }: { candles: Candle[] }) {
-  const values = candles.map((c) => c.close);
+function Sparkline({ prices }: { prices: DailyPrice[] }) {
+  const values = prices.flatMap(point => point.close === null ? [] : [point.close]);
+  if (!values.length) return <div className="empty">No daily prices in this range.</div>;
   const low = Math.min(...values),
     high = Math.max(...values),
     range = high - low || 1;
-  const points = values
-    .map(
-      (value, index) =>
-        `${(index / (values.length - 1 || 1)) * 100},${100 - ((value - low) / range) * 100}`,
-    )
-    .join(" ");
+  const firstTime = Date.parse(prices[0].observedAt);
+  const span = Date.parse(prices.at(-1)!.observedAt) - firstTime || 1;
+  const segments: string[][] = [];
+  let previousTime = -Infinity;
+  for (const point of prices) {
+    const time = Date.parse(point.observedAt);
+    if (point.close === null) { previousTime = -Infinity; continue; }
+    if (time - previousTime !== 86_400_000) segments.push([]);
+    segments.at(-1)!.push(`${(time - firstTime) / span * 100},${100 - ((point.close - low) / range) * 100}`);
+    previousTime = time;
+  }
   return (
     <div className="chart">
       <div className="chart-top">
-        <span>90D OHLCV · CLOSE</span>
+        <span>DAILY PRICE · USD</span>
         <span>{usd(values.at(-1) ?? 0)}</span>
       </div>
       <svg
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
-        aria-label="90 day closing price chart"
+        aria-label="Daily USD price chart; gaps are not filled"
       >
-        <polyline points={points} />
+        {segments.map((points, index) => <polyline key={index} points={points.join(" ")} />)}
       </svg>
       <div className="chart-axis">
         <span>{usd(low)}</span>
@@ -557,8 +559,9 @@ function AssetProfile({
   );
   if (loading) return <Loading />;
   if (error || !result) return <Failure retry={reload} />;
-  const { asset, candles, returns, indicators, fundamentals } = result.data;
-  const last = candles.at(-1);
+  const { asset, priceHistory, returns, indicators, fundamentals } = result.data;
+  const chartStart = Date.parse(priceHistory.points.at(-1)?.observedAt ?? "") - 89 * 86_400_000;
+  const chartPrices = priceHistory.points.filter(point => Date.parse(point.observedAt) >= chartStart);
   return (
     <>
       <button className="back" onClick={back}>
@@ -566,7 +569,7 @@ function AssetProfile({
       </button>
       <section className="asset-hero">
         <div>
-          <label>ASSET PROFILE · POINT-IN-TIME DATA</label>
+          <label>ASSET PROFILE · HISTORICAL RECONSTRUCTION</label>
           <h1>
             {asset.name} <span>{asset.symbol}</span>
           </h1>
@@ -626,29 +629,24 @@ function AssetProfile({
           </section>
           <section className="detail-grid">
             <article className="panel">
-              {candles.length ? (
+              {priceHistory.points.length ? (
                 <>
-                  <Sparkline candles={candles} />
+                  <Sparkline prices={chartPrices} />
                   <div className="ohlcv">
-                    <span>Latest OHLC</span>
-                    <b>O {usd(last?.open ?? 0)}</b>
-                    <b>H {usd(last?.high ?? 0)}</b>
-                    <b>L {usd(last?.low ?? 0)}</b>
-                    <b>C {usd(last?.close ?? 0)}</b>
-                    <b>
-                      V {last?.volume === null ? "—" : usd(last?.volume ?? 0)}
-                    </b>
+                    <span>{chartPrices[0]?.observedAt.slice(0, 10)} – {chartPrices.at(-1)?.observedAt.slice(0, 10)}</span>
+                    <span>{priceHistory.metadata.missingIntervals} missing daily observations</span>
                   </div>
                 </>
               ) : (
                 <div className="empty">
-                  Historical OHLCV is not available from the source yet.
-                  Snapshot metrics remain available.
+                  Daily price history has not been archived yet. Snapshot metrics remain available.
                 </div>
               )}
+              <Status metadata={priceHistory.metadata} />
             </article>
             <article className="panel indicators">
               <h2>Returns & technicals</h2>
+              <p>Completed daily prices as of {priceHistory.metadata.observedAt?.slice(0, 10) ?? "unavailable"}.</p>
               <div>
                 <span>1D</span>
                 <b className={(returns.day ?? 0) < 0 ? "down" : "up"}>
@@ -696,7 +694,7 @@ function AssetProfile({
               </div>
               <div>
                 <span>Data coverage</span>
-                <b>{candles.length} OHLCV observations</b>
+                <b>{priceHistory.points.filter(point => point.close !== null).length} daily price observations</b>
               </div>
             </div>
             <Status metadata={result.metadata} />

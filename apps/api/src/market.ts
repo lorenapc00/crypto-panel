@@ -1,4 +1,6 @@
-import { databaseReady, storeAsset, storeCandle, storeObservation, storedAssetSnapshots, storedCandles } from "./db.js";
+import { databaseReady, storeAsset, storeObservation, storedAssetSnapshots } from "./db.js";
+import { dailyHistory } from "./daily-history.js";
+import { indicators, returns } from "./indicators.js";
 
 export const priorityAssetIds = ["bitcoin", "ethereum", "solana", "hyperliquid"] as const;
 const marketUrl = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h,7d,30d";
@@ -47,23 +49,8 @@ export async function assetDetails(assetId: string) {
     const data = await response.json() as CoinGeckoMarket[]; if (!data[0]) return null;
     asset = assetFromMarket(data[0], 0, new Date().toISOString()); await persistAsset(asset);
   }
-  let candles = await storedCandles(asset.id);
-  if (!candles.length) candles = await fetchAndStoreCandles(asset.id).catch(() => []);
-  return { asset, candles, stale: market.stale, returns: returns(candles), indicators: await import("./indicators.js").then(({ indicators }) => indicators(candles)) };
-}
-async function fetchAndStoreCandles(assetId: string) {
-  const response = await fetch(`https://api.coingecko.com/api/v3/coins/${encodeURIComponent(assetId)}/ohlc?vs_currency=usd&days=90`, { headers: { accept: "application/json" } });
-  if (!response.ok) throw new Error(`CoinGecko OHLC request failed: ${response.status}`);
-  const rows = await response.json() as [number, number, number, number, number][];
-  const chartResponse = await fetch(`https://api.coingecko.com/api/v3/coins/${encodeURIComponent(assetId)}/market_chart?vs_currency=usd&days=90`, { headers: { accept: "application/json" } });
-  const volumes = chartResponse.ok ? (await chartResponse.json() as { total_volumes?: [number, number][] }).total_volumes ?? [] : [];
-  const volumeAt = (timestamp: number) => volumes.reduce<[number, number] | undefined>((nearest, candidate) => !nearest || Math.abs(candidate[0] - timestamp) < Math.abs(nearest[0] - timestamp) ? candidate : nearest, undefined)?.[1] ?? null;
-  const candles = rows.map(([timestamp, open, high, low, close]) => ({ observedAt: new Date(timestamp).toISOString(), open, high, low, close, volume: volumeAt(timestamp) }));
-  if (await databaseReady()) await Promise.all(candles.map(candle => storeCandle({ assetId, interval: "daily", ...candle, sourceId })));
-  return candles;
-}
-function returns(candles: { close: number }[]) {
-  const last = candles.at(-1)?.close; const change = (period: number) => !last || candles.length <= period ? null : (last / candles[candles.length - 1 - period].close - 1) * 100;
-  return { day: change(1), week: change(7), month: change(30), quarter: change(90) };
+  const priceHistory = await dailyHistory(asset.id);
+  // Keep the legacy response field empty; sampled prices are not OHLC candles.
+  return { asset, candles: [], priceHistory, stale: market.stale, returns: returns(priceHistory.points), indicators: indicators(priceHistory.points) };
 }
 export const metadata = (observationTime: string | null, stale = false) => ({ source: "CoinGecko", observedAt: observationTime, coverage, stale });
