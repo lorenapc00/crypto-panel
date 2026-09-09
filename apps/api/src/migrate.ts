@@ -35,11 +35,15 @@ const metrics = [
   ["circulating_supply", "Circulating supply", "tokens", "Tokens currently circulating", "asset"],
   ["total_supply", "Total supply", "tokens", "Reported total token supply", "asset"],
   ["max_supply", "Maximum supply", "tokens", "Maximum token supply where defined", "asset"]
+  ,["tvl_usd", "Total value locked", "USD", "Value held in protocol smart contracts; not a token balance-sheet metric", "chain_or_protocol"]
+  ,["fees_24h_usd", "Fees, 24 hour", "USD", "Gross user fees reported by the source for a chain or protocol", "chain_or_protocol"]
+  ,["revenue_24h_usd", "Revenue, 24 hour", "USD", "Protocol revenue retained by treasury or token holders when reported by the source", "protocol"]
 ] as const;
 
 try {
   await pool.query(schema);
   await pool.query(`insert into sources (id, name, url, license) values ('coingecko', 'CoinGecko', 'https://www.coingecko.com/en/api', 'Provider terms apply') on conflict (id) do nothing`);
+  await pool.query(`insert into sources (id, name, url, license) values ('defillama', 'DefiLlama', 'https://defillama.com/docs/api', 'Provider terms apply') on conflict (id) do nothing`);
   for (const [code, name, unit, formula, scope] of metrics) await pool.query(`insert into metric_definitions (code,name,unit,formula,scope) values ($1,$2,$3,$4,$5) on conflict (code) do nothing`, [code, name, unit, formula, scope]);
   console.log("Database schema is ready.");
 } finally { await closeDatabase(); }

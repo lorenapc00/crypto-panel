@@ -32,3 +32,12 @@ The first source is CoinGecko. The ingestion command can be safely rerun:
 duplicate readings from the same source and observation time are ignored.
 CoinGecko rate limits can delay OHLCV acquisition; already persisted snapshots
 remain available and are explicitly marked stale if the live provider fails.
+
+## Fundamentals and tokenomics
+
+The ingest command also fetches DefiLlama fundamentals where the metric scope
+is appropriate: Ethereum and Solana use chain aggregates, while HYPE uses the
+Hyperliquid protocol aggregate. Chain fees are never presented as token revenue.
+The product derives circulating/max-supply coverage from CoinGecko snapshots,
+but does not label the remainder as a future unlock or emission forecast. A
+verified event-level unlock source must be connected before such events appear.

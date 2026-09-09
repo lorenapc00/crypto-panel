@@ -57,4 +57,12 @@ export async function storedAssetSnapshots() {
   return result.rows;
 }
 
+export async function storedFundamentals(assetId: string) {
+  const result = await pool.query(`select distinct on (metric_code) metric_code, value, unit, observed_at, coverage, quality
+    from observations where asset_id=$1 and metric_code = any($2)
+    order by metric_code, observed_at desc`, [assetId, ["tvl_usd", "fees_24h_usd", "revenue_24h_usd"]]);
+  return result.rows.map(row => ({ metricCode: row.metric_code, value: Number(row.value), unit: row.unit,
+    observedAt: row.observed_at.toISOString(), coverage: row.coverage, quality: row.quality }));
+}
+
 export async function closeDatabase() { await pool.end(); }
