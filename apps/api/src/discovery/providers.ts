@@ -2,7 +2,7 @@ import type { ArchiveInput } from '../archive.js';
 export type Member = { key: string; status: 'observed' | 'active' | 'delisted'; data: Record<string, unknown> };
 export type DiscoverySample = { members: Member[]; notes: Record<string, unknown>; series?: ArchiveInput['series']; assets?: {id:string;symbol:string;name:string}[] };
 export type DiscoveryJob = {
-  id: string; provider: string; kind: 'protocols' | 'namespaces' | 'instruments' | 'pools' | 'market' | 'global' | 'fundamental' | 'issuance' | 'history' | 'book' | 'funding' | 'enrichment';
+  id: string; provider: string; kind: 'protocols' | 'namespaces' | 'instruments' | 'pools' | 'market' | 'global' | 'fundamental' | 'issuance' | 'history' | 'book' | 'funding' | 'enrichment' | 'openinterest';
   scope: string; intervalSeconds: number; membership: 'catalog' | 'sample';
   endpoint: string; body?: Record<string, unknown>; weight: number;
   methodologyVersion?: string;

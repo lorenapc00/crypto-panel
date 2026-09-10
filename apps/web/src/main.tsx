@@ -9,6 +9,7 @@ import { SavedScreens,type Selection } from "./components/SavedScreens";
 import { WorkspaceAccess } from "./components/WorkspaceAccess";
 import { BtcCycles } from "./pages/BtcCycles";
 import { MarketOverview } from "./pages/MarketOverview";
+import { PerpDiscovery } from "./pages/PerpDiscovery";
 
 type Asset = {
   id: string;
@@ -90,10 +91,11 @@ type AssetDetail = {
   fundamentals: Fundamentals;
   tokenomicsEvents: TokenomicsEvent[];
 };
-type Page = "overview" | "btc" | "assets" | "watchlist" | "research" | "data-health";
+type Page = "overview" | "btc" | "perp" | "assets" | "watchlist" | "research" | "data-health";
 const pages: { id: Page; label: string }[] = [
   { id: "overview", label: "Market Overview" },
   { id: "btc", label: "BTC Cycles" },
+  { id: "perp", label: "Perp Discovery" },
   { id: "assets", label: "Assets" },
   { id: "watchlist", label: "Watchlist" },
   { id:"research",label:"Research" },
@@ -741,6 +743,7 @@ function App() {
             {page === "watchlist" && <Watchlist />}{" "}
             {page === "research" && <Research />}
             {page === "btc" && <BtcCycles />}
+            {page === "perp" && <PerpDiscovery />}
             {page === "data-health" && <DataHealth />}
           </>
         )}

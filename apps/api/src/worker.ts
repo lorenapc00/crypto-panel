@@ -12,8 +12,9 @@ import { randomUUID } from 'node:crypto';
 import { recordSeriesGaps } from './health.js';
 import { btcHistoryJob } from './feeds/bitcoin.js';
 import { capitalJobs } from './feeds/capital.js';
+import { perpJobs } from './feeds/perp.js';
 
-const jobs = [...discoveryJobs, ...snapshotJobs, ...historyJobs, ...venueJobs, ...spotJobs, btcHistoryJob, ...capitalJobs];
+const jobs = [...discoveryJobs, ...snapshotJobs, ...historyJobs, ...venueJobs, ...spotJobs, btcHistoryJob, ...capitalJobs, ...perpJobs];
 const workerId=randomUUID();
 let lastHealth=0,registered=false;
 

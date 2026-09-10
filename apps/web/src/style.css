@@ -641,3 +641,14 @@ footer {
 .change-tag.btc-regime { border-color: #4b6a86; color: #9ac6ee; }
 .change-tag.threshold-alert { border-color: #725744; color: #edbd94; }
 .overview-workspace td .asset-link { color: #9ac6ee; }
+
+.perp-evidence { margin-top: 10px; padding: 6px 18px; }
+.perp-evidence h3 { font-size: 12px; font-weight: 500; color: #aebccc; margin: 14px 0 4px; }
+.perp-evidence ul { margin: 0; padding-left: 18px; }
+.perp-evidence li { font-size: 12px; line-height: 1.8; color: #aebccc; }
+.perp-evidence .overview-figures { margin-top: 10px; }
+.btc-workspace td em { font: inherit; color: #829589; margin-left: 7px; }
+.change-tag.perp-listing { border-color: #4b7a63; color: #93d9b6; }
+.change-tag.perp-venue-namespace { border-color: #6a5a86; color: #b399e2; }
+.change-tag.perp-protocol-catalog { border-color: #725744; color: #edbd94; }
+.overview-changes button { margin-top: 8px; }

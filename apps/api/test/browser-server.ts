@@ -10,6 +10,7 @@ import { btcHistoryJob } from '../src/feeds/bitcoin.js';
 import { capitalJobs } from '../src/feeds/capital.js';
 import { discoveryJobs } from '../src/discovery/providers.js';
 import { venueJobs } from '../src/feeds/venue.js';
+import { perpJobs } from '../src/feeds/perp.js';
 
 if(!process.env.TEST_DATABASE_URL)throw new Error('Browser tests require TEST_DATABASE_URL');
 const schema=`browser_${randomUUID().replaceAll('-','')}`;
@@ -17,11 +18,16 @@ const admin=new Pool({connectionString:process.env.TEST_DATABASE_URL});
 const database=new Pool({connectionString:process.env.TEST_DATABASE_URL,options:`-c search_path=${schema}`});
 await admin.query(`create schema ${schema}`);
 await migrate(database);
+const instrumentsJob=discoveryJobs.find(j=>j.id==='hyperliquid:instruments:native:v1')!;
 const jobs=[...snapshotJobs.filter(j=>[marketDataset,globalDataset].includes(j.id)),historyJobs[0],btcHistoryJob,
-  ...capitalJobs,discoveryJobs.find(j=>j.id==='hyperliquid:instruments:native:v1')!,venueJobs[1]];
+  ...capitalJobs,instrumentsJob,venueJobs[0],venueJobs[1],
+  discoveryJobs.find(j=>j.id==='defillama:protocols:v1')!,discoveryJobs.find(j=>j.id==='hyperliquid:namespaces:v1')!,...perpJobs];
 await configureWorker(database,jobs);
+const midnight=Math.floor(Date.now()/86400000)*86400000;
+// A second instrument acquisition turns one archived baseline into one real listing event.
+let instrumentRuns=0;
 // The global aggregate is acquired twice so the overview has a sampled series, not one point.
-for(const job of [...jobs,snapshotJobs.find(j=>j.id===globalDataset)!]){
+for(const job of [...jobs,snapshotJobs.find(j=>j.id===globalDataset)!,instrumentsJob]){
   await database.query('update worker_provider_state s set tokens=l.bucket_capacity,updated_at=clock_timestamp() from worker_provider_limits l where l.provider_id=s.provider_id');
   await database.query('insert into worker_runs (job_id,scheduled_at) values ($1,clock_timestamp())',[job.id]);
   const run=await claim(database);if(!run)throw new Error('Fixture job did not claim');
@@ -32,7 +38,20 @@ for(const job of [...jobs,snapshotJobs.find(j=>j.id===globalDataset)!]){
   const contextPayload = job.id===capitalJobs[0].id?Array.from({length:100},(_,i)=>({date:String((Math.floor(Date.now()/86400000)-100+i)*86400),totalCirculatingUSD:{peggedUSD:100000000000+i*100000000}})):
     job.id===capitalJobs[1].id?{peggedAssets:[{id:'1',name:'Tether',symbol:'USDT',pegType:'peggedUSD',chains:['Ethereum'],circulating:{peggedUSD:1000000},price:1},
       {id:'2',name:'Euro fixture',symbol:'EUR',pegType:'peggedEUR',chains:[],price:1.1}]}:
-    job.kind==='instruments'?[{universe:[{name:'BTC'}]},[{openInterest:'1234',markPx:'60000',funding:'-0.0000125'}]]:
+    job.kind==='instruments'?(()=>{const names=instrumentRuns++?['BTC','NEWPERP']:['BTC'];
+      return [{universe:names.map(name=>({name,szDecimals:5,maxLeverage:40,marginTableId:1})),collateralToken:0},
+        names.map((_,index)=>({openInterest:String(1234+index*10),markPx:'60000',oraclePx:'59970',funding:'-0.0000125',
+          premium:'0.0004',dayNtlVlm:'2500000',impactPxs:['59990','60010']}))];})():
+    job.kind==='namespaces'?[null,{name:'mkts',fullName:'Markets DEX',deployer:'0xabc'}]:
+    job.kind==='protocols'?[{id:'5507',slug:'hyperliquid-perps',name:'Hyperliquid Perps',category:'Derivatives',chains:['Hyperliquid L1'],tvl:180000000,gecko_id:null},
+      {id:'9001',slug:'emerging-perps',name:'Emerging Perps',category:'Derivatives',chains:['Base'],tvl:1000000,gecko_id:'bitcoin'},
+      {id:'777',slug:'a-lender',name:'A Lender',category:'Lending',chains:['Base'],tvl:50,gecko_id:null}]:
+    job.kind==='openinterest'?{total24h:15000000000,
+      totalDataChart:Array.from({length:40},(_,i)=>[(midnight-(40-i)*86400000)/1000,10000000000+i*100000000]),
+      protocols:[{defillamaId:'5507',slug:'hyperliquid-perps',name:'Hyperliquid Perps',category:'Derivatives',
+        chains:['Hyperliquid L1'],parentProtocol:'parent#hyperliquid',module:'hyperliquid-perp-oi',
+        total24h:14000000000,total7DaysAgo:13000000000,total30DaysAgo:10000000000,change_1d:0.5}]}:
+    job.kind==='book'?{coin:'BTC',time:Date.now()-60000,levels:[[{px:'59990',sz:'2'}],[{px:'60010',sz:'2'}]]}:
     job.kind==='funding'?[{coin:'BTC',time:Date.now()-1000,fundingRate:'0.000025'}]:payload;
   const result=await executeRun(database,run,job,async()=>new Response(JSON.stringify(contextPayload)));
   if(result.status!=='succeeded')throw new Error(`Fixture failed: ${job.id} ${result.status}`);

@@ -1,0 +1,426 @@
+{
+  "checkedAt": "2026-09-10T11:25:16.367Z",
+  "scope": "Local supervised Mac; continuous hosting remains unverified",
+  "migration": 10,
+  "endpointStatus": {
+    "projects": 200,
+    "newListings": 200,
+    "catalog": 200,
+    "alerts": 200
+  },
+  "replayBeforeCoverageStatus": 409,
+  "replayCutoff": "2026-09-10T11:23:59.000Z",
+  "replayStatus": 200,
+  "replayClassification": "point-in-time",
+  "replayRefusals": [],
+  "projects": {
+    "methodologyVersion": "perp-projects:v1",
+    "universe": {
+      "scope": "DefiLlama `Derivatives` catalog category together with every protocol in the covered open-interest universe. `Derivatives` is a provider category, not a verified perp-DEX taxonomy: it includes non-perpetual derivatives and may omit perp venues the provider files elsewhere.",
+      "matched": 471,
+      "filtered": 471,
+      "returned": 200,
+      "catalogProtocols": 8213,
+      "catalogDerivatives": 446,
+      "coveredOpenInterestProtocols": 127,
+      "withVenueLink": 1,
+      "withArchivedFundamentals": 1,
+      "withVerifiedMilestone": 0,
+      "withCoveredOpenInterest": 103
+    },
+    "earlyFilter": {
+      "window": "all",
+      "defaultWindowDays": 180,
+      "eligible": 0,
+      "explanation": "The 180-day early-project filter needs verified protocol or token launch dates. No connected free feed publishes them, so no protocol qualifies and the default view ranks the covered universe by first observation in this archive instead."
+    },
+    "sorting": {
+      "applied": "verified-milestone",
+      "fallback": "first-observed",
+      "tieBreak": "protocol id",
+      "disabled": [
+        "30D volume market-share change",
+        "reported volume growth"
+      ],
+      "reason": "Volume sorting stays disabled until comparable free volume windows and a consistent covered-universe denominator exist."
+    },
+    "aggregate": {
+      "latest": {
+        "observedAt": "2026-09-09T00:00:00.000Z",
+        "value": 25374322774,
+        "publishedAt": null,
+        "recordedAt": "2026-09-10T11:22:59.005Z",
+        "payloadId": "1230"
+      },
+      "change7dPct": 7.22939722865481,
+      "change30dPct": 35.48487642954523,
+      "values": 2023,
+      "first": "2021-02-25T00:00:00.000Z",
+      "seriesId": "defillama:covered-perp-open-interest:perp_open_interest_usd:daily:v1",
+      "replayCoverageStart": "2026-09-10T11:22:59.136Z"
+    },
+    "coverage": {
+      "catalog": {
+        "source": "defillama",
+        "scope": "DefiLlama protocol catalog",
+        "observedAt": "2026-09-10T01:01:07.157Z",
+        "recordedAt": "2026-09-10T01:01:07.974Z",
+        "snapshotId": "70",
+        "payloadId": "74",
+        "replayCoverageStart": "2026-09-09T13:34:41.376Z",
+        "intervalSeconds": 86400,
+        "methodologyVersion": "discovery:v1",
+        "unavailable": false,
+        "stale": false,
+        "degraded": false,
+        "error": null,
+        "replayRefused": false,
+        "classification": "forward tracking"
+      },
+      "openInterest": {
+        "source": "defillama",
+        "scope": "DefiLlama covered perp open interest by protocol and the covered-universe aggregate history",
+        "observedAt": "2026-09-10T11:22:58.910Z",
+        "recordedAt": "2026-09-10T11:22:58.953Z",
+        "snapshotId": "1211",
+        "payloadId": "1230",
+        "replayCoverageStart": "2026-09-10T11:22:59.163Z",
+        "intervalSeconds": 86400,
+        "methodologyVersion": "perp-open-interest:v1",
+        "unavailable": false,
+        "stale": false,
+        "degraded": false,
+        "error": null,
+        "replayRefused": false,
+        "classification": "forward tracking"
+      },
+      "openInterestNotes": {
+        "scope": "DefiLlama open-interest dimension across its covered perp protocols; not every protocol in the catalog is covered and not every covered protocol is a perp DEX",
+        "timestamp": "Provider UTC daily label, live day excluded; publication time unknown",
+        "convention": "DefiLlama open-interest dimension. The documented provider convention counts both sides of each contract; `total24h` is the dimension field holding the current open-interest value, not a 24-hour flow.",
+        "membership": "Provider-covered protocols only; coverage changes over time and historical constituents are unavailable",
+        "volumeGate": "Reported and normalized perp volume remain gated: /overview/derivatives and /summary/derivatives/hyperliquid returned HTTP 402",
+        "attribution": "DefiLlama; provider terms apply",
+        "aggregateUsd": 25516431581,
+        "coveredProtocols": 127,
+        "venueComparability": "Never merged with venue-native open interest, which this archive keeps in underlying units"
+      }
+    },
+    "leaders": [
+      {
+        "protocolId": "1018",
+        "slug": "gains-network",
+        "stage": "provider-linked-token",
+        "openInterestUsd": 7600364,
+        "openInterestShareOfCoveredPct": 0.02584345697855778,
+        "openInterestChange30dPct": 70.36365743392167,
+        "tvlUsd": 10150773.757365389,
+        "archivedFundamentals": false,
+        "venue": null,
+        "firstObservedAt": "2026-09-09T13:34:39.303Z",
+        "verifiedMilestoneAt": null
+      },
+      {
+        "protocolId": "1057",
+        "slug": "linear-finance",
+        "stage": "provider-linked-token",
+        "openInterestUsd": null,
+        "openInterestShareOfCoveredPct": null,
+        "openInterestChange30dPct": null,
+        "tvlUsd": 4849.2804751772865,
+        "archivedFundamentals": false,
+        "venue": null,
+        "firstObservedAt": "2026-09-09T13:34:39.303Z",
+        "verifiedMilestoneAt": null
+      },
+      {
+        "protocolId": "1064",
+        "slug": "ideamarket",
+        "stage": "provider-linked-token",
+        "openInterestUsd": null,
+        "openInterestShareOfCoveredPct": null,
+        "openInterestChange30dPct": null,
+        "tvlUsd": 163265.21776088153,
+        "archivedFundamentals": false,
+        "venue": null,
+        "firstObservedAt": "2026-09-09T13:34:39.303Z",
+        "verifiedMilestoneAt": null
+      },
+      {
+        "protocolId": "115",
+        "slug": "synthetix-v1+v2",
+        "stage": "unknown",
+        "openInterestUsd": 0,
+        "openInterestShareOfCoveredPct": 0,
+        "openInterestChange30dPct": null,
+        "tvlUsd": 1789.2176490690797,
+        "archivedFundamentals": false,
+        "venue": null,
+        "firstObservedAt": "2026-09-09T13:34:39.303Z",
+        "verifiedMilestoneAt": null
+      },
+      {
+        "protocolId": "138",
+        "slug": "hakka-finance",
+        "stage": "provider-linked-token",
+        "openInterestUsd": null,
+        "openInterestShareOfCoveredPct": null,
+        "openInterestChange30dPct": null,
+        "tvlUsd": 5400953.7316915365,
+        "archivedFundamentals": false,
+        "venue": null,
+        "firstObservedAt": "2026-09-09T13:34:39.303Z",
+        "verifiedMilestoneAt": null
+      },
+      {
+        "protocolId": "144",
+        "slug": "dydx-v3",
+        "stage": "unknown",
+        "openInterestUsd": null,
+        "openInterestShareOfCoveredPct": null,
+        "openInterestChange30dPct": null,
+        "tvlUsd": 38739653.71558771,
+        "archivedFundamentals": false,
+        "venue": null,
+        "firstObservedAt": "2026-09-09T13:34:39.303Z",
+        "verifiedMilestoneAt": null
+      },
+      {
+        "protocolId": "1517",
+        "slug": "domination-finance",
+        "stage": "unknown",
+        "openInterestUsd": null,
+        "openInterestShareOfCoveredPct": null,
+        "openInterestChange30dPct": null,
+        "tvlUsd": 237892.56367136,
+        "archivedFundamentals": false,
+        "venue": null,
+        "firstObservedAt": "2026-09-09T13:34:39.303Z",
+        "verifiedMilestoneAt": null
+      },
+      {
+        "protocolId": "1521",
+        "slug": "horizon-protocol",
+        "stage": "unknown",
+        "openInterestUsd": null,
+        "openInterestShareOfCoveredPct": null,
+        "openInterestChange30dPct": null,
+        "tvlUsd": 233311.90696408256,
+        "archivedFundamentals": false,
+        "venue": null,
+        "firstObservedAt": "2026-09-09T13:34:39.303Z",
+        "verifiedMilestoneAt": null
+      },
+      {
+        "protocolId": "1531",
+        "slug": "01",
+        "stage": "unknown",
+        "openInterestUsd": null,
+        "openInterestShareOfCoveredPct": null,
+        "openInterestChange30dPct": null,
+        "tvlUsd": 112201.29801293106,
+        "archivedFundamentals": false,
+        "venue": null,
+        "firstObservedAt": "2026-09-09T13:34:39.303Z",
+        "verifiedMilestoneAt": null
+      },
+      {
+        "protocolId": "1548",
+        "slug": "chaotic-finance",
+        "stage": "provider-linked-token",
+        "openInterestUsd": null,
+        "openInterestShareOfCoveredPct": null,
+        "openInterestChange30dPct": null,
+        "tvlUsd": 0,
+        "archivedFundamentals": false,
+        "venue": null,
+        "firstObservedAt": "2026-09-09T13:34:39.303Z",
+        "verifiedMilestoneAt": null
+      }
+    ],
+    "gatedVolume": "Reported and normalized perp volume — and therefore volume market share and its 30D change — stay unavailable: the free endpoints returned HTTP 402."
+  },
+  "listings": {
+    "methodologyVersion": "perp-listings:v1",
+    "lifecycle": {
+      "baselineInstruments": 517,
+      "newListings": 0,
+      "relistings": 0,
+      "delistings": 0,
+      "venueDelistedMarkets": 201,
+      "absentFromLatestCatalog": 0,
+      "verifiedUnderlyings": 4,
+      "withOrderBook": 1,
+      "evidence": "Listing, relisting and delisting events come from the immutable archived event log. The first ingestion of each namespace is recorded as a baseline so existing markets never raise listing alerts. A market already carrying the venue delisting flag at that baseline is counted as a delisted market, not as a delisting event this archive observed."
+    },
+    "screen": {
+      "applied": "new",
+      "windowDays": 30,
+      "underlying": "verified",
+      "matched": 517,
+      "selected": 0,
+      "returned": 0,
+      "excluded": {
+        "baseline": 517,
+        "unresolvedUnderlying": 513,
+        "unresolvedUnderlyingOutsideNative": 283,
+        "delisted": 201,
+        "absentFromLatestCatalog": 0
+      },
+      "rule": "The default screen shows markets this archive first observed inside the window, relisted, or returned to the catalog, with a verified crypto underlying or the venue’s native namespace, and still present in the latest archived catalog. Baseline markets, delisted markets, markets absent from the latest catalog and unresolved non-native underlyings are excluded and counted, never deleted."
+    },
+    "newListingRows": [],
+    "namespaces": [
+      {
+        "namespace": "native",
+        "instruments": 234,
+        "active": 178,
+        "covered": true,
+        "verifiedUnderlyings": 4
+      },
+      {
+        "namespace": "xyz",
+        "instruments": 119,
+        "active": 104,
+        "covered": true,
+        "verifiedUnderlyings": 0
+      },
+      {
+        "namespace": "para",
+        "instruments": 35,
+        "active": 25,
+        "covered": true,
+        "verifiedUnderlyings": 0
+      },
+      {
+        "namespace": "hyna",
+        "instruments": 25,
+        "active": 0,
+        "covered": true,
+        "verifiedUnderlyings": 0
+      },
+      {
+        "namespace": "km",
+        "instruments": 23,
+        "active": 0,
+        "covered": true,
+        "verifiedUnderlyings": 0
+      },
+      {
+        "namespace": "mkts",
+        "instruments": 23,
+        "active": 4,
+        "covered": true,
+        "verifiedUnderlyings": 0
+      },
+      {
+        "namespace": "cash",
+        "instruments": 17,
+        "active": 0,
+        "covered": true,
+        "verifiedUnderlyings": 0
+      },
+      {
+        "namespace": "flx",
+        "instruments": 16,
+        "active": 0,
+        "covered": true,
+        "verifiedUnderlyings": 0
+      },
+      {
+        "namespace": "vntl",
+        "instruments": 15,
+        "active": 0,
+        "covered": true,
+        "verifiedUnderlyings": 0
+      },
+      {
+        "namespace": "io",
+        "instruments": 9,
+        "active": 5,
+        "covered": true,
+        "verifiedUnderlyings": 0
+      },
+      {
+        "namespace": "abcd",
+        "instruments": 1,
+        "active": 0,
+        "covered": true,
+        "verifiedUnderlyings": 0
+      }
+    ],
+    "withOrderBook": 1,
+    "verifiedUnderlyings": [
+      {
+        "instrument": "BTC",
+        "assetId": "bitcoin",
+        "openInterestNative": 35971.70398,
+        "estimatedOpenInterestQuote": 2798706484.75594,
+        "premiumBps": -4.4965184100309585,
+        "fundingIntervalSeconds": 3600,
+        "liquiditySource": "archived order book",
+        "spotSamples": 366,
+        "relativeToBtc7d": 0
+      },
+      {
+        "instrument": "ETH",
+        "assetId": "ethereum",
+        "openInterestNative": 953430.7588000001,
+        "estimatedOpenInterestQuote": 2347346528.1656003,
+        "premiumBps": -4.628238752161229,
+        "fundingIntervalSeconds": 3600,
+        "liquiditySource": "impact prices only",
+        "spotSamples": 366,
+        "relativeToBtc7d": 1.910215615290367
+      },
+      {
+        "instrument": "HYPE",
+        "assetId": "hyperliquid",
+        "openInterestNative": 22484132.039999995,
+        "estimatedOpenInterestQuote": 1856177520.5621998,
+        "premiumBps": -4.600874166090785,
+        "fundingIntervalSeconds": 3600,
+        "liquiditySource": "impact prices only",
+        "spotSamples": 366,
+        "relativeToBtc7d": 0.7258538386479163
+      },
+      {
+        "instrument": "SOL",
+        "assetId": "solana",
+        "openInterestNative": 5459793.4799999995,
+        "estimatedOpenInterestQuote": 551166151.806,
+        "premiumBps": -4.950495049504955,
+        "fundingIntervalSeconds": 3600,
+        "liquiditySource": "impact prices only",
+        "spotSamples": 366,
+        "relativeToBtc7d": -0.10116185676399825
+      }
+    ]
+  },
+  "alerts": {
+    "count": 0,
+    "unavailable": true,
+    "entries": []
+  },
+  "quota": [
+    {
+      "provider_id": "defillama",
+      "requests_this_month": 23,
+      "remaining_requests": 3977
+    },
+    {
+      "provider_id": "hyperliquid",
+      "requests_this_month": 166,
+      "remaining_requests": 49834
+    }
+  ],
+  "limitations": [
+    "Covered open interest follows the DefiLlama convention that counts both sides of each contract and is never merged with venue-native open interest.",
+    "Reported and normalized perp volume, and therefore volume market share, stay gated at HTTP 402.",
+    "No free feed publishes protocol or token launch dates, so every project entry is undated and the 180-day early filter selects nothing.",
+    "Instrument asset class is unknown unless a curated underlying link exists; non-native namespaces are mostly equities, indices, FX and commodities and stay out of the default screen.",
+    "Order-book spread, depth and impact exist only for the single archived native BTC book.",
+    "Listing counts are archive detections, not venue trading-start dates, and the first ingestion of each namespace is a baseline.",
+    "Acquisition remains locally supervised; an always-on host is still outstanding."
+  ]
+}

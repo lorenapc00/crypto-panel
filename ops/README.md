@@ -31,6 +31,11 @@ container or its volume. `node --env-file-if-exists=.env ops/verify-local.mjs --
 verifies recovery and saves a health report in `.reports`. If activation fails,
 fix the reported error and rerun it; inspect the worker heartbeat before assuming
 collection resumed.
+Stage acceptance scripts are read-only and write dated evidence under
+`docs/data`: `ops/verify-btc.mjs`, `ops/verify-btc-context.mjs`,
+`ops/verify-overview.mjs` and `ops/verify-perp.mjs`. Each calls the local API,
+checks that an uncovered replay cutoff is refused, and fails loudly instead of
+writing a report.
 To stop a service, use `launchctl bootout gui/$(id -u)/local.cryptopanel.worker`
 (or `local.cryptopanel.backup`). Remove only these two named plist files from
 `~/Library/LaunchAgents` to uninstall; this does not delete the archive.

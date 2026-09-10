@@ -176,3 +176,17 @@ successful current acquisition does not fill or conceal provider history gaps.
 Stage 2's BTC core, signal-study primitive and venue/capital context are implemented. The 2026-09-09 local follow-up verified the stablecoin history and current catalog separately: 3,208 daily response rows, with 3,207 completed dates retained, and 337 USD-pegged catalog assets from 425 returned assets. Both daily jobs share the quota ledger. There are now 123 jobs and 21 normalized series. Historical constituents remain unavailable, and current catalog membership is not substituted for the historical denominator. [Probe evidence](capability-capital-2026-09-09.json), [production evidence](stage2-context-2026-09-09.json), [methods](BTC_RESEARCH.md#venue-leverage-and-capital-context).
 
 The native BTC venue view keeps OI in BTC and estimated notional in documented USDT price units with USDC collateral; it does not infer a USD conversion. Sampled and settled hourly funding remain separate. Stage 3 Market Overview is next. Perp-volume market-share sorting and inaccessible metrics remain excluded from initial interface commitments.
+
+Stage 4 perp discovery is implemented on top of these recorded results. The previously
+reserved `/overview/open-interest` slot is now a daily acquisition: on 2026-09-10 it
+archived 127 covered protocols and 2,023 completed daily aggregate values from
+2021-02-25, taking the provider total to 124 jobs and 22 normalized series. The
+provider convention counts both sides of each contract, so this series is never merged
+with the venue-native open interest the Hyperliquid adapter archives in underlying
+units. `/overview/derivatives` and `/summary/derivatives/hyperliquid` remain at
+HTTP 402, so reported and normalized perp volume, volume market share and its 30D
+change stay gated, and no connected free feed publishes protocol or token launch dates.
+Of the 517 archived Hyperliquid markets, only four have a curated, verified crypto
+underlying; the venue publishes no asset-class or pre-market field, and the non-native
+namespaces are largely equities, indices, FX and commodities. [Perp methods](PERP_DISCOVERY.md),
+[production evidence](stage4-perp-2026-09-10.json).

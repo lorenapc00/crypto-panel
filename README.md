@@ -89,7 +89,7 @@ and legacy upgrades, rollback, concurrent migrations, immutable revisions,
 cutoff replay, scope checks, and populated stale-history refresh. One-off price
 backfills are labeled historical reconstruction; they do not create production
 replay coverage. Repository `asOf` reads reject dates without declared coverage.
-Validation through Stage 3 Market Overview passes 74 unit/capability checks, 39 PostgreSQL cases and ten
+Validation through Stage 4 perp discovery passes 80 unit/capability checks, 44 PostgreSQL cases and thirteen
 browser scenarios. Browser fixtures use a separate temporary schema and ports
 3101/5175; they do not add research records to the personal workspace.
 
@@ -171,7 +171,25 @@ reads only stored data and accepts a guarded `asOf`; a feed whose coverage start
 after the cutoff is refused for its own block instead of being reconstructed. See
 [Market Overview methodology](docs/data/MARKET_OVERVIEW.md) and
 [dated execution evidence](docs/data/stage3-overview-2026-09-10.json).
-Stage 4 perp discovery interfaces are next.
+
+Open **Perp Discovery** for the two perp research views. *Perp DEX Projects*
+composes the DefiLlama `Derivatives` catalog and the covered open-interest
+universe with per-protocol open interest, share of that covered universe,
+recomputed 7D/30D changes, catalog TVL, trailing 30-day fees and revenue for
+individually verified protocols, curated venue links, why-watch reasons,
+contradictory evidence and risk flags. *New Perp Listings* tracks the archived
+Hyperliquid catalogs: listing classification, time since first observation,
+native open-interest units with an estimated quote notional, funding and its
+settlement interval, mark/oracle premium, order-book spread and impact where a
+book is archived, and underlying spot returns versus BTC for verified links only.
+A first catalog ingestion is a baseline, never a listing, and lifecycle alerts
+derive from the immutable event log, so acknowledging one cannot change its
+evidence. Reported perp volume, volume market share, protocol and token launch
+dates and token terms stay visibly gated. `GET /api/v1/perp/projects`,
+`GET /api/v1/perp/listings` and `GET /api/v1/perp/alerts` read only stored data
+and accept a guarded `asOf`. See [perp methodology](docs/data/PERP_DISCOVERY.md)
+and [dated execution evidence](docs/data/stage4-perp-2026-09-10.json).
+Stage 5 broader altcoin research is next.
 
 See [archive operation and restore procedures](ops/README.md) for local Mac
 supervision, a Linux service template and seven-copy daily backup retention.
