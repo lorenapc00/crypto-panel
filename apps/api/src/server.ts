@@ -6,6 +6,7 @@ import { send, authorize, cutoff } from "./http.js";
 import { researchRoute } from "./research/routes.js";
 import { btcRoute } from "./btc/routes.js";
 import { perpRoute } from "./perp/routes.js";
+import { altcoinRoute } from "./altcoin/routes.js";
 import { readSeries } from "./archive.js";
 import { assetDetails, marketData, marketOverview } from "./market.js";
 import { fundamentals } from "./fundamentals.js";
@@ -25,6 +26,7 @@ return createServer({requestTimeout:15000,headersTimeout:10000},async (req, res)
     if (await researchRoute(database,req,res,url)) return;
     if (await btcRoute(database,req,res,url)) return;
     if (await perpRoute(database,req,res,url)) return;
+    if (await altcoinRoute(database,req,res,url)) return;
     if (req.method !== 'GET') return send(res,405,{error:'Method not allowed'});
     if (url.pathname === '/api/v1/series') {
       const assetId=url.searchParams.get('asset'),metric=url.searchParams.get('metric'),interval=url.searchParams.get('interval');

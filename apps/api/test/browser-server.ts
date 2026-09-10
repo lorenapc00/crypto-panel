@@ -19,8 +19,10 @@ const database=new Pool({connectionString:process.env.TEST_DATABASE_URL,options:
 await admin.query(`create schema ${schema}`);
 await migrate(database);
 const instrumentsJob=discoveryJobs.find(j=>j.id==='hyperliquid:instruments:native:v1')!;
+const solanaPoolsJob=discoveryJobs.find(j=>j.id==='geckoterminal:pools:solana:v1')!;
+const basePoolsJob=discoveryJobs.find(j=>j.id==='geckoterminal:pools:base:v1')!;
 const jobs=[...snapshotJobs.filter(j=>[marketDataset,globalDataset].includes(j.id)),historyJobs[0],btcHistoryJob,
-  ...capitalJobs,instrumentsJob,venueJobs[0],venueJobs[1],
+  ...capitalJobs,instrumentsJob,venueJobs[0],venueJobs[1],solanaPoolsJob,basePoolsJob,
   discoveryJobs.find(j=>j.id==='defillama:protocols:v1')!,discoveryJobs.find(j=>j.id==='hyperliquid:namespaces:v1')!,...perpJobs];
 await configureWorker(database,jobs);
 const midnight=Math.floor(Date.now()/86400000)*86400000;
@@ -52,7 +54,13 @@ for(const job of [...jobs,snapshotJobs.find(j=>j.id===globalDataset)!,instrument
         chains:['Hyperliquid L1'],parentProtocol:'parent#hyperliquid',module:'hyperliquid-perp-oi',
         total24h:14000000000,total7DaysAgo:13000000000,total30DaysAgo:10000000000,change_1d:0.5}]}:
     job.kind==='book'?{coin:'BTC',time:Date.now()-60000,levels:[[{px:'59990',sz:'2'}],[{px:'60010',sz:'2'}]]}:
-    job.kind==='funding'?[{coin:'BTC',time:Date.now()-1000,fundingRate:'0.000025'}]:payload;
+    job.kind==='funding'?[{coin:'BTC',time:Date.now()-1000,fundingRate:'0.000025'}]:
+    job.id==='geckoterminal:pools:solana:v1'?{data:[
+      {id:'solana_PoolAeCoreEmergentToken00000000000000000001',attributes:{address:'PoolAeCoreEmergentToken00000000000000000001',name:'DEEPWORK / SOL',pool_created_at:new Date(midnight).toISOString(),reserve_in_usd:180000,volume_usd:{h24:520000},transactions:{h24:{buys:140,sells:60}}},relationships:{base_token:{data:{id:'solana_DeepWorkTokenMint000000000000000000000001'}},quote_token:{data:{id:'solana_So11111111111111111111111111111111111111112'}}}},
+      {id:'solana_PoolBeSecondaryDeepWorkPair0000000000000002',attributes:{address:'PoolBeSecondaryDeepWorkPair0000000000000002',name:'DEEPWORK / USDC',pool_created_at:new Date(midnight).toISOString(),reserve_in_usd:40000,volume_usd:{h24:90000},transactions:{h24:{buys:20,sells:15}}},relationships:{base_token:{data:{id:'solana_DeepWorkTokenMint000000000000000000000001'}},quote_token:{data:{id:'solana_EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'}}}},
+      {id:'solana_PoolCeThinLaunchLiquidityPair000000000003',attributes:{address:'PoolCeThinLaunchLiquidityPair000000000003',name:'THINCOIN / SOL',pool_created_at:new Date(midnight).toISOString(),reserve_in_usd:12000,volume_usd:{h24:3000},transactions:{h24:{buys:4,sells:9}}},relationships:{base_token:{data:{id:'solana_ThinCoinMint00000000000000000000000000002'}},quote_token:{data:{id:'solana_So11111111111111111111111111111111111111112'}}}}]}:
+    job.id==='geckoterminal:pools:base:v1'?{data:[
+      {id:'base_0x00000000000000000000000000000000000000a1',attributes:{address:'0x00000000000000000000000000000000000000A1',name:'BASEGEM / WETH',pool_created_at:new Date(midnight).toISOString(),reserve_in_usd:null,volume_usd:{h24:15000},transactions:{h24:{buys:8,sells:8}}},relationships:{base_token:{data:{id:'base_0x00000000000000000000000000000000000000b2'}},quote_token:{data:{id:'base_0x4200000000000000000000000000000000000006'}}}}]}:payload;
   const result=await executeRun(database,run,job,async()=>new Response(JSON.stringify(contextPayload)));
   if(result.status!=='succeeded')throw new Error(`Fixture failed: ${job.id} ${result.status}`);
 }

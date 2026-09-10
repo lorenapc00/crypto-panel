@@ -89,8 +89,8 @@ and legacy upgrades, rollback, concurrent migrations, immutable revisions,
 cutoff replay, scope checks, and populated stale-history refresh. One-off price
 backfills are labeled historical reconstruction; they do not create production
 replay coverage. Repository `asOf` reads reject dates without declared coverage.
-Validation through Stage 4 perp discovery passes 80 unit/capability checks, 44 PostgreSQL cases and thirteen
-browser scenarios. Browser fixtures use a separate temporary schema and ports
+Validation through Stage 5 broader altcoin research passes 86 unit/capability checks, 52 PostgreSQL cases and
+fifteen browser scenarios. Browser fixtures use a separate temporary schema and ports
 3101/5175; they do not add research records to the personal workspace.
 
 ## Fundamentals and tokenomics
@@ -189,7 +189,27 @@ dates and token terms stay visibly gated. `GET /api/v1/perp/projects`,
 `GET /api/v1/perp/listings` and `GET /api/v1/perp/alerts` read only stored data
 and accept a guarded `asOf`. See [perp methodology](docs/data/PERP_DISCOVERY.md)
 and [dated execution evidence](docs/data/stage4-perp-2026-09-10.json).
-Stage 5 broader altcoin research is next.
+
+Open **Altcoin Discovery** for the two broader research views. *Emerging
+Projects* composes the archived CoinGecko tracked page with the four priority
+daily price and volume series: BTC-relative 7D/30D/90D returns, 30D/90D realized
+volatility, maximum drawdown with recovery, BTC correlation and beta, a 30-day
+volume median and 7-over-30 acceleration, and supply/FDV dilution. Every research
+default reports pass, fail or unknown separately, an unknown check is never a
+pass, and stablecoins, tokenized funds, commodity-backed tokens and wrapped
+duplicates are excluded through curated immutable rows while a peg-catalog symbol
+collision is only flagged. The 40/30/30 Attention percentile score stays out of
+prime interface space with its unvalidated-v0 caveat. *Spot Launches* composes
+the Solana and Base new-pool samples with DEX Screener pair and promotion
+enrichment: tokens are deduplicated by chain and contract across every pool ever
+sampled so a later pool never makes an old token new, unknown pool liquidity
+stays unknown and off the default shortlist, and paid boosts are labelled
+promotion. The 1,000-asset universe expansion, verified launch dates, token value
+capture and sector-peer comparison stay visibly gated. `GET /api/v1/altcoin/emerging`
+and `GET /api/v1/altcoin/launches` read only stored data and accept a guarded
+`asOf`. See [altcoin methodology](docs/data/ALTCOIN_DISCOVERY.md) and
+[dated execution evidence](docs/data/stage5-altcoin-2026-09-10.json).
+Stage 6 Backtest Lab and expanded evidence is next.
 
 See [archive operation and restore procedures](ops/README.md) for local Mac
 supervision, a Linux service template and seven-copy daily backup retention.

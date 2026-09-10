@@ -1,0 +1,541 @@
+{
+  "checkedAt": "2026-09-10T22:45:03.104Z",
+  "scope": "Local supervised Mac; continuous hosting remains unverified",
+  "migration": 11,
+  "endpointStatus": {
+    "emerging": 200,
+    "launches": 200
+  },
+  "replayCutoff": "2026-09-10T22:43:00.324Z",
+  "replayBeforeCoverageStatus": 409,
+  "replay": {
+    "emergingClassification": "point-in-time",
+    "emergingRefusals": [],
+    "emergingTracked": 100,
+    "launchesClassification": "point-in-time",
+    "launchesRefusals": [],
+    "launchesTokens": 5279
+  },
+  "emerging": {
+    "methodologyVersion": "emerging-projects:v1",
+    "universe": {
+      "scope": "The archived CoinGecko tracked page, which is the provider’s first rank-selected 100 assets. The budgeted 1,000-asset acquisition universe stays gated on verified Demo access, so this is the tail of the top 100, not the $10M–$2B market-cap band.",
+      "tracked": 100,
+      "eligible": 0,
+      "filtered": 100,
+      "returned": 100,
+      "withArchivedPrices": 4,
+      "withNinetyDayHistory": 4,
+      "withMedianVolume": 4,
+      "curatedExclusions": 26,
+      "pegSymbolMatches": 3,
+      "unknownChecks": {
+        "marketCap": 0,
+        "history": 96,
+        "medianVolume": 96
+      },
+      "failedChecks": {
+        "marketCap": 44,
+        "history": 0,
+        "medianVolume": 0,
+        "identity": 26
+      },
+      "expansion": "The budgeted expansion to 1,000 rank-selected assets stays gated on verified CoinGecko Demo access. Until it is enabled, the eligible universe is the tail of the archived tracked page and is not a survey of the $10M–$2B band.",
+      "youngProjects": "A young-projects filter needs verified asset launch dates. No connected free feed publishes them for listed spot assets, so the filter is not offered and no asset is labelled newly launched from its archived history alone. Overlooked older projects stay fully discoverable through the all-tracked-assets screen."
+    },
+    "attention": {
+      "label": "Attention",
+      "prime": false,
+      "ranked": 0,
+      "unranked": 100,
+      "population": {
+        "excess90d": 0,
+        "excess30d": 0,
+        "volumeAcceleration": 0
+      },
+      "weights": {
+        "excess90d": 0.4,
+        "excess30d": 0.3,
+        "volumeAcceleration": 0.3
+      }
+    },
+    "benchmark": {
+      "assetId": "bitcoin",
+      "returns": {
+        "d7": 1.2755026680656867,
+        "d30": 22.47858602537438,
+        "d90": 23.1724416691524
+      },
+      "archivedSamples": 366,
+      "replayRefused": false
+    },
+    "coverage": {
+      "market": {
+        "observedAt": "2026-09-10T22:00:25.810Z",
+        "stale": false,
+        "replayCoverageStart": "2026-09-10T01:00:39.459Z"
+      },
+      "pegCatalog": {
+        "observedAt": "2026-09-10T02:52:24.789Z"
+      },
+      "dailyHistories": {
+        "assets": 4,
+        "replayRefused": false,
+        "scope": "Only the priority assets whose daily price and volume series are already archived carry archive-computed returns, risk and volume screens."
+      }
+    },
+    "sectors": {
+      "status": "gated",
+      "classified": 9,
+      "tracked": 100,
+      "note": "Sector comparison stays gated at curated classification coverage. No sector-relative return, multiple or peer ranking is computed from ten prototype mappings."
+    },
+    "sampleRows": [
+      {
+        "symbol": "HYPE",
+        "marketCapUsd": 17851543809,
+        "eligible": false,
+        "blockedBy": [
+          "marketCap:fail"
+        ],
+        "historyDays": 366,
+        "rel30": 23.949627565648,
+        "vol90": 75.64514515452579,
+        "dd90": -29.093647916585397,
+        "beta": 1.266376626836778,
+        "medVol30": 1043034453.8213938,
+        "fdvRatio": 4.294562758283624,
+        "attention": null,
+        "identityExcluded": false,
+        "identityReason": null,
+        "pegSymbolMatch": null
+      },
+      {
+        "symbol": "SOL",
+        "marketCapUsd": 58514694416,
+        "eligible": false,
+        "blockedBy": [
+          "marketCap:fail"
+        ],
+        "historyDays": 366,
+        "rel30": 9.22308318929812,
+        "vol90": 51.916381256874836,
+        "dd90": -12.634524075191322,
+        "beta": 1.1365096610099399,
+        "medVol30": 3203278777.7988653,
+        "fdvRatio": 1.0810037036902638,
+        "attention": null,
+        "identityExcluded": false,
+        "identityReason": null,
+        "pegSymbolMatch": null
+      },
+      {
+        "symbol": "ETH",
+        "marketCapUsd": 300089075588,
+        "eligible": false,
+        "blockedBy": [
+          "marketCap:fail"
+        ],
+        "historyDays": 366,
+        "rel30": 7.655457309690039,
+        "vol90": 52.632021457431264,
+        "dd90": -12.75514934230233,
+        "beta": 1.2857111534505186,
+        "medVol30": 12275883100.345896,
+        "fdvRatio": 1,
+        "attention": null,
+        "identityExcluded": false,
+        "identityReason": null,
+        "pegSymbolMatch": null
+      },
+      {
+        "symbol": "BTC",
+        "marketCapUsd": 1548680314741,
+        "eligible": false,
+        "blockedBy": [
+          "marketCap:fail"
+        ],
+        "historyDays": 366,
+        "rel30": 0,
+        "vol90": 36.16855903219108,
+        "dd90": -11.655027416279307,
+        "beta": 1,
+        "medVol30": 29075925278.7212,
+        "fdvRatio": 1,
+        "attention": null,
+        "identityExcluded": false,
+        "identityReason": null,
+        "pegSymbolMatch": null
+      },
+      {
+        "symbol": "USDT",
+        "marketCapUsd": 183410605453,
+        "eligible": false,
+        "blockedBy": [
+          "marketCap:fail",
+          "history:unknown",
+          "medianVolume:unknown",
+          "identity:fail"
+        ],
+        "historyDays": 0,
+        "rel30": null,
+        "vol90": null,
+        "dd90": null,
+        "beta": null,
+        "medVol30": null,
+        "fdvRatio": 1.0297989793583695,
+        "attention": null,
+        "identityExcluded": true,
+        "identityReason": "stablecoin",
+        "pegSymbolMatch": null
+      },
+      {
+        "symbol": "BNB",
+        "marketCapUsd": 95108385743,
+        "eligible": false,
+        "blockedBy": [
+          "marketCap:fail",
+          "history:unknown",
+          "medianVolume:unknown"
+        ],
+        "historyDays": 0,
+        "rel30": null,
+        "vol90": null,
+        "dd90": null,
+        "beta": null,
+        "medVol30": null,
+        "fdvRatio": 1.000000007360024,
+        "attention": null,
+        "identityExcluded": false,
+        "identityReason": null,
+        "pegSymbolMatch": null
+      },
+      {
+        "symbol": "XRP",
+        "marketCapUsd": 84793530654,
+        "eligible": false,
+        "blockedBy": [
+          "marketCap:fail",
+          "history:unknown",
+          "medianVolume:unknown"
+        ],
+        "historyDays": 0,
+        "rel30": null,
+        "vol90": null,
+        "dd90": null,
+        "beta": null,
+        "medVol30": null,
+        "fdvRatio": 1.5935360064833655,
+        "attention": null,
+        "identityExcluded": false,
+        "identityReason": null,
+        "pegSymbolMatch": null
+      },
+      {
+        "symbol": "USDC",
+        "marketCapUsd": 74137065208,
+        "eligible": false,
+        "blockedBy": [
+          "marketCap:fail",
+          "history:unknown",
+          "medianVolume:unknown",
+          "identity:fail"
+        ],
+        "historyDays": 0,
+        "rel30": null,
+        "vol90": null,
+        "dd90": null,
+        "beta": null,
+        "medVol30": null,
+        "fdvRatio": 0.9999701179566013,
+        "attention": null,
+        "identityExcluded": true,
+        "identityReason": "stablecoin",
+        "pegSymbolMatch": null
+      },
+      {
+        "symbol": "TRX",
+        "marketCapUsd": 32278182667,
+        "eligible": false,
+        "blockedBy": [
+          "marketCap:fail",
+          "history:unknown",
+          "medianVolume:unknown"
+        ],
+        "historyDays": 0,
+        "rel30": null,
+        "vol90": null,
+        "dd90": null,
+        "beta": null,
+        "medVol30": null,
+        "fdvRatio": 1.0000020812200208,
+        "attention": null,
+        "identityExcluded": false,
+        "identityReason": null,
+        "pegSymbolMatch": null
+      },
+      {
+        "symbol": "FIGR_HELOC",
+        "marketCapUsd": 23174852641,
+        "eligible": false,
+        "blockedBy": [
+          "marketCap:fail",
+          "history:unknown",
+          "medianVolume:unknown",
+          "identity:fail"
+        ],
+        "historyDays": 0,
+        "rel30": null,
+        "vol90": null,
+        "dd90": null,
+        "beta": null,
+        "medVol30": null,
+        "fdvRatio": 1,
+        "attention": null,
+        "identityExcluded": true,
+        "identityReason": "tokenized-fund",
+        "pegSymbolMatch": null
+      }
+    ]
+  },
+  "launches": {
+    "methodologyVersion": "spot-launches:v1",
+    "universe": {
+      "scope": "A sampled radar, not a claim to capture every launch. The archive reads the first page of each chain’s new-pool feed — at most 20 pools — every five minutes, so a pool that appears and leaves between two samples is never observed at all.",
+      "tokens": 5279,
+      "filtered": 5279,
+      "returned": 400,
+      "poolsEverSampled": 5741,
+      "withinWindow": 5279,
+      "shortlisted": 93,
+      "unknownLiquidity": 626,
+      "belowMinimumLiquidity": 4560,
+      "multiPoolTokens": 254,
+      "tokensWithLaterPools": 44,
+      "withEnrichment": 40,
+      "withPromotion": 0
+    },
+    "chains": [
+      {
+        "chain": "solana",
+        "tokens": 3633,
+        "shortlisted": 63,
+        "unknownLiquidity": 305,
+        "pools": 3957,
+        "observedAt": "2026-09-10T22:40:12.711Z",
+        "stale": false,
+        "replayCoverageStart": "2026-09-09T13:34:54.030Z"
+      },
+      {
+        "chain": "base",
+        "tokens": 1646,
+        "shortlisted": 30,
+        "unknownLiquidity": 321,
+        "pools": 1784,
+        "observedAt": "2026-09-10T22:40:00.195Z",
+        "stale": true,
+        "replayCoverageStart": "2026-09-09T13:34:41.692Z"
+      }
+    ],
+    "riskGate": {
+      "verifiedChecks": 0,
+      "criticalFlagsResolved": 0,
+      "excludedForCriticalFlags": 0,
+      "rule": "The default shortlist excludes known sell restrictions and unresolved critical risk flags. No free contract check is connected, so no token currently carries a resolved critical flag and this exclusion removes nothing. That is a coverage gap, not a clean bill of health for any token here."
+    },
+    "sampleRows": [
+      {
+        "chain": "solana",
+        "base": "Besbond",
+        "addr": "EGxcHgy4nzDJ1kZ4qia13eL8ikevxR2ePvcEL1GpBAGS",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 99510.8494,
+        "poolsEverSampled": 1,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 65.07936507936508
+      },
+      {
+        "chain": "solana",
+        "base": "OzemPIG",
+        "addr": "F5JR9CpvFYJQWmKZa1Fye98CEbqLczW4wveavzGtpump",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 3866.997,
+        "poolsEverSampled": 1,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 68
+      },
+      {
+        "chain": "solana",
+        "base": "MAXTHEPORN",
+        "addr": "FkUynVvxJB1jzQ5emp7kBqU3vmH2dV2wdtyFR9vUoDJV",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 3387.6464,
+        "poolsEverSampled": 1,
+        "verifiedQuote": false,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 60
+      },
+      {
+        "chain": "solana",
+        "base": "TOTHEMOON",
+        "addr": "6J15pJGtiWTL6kCW9ctZ31SVxscdNTwRjzRCoAYeBAGS",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 3297.0377,
+        "poolsEverSampled": 1,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 100
+      },
+      {
+        "chain": "solana",
+        "base": "SLOP",
+        "addr": "Ad4qNgUrir8x23g5qeD4zoLLzgaWzcVs73Qm71S58TY5",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 3211.0091,
+        "poolsEverSampled": 2,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 33.33333333333333
+      },
+      {
+        "chain": "solana",
+        "base": "USEDCAR",
+        "addr": "9D9qY2bQu9om2J7i4V5NqNydFgUHDGyWztMxEasLW1yd",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 2799.4274,
+        "poolsEverSampled": 1,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 19.54022988505747
+      },
+      {
+        "chain": "solana",
+        "base": "HUNT",
+        "addr": "AK8jr2UJPK6mc758ST881WQoxp8vvj51YMfrjDshpump",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 2424.8386,
+        "poolsEverSampled": 1,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 100
+      },
+      {
+        "chain": "solana",
+        "base": "Juror",
+        "addr": "9uDqHosLKqMDLSeiuhpf8xyqs5LY4y8c9fRuB1EVpump",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 2289.7415,
+        "poolsEverSampled": 1,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 9.090909090909092
+      },
+      {
+        "chain": "solana",
+        "base": "ape",
+        "addr": "CqgZRbrpjTLY4eLCKaaDc5F8QuvLoewFouxAp4i5pump",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 2235.6878,
+        "poolsEverSampled": 1,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 21.428571428571427
+      },
+      {
+        "chain": "solana",
+        "base": "VOC",
+        "addr": "8H7Tte3jN2MjnraaFzNA3ufTb8PEpGFHmhABcSojpump",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 2220.2695,
+        "poolsEverSampled": 1,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 100
+      },
+      {
+        "chain": "solana",
+        "base": "DERP",
+        "addr": "8ncFNyu2zyWmQg7eMULpvcURUybLWmMC4ap2bosWpump",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 468.8103,
+        "poolsEverSampled": 1,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": -5.263157894736842
+      },
+      {
+        "chain": "solana",
+        "base": "TCAT",
+        "addr": "BifUDWQFpbTrSxYXBnqCpAVYgcyQGzHzJk2MDmeM2Gyv",
+        "firstObservedAt": "2026-09-10T22:40:12.711Z",
+        "daysSince": 0,
+        "hasNewerPools": false,
+        "liquidityUsd": 44.2675,
+        "poolsEverSampled": 1,
+        "verifiedQuote": true,
+        "shortlisted": false,
+        "riskStatus": "unknown",
+        "boosts": "unchecked",
+        "buySell": 100
+      }
+    ]
+  },
+  "limitations": [
+    "Emerging Projects cover only the archived CoinGecko tracked page; the budgeted 1,000-asset acquisition universe stays gated on verified Demo access.",
+    "Archive-computed returns, risk and volume screens exist only for the four priority assets whose daily price and volume series are already archived; every other tracked asset reports those checks as unknown, never failed.",
+    "The Attention score is an unvalidated v0 placeholder kept out of prime interface space; no signal study has tested it yet.",
+    "Stablecoins, tokenized funds, commodity-backed tokens and wrapped duplicates are excluded only through curated immutable rows; a peg-catalog symbol collision is flagged for review and never excludes on its own.",
+    "No connected free feed publishes verified asset launch dates, so the young-projects filter is not offered.",
+    "Spot launch discovery is a sampled radar over the first 20 new pools per chain every five minutes; a pool that appears and leaves between samples is never seen.",
+    "Every spot-launch contract check is unknown; no unverified check becomes a passing result and risk status is kept separate from attention.",
+    "No connected free feed publishes a verified token or protocol launch date, so lifecycle first-observation is a detection time, not a launch.",
+    "Token value capture and sector-peer comparison stay gated on verified holder-revenue and asset-sector coverage.",
+    "Acquisition remains locally supervised; an always-on host is still outstanding."
+  ]
+}

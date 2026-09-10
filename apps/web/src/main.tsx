@@ -10,6 +10,7 @@ import { WorkspaceAccess } from "./components/WorkspaceAccess";
 import { BtcCycles } from "./pages/BtcCycles";
 import { MarketOverview } from "./pages/MarketOverview";
 import { PerpDiscovery } from "./pages/PerpDiscovery";
+import { AltcoinDiscovery } from "./pages/AltcoinDiscovery";
 
 type Asset = {
   id: string;
@@ -91,11 +92,12 @@ type AssetDetail = {
   fundamentals: Fundamentals;
   tokenomicsEvents: TokenomicsEvent[];
 };
-type Page = "overview" | "btc" | "perp" | "assets" | "watchlist" | "research" | "data-health";
+type Page = "overview" | "btc" | "perp" | "altcoin" | "assets" | "watchlist" | "research" | "data-health";
 const pages: { id: Page; label: string }[] = [
   { id: "overview", label: "Market Overview" },
   { id: "btc", label: "BTC Cycles" },
   { id: "perp", label: "Perp Discovery" },
+  { id: "altcoin", label: "Altcoin Discovery" },
   { id: "assets", label: "Assets" },
   { id: "watchlist", label: "Watchlist" },
   { id:"research",label:"Research" },
@@ -744,6 +746,7 @@ function App() {
             {page === "research" && <Research />}
             {page === "btc" && <BtcCycles />}
             {page === "perp" && <PerpDiscovery />}
+            {page === "altcoin" && <AltcoinDiscovery />}
             {page === "data-health" && <DataHealth />}
           </>
         )}
