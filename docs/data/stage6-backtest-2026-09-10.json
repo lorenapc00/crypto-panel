@@ -1,0 +1,345 @@
+{
+  "checkedAt": "2026-09-10T23:25:33.119Z",
+  "scope": "Local supervised Mac; continuous hosting remains unverified",
+  "migration": 12,
+  "endpointStatus": {
+    "templates": 200,
+    "createRun": 200,
+    "getRun": 200,
+    "reproducedRun": 200,
+    "deferredTemplate": 422,
+    "replayNoAsOf": 400,
+    "replayBeforeCoverage": 409,
+    "replayCovered": 200
+  },
+  "templates": {
+    "available": [
+      "btc-regime-filter"
+    ],
+    "deferred": [
+      "emerging-attention-basket",
+      "early-launch-event-study",
+      "perp-project-study",
+      "perp-listing-event-study"
+    ],
+    "deferredGate": "Deferred: this study needs point-in-time replay coverage this archive has not yet accumulated. Only BTC price history is backfillable; every altcoin, perp and launch dataset began archiving in stage 1 and is still measured in days.",
+    "coverageSeriesWithReplay": 22,
+    "coverageSeriesTotal": 22,
+    "earliestSeriesCoverage": "2026-09-10T01:36:43.396Z"
+  },
+  "btcRegimeFilter": {
+    "runId": "1b995eac-2a9c-45cc-bf6f-8874c61731e3",
+    "inputHash": "f42430f408efa5be43c18333b96563f78ca32fa63ed390994495145ae0f0584e",
+    "status": "succeeded",
+    "reproduced": {
+      "httpStatus": 200,
+      "reproduced": true,
+      "sameId": true,
+      "sameHash": true
+    },
+    "equityPoints": 5677,
+    "bullishOnly": {
+      "methodologyVersion": "btc-regime-strategy:v1",
+      "window": {
+        "to": "2026-09-09",
+        "from": "2011-02-24",
+        "years": 15.55,
+        "returnDays": 5676,
+        "tradingDays": 5677,
+        "missingCloseDays": 0
+      },
+      "params": {
+        "to": null,
+        "from": null,
+        "costBps": 25,
+        "holdoutPct": 30,
+        "activeRegimes": "bullish"
+      },
+      "strategy": {
+        "days": 5676,
+        "sharpe": 1.365,
+        "cagrPct": 103.15,
+        "sortino": 2.175,
+        "openDrawdown": true,
+        "volatilityPct": 69.78,
+        "maxDrawdownPct": -76.42,
+        "totalReturnPct": 6120028.89
+      },
+      "benchmark": {
+        "days": 5676,
+        "sharpe": 1.284,
+        "cagrPct": 106.52,
+        "sortino": 1.967,
+        "openDrawdown": true,
+        "volatilityPct": 84.53,
+        "maxDrawdownPct": -92.75,
+        "totalReturnPct": 7906871.89
+      },
+      "trades": {
+        "exits": 20,
+        "total": 41,
+        "entries": 21,
+        "exposurePct": 56.7,
+        "turnoverPerYear": 2.64
+      },
+      "costSensitivity": [
+        {
+          "sharpe": 1.365,
+          "cagrPct": 103.15,
+          "costBps": 25,
+          "maxDrawdownPct": -76.42,
+          "totalReturnPct": 6120028.89
+        },
+        {
+          "sharpe": 1.355,
+          "cagrPct": 101.81,
+          "costBps": 50,
+          "maxDrawdownPct": -76.42,
+          "totalReturnPct": 5519595.38
+        },
+        {
+          "sharpe": 1.336,
+          "cagrPct": 99.13,
+          "costBps": 100,
+          "maxDrawdownPct": -76.42,
+          "totalReturnPct": 4486153.56
+        }
+      ],
+      "holdout": {
+        "splitDate": "2022-01-10",
+        "holdoutPct": 30,
+        "inSample": {
+          "strategy": {
+            "days": 3973,
+            "sharpe": 1.605,
+            "cagrPct": 163.54,
+            "sortino": 2.565,
+            "openDrawdown": true,
+            "volatilityPct": 80.7,
+            "maxDrawdownPct": -76.42,
+            "totalReturnPct": 3810097.65
+          },
+          "benchmark": {
+            "days": 3973,
+            "sharpe": 1.508,
+            "cagrPct": 166.07,
+            "sortino": 2.321,
+            "openDrawdown": true,
+            "volatilityPct": 95.38,
+            "maxDrawdownPct": -92.75,
+            "totalReturnPct": 4227698.12
+          }
+        },
+        "outOfSample": {
+          "strategy": {
+            "days": 1703,
+            "sharpe": 0.477,
+            "cagrPct": 10.69,
+            "sortino": 0.723,
+            "openDrawdown": true,
+            "volatilityPct": 31.81,
+            "maxDrawdownPct": -39.44,
+            "totalReturnPct": 60.62
+          },
+          "benchmark": {
+            "days": 1703,
+            "sharpe": 0.518,
+            "cagrPct": 14.36,
+            "sortino": 0.759,
+            "openDrawdown": true,
+            "volatilityPct": 50.66,
+            "maxDrawdownPct": -66.8,
+            "totalReturnPct": 87.02
+          }
+        }
+      },
+      "warnings": [
+        "The strategy equity ends below its running peak; the maximum drawdown is still open."
+      ],
+      "dataset": {
+        "source": "Coin Metrics Community",
+        "seriesId": "coinmetrics:bitcoin:price_usd:daily:v1",
+        "classification": "historical-reconstruction",
+        "lastObservedAt": "2026-09-09T00:00:00.000Z",
+        "completedPrices": 5898,
+        "firstObservedAt": "2010-07-18T00:00:00.000Z",
+        "methodologyVersion": "btc-trend:v1",
+        "replayCoverageStart": "2026-09-10T02:22:58.627Z"
+      }
+    },
+    "bullishAndTransitional": {
+      "methodologyVersion": "btc-regime-strategy:v1",
+      "window": {
+        "to": "2026-09-09",
+        "from": "2011-02-24",
+        "years": 15.55,
+        "returnDays": 5676,
+        "tradingDays": 5677,
+        "missingCloseDays": 0
+      },
+      "params": {
+        "to": null,
+        "from": null,
+        "costBps": 25,
+        "holdoutPct": 30,
+        "activeRegimes": "bullish+transitional"
+      },
+      "strategy": {
+        "days": 5676,
+        "sharpe": 1.33,
+        "cagrPct": 106.75,
+        "sortino": 2.072,
+        "openDrawdown": true,
+        "volatilityPct": 76.98,
+        "maxDrawdownPct": -94.7,
+        "totalReturnPct": 8043035.04
+      },
+      "benchmark": {
+        "days": 5676,
+        "sharpe": 1.284,
+        "cagrPct": 106.52,
+        "sortino": 1.967,
+        "openDrawdown": true,
+        "volatilityPct": 84.53,
+        "maxDrawdownPct": -92.75,
+        "totalReturnPct": 7906871.89
+      },
+      "trades": {
+        "exits": 16,
+        "total": 33,
+        "entries": 17,
+        "exposurePct": 73.9,
+        "turnoverPerYear": 2.12
+      },
+      "costSensitivity": [
+        {
+          "sharpe": 1.33,
+          "cagrPct": 106.75,
+          "costBps": 25,
+          "maxDrawdownPct": -94.7,
+          "totalReturnPct": 8043035.04
+        },
+        {
+          "sharpe": 1.323,
+          "cagrPct": 105.64,
+          "costBps": 50,
+          "maxDrawdownPct": -94.81,
+          "totalReturnPct": 7398622.76
+        },
+        {
+          "sharpe": 1.309,
+          "cagrPct": 103.44,
+          "costBps": 100,
+          "maxDrawdownPct": -95.02,
+          "totalReturnPct": 6256560.89
+        }
+      ],
+      "holdout": {
+        "splitDate": "2022-01-10",
+        "holdoutPct": 30,
+        "inSample": {
+          "strategy": {
+            "days": 3973,
+            "sharpe": 1.474,
+            "cagrPct": 148.27,
+            "sortino": 2.292,
+            "openDrawdown": true,
+            "volatilityPct": 88.41,
+            "maxDrawdownPct": -94.7,
+            "totalReturnPct": 1989495.42
+          },
+          "benchmark": {
+            "days": 3973,
+            "sharpe": 1.508,
+            "cagrPct": 166.07,
+            "sortino": 2.321,
+            "openDrawdown": true,
+            "volatilityPct": 95.38,
+            "maxDrawdownPct": -92.75,
+            "totalReturnPct": 4227698.12
+          }
+        },
+        "outOfSample": {
+          "strategy": {
+            "days": 1703,
+            "sharpe": 0.964,
+            "cagrPct": 34.9,
+            "sortino": 1.528,
+            "openDrawdown": true,
+            "volatilityPct": 38.76,
+            "maxDrawdownPct": -32.08,
+            "totalReturnPct": 304.26
+          },
+          "benchmark": {
+            "days": 1703,
+            "sharpe": 0.518,
+            "cagrPct": 14.36,
+            "sortino": 0.759,
+            "openDrawdown": true,
+            "volatilityPct": 50.66,
+            "maxDrawdownPct": -66.8,
+            "totalReturnPct": 87.02
+          }
+        }
+      },
+      "warnings": [
+        "The strategy equity ends below its running peak; the maximum drawdown is still open."
+      ],
+      "dataset": {
+        "source": "Coin Metrics Community",
+        "seriesId": "coinmetrics:bitcoin:price_usd:daily:v1",
+        "classification": "historical-reconstruction",
+        "lastObservedAt": "2026-09-09T00:00:00.000Z",
+        "completedPrices": 5898,
+        "firstObservedAt": "2010-07-18T00:00:00.000Z",
+        "methodologyVersion": "btc-trend:v1",
+        "replayCoverageStart": "2026-09-10T02:22:58.627Z"
+      }
+    }
+  },
+  "immutability": {
+    "terminalUpdate": "A completed backtest run is immutable",
+    "delete": "backtest_runs is immutable; append a revision instead"
+  },
+  "replayBeforeCoverage": {
+    "asOf": "2020-01-01T00:00:00.000Z",
+    "status": 409,
+    "error": "Historical replay predates production coverage for the BTC regime at this cutoff; no earlier dataset is replayable"
+  },
+  "replayCovered": {
+    "status": 200,
+    "classification": "point-in-time",
+    "marketOverviewRegime": "bullish",
+    "trackedAssets": 100,
+    "emerging": {
+      "tracked": 100,
+      "eligible": 0
+    },
+    "spotLaunches": {
+      "tokens": 5504,
+      "shortlisted": 95
+    },
+    "perpProjects": {
+      "matched": 471,
+      "coveredOpenInterestProtocols": 127
+    },
+    "perpListings": {
+      "matched": 518
+    },
+    "refusals": []
+  },
+  "tests": {
+    "apiUnit": 97,
+    "apiDb": 58,
+    "browser": 17
+  },
+  "limitations": [
+    "Only the BTC regime filter template is built; attention-basket, early-launch and perp studies are listed as deferred and the create route refuses them for lack of point-in-time replay coverage.",
+    "The BTC regime backtest is close-to-close historical reconstruction from archived Coin Metrics revisions; about one full regime cycle is covered, so the result is descriptive, not statistically significant.",
+    "Execution cost is a flat per-side basis-point assumption on each regime switch, reported at 25/50/100 bps; no slippage, spread, market impact or partial-fill model.",
+    "The idle leg is held flat at a 0% return; no Treasury-bill or money-market yield is credited.",
+    "Historical replay is refused before the BTC regime coverage start and per-workspace before each later dataset; for everything except BTC price history this stays a forward-tracking product.",
+    "Expanded on-chain, unlock, ETF and derivatives feeds stay gated exactly as stage 0 left them; nothing became accessible.",
+    "Acquisition remains locally supervised; an always-on host is still outstanding."
+  ]
+}

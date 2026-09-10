@@ -11,6 +11,7 @@ import { BtcCycles } from "./pages/BtcCycles";
 import { MarketOverview } from "./pages/MarketOverview";
 import { PerpDiscovery } from "./pages/PerpDiscovery";
 import { AltcoinDiscovery } from "./pages/AltcoinDiscovery";
+import { BacktestLab } from "./pages/BacktestLab";
 
 type Asset = {
   id: string;
@@ -92,12 +93,13 @@ type AssetDetail = {
   fundamentals: Fundamentals;
   tokenomicsEvents: TokenomicsEvent[];
 };
-type Page = "overview" | "btc" | "perp" | "altcoin" | "assets" | "watchlist" | "research" | "data-health";
+type Page = "overview" | "btc" | "perp" | "altcoin" | "backtest" | "assets" | "watchlist" | "research" | "data-health";
 const pages: { id: Page; label: string }[] = [
   { id: "overview", label: "Market Overview" },
   { id: "btc", label: "BTC Cycles" },
   { id: "perp", label: "Perp Discovery" },
   { id: "altcoin", label: "Altcoin Discovery" },
+  { id: "backtest", label: "Backtest Lab" },
   { id: "assets", label: "Assets" },
   { id: "watchlist", label: "Watchlist" },
   { id:"research",label:"Research" },
@@ -747,6 +749,7 @@ function App() {
             {page === "btc" && <BtcCycles />}
             {page === "perp" && <PerpDiscovery />}
             {page === "altcoin" && <AltcoinDiscovery />}
+            {page === "backtest" && <BacktestLab />}
             {page === "data-health" && <DataHealth />}
           </>
         )}

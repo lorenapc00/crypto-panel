@@ -51,12 +51,12 @@ test('BTC context shows native venue units, separate funding and scoped capital 
   expect((await pending).suggestedFilename()).toContain('stablecoin');
 });
 
-test('BTC trend and studies stay usable when the independent context request fails', async ({ page }) => {
+test('BTC trend stays usable when the independent context request fails', async ({ page }) => {
   await page.route('**/api/v1/btc/context', route => route.fulfill({ status: 503, contentType: 'application/json', body: '{"error":"Unavailable"}' }));
   await page.goto('/#btc');
   await expect(page.getByText('Venue and capital context could not load.', { exact: false })).toBeVisible();
   await expect(page.getByRole('region', { name: 'BTC price and long-term averages', exact: true })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Run study', exact: true })).toBeEnabled();
+  await expect(page.getByRole('link', { name: /Signal studies and strategy backtests moved to Backtest Lab/ })).toBeVisible();
 });
 
 test('venue and capital context stay visible before BTC price acquisition', async ({ page }) => {
@@ -69,7 +69,8 @@ test('venue and capital context stay visible before BTC price acquisition', asyn
 });
 
 test('signal studies show coverage counts, survive reload by saved ID and export frozen evidence', async ({ page }) => {
-  await page.goto('/#btc'); await page.getByLabel('Signal', { exact: true }).selectOption('custom');
+  await page.goto('/#backtest'); await page.getByRole('button', { name: 'Signal study' }).click();
+  await page.getByLabel('Signal', { exact: true }).selectOption('custom');
   await page.getByLabel('Event dates', { exact: true }).fill('2020-05-11, 2024-04-20');
   await page.getByRole('button', { name: 'Run study', exact: true }).click();
   await expect(page.getByText('Immutable inputs and results', { exact: false })).toBeVisible();

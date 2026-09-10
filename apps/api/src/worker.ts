@@ -13,6 +13,7 @@ import { recordSeriesGaps } from './health.js';
 import { btcHistoryJob } from './feeds/bitcoin.js';
 import { capitalJobs } from './feeds/capital.js';
 import { perpJobs } from './feeds/perp.js';
+import { runBacktests } from './backtest/executor.js';
 
 const jobs = [...discoveryJobs, ...snapshotJobs, ...historyJobs, ...venueJobs, ...spotJobs, btcHistoryJob, ...capitalJobs, ...perpJobs];
 const workerId=randomUUID();
@@ -39,6 +40,7 @@ try {
       await pool.query('update worker_heartbeats set last_seen_at=clock_timestamp() where id=$1',[workerId]);
       if(Date.now()-lastHealth>60000){await recordSeriesGaps(pool);lastHealth=Date.now();}
       if (!once) await schedule(pool);
+      await runBacktests(pool).catch(error => console.error(error instanceof Error ? error.message : error));
       const result = await workOne(pool, fetch, jobs);
       if (result) {
         // Routine pacing deferrals are already visible in the database; logging

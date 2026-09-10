@@ -11,6 +11,7 @@ import { capitalJobs } from '../src/feeds/capital.js';
 import { discoveryJobs } from '../src/discovery/providers.js';
 import { venueJobs } from '../src/feeds/venue.js';
 import { perpJobs } from '../src/feeds/perp.js';
+import { runBacktests } from '../src/backtest/executor.js';
 
 if(!process.env.TEST_DATABASE_URL)throw new Error('Browser tests require TEST_DATABASE_URL');
 const schema=`browser_${randomUUID().replaceAll('-','')}`;
@@ -64,9 +65,16 @@ for(const job of [...jobs,snapshotJobs.find(j=>j.id===globalDataset)!,instrument
   const result=await executeRun(database,run,job,async()=>new Response(JSON.stringify(contextPayload)));
   if(result.status!=='succeeded')throw new Error(`Fixture failed: ${job.id} ${result.status}`);
 }
+// Seed one finished BTC regime backtest and keep draining the queue so the
+// Backtest Lab strategy view has a result and newly submitted runs complete.
+await database.query(`insert into backtest_runs (id,template_key,methodology_version,input_hash,input)
+  values (gen_random_uuid(),'btc-regime-filter','btc-regime-strategy:v1','browser-fixture-seed',
+  '{"templateKey":"btc-regime-filter","methodologyVersion":"btc-regime-strategy:v1","params":{"activeRegimes":"bullish","from":null,"to":null,"holdoutPct":30,"costBps":25},"datasetCoverageStart":null}'::jsonb)`);
+await runBacktests(database);
+const backtestPump=setInterval(()=>{void runBacktests(database).catch(()=>{});},500);
 process.env.WEB_ORIGINS='http://127.0.0.1:5175';
 delete process.env.WORKSPACE_TOKEN;
 const server=apiServer(database).listen(3101,'127.0.0.1',()=>console.log('Isolated browser API ready'));
 let stopping=false;
-async function stop(){if(stopping)return;stopping=true;server.close();server.closeAllConnections();await database.end();await admin.query(`drop schema ${schema} cascade`);await admin.end();}
+async function stop(){if(stopping)return;stopping=true;clearInterval(backtestPump);server.close();server.closeAllConnections();await database.end();await admin.query(`drop schema ${schema} cascade`);await admin.end();}
 process.on('SIGTERM',()=>void stop());process.on('SIGINT',()=>void stop());
