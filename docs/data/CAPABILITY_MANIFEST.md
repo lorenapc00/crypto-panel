@@ -44,7 +44,7 @@ Demo history is documented as limited to 365 days; its chart response reports pr
 daily batch for PriceUSD, CapMrktCurUSD, CapMVRVCur and SplyCur, within the existing
 100-request monthly ceiling. The first request archived 5,898 prices through
 2026-09-09; the other three metrics have null latest-day values and retain their
-2026-09-08 populated endpoints. There are now 121 jobs and 20 normalized series.
+2026-09-08 populated endpoints. That core slice brought the worker to 121 jobs and 20 normalized series; the context follow-up below adds two jobs and one series.
 BTC Cycles and immutable descriptive signal studies are implemented. See
 [live evidence](stage2-btc-2026-09-09.json) and [timestamp/formula conventions](BTC_RESEARCH.md).
 The original Stage 0 evidence below is retained unchanged.
@@ -139,7 +139,7 @@ The executable [budget](quota-budget.json) uses a **31-day month**, includes boo
 |---|---|---:|---:|
 | CoinGecko | 4 market pages + global hourly; 4 priority charts + category catalog daily; 1,000 one-time history requests | 4,875 | 6,000 / 1,125 |
 | Coin Metrics | One BTC metric batch daily + initial backfill | 32 | 100 / 68 |
-| DefiLlama | Catalog, OI and stablecoins daily; 4 fundamentals for up to 20 protocols; 4 chain requests | 2,697 | 4,000 / 1,303 |
+| DefiLlama | Protocol catalog, OI, stablecoin history/catalog daily; 4 fundamentals for up to 20 protocols; 4 chain requests | 2,728 | 4,000 / 1,272 |
 | Hyperliquid | Catalog + 11 namespaces + 20 books + 20 short funding queries hourly | 38,688 | 50,000 / 11,312 |
 | GeckoTerminal | First new-pool page on each chain every five minutes | 17,856 | 30,000 / 12,144 |
 | DEX Screener | Profiles/boosts + pair/order checks for 40 selected tokens total, hourly | 61,008 | 80,000 / 18,992 |
@@ -162,7 +162,7 @@ Stage 1 software and local supervision are complete. The remaining operational
 condition is always-on hosting with sustained coverage and a backup copy outside
 the archive machine. The active market feed remains one top-100 page; expanding
 to the 1,000-asset design requires verified Demo access. Broader fundamentals,
-OI/stablecoins, macro and advanced metrics follow their individual gates.
+broad venue OI, macro and advanced metrics follow their individual gates.
 
 Live normalization preserves irregular Hyperliquid TVL timestamps and flags them
 instead of manufacturing daily bars. DEX Screener Base Uniswap v4 pairs can use
@@ -173,4 +173,6 @@ At Stage 1 finalization, of the 16 normalized series, 11 had healthy spacing/cov
 irregular steps. Four of those retain missing historical fee/revenue dates;
 successful current acquisition does not fill or conceal provider history gaps.
 
-Stage 2's BTC core and signal-study primitive are implemented, including Coin Metrics MVRV and matched-date derived realized price. Venue leverage/capital context and other inputs still require their individual definitions and coverage checks. Perp-volume market-share sorting and inaccessible metrics remain excluded from initial interface commitments.
+Stage 2's BTC core, signal-study primitive and venue/capital context are implemented. The 2026-09-09 local follow-up verified the stablecoin history and current catalog separately: 3,208 daily response rows, with 3,207 completed dates retained, and 337 USD-pegged catalog assets from 425 returned assets. Both daily jobs share the quota ledger. There are now 123 jobs and 21 normalized series. Historical constituents remain unavailable, and current catalog membership is not substituted for the historical denominator. [Probe evidence](capability-capital-2026-09-09.json), [production evidence](stage2-context-2026-09-09.json), [methods](BTC_RESEARCH.md#venue-leverage-and-capital-context).
+
+The native BTC venue view keeps OI in BTC and estimated notional in documented USDT price units with USDC collateral; it does not infer a USD conversion. Sampled and settled hourly funding remain separate. Stage 3 Market Overview is next. Perp-volume market-share sorting and inaccessible metrics remain excluded from initial interface commitments.

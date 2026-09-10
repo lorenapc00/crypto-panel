@@ -8,6 +8,7 @@ import { body, cutoff, send } from '../http.js';
 import { InputError, object, uuid } from '../research/validation.js';
 import { BTC_METHOD, DAY, btcTrend, cycleComparisons, type Point } from './calculations.js';
 import { signalStudy, STUDY_METHOD } from './study.js';
+import { btcContext } from './context.js';
 
 export async function btcArchive(database: Pool, asOf?: string) {
   const client = await database.connect();
@@ -108,6 +109,10 @@ export async function createSignalStudy(database: Pool, input: unknown) {
 
 export async function btcRoute(database: Pool, req: IncomingMessage, res: ServerResponse, url: URL) {
   if (!url.pathname.startsWith('/api/v1/btc/') && !url.pathname.startsWith('/api/v1/signal-studies')) return false;
+  if (url.pathname === '/api/v1/btc/context') {
+    if (req.method !== 'GET') { send(res, 405, { error: 'Method not allowed' }); return true; }
+    send(res, 200, await btcContext(database, cutoff(url.searchParams.get('asOf')))); return true;
+  }
   if (url.pathname === '/api/v1/btc/cycles') {
     if (req.method !== 'GET') { send(res, 405, { error: 'Method not allowed' }); return true; }
     const asOf = cutoff(url.searchParams.get('asOf'));

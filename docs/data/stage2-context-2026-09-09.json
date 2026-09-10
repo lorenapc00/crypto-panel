@@ -1,0 +1,606 @@
+{
+  "checkedAt": "2026-09-10T02:53:03.888Z",
+  "scope": "Local supervised Mac; continuous hosting remains unverified",
+  "endpointStatus": 200,
+  "replayBeforeCoverageStatus": 409,
+  "migration": 9,
+  "scheduledJobs": 123,
+  "normalizedSeries": 21,
+  "jobs": [
+    {
+      "id": "defillama:usd-pegged:catalog:v1",
+      "next_run_at": "2026-09-11T00:00:00.000Z",
+      "status": "succeeded",
+      "error": null,
+      "finished_at": "2026-09-10T02:52:24.922Z",
+      "requests": 1
+    },
+    {
+      "id": "defillama:usd-pegged:daily-history:v1",
+      "next_run_at": "2026-09-11T01:00:00.000Z",
+      "status": "succeeded",
+      "error": null,
+      "finished_at": "2026-09-10T02:52:31.692Z",
+      "requests": 1
+    }
+  ],
+  "series": [
+    {
+      "id": "defillama:usd-pegged:stablecoin_supply_usd:daily:v1",
+      "asset_id": null,
+      "scope": "covered_usd_pegged_stablecoins",
+      "revisions": 3207,
+      "dates": 3207,
+      "first": "2017-11-29T00:00:00.000Z",
+      "last": "2026-09-09T00:00:00.000Z"
+    }
+  ],
+  "venue": {
+    "name": "Hyperliquid native BTC perpetual",
+    "openInterest": {
+      "value": 35480.19128,
+      "unit": "BTC",
+      "datasetId": "hyperliquid:instruments:native:v1",
+      "source": "hyperliquid",
+      "scope": "Hyperliquid namespace \"\"",
+      "methodologyVersion": "discovery:v1",
+      "expectedIntervalSeconds": 3600,
+      "membership": "catalog",
+      "mode": "forward tracking",
+      "replayCoverageStart": "2026-09-09T13:35:15.213Z",
+      "observedAt": "2026-09-10T02:00:46.555Z",
+      "recordedAt": "2026-09-10T02:00:46.569Z",
+      "publishedAt": null,
+      "baseline": false,
+      "snapshotId": "217",
+      "payloadId": "236",
+      "coverage": {
+        "venue": "hyperliquid",
+        "funding": "Current rate sample; not settled funding history",
+        "liquidity": "Impact prices are provider samples, not executable depth",
+        "namespace": "",
+        "membership": "Returned catalog only; absence is not proof of delisting",
+        "marginTables": [
+          [
+            50,
+            {
+              "description": "",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 50
+                }
+              ]
+            }
+          ],
+          [
+            51,
+            {
+              "description": "tiered 10x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 10
+                },
+                {
+                  "lowerBound": "3000000.0",
+                  "maxLeverage": 5
+                }
+              ]
+            }
+          ],
+          [
+            52,
+            {
+              "description": "tiered 10x (2)",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 10
+                },
+                {
+                  "lowerBound": "20000000.0",
+                  "maxLeverage": 5
+                }
+              ]
+            }
+          ],
+          [
+            53,
+            {
+              "description": "tiered 20x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 20
+                },
+                {
+                  "lowerBound": "40000000.0",
+                  "maxLeverage": 10
+                }
+              ]
+            }
+          ],
+          [
+            54,
+            {
+              "description": "tiered 20x (2)",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 20
+                },
+                {
+                  "lowerBound": "70000000.0",
+                  "maxLeverage": 10
+                }
+              ]
+            }
+          ],
+          [
+            55,
+            {
+              "description": "tiered 25x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 25
+                },
+                {
+                  "lowerBound": "100000000.0",
+                  "maxLeverage": 15
+                }
+              ]
+            }
+          ],
+          [
+            56,
+            {
+              "description": "tiered 40x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 40
+                },
+                {
+                  "lowerBound": "150000000.0",
+                  "maxLeverage": 20
+                }
+              ]
+            }
+          ]
+        ],
+        "publicationTime": "unknown"
+      },
+      "gaps": [
+        {
+          "first_missing_at": "2026-09-09T14:00:00.000Z",
+          "last_missing_at": "2026-09-10T00:00:00.000Z",
+          "missing_intervals": 11,
+          "detected_at": "2026-09-10T01:00:26.485Z",
+          "reason": "Worker did not schedule these intervals",
+          "detection_latency_seconds": 39626.485134
+        }
+      ],
+      "acquiredAt": "2026-09-10T02:00:46.555Z",
+      "unavailable": false,
+      "stale": false,
+      "intervalSeconds": 3600,
+      "classification": "forward tracking"
+    },
+    "estimatedNotional": {
+      "value": 2768661246.34352,
+      "markPrice": 78034,
+      "unit": "USDT price units",
+      "collateral": "USDC",
+      "formula": "Native OI (BTC) × contemporaneous mark price; counted once; no stablecoin-to-USD conversion",
+      "datasetId": "hyperliquid:instruments:native:v1",
+      "source": "hyperliquid",
+      "scope": "Hyperliquid namespace \"\"",
+      "methodologyVersion": "discovery:v1",
+      "expectedIntervalSeconds": 3600,
+      "membership": "catalog",
+      "mode": "forward tracking",
+      "replayCoverageStart": "2026-09-09T13:35:15.213Z",
+      "observedAt": "2026-09-10T02:00:46.555Z",
+      "recordedAt": "2026-09-10T02:00:46.569Z",
+      "publishedAt": null,
+      "baseline": false,
+      "snapshotId": "217",
+      "payloadId": "236",
+      "coverage": {
+        "venue": "hyperliquid",
+        "funding": "Current rate sample; not settled funding history",
+        "liquidity": "Impact prices are provider samples, not executable depth",
+        "namespace": "",
+        "membership": "Returned catalog only; absence is not proof of delisting",
+        "marginTables": [
+          [
+            50,
+            {
+              "description": "",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 50
+                }
+              ]
+            }
+          ],
+          [
+            51,
+            {
+              "description": "tiered 10x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 10
+                },
+                {
+                  "lowerBound": "3000000.0",
+                  "maxLeverage": 5
+                }
+              ]
+            }
+          ],
+          [
+            52,
+            {
+              "description": "tiered 10x (2)",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 10
+                },
+                {
+                  "lowerBound": "20000000.0",
+                  "maxLeverage": 5
+                }
+              ]
+            }
+          ],
+          [
+            53,
+            {
+              "description": "tiered 20x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 20
+                },
+                {
+                  "lowerBound": "40000000.0",
+                  "maxLeverage": 10
+                }
+              ]
+            }
+          ],
+          [
+            54,
+            {
+              "description": "tiered 20x (2)",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 20
+                },
+                {
+                  "lowerBound": "70000000.0",
+                  "maxLeverage": 10
+                }
+              ]
+            }
+          ],
+          [
+            55,
+            {
+              "description": "tiered 25x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 25
+                },
+                {
+                  "lowerBound": "100000000.0",
+                  "maxLeverage": 15
+                }
+              ]
+            }
+          ],
+          [
+            56,
+            {
+              "description": "tiered 40x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 40
+                },
+                {
+                  "lowerBound": "150000000.0",
+                  "maxLeverage": 20
+                }
+              ]
+            }
+          ]
+        ],
+        "publicationTime": "unknown"
+      },
+      "gaps": [
+        {
+          "first_missing_at": "2026-09-09T14:00:00.000Z",
+          "last_missing_at": "2026-09-10T00:00:00.000Z",
+          "missing_intervals": 11,
+          "detected_at": "2026-09-10T01:00:26.485Z",
+          "reason": "Worker did not schedule these intervals",
+          "detection_latency_seconds": 39626.485134
+        }
+      ],
+      "acquiredAt": "2026-09-10T02:00:46.555Z",
+      "unavailable": false,
+      "stale": false,
+      "intervalSeconds": 3600,
+      "classification": "forward tracking"
+    },
+    "sampledFunding": {
+      "value": 0.0000054292,
+      "unit": "rate per hour",
+      "datasetId": "hyperliquid:instruments:native:v1",
+      "source": "hyperliquid",
+      "scope": "Hyperliquid namespace \"\"",
+      "methodologyVersion": "discovery:v1",
+      "expectedIntervalSeconds": 3600,
+      "membership": "catalog",
+      "mode": "forward tracking",
+      "replayCoverageStart": "2026-09-09T13:35:15.213Z",
+      "observedAt": "2026-09-10T02:00:46.555Z",
+      "recordedAt": "2026-09-10T02:00:46.569Z",
+      "publishedAt": null,
+      "baseline": false,
+      "snapshotId": "217",
+      "payloadId": "236",
+      "coverage": {
+        "venue": "hyperliquid",
+        "funding": "Current rate sample; not settled funding history",
+        "liquidity": "Impact prices are provider samples, not executable depth",
+        "namespace": "",
+        "membership": "Returned catalog only; absence is not proof of delisting",
+        "marginTables": [
+          [
+            50,
+            {
+              "description": "",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 50
+                }
+              ]
+            }
+          ],
+          [
+            51,
+            {
+              "description": "tiered 10x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 10
+                },
+                {
+                  "lowerBound": "3000000.0",
+                  "maxLeverage": 5
+                }
+              ]
+            }
+          ],
+          [
+            52,
+            {
+              "description": "tiered 10x (2)",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 10
+                },
+                {
+                  "lowerBound": "20000000.0",
+                  "maxLeverage": 5
+                }
+              ]
+            }
+          ],
+          [
+            53,
+            {
+              "description": "tiered 20x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 20
+                },
+                {
+                  "lowerBound": "40000000.0",
+                  "maxLeverage": 10
+                }
+              ]
+            }
+          ],
+          [
+            54,
+            {
+              "description": "tiered 20x (2)",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 20
+                },
+                {
+                  "lowerBound": "70000000.0",
+                  "maxLeverage": 10
+                }
+              ]
+            }
+          ],
+          [
+            55,
+            {
+              "description": "tiered 25x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 25
+                },
+                {
+                  "lowerBound": "100000000.0",
+                  "maxLeverage": 15
+                }
+              ]
+            }
+          ],
+          [
+            56,
+            {
+              "description": "tiered 40x",
+              "marginTiers": [
+                {
+                  "lowerBound": "0.0",
+                  "maxLeverage": 40
+                },
+                {
+                  "lowerBound": "150000000.0",
+                  "maxLeverage": 20
+                }
+              ]
+            }
+          ]
+        ],
+        "publicationTime": "unknown"
+      },
+      "gaps": [
+        {
+          "first_missing_at": "2026-09-09T14:00:00.000Z",
+          "last_missing_at": "2026-09-10T00:00:00.000Z",
+          "missing_intervals": 11,
+          "detected_at": "2026-09-10T01:00:26.485Z",
+          "reason": "Worker did not schedule these intervals",
+          "detection_latency_seconds": 39626.485134
+        }
+      ],
+      "acquiredAt": "2026-09-10T02:00:46.555Z",
+      "unavailable": false,
+      "stale": false,
+      "intervalSeconds": 3600,
+      "classification": "forward tracking"
+    },
+    "settledFunding": {
+      "value": -0.000001429,
+      "unit": "rate per hour",
+      "datasetId": "hyperliquid:funding:BTC:v1",
+      "source": "hyperliquid",
+      "scope": "Native BTC historical hourly funding; last two hours",
+      "methodologyVersion": "funding:v1",
+      "expectedIntervalSeconds": 3600,
+      "membership": "sample",
+      "mode": "forward tracking",
+      "replayCoverageStart": "2026-09-10T01:36:53.149Z",
+      "observedAt": "2026-09-10T02:00:00.018Z",
+      "recordedAt": "2026-09-10T02:00:11.980Z",
+      "publishedAt": null,
+      "baseline": false,
+      "snapshotId": "193",
+      "payloadId": "212",
+      "coverage": {
+        "coverage": "Last two hours for the verified native BTC market; overlapping events deduplicate by identity",
+        "publicationTime": "Provider publication time unknown"
+      },
+      "gaps": [],
+      "acquiredAt": "2026-09-10T02:00:11.966Z",
+      "unavailable": false,
+      "stale": false,
+      "intervalSeconds": 7200,
+      "classification": "forward tracking"
+    },
+    "interpretation": "OI measures open exposure on this venue. High OI alone gives no directional signal. Positive funding means longs pay shorts; negative means shorts pay longs. Sampled rates and published settled rates are separate evidence, without annualization or account cash flows.",
+    "limitations": "Single native venue market, not market-wide positioning. BTC prices follow the documented USDT convention with USDC collateral; no USD OI or OI/market-cap ratio is inferred. Provider publication time is unknown.",
+    "sources": [
+      "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/contract-specifications",
+      "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding"
+    ]
+  },
+  "capital": {
+    "latest": {
+      "observedAt": "2026-09-09T00:00:00.000Z",
+      "value": 310410821908,
+      "publishedAt": null,
+      "recordedAt": "2026-09-10T02:52:31.485Z",
+      "payloadId": "324",
+      "change30dPct": 1.4156139304516646,
+      "change30dUsd": 4332881956,
+      "comparisonAt": "2026-08-10T00:00:00.000Z",
+      "comparisonValue": 306077939952
+    },
+    "coverage": {
+      "seriesId": "defillama:usd-pegged:stablecoin_supply_usd:daily:v1",
+      "source": "defillama",
+      "scope": "covered_usd_pegged_stablecoins",
+      "unit": "USD",
+      "intervalSeconds": 86400,
+      "methodologyVersion": "stablecoin-supply:v1",
+      "replayCoverageStart": "2026-09-10T02:52:31.685Z",
+      "classification": "historical-reconstruction",
+      "first": "2017-11-29T00:00:00.000Z",
+      "last": "2026-09-09T00:00:00.000Z",
+      "values": 3207,
+      "missing": 0,
+      "observedAt": "2026-09-09T00:00:00.000Z",
+      "acquiredAt": "2026-09-10T02:52:31.337Z",
+      "lastRevisionAt": "2026-09-10T02:52:31.485Z",
+      "payloadId": "324",
+      "unavailable": false,
+      "stale": false,
+      "archiveSelection": "latest archived revisions"
+    },
+    "catalog": {
+      "members": 337,
+      "coverage": {
+        "datasetId": "defillama:usd-pegged:catalog:v1",
+        "source": "defillama",
+        "scope": "Current DefiLlama USD-pegged stablecoin catalog",
+        "methodologyVersion": "stablecoin-catalog:v1",
+        "expectedIntervalSeconds": 86400,
+        "membership": "sample",
+        "mode": "forward tracking",
+        "replayCoverageStart": "2026-09-10T02:52:24.911Z",
+        "observedAt": "2026-09-10T02:52:24.789Z",
+        "recordedAt": "2026-09-10T02:52:24.839Z",
+        "publishedAt": null,
+        "baseline": true,
+        "snapshotId": "304",
+        "payloadId": "323",
+        "coverage": {
+          "scope": "Includes provider-covered assets with zero or unknown supply; no blanket peg stability or reserve assurance",
+          "membership": "Current provider catalog filtered to pegType=peggedUSD; not historical membership or an exact reconciliation to the separately sampled history",
+          "returnedAssets": 425,
+          "publicationTime": "unknown",
+          "coveredUsdPeggedAssets": 337
+        },
+        "gaps": [],
+        "acquiredAt": "2026-09-10T02:52:24.789Z",
+        "unavailable": false,
+        "stale": false,
+        "intervalSeconds": 86400,
+        "classification": "forward tracking"
+      }
+    },
+    "formula": "DefiLlama totalCirculatingUSD.peggedUSD. 30D change = (value / value exactly 30 UTC days earlier − 1) × 100; absent or zero denominator makes the percentage unavailable.",
+    "interpretation": "A capital context proxy for provider-covered USD-pegged supply. Expansion or contraction can reflect coverage, supply and valuation changes; it is not measured net inflow into BTC.",
+    "limitations": "Non-USD pegs excluded. Coverage changes over time; historical constituents are unavailable. The separately acquired catalog describes current provider coverage and does not establish the historical denominator. Provider publication time is unknown; historical values may be revised."
+  },
+  "methodologyVersion": "btc-context:v1",
+  "limitations": [
+    "No USD conversion or market-wide positioning claim; native BTC is the only surfaced venue market.",
+    "Stablecoin history has changing provider coverage; current catalog does not establish historical constituents.",
+    "Acquisition is supervised locally. An always-on host, mining/macro feeds and strategy evaluation remain outside this slice."
+  ]
+}

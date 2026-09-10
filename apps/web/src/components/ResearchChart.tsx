@@ -12,9 +12,10 @@ export function download(name: string, content: string, type = 'application/json
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-export function ResearchChart({ title, x, lines, log = false, time = true, syncKey, bands = [], annotations = [], height = 290 }:
+export function ResearchChart({ title, x, lines, log = false, time = true, syncKey, bands = [], annotations = [], height = 290,
+  attribution = 'Coin Metrics Community · CC BY-NC 4.0 · Historical reconstruction' }:
   { title: string; x: number[]; lines: Line[]; log?: boolean; time?: boolean; syncKey?: string;
-    bands?: Band[]; annotations?: { x: number; label: string }[]; height?: number }) {
+    bands?: Band[]; annotations?: { x: number; label: string }[]; height?: number; attribution?: string }) {
   const host = useRef<HTMLDivElement>(null), chart = useRef<uPlot | null>(null);
   const visibleRange = useRef<HTMLParagraphElement>(null);
   useEffect(() => {
@@ -82,7 +83,7 @@ export function ResearchChart({ title, x, lines, log = false, time = true, syncK
     }
     ctx.drawImage(source, 0, 106);
     ctx.fillStyle = '#e7edf5';
-    ctx.font = '12px sans-serif'; ctx.fillText('Coin Metrics Community · CC BY-NC 4.0 · Historical reconstruction', 20, canvas.height - 12);
+    ctx.font = '12px sans-serif'; ctx.fillText(attribution, 20, canvas.height - 12);
     const a = document.createElement('a'); a.href = canvas.toDataURL('image/png'); a.download = `${title.replaceAll(' ', '-')}.png`; a.click();
   };
   return <section className="panel research-chart" aria-label={title}>

@@ -4,7 +4,7 @@ test('BTC charts render, synchronize zoom, export and retain range and scale aft
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
   await page.goto('/#btc');
   await expect(page.getByRole('heading', { name: 'Trend and cycle evidence' })).toBeVisible();
-  await expect(page.locator('.uplot')).toHaveCount(5);
+  await expect(page.locator('.uplot')).toHaveCount(6);
   await page.getByRole('button', { name: '90D', exact: true }).click();
   await expect(page.getByRole('button', { name: '90D', exact: true })).toHaveClass('active');
   const saved = page.waitForResponse(r => r.url().includes('/research/preferences/btc-chart') && r.request().method() === 'PUT');
@@ -29,6 +29,43 @@ test('BTC charts render, synchronize zoom, export and retain range and scale aft
   await expect(price).toBeVisible();
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   expect(errors).toEqual([]);
+});
+
+test('BTC context shows native venue units, separate funding and scoped capital coverage', async ({ page }) => {
+  await page.goto('/#btc');
+  const venue = page.getByRole('region', { name: 'BTC venue leverage' });
+  await expect(venue.getByText('1,234 BTC', { exact: true })).toBeVisible();
+  await expect(venue.getByText('74,040,000 USDT price units', { exact: true })).toBeVisible();
+  await expect(venue.getByText('-0.00125% / hour', { exact: true })).toBeVisible();
+  await expect(venue.getByText('0.0025% / hour', { exact: true })).toBeVisible();
+  await venue.getByText('Native open interest evidence', { exact: true }).click();
+  await expect(venue.locator('details[open]').getByText('Archived payload:', { exact: false })).toBeVisible();
+  const capital = page.getByRole('region', { name: 'BTC capital context' });
+  await expect(capital.getByText('$109,900,000,000', { exact: true })).toBeVisible();
+  await capital.getByText('Stablecoin coverage and methodology', { exact: true }).click();
+  await expect(capital.getByText('Current catalog: 1 covered USD-pegged assets', { exact: false })).toBeVisible();
+  await expect(capital.getByRole('cell', { name: 'Tether (1)', exact: true })).toBeVisible();
+  await expect(capital.getByText('Euro fixture', { exact: false })).toHaveCount(0);
+  const pending = page.waitForEvent('download');
+  await page.getByRole('region', { name: 'Covered USD-pegged stablecoin supply (USD)', exact: true }).getByRole('button', { name: 'Export PNG' }).click();
+  expect((await pending).suggestedFilename()).toContain('stablecoin');
+});
+
+test('BTC trend and studies stay usable when the independent context request fails', async ({ page }) => {
+  await page.route('**/api/v1/btc/context', route => route.fulfill({ status: 503, contentType: 'application/json', body: '{"error":"Unavailable"}' }));
+  await page.goto('/#btc');
+  await expect(page.getByText('Venue and capital context could not load.', { exact: false })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'BTC price and long-term averages', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Run study', exact: true })).toBeEnabled();
+});
+
+test('venue and capital context stay visible before BTC price acquisition', async ({ page }) => {
+  await page.route('**/api/v1/btc/cycles', route => route.fulfill({ contentType: 'application/json',
+    body: JSON.stringify({ data: { points: [], cycles: [], coverage: [], latest: null }, metadata: {} }) }));
+  await page.goto('/#btc');
+  await expect(page.getByRole('heading', { name: 'BTC history is awaiting acquisition' })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'BTC venue leverage' }).getByText('1,234 BTC', { exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'BTC capital context' })).toBeVisible();
 });
 
 test('signal studies show coverage counts, survive reload by saved ID and export frozen evidence', async ({ page }) => {

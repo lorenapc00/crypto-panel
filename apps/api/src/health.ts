@@ -23,7 +23,7 @@ export async function seriesHealth(database:Pool) {
     case when last.observed_at is null then 'unavailable' when last.value is null then 'unavailable'
       when ac.irregular_intervals>0 then 'irregular' when last.observed_at < ${expected} then 'stale'
       when coalesce(g.missing,0)>0 then 'gaps' else 'healthy' end as state
-    from data_series s join assets a on a.id=s.asset_id
+    from data_series s left join assets a on a.id=s.asset_id
     left join replay_coverage c on c.series_id=s.id
     left join lateral (select * from series_acquisitions where series_id=s.id order by recorded_at desc,payload_id desc limit 1) ac on true
     left join lateral (select observed_at,value from series_observations where series_id=s.id and observed_at<=clock_timestamp()

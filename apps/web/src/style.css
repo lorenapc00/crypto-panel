@@ -617,3 +617,27 @@ footer {
 .access form { display: grid; gap: 16px; margin-top: 25px; }
 @media(max-width:950px) { .health-summary { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media(max-width:600px) { .rule-form { grid-template-columns: 1fr; } .research-row { flex-wrap: wrap; } .saved-screens form { flex-wrap: wrap; } }
+.btc-context { display: grid; gap: 18px; min-width: 0; }
+.context-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 16px; }
+.context-metric { min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 14px; background: #111821; border: 1px solid #26303d; border-radius: 6px; }
+.context-metric strong { font-size: 21px; font-weight: 500; overflow-wrap: anywhere; }
+.context-metric small { color: #9ca9b9; }
+.context-metric details { font-size: 12px; overflow-wrap: anywhere; }
+
+.overview-workspace { display: grid; gap: 4px; min-width: 0; }
+.overview-figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 175px), 1fr)); gap: 14px; margin: 8px 0 14px; }
+.overview-figures > div { padding: 14px; background: #111821; border: 1px solid #26303d; border-radius: 6px; display: grid; gap: 6px; align-content: start; }
+.overview-figures span { color: #9ca9b9; font-size: 12px; }
+.overview-figures strong { font-size: 19px; font-weight: 500; text-transform: capitalize; overflow-wrap: anywhere; }
+.overview-figures small { color: #8695a8; font-size: 11px; }
+.overview-movers { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 18px; }
+.overview-movers h3 { font-size: 13px; font-weight: 500; color: #aebccc; margin: 10px 0 4px; }
+.overview-changes { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 10px; }
+.overview-changes li { display: flex; gap: 12px; padding: 12px; background: #111821; border: 1px solid #26303d; border-radius: 6px; }
+.overview-changes b { font-size: 13px; font-weight: 500; }
+.overview-changes small { display: block; color: #9ca9b9; font-size: 11px; margin-top: 4px; }
+.overview-changes p { margin: 6px 0 0; }
+.change-tag { flex: 0 0 auto; align-self: start; font: 10px "DM Mono", monospace; text-transform: uppercase; padding: 4px 7px; border-radius: 4px; border: 1px solid #384556; color: #b8c4d2; }
+.change-tag.btc-regime { border-color: #4b6a86; color: #9ac6ee; }
+.change-tag.threshold-alert { border-color: #725744; color: #edbd94; }
+.overview-workspace td .asset-link { color: #9ac6ee; }

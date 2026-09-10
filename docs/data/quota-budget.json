@@ -99,6 +99,11 @@
           "cyclesPerDay": 1
         },
         {
+          "id": "stablecoin-catalog",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        },
+        {
           "id": "protocol-fees-revenue-holder-revenue-tvl",
           "requestsPerCycle": 80,
           "cyclesPerDay": 1
@@ -110,7 +115,7 @@
         }
       ],
       "bootstrapRequests": 0,
-      "notes": "Design: 20 selected protocols x 4 metrics; success for Hyperliquid does not establish peer coverage. Active: catalog, seven independently scoped daily snapshots and eight normalized daily histories (496 calls/31 days). Current ETH/SOL chain and Hyperliquid protocol metrics preserve individual scope and revisions. Paid perp-volume calls are excluded."
+      "notes": "Design: 20 selected protocols x 4 metrics; success for Hyperliquid does not establish peer coverage. Active: catalog, seven independently scoped daily snapshots and eight normalized daily histories plus covered USD-pegged supply history and catalog (558 calls/31 days). Current ETH/SOL chain and Hyperliquid protocol metrics preserve individual scope and revisions. Paid perp-volume calls are excluded."
     },
     {
       "id": "hyperliquid",

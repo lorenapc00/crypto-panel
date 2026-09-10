@@ -8,6 +8,7 @@ import { ThesisNotes } from "./components/ThesisNotes";
 import { SavedScreens,type Selection } from "./components/SavedScreens";
 import { WorkspaceAccess } from "./components/WorkspaceAccess";
 import { BtcCycles } from "./pages/BtcCycles";
+import { MarketOverview } from "./pages/MarketOverview";
 
 type Asset = {
   id: string;
@@ -91,7 +92,7 @@ type AssetDetail = {
 };
 type Page = "overview" | "btc" | "assets" | "watchlist" | "research" | "data-health";
 const pages: { id: Page; label: string }[] = [
-  { id: "overview", label: "Overview" },
+  { id: "overview", label: "Market Overview" },
   { id: "btc", label: "BTC Cycles" },
   { id: "assets", label: "Assets" },
   { id: "watchlist", label: "Watchlist" },
@@ -165,60 +166,6 @@ function AssetTable({
         </div>
       ))}
     </div>
-  );
-}
-function Overview({
-  navigate,
-  select,
-}: {
-  navigate: (p: Page) => void;
-  select: (id: string) => void;
-}) {
-  const { result, loading, error, reload } = useData<{
-    globalMarketCapUsd: number | null;
-    volume24hUsd: number | null;
-    btcDominance: number | null;
-    ethDominance: number | null;
-    movers: Asset[];
-    marketBreadth: { advancing: number; declining: number; unknown: number; total: number };
-    globalMetadata: Metadata;
-  }>("/overview");
-  if (loading) return <Loading />;
-  if (error || !result) return <Failure retry={reload} />;
-  const d = result.data;
-  return (
-    <>
-      <section className="kpis">
-        <Metric t="Global market cap" v={usd(d.globalMarketCapUsd)} />
-        <Metric t="Global 24h volume" v={usd(d.volume24hUsd)} />
-        <Metric
-          t="BTC dominance"
-          v={d.btcDominance === null ? "—" : `${d.btcDominance.toFixed(1)}%`}
-          detail={
-            d.ethDominance === null
-              ? undefined
-              : `ETH ${d.ethDominance.toFixed(1)}%`
-          }
-        />
-        <Metric
-          t="Tracked-page breadth"
-          v={`${d.marketBreadth.advancing} ↑ / ${d.marketBreadth.declining} ↓`}
-          detail={`${d.marketBreadth.total} tracked assets · ${d.marketBreadth.unknown} unknown`}
-        />
-      </section>
-      <Status metadata={d.globalMetadata} />
-      <section className="panel">
-        <div className="panelhead">
-          <div>
-            <h2>Top assets</h2>
-            <span>Largest assets by market capitalization</span>
-          </div>
-          <button onClick={() => navigate("assets")}>View all assets →</button>
-        </div>
-        <AssetTable assets={d.movers} onSelect={(a) => select(a.id)} />
-        <Status metadata={result.metadata} />
-      </section>
-    </>
   );
 }
 function Metric({ t, v, detail }: { t: string; v: string; detail?: string }) {
@@ -789,9 +736,7 @@ function App() {
           <AssetProfile assetId={assetId} back={() => navigate("assets")} />
         ) : (
           <>
-            {page === "overview" && (
-              <Overview navigate={navigate} select={select} />
-            )}{" "}
+            {page === "overview" && <MarketOverview select={select} />}{" "}
             {page === "assets" && <Assets key={route} select={select} />}{" "}
             {page === "watchlist" && <Watchlist />}{" "}
             {page === "research" && <Research />}

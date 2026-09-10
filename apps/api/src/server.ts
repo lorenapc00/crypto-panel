@@ -10,6 +10,7 @@ import { assetDetails, marketData, marketOverview } from "./market.js";
 import { fundamentals } from "./fundamentals.js";
 import { pool, storedTokenomicsEvents } from "./db.js";
 import { dataHealth, readDiscovery } from "./discovery/archive.js";
+import { marketOverviewArchive } from "./overview.js";
 import { ReplayCoverageError } from "./archive.js";
 
 const port = Number(process.env.PORT ?? 3100);
@@ -25,17 +26,19 @@ return createServer({requestTimeout:15000,headersTimeout:10000},async (req, res)
     if (req.method !== 'GET') return send(res,405,{error:'Method not allowed'});
     if (url.pathname === '/api/v1/series') {
       const assetId=url.searchParams.get('asset'),metric=url.searchParams.get('metric'),interval=url.searchParams.get('interval');
-      if (!assetId||!metric) throw new InputError('Asset and metric are required');
-      id(assetId);id(metric);
-      if(interval!==null&&(!/^\d+$/.test(interval)||Number(interval)<1||Number(interval)>2147483647))throw new InputError("Invalid interval");
       const seriesId=url.searchParams.get('seriesId');
-      const definitions=(await database.query(`select id from data_series where asset_id=$1 and metric_code=$2
+      if (!seriesId && (!assetId||!metric)) throw new InputError('Asset and metric, or an explicit seriesId, are required');
+      if(assetId)id(assetId);if(metric)id(metric);
+      if(interval!==null&&(!/^\d+$/.test(interval)||Number(interval)<1||Number(interval)>2147483647))throw new InputError("Invalid interval");
+      const definitions=(await database.query(`select id from data_series where ($1::text is null or asset_id=$1) and ($2::text is null or metric_code=$2)
         and ($3::text is null or interval_seconds=$3::integer) and ($4::text is null or id=$4) order by id`,[assetId,metric,interval,seriesId])).rows;
       const options={from:cutoff(url.searchParams.get('from')),to:cutoff(url.searchParams.get('to')),
         asOf:cutoff(url.searchParams.get('asOf')),limit:10000};
       if(options.from&&options.to&&Date.parse(options.from)>Date.parse(options.to))throw new InputError('Invalid series date range');
       return send(res,200,{data:await Promise.all(definitions.map(row=>readSeries(row.id,options,database)))});
     }
+    if (req.method === "GET" && url.pathname === "/api/v1/market/overview")
+      return send(res, 200, await marketOverviewArchive(database, cutoff(url.searchParams.get("asOf"))));
     if (req.method === "GET" && url.pathname === "/api/v1/data-health") return send(res, 200, { data: await dataHealth(database) });
     if (req.method === "GET" && url.pathname === "/api/v1/discovery/archive") {
       const dataset = url.searchParams.get("dataset");

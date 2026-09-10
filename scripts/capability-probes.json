@@ -366,6 +366,16 @@
       }
     },
     {
+      "id": "llama-stablecoin-catalog",
+      "provider": "defillama",
+      "url": "https://stablecoins.llama.fi/stablecoins?includePrices=true",
+      "summary": {
+        "kind": "rows",
+        "path": ["peggedAssets"],
+        "fields": ["id", "name", "symbol", "pegType", "circulating.peggedUSD", "chains", "price"]
+      }
+    },
+    {
       "id": "hl-namespaces",
       "provider": "hyperliquid",
       "url": "https://api.hyperliquid.xyz/info",

@@ -11,8 +11,9 @@ import { spotJobs } from './feeds/spot.js';
 import { randomUUID } from 'node:crypto';
 import { recordSeriesGaps } from './health.js';
 import { btcHistoryJob } from './feeds/bitcoin.js';
+import { capitalJobs } from './feeds/capital.js';
 
-const jobs = [...discoveryJobs, ...snapshotJobs, ...historyJobs, ...venueJobs, ...spotJobs, btcHistoryJob];
+const jobs = [...discoveryJobs, ...snapshotJobs, ...historyJobs, ...venueJobs, ...spotJobs, btcHistoryJob, ...capitalJobs];
 const workerId=randomUUID();
 let lastHealth=0,registered=false;
 

@@ -3,7 +3,7 @@ import type { Pool, PoolClient } from "pg";
 import { pool } from "./db.js";
 
 export type SeriesDefinition = {
-  id: string; assetId: string; metricCode: string; sourceId: string;
+  id: string; assetId: string | null; metricCode: string; sourceId: string;
   unit: string; scope: string; intervalSeconds: number; methodologyVersion: string;
 };
 export type SeriesPoint = { observedAt: string; value: number | null; publishedAt?: string | null };
@@ -68,7 +68,7 @@ export async function appendSeries(client: PoolClient, payloadId: string, source
       const fields = [d.id, d.assetId, d.metricCode, d.sourceId, d.unit, d.scope, d.intervalSeconds, d.methodologyVersion];
       await client.query(`insert into data_series (id, asset_id, metric_code, source_id, unit, scope, interval_seconds, methodology_version)
         values ($1,$2,$3,$4,$5,$6,$7,$8) on conflict (id) do nothing`, fields);
-      const compatible = await client.query(`select 1 from data_series where id=$1 and asset_id=$2 and metric_code=$3
+      const compatible = await client.query(`select 1 from data_series where id=$1 and asset_id is not distinct from $2 and metric_code=$3
         and source_id=$4 and unit=$5 and scope=$6 and interval_seconds=$7 and methodology_version=$8`, fields);
       if (!compatible.rows.length) throw new Error(`Incompatible definition for series ${d.id}; use a new methodology version`);
       // Compare against the latest revision, including explicit null corrections.

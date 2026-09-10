@@ -1,0 +1,299 @@
+{
+  "checkedAt": "2026-09-10T10:45:03.764Z",
+  "scope": "Local supervised Mac; continuous hosting remains unverified",
+  "endpointStatus": 200,
+  "replayBeforeCoverageStatus": 409,
+  "replayCutoff": "2026-09-10T01:01:39.000Z",
+  "replayStatus": 200,
+  "replayClassification": "point-in-time",
+  "replayRefusals": [
+    "btc-history",
+    "stablecoin-supply",
+    "daily-histories"
+  ],
+  "migration": 9,
+  "methodologyVersion": "market-overview:v1",
+  "global": {
+    "marketCapUsd": 2667580870025.9336,
+    "volume24hUsd": 90367281850.6162,
+    "btcDominance": 58.55684018449979,
+    "ethDominance": 11.259718733245123,
+    "evidence": {
+      "source": "coingecko",
+      "scope": "CoinGecko provider-global coverage; USD",
+      "observedAt": "2026-09-10T10:01:52.000Z",
+      "acquiredAt": "2026-09-10T10:09:56.381Z",
+      "recordedAt": "2026-09-10T10:09:56.394Z",
+      "snapshotId": "996",
+      "payloadId": "1015",
+      "replayCoverageStart": "2026-09-10T01:00:26.949Z",
+      "intervalSeconds": 3600,
+      "methodologyVersion": "global-snapshot:v1",
+      "degraded": false,
+      "error": null,
+      "replayRefused": false,
+      "unavailable": false,
+      "stale": false,
+      "classification": "forward tracking"
+    },
+    "formula": "Provider global totals and market-cap percentages, archived hourly and read from storage. These are the provider aggregates, not a sum of the tracked page.",
+    "limitations": "Provider coverage and its own asset universe are not published per snapshot; dominance follows the provider definition. Publication time is unknown and acquisition receipt is retained separately."
+  },
+  "breadth": {
+    "advancing": 27,
+    "declining": 70,
+    "unchanged": 2,
+    "unknown": 1,
+    "total": 100,
+    "scope": "CoinGecko rank-selected first page, up to 100 assets; not a global universe",
+    "stale": false
+  },
+  "averages": {
+    "sma50": {
+      "above": 4,
+      "covered": 4,
+      "percent": 100
+    },
+    "sma200": {
+      "above": 4,
+      "covered": 4,
+      "percent": 100
+    },
+    "tracked": 100,
+    "scope": "4 of 100 tracked assets have 200 contiguous completed daily samples; 4 have 50",
+    "assets": [
+      {
+        "assetId": "bitcoin",
+        "samples": 366,
+        "above50d": true,
+        "above200d": true
+      },
+      {
+        "assetId": "ethereum",
+        "samples": 366,
+        "above50d": true,
+        "above200d": true
+      },
+      {
+        "assetId": "hyperliquid",
+        "samples": 366,
+        "above50d": true,
+        "above200d": true
+      },
+      {
+        "assetId": "solana",
+        "samples": 366,
+        "above50d": true,
+        "above200d": true
+      }
+    ]
+  },
+  "btc": {
+    "regime": "bullish",
+    "candidate": "bullish",
+    "confirmationDays": 3,
+    "observedAt": "2026-09-09T00:00:00.000Z",
+    "mayerMultiple": 1.1185548177162434,
+    "mvrv": null,
+    "drawdownPct": -37.346022900600126,
+    "evidence": {
+      "source": "Coin Metrics Community",
+      "scope": "BTC completed UTC daily closes; CC BY-NC 4.0",
+      "observedAt": "2026-09-09T00:00:00.000Z",
+      "seriesId": "coinmetrics:bitcoin:price_usd:daily:v1",
+      "values": 5898,
+      "replayCoverageStart": "2026-09-10T02:22:58.627Z",
+      "unavailable": false,
+      "replayRefused": false,
+      "stale": false,
+      "classification": "historical-reconstruction",
+      "methodologyVersion": "btc-trend:v1"
+    }
+  },
+  "liquidity": {
+    "stablecoin": {
+      "value": 310410821908,
+      "changePct": 1.4156139304516646,
+      "comparisonAt": "2026-08-10T00:00:00.000Z",
+      "values": 400,
+      "coverage": {
+        "source": "defillama",
+        "scope": "covered_usd_pegged_stablecoins",
+        "seriesId": "defillama:usd-pegged:stablecoin_supply_usd:daily:v1",
+        "observedAt": "2026-09-09T00:00:00.000Z",
+        "first": "2025-08-06T00:00:00.000Z",
+        "values": 400,
+        "replayCoverageStart": "2026-09-10T02:52:31.685Z",
+        "unavailable": false,
+        "replayRefused": false,
+        "stale": false,
+        "classification": "historical-reconstruction"
+      }
+    },
+    "reportedVolume": {
+      "latest": 90367281850.6162,
+      "change24hPct": null,
+      "change7dPct": null,
+      "coverage": {
+        "source": "coingecko",
+        "scope": "CoinGecko provider-global reported 24h volume, sampled hourly from this archive onward",
+        "observedAt": "2026-09-10T10:01:52.000Z",
+        "acquiredAt": "2026-09-10T10:09:56.381Z",
+        "recordedAt": "2026-09-10T10:09:56.394Z",
+        "snapshotId": "996",
+        "payloadId": "1015",
+        "replayCoverageStart": "2026-09-10T01:00:26.949Z",
+        "intervalSeconds": 3600,
+        "methodologyVersion": "global-snapshot:v1",
+        "degraded": false,
+        "error": null,
+        "replayRefused": false,
+        "unavailable": false,
+        "stale": false,
+        "classification": "forward tracking",
+        "samples": 10,
+        "first": "2026-09-10T00:51:03.000Z",
+        "last": "2026-09-10T10:01:52.000Z"
+      }
+    }
+  },
+  "reportedVolumeSamples": {
+    "source": "coingecko",
+    "scope": "CoinGecko provider-global reported 24h volume, sampled hourly from this archive onward",
+    "observedAt": "2026-09-10T10:01:52.000Z",
+    "acquiredAt": "2026-09-10T10:09:56.381Z",
+    "recordedAt": "2026-09-10T10:09:56.394Z",
+    "snapshotId": "996",
+    "payloadId": "1015",
+    "replayCoverageStart": "2026-09-10T01:00:26.949Z",
+    "intervalSeconds": 3600,
+    "methodologyVersion": "global-snapshot:v1",
+    "degraded": false,
+    "error": null,
+    "replayRefused": false,
+    "unavailable": false,
+    "stale": false,
+    "classification": "forward tracking",
+    "samples": 10,
+    "first": "2026-09-10T00:51:03.000Z",
+    "last": "2026-09-10T10:01:52.000Z"
+  },
+  "performance": {
+    "benchmark": "bitcoin",
+    "rows": [
+      {
+        "assetId": "hyperliquid",
+        "symbol": "HYPE",
+        "name": "Hyperliquid",
+        "observedAt": "2026-09-10T00:00:00.000Z",
+        "samples": 366,
+        "usd": {
+          "d7": 2.0106147917918094,
+          "d30": 51.811751226123334,
+          "d90": 41.855817921994685
+        },
+        "relative": {
+          "d7": 0.7258538386479163,
+          "d30": 23.949627565648,
+          "d90": 15.16847112849058
+        }
+      },
+      {
+        "assetId": "solana",
+        "symbol": "SOL",
+        "name": "Solana",
+        "observedAt": "2026-09-10T00:00:00.000Z",
+        "samples": 366,
+        "usd": {
+          "d7": 1.173050489119598,
+          "d30": 33.77488790357073,
+          "d90": 52.010543082252326
+        },
+        "relative": {
+          "d7": -0.10116185676399825,
+          "d30": 9.22308318929812,
+          "d90": 23.41278700195013
+        }
+      },
+      {
+        "assetId": "ethereum",
+        "symbol": "ETH",
+        "name": "Ethereum",
+        "observedAt": "2026-09-10T00:00:00.000Z",
+        "samples": 366,
+        "usd": {
+          "d7": 3.21008313449489,
+          "d30": 31.854881892058916,
+          "d90": 47.59105521798399
+        },
+        "relative": {
+          "d7": 1.910215615290367,
+          "d30": 7.655457309690039,
+          "d90": 19.824737756211142
+        }
+      },
+      {
+        "assetId": "bitcoin",
+        "symbol": "BTC",
+        "name": "Bitcoin",
+        "observedAt": "2026-09-10T00:00:00.000Z",
+        "samples": 366,
+        "usd": {
+          "d7": 1.2755026680656867,
+          "d30": 22.47858602537438,
+          "d90": 23.1724416691524
+        },
+        "relative": {
+          "d7": 0,
+          "d30": 0,
+          "d90": 0
+        }
+      }
+    ],
+    "unarchivedAssets": 96,
+    "scope": "Assets with archived CoinGecko daily price samples; both the asset and the BTC benchmark use the same source and sampling time"
+  },
+  "sectors": {
+    "status": "gated",
+    "tracked": 100,
+    "classified": 9,
+    "unclassified": 91,
+    "categories": [
+      "L1",
+      "stablecoin",
+      "exchange token",
+      "DEX",
+      "lending",
+      "L2"
+    ]
+  },
+  "signalChanges": [
+    {
+      "type": "btc-regime",
+      "observedAt": "2026-09-05T00:00:00.000Z",
+      "title": "BTC regime confirmed bullish"
+    },
+    {
+      "type": "btc-regime",
+      "observedAt": "2026-08-21T00:00:00.000Z",
+      "title": "BTC regime confirmed transitional"
+    },
+    {
+      "type": "btc-regime",
+      "observedAt": "2025-11-28T00:00:00.000Z",
+      "title": "BTC regime confirmed bearish"
+    },
+    {
+      "type": "btc-regime",
+      "observedAt": "2025-11-05T00:00:00.000Z",
+      "title": "BTC regime confirmed transitional"
+    }
+  ],
+  "limitations": [
+    "Tracked-page breadth, sector coverage and reported movers describe the archived top-100 page, never the market.",
+    "Above-average participation covers only assets with archived daily histories; the rest are uncovered, not below.",
+    "Provider-global aggregates carry the provider’s own coverage; reported volume is sampled hourly from this archive onward.",
+    "Sector leadership stays gated until asset-sector mappings and historical membership are verified.",
+    "Acquisition remains locally supervised; an always-on host is still outstanding."
+  ]
+}

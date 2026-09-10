@@ -59,16 +59,20 @@ export async function archiveDiscovery(database: Pool, run: Run, job: DiscoveryJ
   });
 }
 
-export async function readDiscovery(database: Pool, datasetId: string, asOf?: string) {
+/** A cutoff may only select snapshots this dataset had actually begun archiving. */
+export async function guardDiscoveryReplay(database: Pick<Pool, 'query'>, datasetId: string, asOf?: string) {
   if (asOf && !Number.isFinite(Date.parse(asOf))) throw new Error('Invalid replay cutoff');
+  if (!asOf) return;
+  const check = (await database.query(`select $2::timestamptz > clock_timestamp() as future,
+    exists(select 1 from discovery_replay_coverage where dataset_id=$1 and starts_at <= $2::timestamptz) as covered`, [datasetId, asOf])).rows[0];
+  if (check.future) throw new Error('Replay cutoff cannot be in the future');
+  if (!check.covered) throw new ReplayCoverageError('Discovery replay predates production coverage');
+}
+
+export async function readDiscovery(database: Pick<Pool, 'query'>, datasetId: string, asOf?: string) {
+  await guardDiscoveryReplay(database, datasetId, asOf);
   const definition = (await database.query(`select d.*,c.starts_at from discovery_datasets d
     left join discovery_replay_coverage c on c.dataset_id=d.id where d.id=$1`, [datasetId])).rows[0];
-  if (asOf) {
-    const check = (await database.query(`select $2::timestamptz > clock_timestamp() as future,
-      exists(select 1 from discovery_replay_coverage where dataset_id=$1 and starts_at <= $2::timestamptz) as covered`, [datasetId, asOf])).rows[0];
-    if (check.future) throw new Error('Replay cutoff cannot be in the future');
-    if (!check.covered) throw new ReplayCoverageError('Discovery replay predates production coverage');
-  }
   if (!definition) return null;
   const snapshot = (await database.query(`select * from discovery_snapshots where dataset_id=$1
     and recorded_at <= coalesce($2::timestamptz,clock_timestamp())

@@ -89,7 +89,7 @@ and legacy upgrades, rollback, concurrent migrations, immutable revisions,
 cutoff replay, scope checks, and populated stale-history refresh. One-off price
 backfills are labeled historical reconstruction; they do not create production
 replay coverage. Repository `asOf` reads reject dates without declared coverage.
-Validation through the Stage 2 BTC core passes 56 unit/capability checks, 32 PostgreSQL cases and five
+Validation through Stage 3 Market Overview passes 74 unit/capability checks, 39 PostgreSQL cases and ten
 browser scenarios. Browser fixtures use a separate temporary schema and ports
 3101/5175; they do not add research records to the personal workspace.
 
@@ -128,17 +128,18 @@ intervals, missing/resolved gaps, replay starts, quota/error counts, worker
 heartbeats, storage size and the latest verified backup. Market coverage remains one top-100
 page; the 1,000-asset expansion is still gated. Global totals use a separate
 CoinGecko `/global` snapshot, while breadth retains exact tracked-page membership.
-`/assets` and `/overview` accept guarded `asOf` cutoffs; other asset routes remain
+`/assets`, `/overview` and `/market/overview` accept guarded `asOf` cutoffs; other asset routes remain
 current-state reads. `/api/v1/series` accepts `asset`, `metric`, optional interval
 in seconds, `seriesId`, `from`, `to` and guarded `asOf` queries.
 
-The 121 scheduled job definitions include four priority daily charts, eight
+The 123 scheduled job definitions include four priority daily charts, eight
 fundamental histories, a selected BTC book/funding pair, and up to 40 sampled
 Solana/Base token pair/promotion lookups per hour. Empty token slots skip without
 consuming quota or starting replay coverage. Paid promotion stays separate from
 trading evidence, and unverified contract risks remain unknown. The additional
 Coin Metrics daily BTC batch archives price, current-supply market cap, MVRV and
-supply under the existing quota budget.
+supply under the existing quota budget. Two daily DefiLlama jobs add covered
+USD-pegged supply history and its separately sampled current asset catalog.
 
 Open **BTC Cycles** for long-term interactive charts, daily/weekly averages,
 three-day-confirmed regimes, valuation, drawdown and halving comparisons. Range
@@ -149,7 +150,28 @@ counts. Study inputs/results are immutable and reopen by ID; exports include the
 archived revisions. These are descriptive historical reconstructions, without
 executable strategy or statistical-significance claims. See [BTC methodology and
 API details](docs/data/BTC_RESEARCH.md) and [local execution evidence](docs/data/stage2-btc-2026-09-09.json).
-Venue leverage/capital context and the broader roadmap remain subsequent work.
+BTC Cycles also surfaces native Hyperliquid BTC open interest, estimated notional
+in documented USDT price units with USDC collateral, and separate sampled and
+settled hourly funding. Capital context shows covered USD-pegged stablecoin
+supply, exact 30D changes, an attributed chart/export and current catalog coverage.
+Historical constituents remain unavailable; supply changes are not measured net
+inflows. Each feed reports its own freshness, provenance and replay start.
+`GET /api/v1/btc/context` reads archived data with an optional guarded `asOf`.
+Aggregate histories can use `/api/v1/series?seriesId=...` without an asset identifier.
+[Context execution evidence](docs/data/stage2-context-2026-09-09.json) records
+3,207 completed supply days and 337 current USD-pegged catalog members.
+Open **Market Overview** for composed market conditions: provider-global
+aggregates, sampled hourly market-cap/volume/dominance charts, tracked-page
+breadth, the share of covered assets above their own 50D/200D averages, the BTC
+regime summary, covered stablecoin supply and its exact 30D change, BTC-relative
+7D/30D/90D performance, provider-reported movers and notable changes. Sector
+leadership stays gated at curated classification coverage. Each figure opens its
+own formula, scope, freshness and provenance. `GET /api/v1/market/overview`
+reads only stored data and accepts a guarded `asOf`; a feed whose coverage starts
+after the cutoff is refused for its own block instead of being reconstructed. See
+[Market Overview methodology](docs/data/MARKET_OVERVIEW.md) and
+[dated execution evidence](docs/data/stage3-overview-2026-09-10.json).
+Stage 4 perp discovery interfaces are next.
 
 See [archive operation and restore procedures](ops/README.md) for local Mac
 supervision, a Linux service template and seven-copy daily backup retention.

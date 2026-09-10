@@ -23,7 +23,7 @@ try {
     methodology: body.data?.methodology,
     limitations: ['Historical reconstructions do not establish past publication availability.',
       'BTC study controls cover confirmed regimes and custom dates; other priority assets support custom dates on aligned CoinGecko samples.',
-      'Venue leverage, covered stablecoin capital context and broader study evaluation remain subsequent work.'] };
+      'Venue/capital context has separate verification in ops/verify-btc-context.mjs; broader study evaluation remains subsequent work.'] };
   const passed = response.status === 200 && guard.status === 409 && body.data?.points?.length > 5000 && jobs[0]?.status === 'succeeded';
   if (!passed) { console.error(JSON.stringify({ passed, endpointStatus: response.status, replayStatus: guard.status, jobs, error: body.error })); process.exitCode = 1; }
   else {

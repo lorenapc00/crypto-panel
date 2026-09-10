@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { api, useData } from '../api';
 import { ResearchChart, download } from '../components/ResearchChart';
+import { BtcContext } from '../components/BtcContext';
 
 type Point = { observedAt: string; value: number | null; sma50: number | null; sma200: number | null;
   sma20w: number | null; ema21w: number | null; sma200w: number | null; weeklyRsi: number | null;
@@ -84,8 +85,8 @@ export function BtcCycles() {
       mvrv: [{ label: 'MVRV', color: colors[2], values: rows.map(p => p.mvrv) }], cycleX, cyclePrice: cycleLines('indexedPrice'), cycleMvrv: cycleLines('mvrv') };
   }, [d, range]);
   if (loading) return <p>Loading archived BTC research…</p>;
-  if (error || !result || !d || !charts) return <p role="alert">Unable to load BTC research. <button onClick={reload}>Try again</button></p>;
-  if (!d.latest) return <section className="panel btc-empty"><h2>BTC history is awaiting acquisition</h2><p>The scheduled Coin Metrics feed has not archived completed daily prices yet. Data Health shows its acquisition status.</p><a href="#data-health">Open Data Health</a></section>;
+  if (error || !result || !d || !charts) return <><p role="alert">Unable to load BTC research. <button onClick={reload}>Try again</button></p><BtcContext range={range} /></>;
+  if (!d.latest) return <><section className="panel btc-empty"><h2>BTC history is awaiting acquisition</h2><p>The scheduled Coin Metrics feed has not archived completed daily prices yet. Data Health shows its acquisition status.</p><a href="#data-health">Open Data Health</a></section><BtcContext range={range} /></>;
   const last = d.latest;
   const kpis = [
     ['Completed daily close', usd(last.value)], ['Regime', last.regime.replaceAll('-', ' ')], ['Mayer Multiple', num(last.mayerMultiple, '×')],
@@ -103,6 +104,7 @@ export function BtcCycles() {
     <p className="regime-key">Shading: green = bullish · red = bearish · neutral = transitional / insufficient history. Daily price represents the end of the labeled UTC day.</p>
     <ResearchChart title="Drawdown from observed ATH (%)" x={charts.x} lines={charts.drawdown} syncKey="btc-time" height={210} />
     <ResearchChart title="Coin Metrics MVRV" x={charts.x} lines={charts.mvrv} syncKey="btc-time" height={230} />
+    <BtcContext range={range} />
     <div className="btc-cycle-heading"><h2>Halving comparisons</h2><p>{d.methodology.cycles} <a href="https://bitcoin.org/en/halving" target="_blank" rel="noreferrer">Halving dates</a></p></div>
     <ResearchChart title="Cycle price · halving-day close = 100" x={charts.cycleX} lines={charts.cyclePrice} time={false} log={log} syncKey="btc-cycles" />
     <ResearchChart title="MVRV at equivalent cycle stages" x={charts.cycleX} lines={charts.cycleMvrv} time={false} syncKey="btc-cycles" height={230} />

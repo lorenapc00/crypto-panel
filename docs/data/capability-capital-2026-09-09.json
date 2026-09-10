@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-09-10T02:38:45.042Z",
+  "manifestSha256": "f384c921fca6cfecd7ea81b3e5071962dffd78ae3f61e9b62f98aee9364725e5",
+  "classification": "capability-samples-not-an-ingestion-archive",
+  "results": [
+    {
+      "id": "llama-stablecoin-supply",
+      "provider": "defillama",
+      "url": "https://stablecoins.llama.fi/stablecoincharts/all",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-10T02:38:45.113Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Thu, 10 Sep 2026 02:38:45 GMT",
+        "etag": "\"6aa20656-1366eb\"",
+        "last-modified": "Thu, 10 Sep 2026 01:22:30 GMT"
+      },
+      "bytes": 1271531,
+      "sha256": "500877f54ea36f962fc968e46707dffd6250d03aaf75a6d9cb21173ae0ea1767",
+      "summary": {
+        "rows": 3208,
+        "first": "2017-11-29T00:00:00.000Z",
+        "last": "2026-09-10T00:00:00.000Z",
+        "invalidTimestamps": 0,
+        "duplicateTimestamps": 0,
+        "ascending": true,
+        "regular": true,
+        "intervalSeconds": 86400,
+        "intervalHistogram": [
+          {
+            "seconds": 86400,
+            "count": 3207
+          }
+        ],
+        "metrics": {
+          "totalCirculatingUSD.peggedUSD": {
+            "numericRows": 3208,
+            "missingRows": 0,
+            "first": "2017-11-29T00:00:00.000Z",
+            "last": "2026-09-10T00:00:00.000Z"
+          }
+        }
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-10T02:38:45.398Z",
+      "durationMs": 283
+    },
+    {
+      "id": "llama-stablecoin-catalog",
+      "provider": "defillama",
+      "url": "https://stablecoins.llama.fi/stablecoins?includePrices=true",
+      "method": "GET",
+      "credentialMode": "none",
+      "requestedAt": "2026-09-10T02:38:47.046Z",
+      "httpStatus": 200,
+      "responseHeaders": {
+        "content-type": "application/json",
+        "date": "Thu, 10 Sep 2026 02:38:51 GMT",
+        "etag": "\"6aa2067d-86dd3\"",
+        "last-modified": "Thu, 10 Sep 2026 01:23:09 GMT"
+      },
+      "bytes": 552403,
+      "sha256": "feb6960e9113252aba9e9cf9ecf8197e319afb80ffd2e9c5f7e81bc193b1d727",
+      "summary": {
+        "rows": 425,
+        "fields": {
+          "id": {
+            "presentRows": 425
+          },
+          "name": {
+            "presentRows": 425
+          },
+          "symbol": {
+            "presentRows": 425
+          },
+          "pegType": {
+            "presentRows": 425
+          },
+          "circulating.peggedUSD": {
+            "presentRows": 337
+          },
+          "chains": {
+            "presentRows": 425
+          },
+          "price": {
+            "presentRows": 305
+          }
+        },
+        "sampleIds": [
+          "1",
+          "2",
+          "209"
+        ]
+      },
+      "outcome": "sample-received",
+      "completedAt": "2026-09-10T02:38:51.220Z",
+      "durationMs": 4174
+    }
+  ],
+  "completedAt": "2026-09-10T02:38:51.221Z",
+  "attemptedRequests": 2
+}
