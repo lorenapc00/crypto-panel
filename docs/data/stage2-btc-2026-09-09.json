@@ -1,0 +1,191 @@
+{
+  "checkedAt": "2026-09-10T02:31:40.469Z",
+  "scope": "Local supervised Mac; continuous hosting remains unverified",
+  "endpointStatus": 200,
+  "replayBeforeCoverageStatus": 409,
+  "migration": 8,
+  "jobs": [
+    {
+      "id": "coinmetrics:bitcoin:daily-history:v1",
+      "next_run_at": "2026-09-11T02:00:00.000Z",
+      "status": "succeeded",
+      "error": null,
+      "finished_at": "2026-09-10T02:23:00.394Z",
+      "requests": 1
+    }
+  ],
+  "revisions": [
+    {
+      "id": "coinmetrics:bitcoin:circulating_supply:daily:v1",
+      "observations": 6096,
+      "dates": 6096,
+      "first": "2010-01-01T00:00:00.000Z",
+      "last": "2026-09-09T00:00:00.000Z"
+    },
+    {
+      "id": "coinmetrics:bitcoin:market_cap_usd:daily:v1",
+      "observations": 5898,
+      "dates": 5898,
+      "first": "2010-07-18T00:00:00.000Z",
+      "last": "2026-09-09T00:00:00.000Z"
+    },
+    {
+      "id": "coinmetrics:bitcoin:mvrv:daily:v1",
+      "observations": 5898,
+      "dates": 5898,
+      "first": "2010-07-18T00:00:00.000Z",
+      "last": "2026-09-09T00:00:00.000Z"
+    },
+    {
+      "id": "coinmetrics:bitcoin:price_usd:daily:v1",
+      "observations": 5898,
+      "dates": 5898,
+      "first": "2010-07-18T00:00:00.000Z",
+      "last": "2026-09-09T00:00:00.000Z"
+    }
+  ],
+  "coverage": [
+    {
+      "metric": "price_usd",
+      "seriesId": "coinmetrics:bitcoin:price_usd:daily:v1",
+      "source": "coinmetrics",
+      "scope": "asset",
+      "unit": "USD",
+      "intervalSeconds": 86400,
+      "methodologyVersion": "coinmetrics-daily:v1",
+      "replayCoverageStart": "2026-09-10T02:22:58.627Z",
+      "classification": "forward-tracking-with-reconstruction",
+      "first": "2010-07-18T00:00:00.000Z",
+      "last": "2026-09-09T00:00:00.000Z",
+      "points": 5898,
+      "missing": 0,
+      "stale": false,
+      "formula": "PriceUSD",
+      "timestamp": "UTC day label; values for that completed day",
+      "license": "CC BY-NC 4.0"
+    },
+    {
+      "metric": "market_cap_usd",
+      "seriesId": "coinmetrics:bitcoin:market_cap_usd:daily:v1",
+      "source": "coinmetrics",
+      "scope": "asset",
+      "unit": "USD",
+      "intervalSeconds": 86400,
+      "methodologyVersion": "coinmetrics-daily:v1",
+      "replayCoverageStart": "2026-09-10T02:22:59.127Z",
+      "classification": "forward-tracking-with-reconstruction",
+      "first": "2010-07-18T00:00:00.000Z",
+      "last": "2026-09-08T00:00:00.000Z",
+      "points": 5897,
+      "missing": 1,
+      "stale": true,
+      "formula": "CapMrktCurUSD",
+      "timestamp": "UTC day label; values for that completed day",
+      "license": "CC BY-NC 4.0"
+    },
+    {
+      "metric": "mvrv",
+      "seriesId": "coinmetrics:bitcoin:mvrv:daily:v1",
+      "source": "coinmetrics",
+      "scope": "asset",
+      "unit": "ratio",
+      "intervalSeconds": 86400,
+      "methodologyVersion": "coinmetrics-daily:v1",
+      "replayCoverageStart": "2026-09-10T02:22:59.674Z",
+      "classification": "forward-tracking-with-reconstruction",
+      "first": "2010-07-18T00:00:00.000Z",
+      "last": "2026-09-08T00:00:00.000Z",
+      "points": 5897,
+      "missing": 1,
+      "stale": true,
+      "formula": "CapMVRVCur",
+      "timestamp": "UTC day label; values for that completed day",
+      "license": "CC BY-NC 4.0"
+    },
+    {
+      "metric": "circulating_supply",
+      "seriesId": "coinmetrics:bitcoin:circulating_supply:daily:v1",
+      "source": "coinmetrics",
+      "scope": "asset",
+      "unit": "tokens",
+      "intervalSeconds": 86400,
+      "methodologyVersion": "coinmetrics-daily:v1",
+      "replayCoverageStart": "2026-09-10T02:23:00.384Z",
+      "classification": "forward-tracking-with-reconstruction",
+      "first": "2010-01-01T00:00:00.000Z",
+      "last": "2026-09-08T00:00:00.000Z",
+      "points": 6095,
+      "missing": 1,
+      "stale": true,
+      "formula": "SplyCur",
+      "timestamp": "UTC day label; values for that completed day",
+      "license": "CC BY-NC 4.0"
+    }
+  ],
+  "latest": {
+    "observedAt": "2026-09-09T00:00:00.000Z",
+    "value": 78207.4846148861,
+    "sma50": 70178.39593067451,
+    "sma200": 69918.32977355777,
+    "sma200Slope20d": 934.993019195419,
+    "sma20w": 70161.69356066402,
+    "ema21w": 71203.8942532472,
+    "sma200w": 64860.04729236303,
+    "weeklyRsi": 58.999397481031544,
+    "mayerMultiple": 1.1185548177162434,
+    "drawdownPct": -37.346022900600126,
+    "daysUnderwater": 338,
+    "recoveryDays": null,
+    "volatility30d": 47.087187333996425,
+    "volatility90d": 36.448430087577336,
+    "regime": "bullish",
+    "candidate": "bullish",
+    "confirmationDays": 3,
+    "athCoverage": "running maximum of observed closes",
+    "mvrv": null,
+    "realizedPrice": null
+  },
+  "cycleCoverage": [
+    {
+      "date": "2012-11-28",
+      "anchorPrice": 12.3316598270018,
+      "observations": 1319
+    },
+    {
+      "date": "2016-07-09",
+      "anchorPrice": 651.941914026885,
+      "observations": 1402
+    },
+    {
+      "date": "2020-05-11",
+      "anchorPrice": 8591.65288433665,
+      "observations": 1440
+    },
+    {
+      "date": "2024-04-20",
+      "anchorPrice": 64907.9928366452,
+      "observations": 873
+    }
+  ],
+  "methodology": {
+    "version": "btc-trend:v1",
+    "classification": "historical-reconstruction",
+    "snapshotAsOf": null,
+    "regime": "Bullish: close > SMA200 and SMA200 > its value 20 days earlier. Bearish: both reverse. Otherwise transitional. Three consecutive daily candidates confirm any change; gaps reset confirmation.",
+    "weekly": "Completed Monday–Sunday UTC weeks; require seven daily prices. SMA20/200, seeded EMA21 and Wilder RSI14. The latest completed week carries through the current week.",
+    "valuation": "Mayer = close / SMA200. MVRV = CapMrktCurUSD / CapRealUSD. Derived realized price = (CapMrktCurUSD / CapMVRVCur) / SplyCur on matching dates. These valuation views share inputs.",
+    "risk": "Volatility: sample standard deviation of 30/90 daily log returns × sqrt(365). Drawdown uses the running maximum within observed coverage. Recovery duration is unavailable across gaps.",
+    "cycles": "Halving-day close = 100, ending before the next halving. About three completed comparable cycles: illustration, not statistical inference or a price target.",
+    "replay": "A cutoff selects archived revisions known then. Historical chart labels are reconstructed; they do not prove signal availability on those dates.",
+    "sources": [
+      "https://raw.githubusercontent.com/coinmetrics/docs-website/master/asset-metrics/market/priceusd.md",
+      "https://raw.githubusercontent.com/coinmetrics/docs-website/master/asset-metrics/market/capmvrvcur.md",
+      "https://bitcoin.org/en/halving"
+    ]
+  },
+  "limitations": [
+    "Historical reconstructions do not establish past publication availability.",
+    "BTC study controls cover confirmed regimes and custom dates; other priority assets support custom dates on aligned CoinGecko samples.",
+    "Venue leverage, covered stablecoin capital context and broader study evaluation remain subsequent work."
+  ]
+}

@@ -89,7 +89,7 @@ and legacy upgrades, rollback, concurrent migrations, immutable revisions,
 cutoff replay, scope checks, and populated stale-history refresh. One-off price
 backfills are labeled historical reconstruction; they do not create production
 replay coverage. Repository `asOf` reads reject dates without declared coverage.
-Stage 1 validation passes 47 unit/capability checks, 28 PostgreSQL cases and three
+Validation through the Stage 2 BTC core passes 56 unit/capability checks, 32 PostgreSQL cases and five
 browser scenarios. Browser fixtures use a separate temporary schema and ports
 3101/5175; they do not add research records to the personal workspace.
 
@@ -132,11 +132,24 @@ CoinGecko `/global` snapshot, while breadth retains exact tracked-page membershi
 current-state reads. `/api/v1/series` accepts `asset`, `metric`, optional interval
 in seconds, `seriesId`, `from`, `to` and guarded `asOf` queries.
 
-The 120 scheduled job definitions include four priority daily charts, eight
+The 121 scheduled job definitions include four priority daily charts, eight
 fundamental histories, a selected BTC book/funding pair, and up to 40 sampled
 Solana/Base token pair/promotion lookups per hour. Empty token slots skip without
 consuming quota or starting replay coverage. Paid promotion stays separate from
-trading evidence, and unverified contract risks remain unknown.
+trading evidence, and unverified contract risks remain unknown. The additional
+Coin Metrics daily BTC batch archives price, current-supply market cap, MVRV and
+supply under the existing quota budget.
+
+Open **BTC Cycles** for long-term interactive charts, daily/weekly averages,
+three-day-confirmed regimes, valuation, drawdown and halving comparisons. Range
+and log-scale settings persist; charts export as PNG. The signal-study primitive
+evaluates BTC regime transitions or custom event dates across the four priority
+assets, with six forward horizons, BTC-relative returns, downside and coverage
+counts. Study inputs/results are immutable and reopen by ID; exports include the
+archived revisions. These are descriptive historical reconstructions, without
+executable strategy or statistical-significance claims. See [BTC methodology and
+API details](docs/data/BTC_RESEARCH.md) and [local execution evidence](docs/data/stage2-btc-2026-09-09.json).
+Venue leverage/capital context and the broader roadmap remain subsequent work.
 
 See [archive operation and restore procedures](ops/README.md) for local Mac
 supervision, a Linux service template and seven-copy daily backup retention.

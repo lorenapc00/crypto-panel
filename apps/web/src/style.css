@@ -1,4 +1,40 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+.btc-workspace { color: #e2e7ef; }
+.btc-workspace .panel { background: #111821; border-color: #2b3543; }
+.btc-workspace a { color: #9ac6ee; }
+.btc-intro { display: flex; justify-content: space-between; align-items: center; margin: 24px 0 12px; gap: 16px; }
+.btc-intro h2 { font-size: 26px; margin: 10px 0; }
+.btc-intro p, .btc-workspace .eyebrow, .regime-evidence, .regime-key, .chart-help { color: #9ca9b9; font-size: 12px; line-height: 1.7; }
+.btc-kpis { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #2b3543; margin-top: 20px; background: #111821; }
+.btc-kpis > div { padding: 18px; border: 1px solid #202a37; display: grid; gap: 8px; }
+.btc-kpis span { color: #9ca9b9; font-size: 12px; }
+.btc-kpis strong { font-size: 23px; text-transform: capitalize; font-weight: 500; }
+.btc-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; padding: 12px 0; }
+.btc-controls label { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; color: #b8c4d2; font-size: 12px; }
+.btc-controls input, .btc-controls select { background: #111821; color: #e2e7ef; border: 1px solid #384556; padding: 8px; border-radius: 3px; color-scheme: dark; }
+.btc-controls input[type=checkbox] { width: auto; }
+.btc-workspace button.active { color: #111821; background: #b3cee8; border-color: #b3cee8; }
+.research-chart { margin-top: 14px; padding: 0 12px; min-width: 0; }
+.research-chart .panelhead { padding: 14px 4px; }
+.research-chart .panelhead h2 { font-size: 15px; }
+.research-chart .panelhead button { font-size: 10px; margin: 0 0 0 6px; }
+.research-chart .uplot { font-family: 'DM Mono', monospace; color: #b8c4d2; font-size: 11px; max-width: 100%; }
+.research-chart .u-legend { display: flex; flex-wrap: wrap; justify-content: center; }
+.research-chart .u-legend .u-series { margin: 5px 7px; }
+.research-chart .u-cursor-x, .research-chart .u-cursor-y { border-color: #8195ae; }
+.chart-help { margin: 4px 8px 12px; }
+.btc-cycle-heading { margin-top: 32px; }
+.btc-cycle-heading p, .btc-study p, .btc-method p, .btc-study li { font-size: 12px; line-height: 1.8; color: #aebccc; }
+.btc-study, .btc-method, .btc-empty { margin-top: 22px; padding: 18px; }
+.btc-study .panelhead { padding: 0; }
+.btc-table-wrap { overflow: auto; }
+.btc-workspace table { width: 100%; border-collapse: collapse; font-size: 11px; white-space: nowrap; }
+.btc-workspace th, .btc-workspace td { text-align: left; padding: 12px 10px; border-bottom: 1px solid #2b3543; }
+.btc-workspace th { color: #aebccc; font-weight: 400; }
+.btc-workspace details { padding-top: 12px; }
+.btc-workspace summary { cursor: pointer; font-size: 13px; padding-bottom: 10px; }
+.study-identity { overflow-wrap: anywhere; }
+@media (max-width: 800px) { .btc-kpis { grid-template-columns: repeat(2, 1fr); } .btc-intro { display: block; } .btc-kpis strong { font-size: 18px; } .research-chart .panelhead { flex-wrap: wrap; gap: 8px; } }
 .asset-link {
   border: 0;
   padding: 0;
@@ -187,11 +223,12 @@ body {
 .shell {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 220px minmax(0, 1fr);
   background:
     radial-gradient(circle at 75% -10%, #153126, transparent 35%), #08100d;
 }
 aside {
+  min-width: 0;
   border-right: 1px solid #24352d;
   padding: 28px 16px;
   display: flex;
@@ -229,6 +266,7 @@ aside strong {
   color: #c8f85c;
 }
 main {
+  min-width: 0;
   padding: 42px clamp(22px, 5vw, 74px);
   max-width: 1400px;
   width: 100%;
@@ -487,7 +525,7 @@ footer {
 }
 @media (max-width: 600px) {
   .shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   aside {
     border-right: 0;

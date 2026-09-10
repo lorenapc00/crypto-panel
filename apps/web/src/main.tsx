@@ -7,6 +7,7 @@ import { Research } from "./pages/Research";
 import { ThesisNotes } from "./components/ThesisNotes";
 import { SavedScreens,type Selection } from "./components/SavedScreens";
 import { WorkspaceAccess } from "./components/WorkspaceAccess";
+import { BtcCycles } from "./pages/BtcCycles";
 
 type Asset = {
   id: string;
@@ -88,9 +89,10 @@ type AssetDetail = {
   fundamentals: Fundamentals;
   tokenomicsEvents: TokenomicsEvent[];
 };
-type Page = "overview" | "assets" | "watchlist" | "research" | "data-health";
+type Page = "overview" | "btc" | "assets" | "watchlist" | "research" | "data-health";
 const pages: { id: Page; label: string }[] = [
   { id: "overview", label: "Overview" },
+  { id: "btc", label: "BTC Cycles" },
   { id: "assets", label: "Assets" },
   { id: "watchlist", label: "Watchlist" },
   { id:"research",label:"Research" },
@@ -793,6 +795,7 @@ function App() {
             {page === "assets" && <Assets key={route} select={select} />}{" "}
             {page === "watchlist" && <Watchlist />}{" "}
             {page === "research" && <Research />}
+            {page === "btc" && <BtcCycles />}
             {page === "data-health" && <DataHealth />}
           </>
         )}

@@ -45,10 +45,11 @@ export async function saveNote(database: Pool, input: unknown, noteId?: string) 
 export async function savePreference(database: Pool, key: string, input: unknown) {
   let value: unknown;
   if (key === 'asset-screen') value = filters(input);
-  else if (key === 'price-chart') {
+  else if (key === 'price-chart' || key === 'btc-chart') {
     const row = object(input);
     if (!['30D','90D','1Y','All'].includes(String(row.range))) throw new InputError('Invalid chart range');
-    value = { range:row.range };
+    if (key === 'btc-chart' && typeof row.log !== 'boolean') throw new InputError('Invalid chart scale');
+    value = key === 'btc-chart' ? { range:row.range, log:row.log } : { range:row.range };
   } else throw new InputError('Unsupported preference');
   await database.query(`insert into research_preferences (key,value) values ($1,$2) on conflict (key)
     do update set value=excluded.value,updated_at=clock_timestamp()`, [key,value]);

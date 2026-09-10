@@ -4,6 +4,7 @@ import type { Pool } from "pg";
 import { InputError, id } from "./research/validation.js";
 import { send, authorize, cutoff } from "./http.js";
 import { researchRoute } from "./research/routes.js";
+import { btcRoute } from "./btc/routes.js";
 import { readSeries } from "./archive.js";
 import { assetDetails, marketData, marketOverview } from "./market.js";
 import { fundamentals } from "./fundamentals.js";
@@ -20,6 +21,7 @@ return createServer({requestTimeout:15000,headersTimeout:10000},async (req, res)
     if (url.pathname === '/api/v1/auth/dev-session') return send(res,410,{error:'Development sessions have been removed; this is one persistent personal workspace'});
     if (!url.pathname.startsWith('/api/v1/')) return send(res,404,{error:'Not found'});
     if (await researchRoute(database,req,res,url)) return;
+    if (await btcRoute(database,req,res,url)) return;
     if (req.method !== 'GET') return send(res,405,{error:'Method not allowed'});
     if (url.pathname === '/api/v1/series') {
       const assetId=url.searchParams.get('asset'),metric=url.searchParams.get('metric'),interval=url.searchParams.get('interval');

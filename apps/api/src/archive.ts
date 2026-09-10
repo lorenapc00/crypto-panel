@@ -98,7 +98,7 @@ export async function appendSeries(client: PoolClient, payloadId: string, source
 
 export class ReplayCoverageError extends Error {}
 
-export async function readSeries(seriesId: string, options: { from?: string; to?: string; asOf?: string; limit?: number } = {}, database: Pool = pool) {
+export async function readSeries(seriesId: string, options: { from?: string; to?: string; asOf?: string; limit?: number } = {}, database: Pick<Pool, 'query'> = pool) {
   const limit = options.limit ?? 365;
   if (!Number.isSafeInteger(limit) || limit < 1 || limit > 10000) throw new Error("Series limit must be between 1 and 10000");
   for (const value of [options.from, options.to, options.asOf]) if (value !== undefined) checkTime(value);

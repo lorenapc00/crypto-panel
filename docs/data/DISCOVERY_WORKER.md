@@ -66,14 +66,15 @@ supervisor can restart it; unresolved reservations remain visible and charged.
 | `mempool:bitcoin:tip:v1` | Hourly | Tip height and derived subsidy era |
 | `solana-rpc:solana:inflation:v1` | Hourly | Observed annualized inflation parameter; not realized net issuance |
 | `coingecko:{asset}:daily-history:v1` | Daily, 00:15 UTC | BTC/ETH/SOL/HYPE daily USD price and sampled trailing-24-hour volume; historical reconstruction before archive coverage |
+| `coinmetrics:bitcoin:daily-history:v1` | Daily, 02:00 UTC | BTC PriceUSD, CapMrktCurUSD, CapMVRVCur and SplyCur; complete history in one quota-controlled batch, with original UTC day labels and independent metric coverage |
 | `defillama:{asset}:{metric}:daily-history:v1` | Daily, 00:30 UTC | Eight histories: ETH/SOL chain fees/TVL and Hyperliquid protocol fees/revenue/holder revenue/TVL |
 | `hyperliquid:book:BTC:v1` | Hourly | Native BTC top-20 book, spread/depth and estimated impact in USDC; no assumed USD peg |
 | `hyperliquid:funding:BTC:v1` | Hourly | Last two hours of settled native BTC funding rates, hourly interval; not account cash flows |
 | `dexscreener:{chain}:{pairs\|orders}:slot{0..19}:v1` | Hourly | Up to 20 distinct sampled base tokens per chain, using a pool snapshot at most one hour old |
 
-There are 120 scheduled definitions, including 80 spot enrichment slots. An empty
+There are 121 scheduled definitions, including 80 spot enrichment slots. An empty
 slot is skipped without HTTP or replay coverage. CoinGecko produces eight series,
-DefiLlama another eight. Historical Hyperliquid TVL contains irregular timestamps;
+DefiLlama another eight, and Coin Metrics four (20 total). Historical Hyperliquid TVL contains irregular timestamps;
 these are preserved and flagged, never shifted to fabricate regular daily bars.
 Base Uniswap v4 pool IDs may be bytes32; pair identity is stored separately from
 token contract addresses. Pair liquidity and risk fields remain unknown when
@@ -166,8 +167,9 @@ For a headless health read without starting the API, use
 `pnpm --filter @crypto-panel/api worker --health`. This reads persisted health and
 exits without scheduling or fetching.
 
-Not yet scheduled: multi-cycle Coin Metrics BTC history, macro, broad fundamentals,
-OI/stablecoin series and backtests. These follow the product sequence and individual
+Coin Metrics multi-cycle BTC history is scheduled and supports the [BTC research
+and study primitive](BTC_RESEARCH.md). Not yet scheduled: macro, broad fundamentals,
+additional OI/stablecoin series and strategy backtests. These follow the product sequence and individual
 feed gates. Watchlists, notes/revisions, screens/preferences and threshold alerts
 now persist in PostgreSQL. API reads are stored-only.
 `/assets` and `/overview` accept `asOf`; pre-coverage requests return 409.

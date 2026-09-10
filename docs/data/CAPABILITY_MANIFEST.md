@@ -40,6 +40,15 @@ Demo history is documented as limited to 365 days; its chart response reports pr
 
 ### Coin Metrics: use the Community API for BTC
 
+**Stage 2 follow-up — 2026-09-09 local:** the production worker now schedules one
+daily batch for PriceUSD, CapMrktCurUSD, CapMVRVCur and SplyCur, within the existing
+100-request monthly ceiling. The first request archived 5,898 prices through
+2026-09-09; the other three metrics have null latest-day values and retain their
+2026-09-08 populated endpoints. There are now 121 jobs and 20 normalized series.
+BTC Cycles and immutable descriptive signal studies are implemented. See
+[live evidence](stage2-btc-2026-09-09.json) and [timestamp/formula conventions](BTC_RESEARCH.md).
+The original Stage 0 evidence below is retained unchanged.
+
 `cm-btc-core-batch` returned all seven requested daily metrics in one unpaginated response. Bounds below are **numeric metric coverage**, not the first date in the response.
 
 | Metric | Observed numeric history | Scope / initial use |
@@ -160,8 +169,8 @@ instead of manufacturing daily bars. DEX Screener Base Uniswap v4 pairs can use
 bytes32 pool IDs; token contracts still require their own valid chain identity.
 These findings came from archived response inspection and successful bounded
 retries; the original failures remain recorded quota evidence.
-Of the 16 normalized series, 11 have healthy spacing/coverage and five flag
+At Stage 1 finalization, of the 16 normalized series, 11 had healthy spacing/coverage and five flagged
 irregular steps. Four of those retain missing historical fee/revenue dates;
 successful current acquisition does not fill or conceal provider history gaps.
 
-Stage 2 can then ship BTC price-derived research and its signal-study primitive. MVRV and other verified inputs may follow with their individual definitions. Perp-volume market-share sorting and inaccessible metrics are excluded from initial interface commitments.
+Stage 2's BTC core and signal-study primitive are implemented, including Coin Metrics MVRV and matched-date derived realized price. Venue leverage/capital context and other inputs still require their individual definitions and coverage checks. Perp-volume market-share sorting and inaccessible metrics remain excluded from initial interface commitments.
