@@ -1,0 +1,1867 @@
+{
+  "checkedAt": "2026-09-10T01:57:43.335Z",
+  "timezone": "America/Sao_Paulo",
+  "scope": "Local supervised Mac; continuous hosting remains unverified",
+  "migrations": [
+    {
+      "version": 1,
+      "applied_at": "2026-09-09T12:44:57.383Z"
+    },
+    {
+      "version": 2,
+      "applied_at": "2026-09-09T12:44:57.453Z"
+    },
+    {
+      "version": 3,
+      "applied_at": "2026-09-09T13:26:43.786Z"
+    },
+    {
+      "version": 4,
+      "applied_at": "2026-09-10T00:58:54.572Z"
+    },
+    {
+      "version": 5,
+      "applied_at": "2026-09-10T01:31:27.876Z"
+    },
+    {
+      "version": 6,
+      "applied_at": "2026-09-10T01:31:27.911Z"
+    },
+    {
+      "version": 7,
+      "applied_at": "2026-09-10T01:50:32.473Z"
+    }
+  ],
+  "services": [
+    {
+      "name": "worker",
+      "state": "running",
+      "pid": 38650,
+      "lastExitCode": "0"
+    },
+    {
+      "name": "backup",
+      "state": "not running",
+      "pid": null,
+      "lastExitCode": "0"
+    }
+  ],
+  "restartTest": {
+    "previousPid": 37140,
+    "newPid": 38650,
+    "elapsedSeconds": 1.011
+  },
+  "postgresRestart": "unless-stopped",
+  "endpoints": [
+    {
+      "path": "/workspace",
+      "status": 200
+    },
+    {
+      "path": "/overview",
+      "status": 200
+    },
+    {
+      "path": "/assets",
+      "status": 200
+    },
+    {
+      "path": "/assets/bitcoin",
+      "status": 200
+    },
+    {
+      "path": "/data-health",
+      "status": 200
+    },
+    {
+      "path": "/research/notes?assetId=bitcoin",
+      "status": 200
+    }
+  ],
+  "summary": {
+    "jobs": 120,
+    "jobStates": {
+      "healthy": 112,
+      "unavailable": 8
+    },
+    "latestRunStatuses": {
+      "succeeded": 112,
+      "skipped": 8
+    },
+    "series": 16,
+    "seriesStates": {
+      "healthy": 11,
+      "irregular": 5
+    }
+  },
+  "jobs": [
+    {
+      "id": "coingecko:bitcoin:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:36:43.498Z",
+      "last_success_at": "2026-09-10T01:36:43.241Z"
+    },
+    {
+      "id": "coingecko:ethereum:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:00.543Z",
+      "last_success_at": "2026-09-10T01:37:00.463Z"
+    },
+    {
+      "id": "coingecko:global:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:00:26.949Z",
+      "last_success_at": "2026-09-10T01:00:26.913Z"
+    },
+    {
+      "id": "coingecko:hyperliquid:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:16.573Z",
+      "last_success_at": "2026-09-10T01:37:16.504Z"
+    },
+    {
+      "id": "coingecko:market:top100:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:00:39.459Z",
+      "last_success_at": "2026-09-10T01:00:39.397Z"
+    },
+    {
+      "id": "coingecko:solana:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:31.200Z",
+      "last_success_at": "2026-09-10T01:37:31.114Z"
+    },
+    {
+      "id": "defillama:ethereum:fees:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:36:46.886Z",
+      "last_success_at": "2026-09-10T01:36:46.332Z"
+    },
+    {
+      "id": "defillama:ethereum:fees_24h_usd:snapshot:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:00:28.031Z",
+      "last_success_at": "2026-09-10T01:00:27.954Z"
+    },
+    {
+      "id": "defillama:ethereum:tvl:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:36:57.926Z",
+      "last_success_at": "2026-09-10T01:36:57.127Z"
+    },
+    {
+      "id": "defillama:ethereum:tvl_usd:snapshot:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:00:35.276Z",
+      "last_success_at": "2026-09-10T01:00:35.219Z"
+    },
+    {
+      "id": "defillama:hyperliquid:fees:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:05.193Z",
+      "last_success_at": "2026-09-10T01:37:05.074Z"
+    },
+    {
+      "id": "defillama:hyperliquid:fees_24h_usd:snapshot:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:00:42.003Z",
+      "last_success_at": "2026-09-10T01:00:41.985Z"
+    },
+    {
+      "id": "defillama:hyperliquid:holder_revenue:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:14.231Z",
+      "last_success_at": "2026-09-10T01:37:14.119Z"
+    },
+    {
+      "id": "defillama:hyperliquid:revenue:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:23.277Z",
+      "last_success_at": "2026-09-10T01:37:23.160Z"
+    },
+    {
+      "id": "defillama:hyperliquid:revenue_24h_usd:snapshot:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:00:49.154Z",
+      "last_success_at": "2026-09-10T01:00:49.126Z"
+    },
+    {
+      "id": "defillama:hyperliquid:tvl:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:50:46.178Z",
+      "last_success_at": "2026-09-10T01:50:45.940Z"
+    },
+    {
+      "id": "defillama:hyperliquid:tvl_usd:snapshot:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:00:55.838Z",
+      "last_success_at": "2026-09-10T01:00:55.780Z"
+    },
+    {
+      "id": "defillama:protocols:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:34:41.376Z",
+      "last_success_at": "2026-09-10T01:01:07.157Z"
+    },
+    {
+      "id": "defillama:solana:fees:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:38.297Z",
+      "last_success_at": "2026-09-10T01:37:38.020Z"
+    },
+    {
+      "id": "defillama:solana:fees_24h_usd:snapshot:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:01:10.843Z",
+      "last_success_at": "2026-09-10T01:01:10.794Z"
+    },
+    {
+      "id": "defillama:solana:tvl:daily-history:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:43.240Z",
+      "last_success_at": "2026-09-10T01:37:43.011Z"
+    },
+    {
+      "id": "defillama:solana:tvl_usd:snapshot:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:01:16.505Z",
+      "last_success_at": "2026-09-10T01:01:16.457Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot0:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:36:47.431Z",
+      "last_success_at": "2026-09-10T01:36:47.413Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot10:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:05.713Z",
+      "last_success_at": "2026-09-10T01:37:05.655Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot11:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:36:53.476Z",
+      "last_success_at": "2026-09-10T01:36:53.444Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot12:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:00.864Z",
+      "last_success_at": "2026-09-10T01:37:00.838Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot13:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:14.623Z",
+      "last_success_at": "2026-09-10T01:37:14.602Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot14:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:23.690Z",
+      "last_success_at": "2026-09-10T01:37:23.661Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot15:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:34.768Z",
+      "last_success_at": "2026-09-10T01:37:34.754Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot16:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:41.611Z",
+      "last_success_at": "2026-09-10T01:37:41.591Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot17:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:38.639Z",
+      "last_success_at": "2026-09-10T01:37:38.611Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot18:v1",
+      "state": "unavailable",
+      "last_run_status": "skipped",
+      "last_run_error": "No eligible source member",
+      "replay_coverage_start": null,
+      "last_success_at": null
+    },
+    {
+      "id": "dexscreener:base:orders:slot19:v1",
+      "state": "unavailable",
+      "last_run_status": "skipped",
+      "last_run_error": "No eligible source member",
+      "replay_coverage_start": null,
+      "last_success_at": null
+    },
+    {
+      "id": "dexscreener:base:orders:slot1:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:43.519Z",
+      "last_success_at": "2026-09-10T01:37:43.503Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot2:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:46.141Z",
+      "last_success_at": "2026-09-10T01:37:46.125Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot3:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:48.962Z",
+      "last_success_at": "2026-09-10T01:37:48.944Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot4:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:51.198Z",
+      "last_success_at": "2026-09-10T01:37:51.182Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot5:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:53.574Z",
+      "last_success_at": "2026-09-10T01:37:53.553Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot6:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:31.884Z",
+      "last_success_at": "2026-09-10T01:37:31.872Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot7:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:56.125Z",
+      "last_success_at": "2026-09-10T01:37:56.108Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot8:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:58.344Z",
+      "last_success_at": "2026-09-10T01:37:58.328Z"
+    },
+    {
+      "id": "dexscreener:base:orders:slot9:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:00.536Z",
+      "last_success_at": "2026-09-10T01:38:00.524Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot0:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:50:47.578Z",
+      "last_success_at": "2026-09-10T01:50:47.562Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot10:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:50:52.812Z",
+      "last_success_at": "2026-09-10T01:50:52.778Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot11:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:50:50.677Z",
+      "last_success_at": "2026-09-10T01:50:50.660Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot12:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:50:57.637Z",
+      "last_success_at": "2026-09-10T01:50:57.620Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot13:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:50:45.036Z",
+      "last_success_at": "2026-09-10T01:50:44.985Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot14:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:50:54.879Z",
+      "last_success_at": "2026-09-10T01:50:54.845Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot15:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:51:00.350Z",
+      "last_success_at": "2026-09-10T01:51:00.333Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot16:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:51:03.110Z",
+      "last_success_at": "2026-09-10T01:51:03.054Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot17:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:16.526Z",
+      "last_success_at": "2026-09-10T01:38:16.512Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot18:v1",
+      "state": "unavailable",
+      "last_run_status": "skipped",
+      "last_run_error": "No eligible source member",
+      "replay_coverage_start": null,
+      "last_success_at": null
+    },
+    {
+      "id": "dexscreener:base:pairs:slot19:v1",
+      "state": "unavailable",
+      "last_run_status": "skipped",
+      "last_run_error": "No eligible source member",
+      "replay_coverage_start": null,
+      "last_success_at": null
+    },
+    {
+      "id": "dexscreener:base:pairs:slot1:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:51:08.124Z",
+      "last_success_at": "2026-09-10T01:51:08.107Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot2:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:22.470Z",
+      "last_success_at": "2026-09-10T01:38:22.458Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot3:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:24.882Z",
+      "last_success_at": "2026-09-10T01:38:24.868Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot4:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:51:05.315Z",
+      "last_success_at": "2026-09-10T01:51:05.298Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot5:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:51:10.929Z",
+      "last_success_at": "2026-09-10T01:51:10.908Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot6:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:51:13.676Z",
+      "last_success_at": "2026-09-10T01:51:13.659Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot7:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:33.715Z",
+      "last_success_at": "2026-09-10T01:38:33.699Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot8:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:51:16.324Z",
+      "last_success_at": "2026-09-10T01:51:16.309Z"
+    },
+    {
+      "id": "dexscreener:base:pairs:slot9:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:51:18.919Z",
+      "last_success_at": "2026-09-10T01:51:18.883Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot0:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:39.364Z",
+      "last_success_at": "2026-09-10T01:38:39.350Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot10:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:42.279Z",
+      "last_success_at": "2026-09-10T01:38:42.266Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot11:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:36:49.390Z",
+      "last_success_at": "2026-09-10T01:36:49.364Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot12:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:36:58.460Z",
+      "last_success_at": "2026-09-10T01:36:58.446Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot13:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:45.197Z",
+      "last_success_at": "2026-09-10T01:38:45.183Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot14:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:47.980Z",
+      "last_success_at": "2026-09-10T01:38:47.966Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot15:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:50.733Z",
+      "last_success_at": "2026-09-10T01:38:50.718Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot16:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:53.482Z",
+      "last_success_at": "2026-09-10T01:38:53.469Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot17:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:11.701Z",
+      "last_success_at": "2026-09-10T01:37:11.678Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot18:v1",
+      "state": "unavailable",
+      "last_run_status": "skipped",
+      "last_run_error": "No eligible source member",
+      "replay_coverage_start": null,
+      "last_success_at": null
+    },
+    {
+      "id": "dexscreener:solana:orders:slot19:v1",
+      "state": "unavailable",
+      "last_run_status": "skipped",
+      "last_run_error": "No eligible source member",
+      "replay_coverage_start": null,
+      "last_success_at": null
+    },
+    {
+      "id": "dexscreener:solana:orders:slot1:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:02.860Z",
+      "last_success_at": "2026-09-10T01:37:02.836Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot2:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:16.839Z",
+      "last_success_at": "2026-09-10T01:37:16.817Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot3:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:56.139Z",
+      "last_success_at": "2026-09-10T01:38:56.128Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot4:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:38:58.865Z",
+      "last_success_at": "2026-09-10T01:38:58.849Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot5:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:01.456Z",
+      "last_success_at": "2026-09-10T01:39:01.443Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot6:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:04.050Z",
+      "last_success_at": "2026-09-10T01:39:04.037Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot7:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:06.654Z",
+      "last_success_at": "2026-09-10T01:39:06.639Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot8:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:20.977Z",
+      "last_success_at": "2026-09-10T01:37:20.943Z"
+    },
+    {
+      "id": "dexscreener:solana:orders:slot9:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:09.247Z",
+      "last_success_at": "2026-09-10T01:39:09.232Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot0:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:11.827Z",
+      "last_success_at": "2026-09-10T01:39:11.813Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot10:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:14.360Z",
+      "last_success_at": "2026-09-10T01:39:14.344Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot11:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:16.869Z",
+      "last_success_at": "2026-09-10T01:39:16.854Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot12:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:19.214Z",
+      "last_success_at": "2026-09-10T01:39:19.203Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot13:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:21.525Z",
+      "last_success_at": "2026-09-10T01:39:21.507Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot14:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:24.000Z",
+      "last_success_at": "2026-09-10T01:39:23.986Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot15:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:26.450Z",
+      "last_success_at": "2026-09-10T01:39:26.434Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot16:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:28.899Z",
+      "last_success_at": "2026-09-10T01:39:28.883Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot17:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:25.687Z",
+      "last_success_at": "2026-09-10T01:37:25.665Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot18:v1",
+      "state": "unavailable",
+      "last_run_status": "skipped",
+      "last_run_error": "No eligible source member",
+      "replay_coverage_start": null,
+      "last_success_at": null
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot19:v1",
+      "state": "unavailable",
+      "last_run_status": "skipped",
+      "last_run_error": "No eligible source member",
+      "replay_coverage_start": null,
+      "last_success_at": null
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot1:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:31.293Z",
+      "last_success_at": "2026-09-10T01:39:31.278Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot2:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:33.723Z",
+      "last_success_at": "2026-09-10T01:39:33.710Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot3:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:36.083Z",
+      "last_success_at": "2026-09-10T01:39:36.069Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot4:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:36:51.440Z",
+      "last_success_at": "2026-09-10T01:36:51.420Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot5:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:40.699Z",
+      "last_success_at": "2026-09-10T01:39:40.680Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot6:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:38.381Z",
+      "last_success_at": "2026-09-10T01:39:38.367Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot7:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:39:43.008Z",
+      "last_success_at": "2026-09-10T01:39:42.994Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot8:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:09.682Z",
+      "last_success_at": "2026-09-10T01:37:09.661Z"
+    },
+    {
+      "id": "dexscreener:solana:pairs:slot9:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:37:27.852Z",
+      "last_success_at": "2026-09-10T01:37:27.832Z"
+    },
+    {
+      "id": "geckoterminal:pools:base:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:34:41.692Z",
+      "last_success_at": "2026-09-10T01:55:01.159Z"
+    },
+    {
+      "id": "geckoterminal:pools:solana:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:34:54.030Z",
+      "last_success_at": "2026-09-10T01:55:13.743Z"
+    },
+    {
+      "id": "hyperliquid:book:BTC:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:36:52.785Z",
+      "last_success_at": "2026-09-10T01:36:52.762Z"
+    },
+    {
+      "id": "hyperliquid:funding:BTC:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:36:53.149Z",
+      "last_success_at": "2026-09-10T01:36:53.129Z"
+    },
+    {
+      "id": "hyperliquid:instruments:abcd:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:34:42.286Z",
+      "last_success_at": "2026-09-10T01:00:29.122Z"
+    },
+    {
+      "id": "hyperliquid:instruments:cash:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:34:47.013Z",
+      "last_success_at": "2026-09-10T01:00:34.360Z"
+    },
+    {
+      "id": "hyperliquid:instruments:flx:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:34:51.680Z",
+      "last_success_at": "2026-09-10T01:00:38.918Z"
+    },
+    {
+      "id": "hyperliquid:instruments:hyna:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:34:56.428Z",
+      "last_success_at": "2026-09-10T01:00:43.481Z"
+    },
+    {
+      "id": "hyperliquid:instruments:io:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:35:01.205Z",
+      "last_success_at": "2026-09-10T01:00:48.247Z"
+    },
+    {
+      "id": "hyperliquid:instruments:km:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:35:05.862Z",
+      "last_success_at": "2026-09-10T01:00:52.822Z"
+    },
+    {
+      "id": "hyperliquid:instruments:mkts:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:35:10.565Z",
+      "last_success_at": "2026-09-10T01:00:57.528Z"
+    },
+    {
+      "id": "hyperliquid:instruments:native:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:35:15.213Z",
+      "last_success_at": "2026-09-10T01:01:01.967Z"
+    },
+    {
+      "id": "hyperliquid:instruments:para:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:35:19.815Z",
+      "last_success_at": "2026-09-10T01:01:11.232Z"
+    },
+    {
+      "id": "hyperliquid:instruments:vntl:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:35:24.332Z",
+      "last_success_at": "2026-09-10T01:01:15.940Z"
+    },
+    {
+      "id": "hyperliquid:instruments:xyz:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:35:29.199Z",
+      "last_success_at": "2026-09-10T01:01:20.450Z"
+    },
+    {
+      "id": "hyperliquid:namespaces:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-09T13:35:33.677Z",
+      "last_success_at": "2026-09-10T01:01:24.200Z"
+    },
+    {
+      "id": "mempool:bitcoin:tip:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:00:33.436Z",
+      "last_success_at": "2026-09-10T01:00:33.417Z"
+    },
+    {
+      "id": "solana-rpc:solana:inflation:v1",
+      "state": "healthy",
+      "last_run_status": "succeeded",
+      "last_run_error": null,
+      "replay_coverage_start": "2026-09-10T01:00:34.031Z",
+      "last_success_at": "2026-09-10T01:00:34.015Z"
+    }
+  ],
+  "series": [
+    {
+      "id": "coingecko:bitcoin:price_usd:daily-sample:v1",
+      "asset_id": "bitcoin",
+      "symbol": "BTC",
+      "metric_code": "price_usd",
+      "source_id": "coingecko",
+      "scope": "asset",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "daily-sample:v1",
+      "replay_coverage_start": "2026-09-10T01:36:43.396Z",
+      "last_success_at": "2026-09-10T01:36:43.385Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 365,
+      "dataset_id": "coingecko:bitcoin:daily-history:v1",
+      "last_observation_at": "2026-09-10T00:00:00.000Z",
+      "last_value": 78283.06047169256,
+      "seconds_since_success": 1259.963431,
+      "expected_latest_at": "2026-09-10T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 1,
+      "last_detected_at": "2026-09-10T01:36:42.790Z",
+      "maximum_detection_latency_seconds": 5802.790059,
+      "state": "healthy"
+    },
+    {
+      "id": "coingecko:bitcoin:volume_24h_usd:daily-sample:v1",
+      "asset_id": "bitcoin",
+      "symbol": "BTC",
+      "metric_code": "volume_24h_usd",
+      "source_id": "coingecko",
+      "scope": "asset",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "daily-sample:v1",
+      "replay_coverage_start": "2026-09-10T01:36:43.479Z",
+      "last_success_at": "2026-09-10T01:36:43.475Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 365,
+      "dataset_id": "coingecko:bitcoin:daily-history:v1",
+      "last_observation_at": "2026-09-10T00:00:00.000Z",
+      "last_value": 34938279858.59001,
+      "seconds_since_success": 1259.874355,
+      "expected_latest_at": "2026-09-10T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 1,
+      "last_detected_at": "2026-09-10T01:36:42.794Z",
+      "maximum_detection_latency_seconds": 5802.794839,
+      "state": "healthy"
+    },
+    {
+      "id": "coingecko:ethereum:price_usd:daily-sample:v1",
+      "asset_id": "ethereum",
+      "symbol": "ETH",
+      "metric_code": "price_usd",
+      "source_id": "coingecko",
+      "scope": "asset",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "daily-sample:v1",
+      "replay_coverage_start": "2026-09-10T01:37:00.528Z",
+      "last_success_at": "2026-09-10T01:37:00.527Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 365,
+      "dataset_id": "coingecko:ethereum:daily-history:v1",
+      "last_observation_at": "2026-09-10T00:00:00.000Z",
+      "last_value": 2467.529167979314,
+      "seconds_since_success": 1242.821873,
+      "expected_latest_at": "2026-09-10T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 1,
+      "last_detected_at": "2026-09-10T01:36:42.800Z",
+      "maximum_detection_latency_seconds": 5802.800994,
+      "state": "healthy"
+    },
+    {
+      "id": "coingecko:ethereum:volume_24h_usd:daily-sample:v1",
+      "asset_id": "ethereum",
+      "symbol": "ETH",
+      "metric_code": "volume_24h_usd",
+      "source_id": "coingecko",
+      "scope": "asset",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "daily-sample:v1",
+      "replay_coverage_start": "2026-09-10T01:37:00.540Z",
+      "last_success_at": "2026-09-10T01:37:00.539Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 365,
+      "dataset_id": "coingecko:ethereum:daily-history:v1",
+      "last_observation_at": "2026-09-10T00:00:00.000Z",
+      "last_value": 13328861510.407354,
+      "seconds_since_success": 1242.810266,
+      "expected_latest_at": "2026-09-10T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 1,
+      "last_detected_at": "2026-09-10T01:36:42.810Z",
+      "maximum_detection_latency_seconds": 5802.810851,
+      "state": "healthy"
+    },
+    {
+      "id": "defillama:ethereum:fees_24h_usd:daily:v1",
+      "asset_id": "ethereum",
+      "symbol": "ETH",
+      "metric_code": "fees_24h_usd",
+      "source_id": "defillama",
+      "scope": "chain",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "fundamental-daily:v1",
+      "replay_coverage_start": "2026-09-10T01:36:46.882Z",
+      "last_success_at": "2026-09-10T01:36:46.881Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 5,
+      "last_response_points": 3084,
+      "dataset_id": "defillama:ethereum:fees:daily-history:v1",
+      "last_observation_at": "2026-09-09T00:00:00.000Z",
+      "last_value": 6872147.379999999,
+      "seconds_since_success": 1256.468143,
+      "expected_latest_at": "2026-09-09T00:00:00.000Z",
+      "missing_intervals": 6,
+      "resolved_gaps": 0,
+      "last_detected_at": "2026-09-10T01:37:42.858Z",
+      "maximum_detection_latency_seconds": 264217062.85827,
+      "state": "irregular"
+    },
+    {
+      "id": "defillama:ethereum:tvl_usd:daily:v1",
+      "asset_id": "ethereum",
+      "symbol": "ETH",
+      "metric_code": "tvl_usd",
+      "source_id": "defillama",
+      "scope": "chain",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "fundamental-daily:v1",
+      "replay_coverage_start": "2026-09-10T01:36:57.918Z",
+      "last_success_at": "2026-09-10T01:36:57.914Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 3270,
+      "dataset_id": "defillama:ethereum:tvl:daily-history:v1",
+      "last_observation_at": "2026-09-09T00:00:00.000Z",
+      "last_value": 49248767431,
+      "seconds_since_success": 1245.434669,
+      "expected_latest_at": "2026-09-09T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 0,
+      "last_detected_at": null,
+      "maximum_detection_latency_seconds": null,
+      "state": "healthy"
+    },
+    {
+      "id": "coingecko:hyperliquid:price_usd:daily-sample:v1",
+      "asset_id": "hyperliquid",
+      "symbol": "HYPE",
+      "metric_code": "price_usd",
+      "source_id": "coingecko",
+      "scope": "asset",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "daily-sample:v1",
+      "replay_coverage_start": "2026-09-10T01:37:16.549Z",
+      "last_success_at": "2026-09-10T01:37:16.547Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 365,
+      "dataset_id": "coingecko:hyperliquid:daily-history:v1",
+      "last_observation_at": "2026-09-10T00:00:00.000Z",
+      "last_value": 83.56327349297841,
+      "seconds_since_success": 1226.802249,
+      "expected_latest_at": "2026-09-10T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 1,
+      "last_detected_at": "2026-09-10T01:36:42.820Z",
+      "maximum_detection_latency_seconds": 5802.820964,
+      "state": "healthy"
+    },
+    {
+      "id": "coingecko:hyperliquid:volume_24h_usd:daily-sample:v1",
+      "asset_id": "hyperliquid",
+      "symbol": "HYPE",
+      "metric_code": "volume_24h_usd",
+      "source_id": "coingecko",
+      "scope": "asset",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "daily-sample:v1",
+      "replay_coverage_start": "2026-09-10T01:37:16.568Z",
+      "last_success_at": "2026-09-10T01:37:16.567Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 365,
+      "dataset_id": "coingecko:hyperliquid:daily-history:v1",
+      "last_observation_at": "2026-09-10T00:00:00.000Z",
+      "last_value": 1212828739.1735473,
+      "seconds_since_success": 1226.782053,
+      "expected_latest_at": "2026-09-10T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 1,
+      "last_detected_at": "2026-09-10T01:36:42.826Z",
+      "maximum_detection_latency_seconds": 5802.826657,
+      "state": "healthy"
+    },
+    {
+      "id": "defillama:hyperliquid:fees_24h_usd:daily:v1",
+      "asset_id": "hyperliquid",
+      "symbol": "HYPE",
+      "metric_code": "fees_24h_usd",
+      "source_id": "defillama",
+      "scope": "protocol",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "fundamental-daily:v1",
+      "replay_coverage_start": "2026-09-10T01:37:05.189Z",
+      "last_success_at": "2026-09-10T01:37:05.187Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 2,
+      "last_response_points": 622,
+      "dataset_id": "defillama:hyperliquid:fees:daily-history:v1",
+      "last_observation_at": "2026-09-09T00:00:00.000Z",
+      "last_value": 18380,
+      "seconds_since_success": 1238.16203,
+      "expected_latest_at": "2026-09-09T00:00:00.000Z",
+      "missing_intervals": 4,
+      "resolved_gaps": 0,
+      "last_detected_at": "2026-09-10T01:37:42.881Z",
+      "maximum_detection_latency_seconds": 52364262.880572,
+      "state": "irregular"
+    },
+    {
+      "id": "defillama:hyperliquid:holder_revenue_24h_usd:daily:v1",
+      "asset_id": "hyperliquid",
+      "symbol": "HYPE",
+      "metric_code": "holder_revenue_24h_usd",
+      "source_id": "defillama",
+      "scope": "protocol",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "fundamental-daily:v1",
+      "replay_coverage_start": "2026-09-10T01:37:14.227Z",
+      "last_success_at": "2026-09-10T01:37:14.225Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 2,
+      "last_response_points": 621,
+      "dataset_id": "defillama:hyperliquid:holder_revenue:daily-history:v1",
+      "last_observation_at": "2026-09-08T00:00:00.000Z",
+      "last_value": 1800584,
+      "seconds_since_success": 1229.123772,
+      "expected_latest_at": "2026-09-09T00:00:00.000Z",
+      "missing_intervals": 5,
+      "resolved_gaps": 0,
+      "last_detected_at": "2026-09-10T01:37:42.884Z",
+      "maximum_detection_latency_seconds": 52364262.882723,
+      "state": "irregular"
+    },
+    {
+      "id": "defillama:hyperliquid:revenue_24h_usd:daily:v1",
+      "asset_id": "hyperliquid",
+      "symbol": "HYPE",
+      "metric_code": "revenue_24h_usd",
+      "source_id": "defillama",
+      "scope": "protocol",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "fundamental-daily:v1",
+      "replay_coverage_start": "2026-09-10T01:37:23.273Z",
+      "last_success_at": "2026-09-10T01:37:23.271Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 2,
+      "last_response_points": 622,
+      "dataset_id": "defillama:hyperliquid:revenue:daily-history:v1",
+      "last_observation_at": "2026-09-09T00:00:00.000Z",
+      "last_value": 0,
+      "seconds_since_success": 1220.077633,
+      "expected_latest_at": "2026-09-09T00:00:00.000Z",
+      "missing_intervals": 4,
+      "resolved_gaps": 0,
+      "last_detected_at": "2026-09-10T01:37:42.885Z",
+      "maximum_detection_latency_seconds": 52364262.884923,
+      "state": "irregular"
+    },
+    {
+      "id": "defillama:hyperliquid:tvl_usd:daily:v1",
+      "asset_id": "hyperliquid",
+      "symbol": "HYPE",
+      "metric_code": "tvl_usd",
+      "source_id": "defillama",
+      "scope": "protocol",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "fundamental-daily:v1",
+      "replay_coverage_start": "2026-09-10T01:50:46.175Z",
+      "last_success_at": "2026-09-10T01:50:46.173Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 1,
+      "last_response_points": 1190,
+      "dataset_id": "defillama:hyperliquid:tvl:daily-history:v1",
+      "last_observation_at": "2026-09-09T23:32:23.000Z",
+      "last_value": 6865699829,
+      "seconds_since_success": 417.176395,
+      "expected_latest_at": "2026-09-09T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 0,
+      "last_detected_at": null,
+      "maximum_detection_latency_seconds": null,
+      "state": "irregular"
+    },
+    {
+      "id": "coingecko:solana:price_usd:daily-sample:v1",
+      "asset_id": "solana",
+      "symbol": "SOL",
+      "metric_code": "price_usd",
+      "source_id": "coingecko",
+      "scope": "asset",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "daily-sample:v1",
+      "replay_coverage_start": "2026-09-10T01:37:31.173Z",
+      "last_success_at": "2026-09-10T01:37:31.171Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 365,
+      "dataset_id": "coingecko:solana:daily-history:v1",
+      "last_observation_at": "2026-09-10T00:00:00.000Z",
+      "last_value": 101.56828258356754,
+      "seconds_since_success": 1212.178225,
+      "expected_latest_at": "2026-09-10T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 1,
+      "last_detected_at": "2026-09-10T01:36:42.814Z",
+      "maximum_detection_latency_seconds": 5802.814902,
+      "state": "healthy"
+    },
+    {
+      "id": "coingecko:solana:volume_24h_usd:daily-sample:v1",
+      "asset_id": "solana",
+      "symbol": "SOL",
+      "metric_code": "volume_24h_usd",
+      "source_id": "coingecko",
+      "scope": "asset",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "daily-sample:v1",
+      "replay_coverage_start": "2026-09-10T01:37:31.190Z",
+      "last_success_at": "2026-09-10T01:37:31.188Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 365,
+      "dataset_id": "coingecko:solana:daily-history:v1",
+      "last_observation_at": "2026-09-10T00:00:00.000Z",
+      "last_value": 3168430582.0312,
+      "seconds_since_success": 1212.161239,
+      "expected_latest_at": "2026-09-10T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 1,
+      "last_detected_at": "2026-09-10T01:36:42.818Z",
+      "maximum_detection_latency_seconds": 5802.818718,
+      "state": "healthy"
+    },
+    {
+      "id": "defillama:solana:fees_24h_usd:daily:v1",
+      "asset_id": "solana",
+      "symbol": "SOL",
+      "metric_code": "fees_24h_usd",
+      "source_id": "defillama",
+      "scope": "chain",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "fundamental-daily:v1",
+      "replay_coverage_start": "2026-09-10T01:37:38.293Z",
+      "last_success_at": "2026-09-10T01:37:38.290Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 1669,
+      "dataset_id": "defillama:solana:fees:daily-history:v1",
+      "last_observation_at": "2026-09-09T00:00:00.000Z",
+      "last_value": 4540783.34,
+      "seconds_since_success": 1205.058651,
+      "expected_latest_at": "2026-09-09T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 0,
+      "last_detected_at": null,
+      "maximum_detection_latency_seconds": null,
+      "state": "healthy"
+    },
+    {
+      "id": "defillama:solana:tvl_usd:daily:v1",
+      "asset_id": "solana",
+      "symbol": "SOL",
+      "metric_code": "tvl_usd",
+      "source_id": "defillama",
+      "scope": "chain",
+      "unit": "USD",
+      "interval_seconds": 86400,
+      "methodology_version": "fundamental-daily:v1",
+      "replay_coverage_start": "2026-09-10T01:37:43.237Z",
+      "last_success_at": "2026-09-10T01:37:43.235Z",
+      "detected_interval_seconds": 86400,
+      "irregular_intervals": 0,
+      "last_response_points": 2003,
+      "dataset_id": "defillama:solana:tvl:daily-history:v1",
+      "last_observation_at": "2026-09-09T00:00:00.000Z",
+      "last_value": 5794720577,
+      "seconds_since_success": 1200.114016,
+      "expected_latest_at": "2026-09-09T00:00:00.000Z",
+      "missing_intervals": 0,
+      "resolved_gaps": 0,
+      "last_detected_at": null,
+      "maximum_detection_latency_seconds": null,
+      "state": "healthy"
+    }
+  ],
+  "providers": [
+    {
+      "provider_id": "coingecko",
+      "units_per_minute": 5,
+      "bucket_capacity": 1,
+      "requests_per_month": 6000,
+      "budget_version": "1bceb5c3d27d64a18d495891224af5ed96551a80ad401b4f11f38c247f6cb5a5",
+      "requests_this_month": 7,
+      "remaining_requests": 5993,
+      "blocked_until": null,
+      "tokens": "0",
+      "attempts_24h": 7,
+      "errors_24h": 0,
+      "unfinished_requests_24h": 0
+    },
+    {
+      "provider_id": "defillama",
+      "units_per_minute": 10,
+      "bucket_capacity": 1,
+      "requests_per_month": 4000,
+      "budget_version": "1bceb5c3d27d64a18d495891224af5ed96551a80ad401b4f11f38c247f6cb5a5",
+      "requests_this_month": 18,
+      "remaining_requests": 3982,
+      "blocked_until": null,
+      "tokens": "0",
+      "attempts_24h": 18,
+      "errors_24h": 1,
+      "unfinished_requests_24h": 0
+    },
+    {
+      "provider_id": "dexscreener",
+      "units_per_minute": 30,
+      "bucket_capacity": 1,
+      "requests_per_month": 80000,
+      "budget_version": "1bceb5c3d27d64a18d495891224af5ed96551a80ad401b4f11f38c247f6cb5a5",
+      "requests_this_month": 86,
+      "remaining_requests": 79914,
+      "blocked_until": null,
+      "tokens": "0",
+      "attempts_24h": 86,
+      "errors_24h": 14,
+      "unfinished_requests_24h": 0
+    },
+    {
+      "provider_id": "geckoterminal",
+      "units_per_minute": 5,
+      "bucket_capacity": 1,
+      "requests_per_month": 30000,
+      "budget_version": "1bceb5c3d27d64a18d495891224af5ed96551a80ad401b4f11f38c247f6cb5a5",
+      "requests_this_month": 29,
+      "remaining_requests": 29971,
+      "blocked_until": null,
+      "tokens": "0",
+      "attempts_24h": 29,
+      "errors_24h": 0,
+      "unfinished_requests_24h": 0
+    },
+    {
+      "provider_id": "hyperliquid",
+      "units_per_minute": 300,
+      "bucket_capacity": 21,
+      "requests_per_month": 50000,
+      "budget_version": "1bceb5c3d27d64a18d495891224af5ed96551a80ad401b4f11f38c247f6cb5a5",
+      "requests_this_month": 26,
+      "remaining_requests": 49974,
+      "blocked_until": null,
+      "tokens": "0",
+      "attempts_24h": 26,
+      "errors_24h": 0,
+      "unfinished_requests_24h": 0
+    },
+    {
+      "provider_id": "mempool",
+      "units_per_minute": 1,
+      "bucket_capacity": 1,
+      "requests_per_month": 1000,
+      "budget_version": "1bceb5c3d27d64a18d495891224af5ed96551a80ad401b4f11f38c247f6cb5a5",
+      "requests_this_month": 1,
+      "remaining_requests": 999,
+      "blocked_until": null,
+      "tokens": "0",
+      "attempts_24h": 1,
+      "errors_24h": 0,
+      "unfinished_requests_24h": 0
+    },
+    {
+      "provider_id": "solana-rpc",
+      "units_per_minute": 1,
+      "bucket_capacity": 1,
+      "requests_per_month": 1000,
+      "budget_version": "1bceb5c3d27d64a18d495891224af5ed96551a80ad401b4f11f38c247f6cb5a5",
+      "requests_this_month": 1,
+      "remaining_requests": 999,
+      "blocked_until": null,
+      "tokens": "0",
+      "attempts_24h": 1,
+      "errors_24h": 0,
+      "unfinished_requests_24h": 0
+    }
+  ],
+  "gaps": [
+    {
+      "job_id": "defillama:hyperliquid:tvl:daily-history:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:37:30.688Z",
+      "maximum_detection_latency_seconds": 4050.68896
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot0:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:38:04.868Z",
+      "maximum_detection_latency_seconds": 2284.868829
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot10:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:37:29.849Z",
+      "maximum_detection_latency_seconds": 2249.849575
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot11:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:38:02.757Z",
+      "maximum_detection_latency_seconds": 2282.757413
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot12:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:38:07.162Z",
+      "maximum_detection_latency_seconds": 2287.162877
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot13:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:36:55.525Z",
+      "maximum_detection_latency_seconds": 2215.525771
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot14:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:38:09.226Z",
+      "maximum_detection_latency_seconds": 2289.226645
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot15:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:38:12.258Z",
+      "maximum_detection_latency_seconds": 2292.25898
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot16:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:38:14.337Z",
+      "maximum_detection_latency_seconds": 2294.337078
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot1:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:38:19.527Z",
+      "maximum_detection_latency_seconds": 2299.527164
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot4:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:38:27.925Z",
+      "maximum_detection_latency_seconds": 2307.925808
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot5:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:37:18.881Z",
+      "maximum_detection_latency_seconds": 2238.881989
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot6:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:38:30.861Z",
+      "maximum_detection_latency_seconds": 2310.861575
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot8:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:37:07.675Z",
+      "maximum_detection_latency_seconds": 2227.675026
+    },
+    {
+      "job_id": "dexscreener:base:pairs:slot9:v1",
+      "missing_intervals": 1,
+      "last_detected_at": "2026-09-10T01:38:36.504Z",
+      "maximum_detection_latency_seconds": 2316.504289
+    },
+    {
+      "job_id": "geckoterminal:pools:base:v1",
+      "missing_intervals": 135,
+      "last_detected_at": "2026-09-10T01:00:26.440Z",
+      "maximum_detection_latency_seconds": 40526.440782
+    },
+    {
+      "job_id": "geckoterminal:pools:solana:v1",
+      "missing_intervals": 136,
+      "last_detected_at": "2026-09-10T01:00:26.445Z",
+      "maximum_detection_latency_seconds": 40826.402181
+    },
+    {
+      "job_id": "hyperliquid:instruments:abcd:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.450Z",
+      "maximum_detection_latency_seconds": 39626.45055
+    },
+    {
+      "job_id": "hyperliquid:instruments:cash:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.455Z",
+      "maximum_detection_latency_seconds": 39626.455735
+    },
+    {
+      "job_id": "hyperliquid:instruments:flx:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.461Z",
+      "maximum_detection_latency_seconds": 39626.461169
+    },
+    {
+      "job_id": "hyperliquid:instruments:hyna:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.466Z",
+      "maximum_detection_latency_seconds": 39626.466745
+    },
+    {
+      "job_id": "hyperliquid:instruments:io:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.471Z",
+      "maximum_detection_latency_seconds": 39626.471335
+    },
+    {
+      "job_id": "hyperliquid:instruments:km:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.475Z",
+      "maximum_detection_latency_seconds": 39626.475676
+    },
+    {
+      "job_id": "hyperliquid:instruments:mkts:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.480Z",
+      "maximum_detection_latency_seconds": 39626.480347
+    },
+    {
+      "job_id": "hyperliquid:instruments:native:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.485Z",
+      "maximum_detection_latency_seconds": 39626.485134
+    },
+    {
+      "job_id": "hyperliquid:instruments:para:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.489Z",
+      "maximum_detection_latency_seconds": 39626.489596
+    },
+    {
+      "job_id": "hyperliquid:instruments:vntl:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.493Z",
+      "maximum_detection_latency_seconds": 39626.493402
+    },
+    {
+      "job_id": "hyperliquid:instruments:xyz:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.498Z",
+      "maximum_detection_latency_seconds": 39626.498704
+    },
+    {
+      "job_id": "hyperliquid:namespaces:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.503Z",
+      "maximum_detection_latency_seconds": 39626.503538
+    }
+  ],
+  "operations": {
+    "workers": [
+      {
+        "id": "084bd448-c76d-4920-95a2-447071330b08",
+        "started_at": "2026-09-10T01:57:41.295Z",
+        "last_seen_at": "2026-09-10T01:57:42.397Z",
+        "stopped_at": null,
+        "seconds_since_heartbeat": 0.946587,
+        "running": true
+      },
+      {
+        "id": "5063a0ed-7634-470e-9e38-508e4cf7db2f",
+        "started_at": "2026-09-10T01:53:39.264Z",
+        "last_seen_at": "2026-09-10T01:57:39.331Z",
+        "stopped_at": "2026-09-10T01:57:40.350Z",
+        "seconds_since_heartbeat": 4.01262,
+        "running": false
+      },
+      {
+        "id": "9fc3c400-340c-4229-ab17-8651d9ced912",
+        "started_at": "2026-09-10T01:50:44.337Z",
+        "last_seen_at": "2026-09-10T01:53:36.841Z",
+        "stopped_at": "2026-09-10T01:53:37.857Z",
+        "seconds_since_heartbeat": 246.502419,
+        "running": false
+      },
+      {
+        "id": "f22ad97e-534a-4178-b6e3-d219ddc0e7ca",
+        "started_at": "2026-09-10T01:36:41.613Z",
+        "last_seen_at": "2026-09-10T01:50:30.066Z",
+        "stopped_at": "2026-09-10T01:50:31.060Z",
+        "seconds_since_heartbeat": 433.276679,
+        "running": false
+      }
+    ],
+    "lastBackup": {
+      "id": "c3db9634-f0bb-483b-8e7a-c42b80ed2731",
+      "completed_at": "2026-09-10T01:50:42.452Z",
+      "filename": "archive-2026-09-10T01-50-32.846Z.dump",
+      "bytes": "13207208",
+      "sha256": "919f8411166fa4bf540e8c054c4955f8c8917f27c77852c78ab8e3344960273b",
+      "restore_verified_at": "2026-09-10T01:50:42.452Z"
+    },
+    "storage": {
+      "database_bytes": "70573079",
+      "payloads": 171,
+      "snapshots": 152
+    },
+    "retention": "Archive rows are retained indefinitely. Backups retain 7 daily copies; no automatic archive pruning."
+  },
+  "requestPurposes": [
+    {
+      "purpose": "capability-probe",
+      "provider_id": "coingecko",
+      "requests": 1,
+      "successful": 1,
+      "errors": 0
+    },
+    {
+      "purpose": "scheduled",
+      "provider_id": "coingecko",
+      "requests": 6,
+      "successful": 6,
+      "errors": 0
+    },
+    {
+      "purpose": "scheduled",
+      "provider_id": "defillama",
+      "requests": 18,
+      "successful": 17,
+      "errors": 1
+    },
+    {
+      "purpose": "scheduled",
+      "provider_id": "dexscreener",
+      "requests": 86,
+      "successful": 72,
+      "errors": 14
+    },
+    {
+      "purpose": "scheduled",
+      "provider_id": "geckoterminal",
+      "requests": 29,
+      "successful": 29,
+      "errors": 0
+    },
+    {
+      "purpose": "scheduled",
+      "provider_id": "hyperliquid",
+      "requests": 26,
+      "successful": 26,
+      "errors": 0
+    },
+    {
+      "purpose": "scheduled",
+      "provider_id": "mempool",
+      "requests": 1,
+      "successful": 1,
+      "errors": 0
+    },
+    {
+      "purpose": "scheduled",
+      "provider_id": "solana-rpc",
+      "requests": 1,
+      "successful": 1,
+      "errors": 0
+    }
+  ],
+  "limitations": [
+    "Historical acquisition gaps and provider errors are retained.",
+    "Empty spot slots skip without quota or replay coverage.",
+    "Historical TVL spacing is irregular where supplied; timestamps are never shifted to fabricate daily bars.",
+    "This Mac must remain awake and logged in with Docker running. Local backups do not protect against machine loss."
+  ]
+}

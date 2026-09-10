@@ -4,3 +4,6 @@ dist/
 .env
 package-lock.json
 .reports/
+.backups/
+test-results/
+playwright-report/

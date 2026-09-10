@@ -35,10 +35,11 @@ async function ready(database: Pool) {
 
 test("fresh and concurrent migrations apply once, with an intact ledger on rerun", async () => isolated(async database => {
   const result = await Promise.all([migrate(database), migrate(database)]);
-  assert.equal(result.flat().length, 2);
-  assert.equal((await database.query("select count(*)::int as count from schema_migrations")).rows[0].count, 2);
+  const expected = (await loadMigrations()).length;
+  assert.equal(result.flat().length, expected);
+  assert.equal((await database.query("select count(*)::int as count from schema_migrations")).rows[0].count, expected);
   assert.deepEqual(await migrate(database), []);
-  assert.equal((await database.query("select count(*)::int as count from metric_definitions")).rows[0].count, 10);
+  assert.equal((await database.query("select count(*)::int as count from metric_definitions")).rows[0].count, 11);
 }));
 
 test("unversioned upgrades retain original candles and block subsequent quarantine writes", async () => isolated(async database => {

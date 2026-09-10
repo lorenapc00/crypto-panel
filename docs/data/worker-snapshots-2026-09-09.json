@@ -1,0 +1,511 @@
+{
+  "checkedAt": "2026-09-10T01:01:44.455Z",
+  "environment": "Local development; no supervised production deployment",
+  "validation": {
+    "unitCases": 28,
+    "databaseCases": 22,
+    "capabilityBudgetCases": 12,
+    "build": "passed"
+  },
+  "migrations": [
+    {
+      "version": 1,
+      "name": "0001_legacy_baseline.sql",
+      "applied_at": "2026-09-09T12:44:57.383Z"
+    },
+    {
+      "version": 2,
+      "name": "0002_research_archive.sql",
+      "applied_at": "2026-09-09T12:44:57.453Z"
+    },
+    {
+      "version": 3,
+      "name": "0003_discovery_worker.sql",
+      "applied_at": "2026-09-09T13:26:43.786Z"
+    },
+    {
+      "version": 4,
+      "name": "0004_market_snapshots.sql",
+      "applied_at": "2026-09-10T00:58:54.572Z"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "coingecko:global:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:26.913Z",
+      "replayCoverageStart": "2026-09-10T01:00:26.949Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "coingecko:market:top100:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:39.397Z",
+      "replayCoverageStart": "2026-09-10T01:00:39.459Z",
+      "members": 100,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "defillama:ethereum:fees_24h_usd:snapshot:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:27.954Z",
+      "replayCoverageStart": "2026-09-10T01:00:28.031Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "defillama:ethereum:tvl_usd:snapshot:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:35.219Z",
+      "replayCoverageStart": "2026-09-10T01:00:35.276Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "defillama:hyperliquid:fees_24h_usd:snapshot:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:41.985Z",
+      "replayCoverageStart": "2026-09-10T01:00:42.003Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "defillama:hyperliquid:revenue_24h_usd:snapshot:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:49.126Z",
+      "replayCoverageStart": "2026-09-10T01:00:49.154Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "defillama:hyperliquid:tvl_usd:snapshot:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:55.780Z",
+      "replayCoverageStart": "2026-09-10T01:00:55.838Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "defillama:protocols:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:01:07.157Z",
+      "replayCoverageStart": "2026-09-09T13:34:41.376Z",
+      "members": 8213,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "defillama:solana:fees_24h_usd:snapshot:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:01:10.794Z",
+      "replayCoverageStart": "2026-09-10T01:01:10.843Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "defillama:solana:tvl_usd:snapshot:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:01:16.457Z",
+      "replayCoverageStart": "2026-09-10T01:01:16.505Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "geckoterminal:pools:base:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:28.547Z",
+      "replayCoverageStart": "2026-09-09T13:34:41.692Z",
+      "members": 20,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "geckoterminal:pools:solana:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:40.610Z",
+      "replayCoverageStart": "2026-09-09T13:34:54.030Z",
+      "members": 20,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:abcd:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:29.122Z",
+      "replayCoverageStart": "2026-09-09T13:34:42.286Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:cash:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:34.360Z",
+      "replayCoverageStart": "2026-09-09T13:34:47.013Z",
+      "members": 17,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:flx:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:38.918Z",
+      "replayCoverageStart": "2026-09-09T13:34:51.680Z",
+      "members": 16,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:hyna:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:43.481Z",
+      "replayCoverageStart": "2026-09-09T13:34:56.428Z",
+      "members": 25,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:io:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:48.247Z",
+      "replayCoverageStart": "2026-09-09T13:35:01.205Z",
+      "members": 9,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:km:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:52.822Z",
+      "replayCoverageStart": "2026-09-09T13:35:05.862Z",
+      "members": 23,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:mkts:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:57.528Z",
+      "replayCoverageStart": "2026-09-09T13:35:10.565Z",
+      "members": 23,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:native:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:01:01.967Z",
+      "replayCoverageStart": "2026-09-09T13:35:15.213Z",
+      "members": 234,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:para:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:01:11.232Z",
+      "replayCoverageStart": "2026-09-09T13:35:19.815Z",
+      "members": 35,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:vntl:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:01:15.940Z",
+      "replayCoverageStart": "2026-09-09T13:35:24.332Z",
+      "members": 15,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:instruments:xyz:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:01:20.450Z",
+      "replayCoverageStart": "2026-09-09T13:35:29.199Z",
+      "members": 119,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "hyperliquid:namespaces:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:01:24.200Z",
+      "replayCoverageStart": "2026-09-09T13:35:33.677Z",
+      "members": 11,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "mempool:bitcoin:tip:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:33.417Z",
+      "replayCoverageStart": "2026-09-10T01:00:33.436Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    },
+    {
+      "id": "solana-rpc:solana:inflation:v1",
+      "state": "healthy",
+      "lastSuccessAt": "2026-09-10T01:00:34.015Z",
+      "replayCoverageStart": "2026-09-10T01:00:34.031Z",
+      "members": 1,
+      "lastRunStatus": "succeeded",
+      "lastError": null
+    }
+  ],
+  "providers": [
+    {
+      "id": "coingecko",
+      "requestsThisMonth": 2,
+      "monthlyCeiling": 6000,
+      "attempts24h": 2,
+      "errors24h": 0
+    },
+    {
+      "id": "defillama",
+      "requestsThisMonth": 9,
+      "monthlyCeiling": 4000,
+      "attempts24h": 9,
+      "errors24h": 0
+    },
+    {
+      "id": "geckoterminal",
+      "requestsThisMonth": 7,
+      "monthlyCeiling": 30000,
+      "attempts24h": 7,
+      "errors24h": 0
+    },
+    {
+      "id": "hyperliquid",
+      "requestsThisMonth": 24,
+      "monthlyCeiling": 50000,
+      "attempts24h": 24,
+      "errors24h": 0
+    },
+    {
+      "id": "mempool",
+      "requestsThisMonth": 1,
+      "monthlyCeiling": 1000,
+      "attempts24h": 1,
+      "errors24h": 0
+    },
+    {
+      "id": "solana-rpc",
+      "requestsThisMonth": 1,
+      "monthlyCeiling": 1000,
+      "attempts24h": 1,
+      "errors24h": 0
+    }
+  ],
+  "gaps": [
+    {
+      "job_id": "geckoterminal:pools:base:v1",
+      "missing_intervals": 135,
+      "last_detected_at": "2026-09-10T01:00:26.440Z",
+      "maximum_detection_latency_seconds": 40526.440782
+    },
+    {
+      "job_id": "geckoterminal:pools:solana:v1",
+      "missing_intervals": 136,
+      "last_detected_at": "2026-09-10T01:00:26.445Z",
+      "maximum_detection_latency_seconds": 40826.402181
+    },
+    {
+      "job_id": "hyperliquid:instruments:abcd:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.450Z",
+      "maximum_detection_latency_seconds": 39626.45055
+    },
+    {
+      "job_id": "hyperliquid:instruments:cash:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.455Z",
+      "maximum_detection_latency_seconds": 39626.455735
+    },
+    {
+      "job_id": "hyperliquid:instruments:flx:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.461Z",
+      "maximum_detection_latency_seconds": 39626.461169
+    },
+    {
+      "job_id": "hyperliquid:instruments:hyna:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.466Z",
+      "maximum_detection_latency_seconds": 39626.466745
+    },
+    {
+      "job_id": "hyperliquid:instruments:io:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.471Z",
+      "maximum_detection_latency_seconds": 39626.471335
+    },
+    {
+      "job_id": "hyperliquid:instruments:km:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.475Z",
+      "maximum_detection_latency_seconds": 39626.475676
+    },
+    {
+      "job_id": "hyperliquid:instruments:mkts:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.480Z",
+      "maximum_detection_latency_seconds": 39626.480347
+    },
+    {
+      "job_id": "hyperliquid:instruments:native:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.485Z",
+      "maximum_detection_latency_seconds": 39626.485134
+    },
+    {
+      "job_id": "hyperliquid:instruments:para:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.489Z",
+      "maximum_detection_latency_seconds": 39626.489596
+    },
+    {
+      "job_id": "hyperliquid:instruments:vntl:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.493Z",
+      "maximum_detection_latency_seconds": 39626.493402
+    },
+    {
+      "job_id": "hyperliquid:instruments:xyz:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.498Z",
+      "maximum_detection_latency_seconds": 39626.498704
+    },
+    {
+      "job_id": "hyperliquid:namespaces:v1",
+      "missing_intervals": 11,
+      "last_detected_at": "2026-09-10T01:00:26.503Z",
+      "maximum_detection_latency_seconds": 39626.503538
+    }
+  ],
+  "api": [
+    {
+      "path": "/assets",
+      "status": 200,
+      "unavailable": false,
+      "stale": false,
+      "assetCount": 100
+    },
+    {
+      "path": "/overview",
+      "status": 200,
+      "unavailable": false,
+      "stale": false,
+      "globalScope": "CoinGecko provider global market coverage; USD"
+    },
+    {
+      "path": "/assets/bitcoin",
+      "status": 200,
+      "unavailable": false,
+      "stale": false,
+      "fundamentals": [
+        {
+          "code": "tvl_usd",
+          "available": false,
+          "stale": true
+        },
+        {
+          "code": "fees_24h_usd",
+          "available": false,
+          "stale": true
+        },
+        {
+          "code": "revenue_24h_usd",
+          "available": false,
+          "stale": true
+        }
+      ],
+      "issuance": "stored"
+    },
+    {
+      "path": "/assets/ethereum",
+      "status": 200,
+      "unavailable": false,
+      "stale": false,
+      "fundamentals": [
+        {
+          "code": "tvl_usd",
+          "available": true,
+          "stale": false
+        },
+        {
+          "code": "fees_24h_usd",
+          "available": true,
+          "stale": false
+        },
+        {
+          "code": "revenue_24h_usd",
+          "available": false,
+          "stale": true
+        }
+      ],
+      "issuance": "unavailable"
+    },
+    {
+      "path": "/assets/solana",
+      "status": 200,
+      "unavailable": false,
+      "stale": false,
+      "fundamentals": [
+        {
+          "code": "tvl_usd",
+          "available": true,
+          "stale": false
+        },
+        {
+          "code": "fees_24h_usd",
+          "available": true,
+          "stale": false
+        },
+        {
+          "code": "revenue_24h_usd",
+          "available": false,
+          "stale": true
+        }
+      ],
+      "issuance": "stored"
+    },
+    {
+      "path": "/assets/hyperliquid",
+      "status": 200,
+      "unavailable": false,
+      "stale": false,
+      "fundamentals": [
+        {
+          "code": "tvl_usd",
+          "available": true,
+          "stale": false
+        },
+        {
+          "code": "fees_24h_usd",
+          "available": true,
+          "stale": false
+        },
+        {
+          "code": "revenue_24h_usd",
+          "available": true,
+          "stale": false
+        }
+      ],
+      "issuance": "unavailable"
+    }
+  ],
+  "quotaScope": "Scheduled discovery, market/global, verified fundamental and issuance snapshots; manual daily history and research probes are not metered here"
+}

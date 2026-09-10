@@ -1,29 +1,45 @@
 # Crypto Panel
 
 Personal crypto market-intelligence dashboard. English/USD, dark terminal UI,
-top-100 market coverage, shared demo watchlists, source attribution and freshness
+top-100 market coverage, persistent personal research state, source attribution and freshness
 metadata. It is a free beta and does not provide investment advice.
 
 ## Run
+
+Start Docker Desktop before running the database commands. Keep the API and web
+development servers running in separate terminals.
 
 ```bash
 pnpm install
 docker compose up -d postgres
 pnpm --filter @crypto-panel/api db:migrate
-# Initial snapshots and daily price/rolling-volume history for BTC, ETH, SOL and HYPE
+# Run in a separate terminal; wait for the first successful market snapshot
+pnpm --filter @crypto-panel/api worker
+# Optional immediate refresh; the worker also schedules these four histories daily
 pnpm --filter @crypto-panel/api ingest:market
 pnpm dev:api # API: http://127.0.0.1:3100
 pnpm dev     # Web: http://127.0.0.1:5174
 ```
 
 The Crypto Panel deliberately uses ports 3100 (API) and 5174 (web), so it can
-run alongside another local project, which uses 3000 and 5173. Authentication is
-currently deferred; the API exposes a temporary shared demo workspace.
+run alongside another local project, which uses 3000 and 5173. This is one personal
+workspace stored in PostgreSQL. The API binds to loopback by default. Optional
+`WORKSPACE_TOKEN` protects API access with a bearer token entered in the web app;
+the browser keeps that token only for its session. `WEB_ORIGINS` accepts a
+comma-separated origin allowlist. The fake development session endpoint is removed.
+
+API reads require PostgreSQL and persisted worker snapshots. Run migrations and
+start the worker before loading the interface. A feed with no successful archive
+shows unavailable; a failed or late feed retains its stored values with stale
+metadata. No API read fetches a provider or starts a backfill. Daily charts appear
+after the first scheduled or explicit history acquisition. Database outages return an API error;
+there is no live-provider fallback.
 
 ## Data model and first asset profiles
 
 PostgreSQL stores assets, source definitions, metric definitions, market
-observations, raw provider payloads and immutable daily-series revisions. Legacy
+membership snapshots, raw provider payloads and immutable daily-series revisions.
+Legacy snapshot observations remain read-only and are excluded from API/replay reads. Legacy
 OHLCV rows are preserved in the read-only `legacy_candles` quarantine table.
 The initial asset profiles are Bitcoin,
 Ethereum, Solana and Hyperliquid (HYPE), available by selecting an asset in the
@@ -37,8 +53,17 @@ values append revisions, unchanged values are deduplicated, and each response
 retains its provenance. Price and reported trailing-24-hour volume are separate
 series. Returns use calendar dates; indicators require contiguous daily history
 and RSI uses Wilder smoothing. Opening an asset page reads stored history without
-triggering a backfill. Market/fundamental API reads still fetch live until the
-worker is implemented. Provider failures leave archived history intact.
+triggering a backfill. Market/global, verified fundamentals and issuance
+snapshots and daily histories run in the shared worker queue. Provider failures
+leave archived history intact. Manual ingestion and probe CLI requests share the
+same persisted quota counters and backoff as the worker.
+
+Watchlists, saved screens, filters, chart ranges and thesis notes survive reloads
+and API restarts. Notes retain dated revisions. The Research page manages price,
+market-cap and 24-hour-change threshold conditions; the first valid observation
+sets a baseline, and later false-to-true crossings create evidence-backed alerts.
+Missing/stale inputs never create synthetic alerts. Taxonomy holds ten curated,
+versioned classifications; other assets remain unclassified.
 
 ### Schema upgrades and database tests
 
@@ -54,6 +79,9 @@ PostgreSQL integration tests explicitly against the local development database:
 
 ```bash
 TEST_DATABASE_URL=postgres://crypto_panel:crypto_panel_dev@127.0.0.1:5432/crypto_panel pnpm --filter @crypto-panel/api test:db
+# One-time browser installation, then isolated browser tests (PostgreSQL required)
+pnpm --filter @crypto-panel/web exec playwright install chromium
+pnpm --filter @crypto-panel/web test:e2e
 ```
 
 Each database test creates and removes its own random schema. Tests cover fresh
@@ -61,27 +89,65 @@ and legacy upgrades, rollback, concurrent migrations, immutable revisions,
 cutoff replay, scope checks, and populated stale-history refresh. One-off price
 backfills are labeled historical reconstruction; they do not create production
 replay coverage. Repository `asOf` reads reject dates without declared coverage.
+Stage 1 validation passes 47 unit/capability checks, 28 PostgreSQL cases and three
+browser scenarios. Browser fixtures use a separate temporary schema and ports
+3101/5175; they do not add research records to the personal workspace.
 
 ## Fundamentals and tokenomics
 
-The ingest command also fetches DefiLlama fundamentals where the metric scope
-is appropriate: Ethereum and Solana use chain aggregates, while HYPE uses the
+The worker archives seven verified DefiLlama metric snapshots daily: Ethereum and Solana use chain aggregates, while HYPE uses the
 Hyperliquid protocol aggregate. Chain fees are never presented as token revenue.
-The product derives circulating/max-supply coverage from CoinGecko snapshots,
+BTC tip/subsidy and the Solana inflation parameter are archived hourly; neither
+is presented as realized net issuance. The product derives circulating/max-supply coverage from CoinGecko snapshots,
 but does not label the remainder as a future unlock or emission forecast. A
 verified event-level unlock source must be connected before such events appear.
+Eight normalized fundamental histories preserve provider timestamps and revisions,
+including holder revenue as a separate metric. Irregular historical TVL spacing
+is flagged on Data Health. Native BTC book depth is denominated in USDC, and
+settled hourly funding rates are archived without implying account cash flows.
 
 ## Investment research roadmap
 
 Development follows [INVESTMENT_RESEARCH_PLAN.md](INVESTMENT_RESEARCH_PLAN.md).
 Stage 0 produced a [data capability manifest](docs/data/CAPABILITY_MANIFEST.md)
 with dated endpoint evidence, unavailable-feed decisions, and a quota budget.
-The first stage 1 slice adds the migration/archive foundation and corrected
-daily asset history. The scheduled discovery archive and new research workspaces
-are still planned work.
+Stage 1 adds the migration/archive foundation, corrected daily history, and a
+scheduled discovery archive. The worker collects protocol catalogs daily,
+Hyperliquid namespaces and instrument contexts hourly, and the first 20 new
+pools on Solana and Base every five minutes. Initial catalog snapshots establish
+baselines; first observation never invents a historical listing or token-launch
+date. Quotas, retry delays, leases and missing intervals persist across restarts.
+
+See the [worker runbook](docs/data/DISCOVERY_WORKER.md) for coverage, supervision
+and replay semantics. `worker:once` drains immediately available work and exits;
+quota-delayed jobs remain queued. Keep `worker` running to accumulate coverage.
+The API exposes stored `GET /api/v1/data-health` and
+`GET /api/v1/discovery/archive?dataset=hyperliquid%3Ainstruments%3Anative%3Av1`
+with optional `asOf`. The Data Health page shows per-job and per-series freshness,
+intervals, missing/resolved gaps, replay starts, quota/error counts, worker
+heartbeats, storage size and the latest verified backup. Market coverage remains one top-100
+page; the 1,000-asset expansion is still gated. Global totals use a separate
+CoinGecko `/global` snapshot, while breadth retains exact tracked-page membership.
+`/assets` and `/overview` accept guarded `asOf` cutoffs; other asset routes remain
+current-state reads. `/api/v1/series` accepts `asset`, `metric`, optional interval
+in seconds, `seriesId`, `from`, `to` and guarded `asOf` queries.
+
+The 120 scheduled job definitions include four priority daily charts, eight
+fundamental histories, a selected BTC book/funding pair, and up to 40 sampled
+Solana/Base token pair/promotion lookups per hour. Empty token slots skip without
+consuming quota or starting replay coverage. Paid promotion stays separate from
+trading evidence, and unverified contract risks remain unknown.
+
+See [archive operation and restore procedures](ops/README.md) for local Mac
+supervision, a Linux service template and seven-copy daily backup retention.
+The local worker and backup LaunchAgents are installed and a restore is verified.
+Continuous hosting remains an operational requirement: this Mac must stay awake,
+logged in and running Docker. Local backups need a separate-machine copy for
+protection against machine loss. [Dated verification](docs/data/stage1-finalization-2026-09-09.json).
 
 ```bash
-# Read-only provider checks; saves .reports/capabilities.json (requires network)
+# Provider reads with persisted quota accounting (requires PostgreSQL and network)
+# Saves .reports/capabilities.json
 pnpm research:probe
 # Optional: repeat selected checks
 pnpm research:probe --only cg-global,cm-btc-core-batch
@@ -90,6 +156,7 @@ pnpm research:budget
 ```
 
 The probe optionally uses exported `COINGECKO_DEMO_API_KEY` and `FRED_API_KEY`.
-It does not load `.env`. Manual daily-history ingestion also supports the Demo
-key; older market/fundamental adapters do not yet use it.
+CLI commands do not load `.env` automatically; the generated services explicitly
+load the repository `.env` when present. Manual and scheduled CoinGecko requests
+send the optional Demo key as a header. Apply migrations before running probes.
 See the manifest for result classifications, scope, and remaining stage 1 work.

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "checkedOn": "2026-09-09",
   "planningMonthDays": 31,
-  "status": "design-budget-not-yet-enforced-by-a-worker",
+  "status": "enforced-for-all-acquisition-paths-broader-universe-remains-planned",
   "assumptions": {
     "marketUniverseSize": 1000,
     "marketPageSize": 250,
@@ -48,7 +48,7 @@
         }
       ],
       "bootstrapRequests": 1000,
-      "notes": "Backfill at most 1000 assets once, queued within the same monthly cap. Retain daily samples from hourly snapshots thereafter; do not request daily history per asset. Failures/retries and probes consume the same reserve. Revalidate Demo access with a free key before expanding to this universe."
+      "notes": "Design: backfill at most 1000 assets once within the same monthly cap, then retain samples from hourly snapshots; do not request daily history per asset. Active worker: one top-100 page plus global hourly and four priority charts daily (1612 calls/31 days). Manual history, failures/retries and probes share the ledger. Revalidate Demo access with a free key before expanding to the design universe."
     },
     {
       "id": "coinmetrics",
@@ -110,7 +110,7 @@
         }
       ],
       "bootstrapRequests": 0,
-      "notes": "20 selected protocols x 4 metrics; success for Hyperliquid does not establish coverage for all peers. Each metric independently unavailable on failed verification. Full histories arrive in the scheduled summary calls. Paid perp-volume calls are excluded."
+      "notes": "Design: 20 selected protocols x 4 metrics; success for Hyperliquid does not establish peer coverage. Active: catalog, seven independently scoped daily snapshots and eight normalized daily histories (496 calls/31 days). Current ETH/SOL chain and Hyperliquid protocol metrics preserve individual scope and revisions. Paid perp-volume calls are excluded."
     },
     {
       "id": "hyperliquid",
@@ -149,14 +149,14 @@
         }
       ],
       "bootstrapRequests": 0,
-      "notes": "Funding estimate requests only the last two hours (20 base weight plus one response-item increment). Longer history needs a separate weighted backfill budget. Recompute when namespace count or selected markets changes; preserve explicit coverage."
+      "notes": "Active: namespace catalog and 11 contexts plus one native BTC book and one two-hour funding window hourly (10416 calls/31 days). Design reserves up to 20 books/funding markets. Short funding uses weight21; broad funding probes conservatively reserve weight45. Longer history needs a separate weighted backfill budget. Recompute when coverage changes."
     },
     {
       "id": "geckoterminal",
       "documentedLimit": {
-        "requestsPerMinute": 10,
-        "approximate": true,
-        "source": "https://api.geckoterminal.com/docs/index.html"
+        "requestsPerMinute": 30,
+        "source": "https://apiguide.geckoterminal.com/faq",
+        "note": "FAQ rechecked during worker implementation on 2026-09-09; local ceiling remains 5/minute."
       },
       "localLimit": {
         "requestsPerMinute": 5,
@@ -201,7 +201,7 @@
         }
       ],
       "bootstrapRequests": 0,
-      "notes": "40 tokens total across Solana/Base per hour, one pair lookup and one paid-order check each. Archive promotion independently from trading evidence."
+      "notes": "Active: up to 40 sampled tokens total across Solana/Base per hour, one pair lookup and one paid-order check each (at most 59520 calls/31 days). Empty slots skip without a request or coverage. Standalone profile/boost catalogs remain design capacity. Archive promotion independently from trading evidence."
     },
     {
       "id": "mempool",

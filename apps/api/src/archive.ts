@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import type { Pool } from "pg";
+import type { Pool, PoolClient } from "pg";
 import { pool } from "./db.js";
 
 export type SeriesDefinition = {
@@ -46,8 +46,21 @@ export async function archivePayload(input: ArchiveInput, database: Pool = pool)
       (source_id, endpoint, requested_at, received_at, sha256, payload)
       values ($1, $2, $3, $4, $5, $6::jsonb) returning id`,
     [input.sourceId, input.endpoint, input.requestedAt, input.receivedAt, createHash("sha256").update(input.rawPayload).digest("hex"), input.rawPayload]);
+    const inserted = await appendSeries(client,payload.rows[0].id,input.sourceId,sorted);
+    await client.query("commit");
+    return { payloadId: payload.rows[0].id, inserted };
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+export async function appendSeries(client: PoolClient, payloadId: string, sourceId: string,
+  series: ArchiveInput['series'], datasetId: string | null = null) {
     let inserted = 0;
-    for (const { definition: d, points } of sorted) {
+    for (const { definition: d, points } of series) {
       await client.query("select pg_advisory_xact_lock(hashtext(current_schema()), hashtext($1))", [`archive:${d.id}`]);
       const metric = await client.query(`select 1 from metric_definitions where code=$1 and unit=$2
         and (scope=$3 or (scope='chain_or_protocol' and $3 in ('chain', 'protocol')))`, [d.metricCode, d.unit, d.scope]);
@@ -67,17 +80,20 @@ export async function archivePayload(input: ArchiveInput, database: Pool = pool)
           where series_id=$1 and observed_at=p."observedAt" order by recorded_at desc, id desc limit 1
         ) previous on true
         where previous.id is null or previous.value is distinct from p.value or previous.published_at is distinct from p."publishedAt"`,
-      [d.id, input.sourceId, payload.rows[0].id, JSON.stringify(points)]);
+      [d.id, sourceId, payloadId, JSON.stringify(points)]);
       inserted += result.rowCount ?? 0;
+      const times = points.map(point=>Date.parse(point.observedAt)).sort((a,b)=>a-b);
+      const steps = times.slice(1).map((time,index)=>(time-times[index])/1000);
+      const frequencies = new Map<number,number>();
+      for (const step of steps) frequencies.set(step,(frequencies.get(step)??0)+1);
+      const detected = [...frequencies].sort((a,b)=>b[1]-a[1] || a[0]-b[0])[0]?.[0] ?? null;
+      await client.query(`insert into series_acquisitions (series_id,payload_id,dataset_id,first_observed_at,last_observed_at,points,detected_interval_seconds,irregular_intervals)
+        values ($1,$2,$3,$4,$5,$6,$7,$8) on conflict do nothing`,
+        [d.id,payloadId,datasetId,times.length ? new Date(times[0]) : null,times.length ? new Date(times.at(-1)!) : null,
+          points.length,detected,steps.filter(step=>step!==d.intervalSeconds).length]);
+      if (datasetId) await client.query('insert into replay_coverage (series_id) values ($1) on conflict do nothing',[d.id]);
     }
-    await client.query("commit");
-    return { payloadId: payload.rows[0].id, inserted };
-  } catch (error) {
-    await client.query("rollback");
-    throw error;
-  } finally {
-    client.release();
-  }
+    return inserted;
 }
 
 export class ReplayCoverageError extends Error {}
@@ -112,6 +128,6 @@ export async function readSeries(seriesId: string, options: { from?: string; to?
   ) revisions order by observed_at desc limit $5`, [seriesId, options.from ?? null, options.to ?? null, options.asOf ?? null, limit]);
   return {
     points: result.rows.reverse().map(row => ({ observedAt: row.observed_at.toISOString(), value: row.value === null ? null : Number(row.value), publishedAt: row.published_at?.toISOString() ?? null, recordedAt: row.recorded_at.toISOString(), payloadId: row.payload_id as string })),
-    metadata: { seriesId, source: d.source_id as string, scope: d.scope as string, unit: d.unit as string, intervalSeconds: d.interval_seconds as number, methodologyVersion: d.methodology_version as string, replayCoverageStart: d.replay_start_at?.toISOString() ?? null, classification: options.asOf ? "point-in-time" as const : "historical-reconstruction" as const },
+    metadata: { seriesId, source: d.source_id as string, scope: d.scope as string, unit: d.unit as string, intervalSeconds: d.interval_seconds as number, methodologyVersion: d.methodology_version as string, replayCoverageStart: d.replay_start_at?.toISOString() ?? null, classification: options.asOf ? "point-in-time" as const : d.replay_start_at ? "forward-tracking-with-reconstruction" as const : "historical-reconstruction" as const },
   };
 }

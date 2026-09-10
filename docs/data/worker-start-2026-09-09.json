@@ -1,0 +1,159 @@
+{
+  "checkedAt": "2026-09-09T13:39:11.581Z",
+  "environment": "local development PostgreSQL; not a supervised production deployment",
+  "method": "Real scheduled worker requests, worker completion logs, and persisted worker --health read",
+  "jobs": [
+    {
+      "id": "defillama:protocols:v1",
+      "baselineMembers": 8208,
+      "replayCoverageStart": "2026-09-09T13:34:41.376Z",
+      "lastSuccessAt": "2026-09-09T13:34:39.303Z",
+      "state": "healthy"
+    },
+    {
+      "id": "geckoterminal:pools:base:v1",
+      "baselineMembers": 20,
+      "replayCoverageStart": "2026-09-09T13:34:41.692Z",
+      "lastSuccessAt": "2026-09-09T13:35:06.059Z",
+      "state": "healthy"
+    },
+    {
+      "id": "geckoterminal:pools:solana:v1",
+      "baselineMembers": 20,
+      "replayCoverageStart": "2026-09-09T13:34:54.030Z",
+      "lastSuccessAt": "2026-09-09T13:35:18.409Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:abcd:v1",
+      "baselineMembers": 1,
+      "replayCoverageStart": "2026-09-09T13:34:42.286Z",
+      "lastSuccessAt": "2026-09-09T13:34:42.265Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:cash:v1",
+      "baselineMembers": 17,
+      "replayCoverageStart": "2026-09-09T13:34:47.013Z",
+      "lastSuccessAt": "2026-09-09T13:34:46.988Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:flx:v1",
+      "baselineMembers": 16,
+      "replayCoverageStart": "2026-09-09T13:34:51.680Z",
+      "lastSuccessAt": "2026-09-09T13:34:51.657Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:hyna:v1",
+      "baselineMembers": 25,
+      "replayCoverageStart": "2026-09-09T13:34:56.428Z",
+      "lastSuccessAt": "2026-09-09T13:34:56.403Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:io:v1",
+      "baselineMembers": 9,
+      "replayCoverageStart": "2026-09-09T13:35:01.205Z",
+      "lastSuccessAt": "2026-09-09T13:35:01.181Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:km:v1",
+      "baselineMembers": 23,
+      "replayCoverageStart": "2026-09-09T13:35:05.862Z",
+      "lastSuccessAt": "2026-09-09T13:35:05.837Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:mkts:v1",
+      "baselineMembers": 23,
+      "replayCoverageStart": "2026-09-09T13:35:10.565Z",
+      "lastSuccessAt": "2026-09-09T13:35:10.540Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:native:v1",
+      "baselineMembers": 234,
+      "replayCoverageStart": "2026-09-09T13:35:15.213Z",
+      "lastSuccessAt": "2026-09-09T13:35:15.137Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:para:v1",
+      "baselineMembers": 35,
+      "replayCoverageStart": "2026-09-09T13:35:19.815Z",
+      "lastSuccessAt": "2026-09-09T13:35:19.785Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:vntl:v1",
+      "baselineMembers": 15,
+      "replayCoverageStart": "2026-09-09T13:35:24.332Z",
+      "lastSuccessAt": "2026-09-09T13:35:24.311Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:instruments:xyz:v1",
+      "baselineMembers": 119,
+      "replayCoverageStart": "2026-09-09T13:35:29.199Z",
+      "lastSuccessAt": "2026-09-09T13:35:29.148Z",
+      "state": "healthy"
+    },
+    {
+      "id": "hyperliquid:namespaces:v1",
+      "baselineMembers": 11,
+      "replayCoverageStart": "2026-09-09T13:35:33.677Z",
+      "lastSuccessAt": "2026-09-09T13:35:33.656Z",
+      "state": "healthy"
+    }
+  ],
+  "providers": [
+    {
+      "id": "defillama",
+      "requestsThisMonth": 1,
+      "errors24h": 0,
+      "unfinishedRequests24h": 0,
+      "monthlyCeiling": 4000
+    },
+    {
+      "id": "geckoterminal",
+      "requestsThisMonth": 4,
+      "errors24h": 0,
+      "unfinishedRequests24h": 0,
+      "monthlyCeiling": 30000
+    },
+    {
+      "id": "hyperliquid",
+      "requestsThisMonth": 12,
+      "errors24h": 0,
+      "unfinishedRequests24h": 0,
+      "monthlyCeiling": 50000
+    }
+  ],
+  "gaps": [],
+  "namespaceCoverage": {
+    "lifecycle": "Catalog observation is not a venue launch date",
+    "coveredNamespaces": [
+      "",
+      "xyz",
+      "flx",
+      "vntl",
+      "hyna",
+      "km",
+      "abcd",
+      "cash",
+      "para",
+      "mkts",
+      "io"
+    ],
+    "uncoveredNamespaces": [],
+    "missingConfiguredNamespaces": []
+  },
+  "limitations": [
+    "Coverage starts independently per dataset at first successful local worker ingestion.",
+    "Worker must remain running; deployment and supervision are still pending.",
+    "Market/fundamental/manual ingestion and probes are outside this quota ledger."
+  ]
+}

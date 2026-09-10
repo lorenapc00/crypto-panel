@@ -137,7 +137,7 @@ export async function probe(spec, { fetchImpl = fetch, env = process.env, now = 
 
 async function main() {
   const args = process.argv.slice(2);
-  let output = resolve(".reports/capabilities.json");
+  let output = fileURLToPath(new URL("../.reports/capabilities.json",import.meta.url));
   let only;
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--output" && args[i + 1]) output = resolve(args[++i]);
@@ -158,7 +158,9 @@ async function main() {
     else {
       await delay(Math.max(0, (lastRequest.get(spec.provider) ?? 0) + manifest.providerSpacingMs[spec.provider] - Date.now()));
       lastRequest.set(spec.provider, Date.now());
-      result = await probe(spec);
+      const { meteredFetch, probeWeight } = await import('../apps/api/src/requests.ts');
+      result = await probe(spec,{fetchImpl:async (url,init)=> (await meteredFetch(spec.provider,url,init,
+        {purpose:'capability-probe',weight:probeWeight(spec.provider,spec.body)})).response});
       if (result.outcome === "rate-limited") throttled.add(spec.provider);
     }
     report.results.push(result);
@@ -177,4 +179,6 @@ async function main() {
   if (report.results.some(result => ["network-error", "invalid-payload", "rate-limited", "skipped-after-rate-limit"].includes(result.outcome))) process.exitCode = 1;
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await main();
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  try { await main(); } finally { const { pool } = await import('../apps/api/src/db.ts'); await pool.end(); }
+}

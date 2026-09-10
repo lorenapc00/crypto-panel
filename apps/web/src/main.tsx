@@ -1,30 +1,29 @@
 import { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./style.css";
+import { api,useData,Status,type Metadata } from "./api";
+import { DataHealth } from "./pages/DataHealth";
+import { Research } from "./pages/Research";
+import { ThesisNotes } from "./components/ThesisNotes";
+import { SavedScreens,type Selection } from "./components/SavedScreens";
+import { WorkspaceAccess } from "./components/WorkspaceAccess";
 
-type Metadata = {
-  source: string;
-  observedAt: string | null;
-  coverage: string;
-  stale: boolean;
-  unavailable?: boolean;
-};
 type Asset = {
   id: string;
   symbol: string;
   name: string;
-  rank: number;
-  priceUsd: number;
-  marketCapUsd: number;
+  rank: number | null;
+  priceUsd: number | null;
+  marketCapUsd: number | null;
   fullyDilutedValuationUsd: number | null;
-  volume24hUsd: number;
+  volume24hUsd: number | null;
   circulatingSupply: number | null;
   totalSupply: number | null;
   maxSupply: number | null;
-  change24h: number;
+  change24h: number | null;
   change7d: number | null;
   change30d: number | null;
-  observedAt: string;
+  observedAt: string | null;
 };
 type DailyPrice = {
   observedAt: string;
@@ -38,16 +37,19 @@ type Fundamental = {
   scope: "chain" | "protocol" | "unavailable";
   coverage: string;
   available: boolean;
+  stale: boolean;
+  observedAt: string | null;
+  acquiredAt: string | null;
 };
 type Fundamentals = {
-  category: "L1" | "L2" | "DEX" | "lending" | "stablecoin" | "exchange token";
+  category: "L1" | "L2" | "DEX" | "lending" | "stablecoin" | "exchange token" | "unknown";
   fundamentals: Fundamental[];
   tokenomics: {
     circulatingPercent: number | null;
     nonCirculatingSupply: number | null;
     unlocks: { events: []; status: "unavailable"; note: string };
     emissions: {
-      status: "live" | "unavailable";
+      status: "stored" | "stale" | "unavailable";
       observedAt: string | null;
       source: string;
       note: string;
@@ -86,12 +88,13 @@ type AssetDetail = {
   fundamentals: Fundamentals;
   tokenomicsEvents: TokenomicsEvent[];
 };
-type Api<T> = { data: T; metadata: Metadata };
-type Page = "overview" | "assets" | "watchlist";
+type Page = "overview" | "assets" | "watchlist" | "research" | "data-health";
 const pages: { id: Page; label: string }[] = [
   { id: "overview", label: "Overview" },
   { id: "assets", label: "Assets" },
   { id: "watchlist", label: "Watchlist" },
+  { id:"research",label:"Research" },
+  { id:"data-health",label:"Data Health" },
 ];
 const profileAssets = [
   { id: "bitcoin", label: "BTC" },
@@ -99,53 +102,14 @@ const profileAssets = [
   { id: "solana", label: "SOL" },
   { id: "hyperliquid", label: "HYPE" },
 ];
-const usd = (value: number) =>
+const usd = (value: number | null) => value === null ? "—" :
   new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     notation: value >= 1e9 ? "compact" : "standard",
     maximumFractionDigits: 2,
   }).format(value);
-const pct = (value: number) => `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
-async function api<T>(path: string, options?: RequestInit): Promise<Api<T>> {
-  const res = await fetch(`/api/v1${path}`, {
-    ...options,
-    headers: { "content-type": "application/json", ...options?.headers },
-  });
-  if (!res.ok && res.status !== 204)
-    throw new Error("Market data is temporarily unavailable.");
-  return res.status === 204 ? ({} as Api<T>) : res.json();
-}
-function useData<T>(path: string) {
-  const [state, setState] = useState<{
-    result?: Api<T>;
-    error?: string;
-    loading: boolean;
-  }>({ loading: true });
-  const reload = () => {
-    setState({ loading: true });
-    api<T>(path)
-      .then((result) => setState({ result, loading: false }))
-      .catch(() =>
-        setState({ error: "Unable to load this market data.", loading: false }),
-      );
-  };
-  useEffect(reload, [path]);
-  return { ...state, reload };
-}
-function Status({ metadata }: { metadata?: Metadata }) {
-  return metadata ? (
-    <div className={`status ${metadata.stale ? "stale" : ""}`}>
-      <span>{metadata.stale ? "STALE / UNAVAILABLE" : metadata.source}</span>
-      <span>{metadata.coverage}</span>
-      <span>
-        {metadata.observedAt
-          ? `UPDATED ${new Date(metadata.observedAt).toLocaleTimeString()}`
-          : "UPDATED Unavailable"}
-      </span>
-    </div>
-  ) : null;
-}
+const pct = (value: number | null) => value === null ? "—" : `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
 function Loading() {
   return <div className="loading">Loading market data…</div>;
 }
@@ -190,7 +154,7 @@ function AssetTable({
             )}
           </span>
           <span>{usd(a.priceUsd)}</span>
-          <span className={a.change24h < 0 ? "down" : "up"}>
+          <span className={a.change24h === null ? "" : a.change24h < 0 ? "down" : "up"}>
             {pct(a.change24h)}
           </span>
           <span>{usd(a.marketCapUsd)}</span>
@@ -209,12 +173,13 @@ function Overview({
   select: (id: string) => void;
 }) {
   const { result, loading, error, reload } = useData<{
-    globalMarketCapUsd: number;
-    volume24hUsd: number;
+    globalMarketCapUsd: number | null;
+    volume24hUsd: number | null;
     btcDominance: number | null;
     ethDominance: number | null;
     movers: Asset[];
-    marketBreadth: { advancing: number; declining: number };
+    marketBreadth: { advancing: number; declining: number; unknown: number; total: number };
+    globalMetadata: Metadata;
   }>("/overview");
   if (loading) return <Loading />;
   if (error || !result) return <Failure retry={reload} />;
@@ -223,7 +188,7 @@ function Overview({
     <>
       <section className="kpis">
         <Metric t="Global market cap" v={usd(d.globalMarketCapUsd)} />
-        <Metric t="24h volume" v={usd(d.volume24hUsd)} />
+        <Metric t="Global 24h volume" v={usd(d.volume24hUsd)} />
         <Metric
           t="BTC dominance"
           v={d.btcDominance === null ? "—" : `${d.btcDominance.toFixed(1)}%`}
@@ -234,10 +199,12 @@ function Overview({
           }
         />
         <Metric
-          t="Market breadth"
+          t="Tracked-page breadth"
           v={`${d.marketBreadth.advancing} ↑ / ${d.marketBreadth.declining} ↓`}
+          detail={`${d.marketBreadth.total} tracked assets · ${d.marketBreadth.unknown} unknown`}
         />
       </section>
+      <Status metadata={d.globalMetadata} />
       <section className="panel">
         <div className="panelhead">
           <div>
@@ -265,20 +232,24 @@ function Assets({ select }: { select: (id: string) => void }) {
   const { result, loading, error, reload } = useData<Asset[]>("/assets");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<"rank" | "cap" | "change">("rank");
+  const [minCap,setMinCap]=useState<number|null>(null),[maxCap,setMaxCap]=useState<number|null>(null);
+  const selection:Selection={query,sort,minCap,maxCap};
+  const apply=(value:Selection)=>{setQuery(value.query);setSort(value.sort);setMinCap(value.minCap);setMaxCap(value.maxCap);};
   const assets = useMemo(
     () =>
       [...(result?.data ?? [])]
         .filter((a) =>
           `${a.symbol} ${a.name}`.toLowerCase().includes(query.toLowerCase()),
         )
+        .filter(asset=>(minCap===null||(asset.marketCapUsd!==null&&asset.marketCapUsd>=minCap))&&(maxCap===null||(asset.marketCapUsd!==null&&asset.marketCapUsd<=maxCap)))
         .sort((a, b) =>
           sort === "change"
-            ? b.change24h - a.change24h
+            ? (b.change24h ?? -Infinity) - (a.change24h ?? -Infinity)
             : sort === "cap"
-              ? b.marketCapUsd - a.marketCapUsd
-              : a.rank - b.rank,
+              ? (b.marketCapUsd ?? -Infinity) - (a.marketCapUsd ?? -Infinity)
+              : (a.rank ?? Infinity) - (b.rank ?? Infinity),
         ),
-    [result, query, sort],
+    [result, query, sort,minCap,maxCap],
   );
   if (loading) return <Loading />;
   if (error || !result) return <Failure retry={reload} />;
@@ -307,6 +278,9 @@ function Assets({ select }: { select: (id: string) => void }) {
           ))}
         </div>
       </div>
+      <SavedScreens selection={selection} apply={apply}/>
+      <div className="cap-filters"><label>Min market cap (USD)<input type="number" min="0" value={minCap??''} onChange={e=>setMinCap(e.target.value===''?null:Number(e.target.value))}/></label>
+      <label>Max market cap (USD)<input type="number" min="0" value={maxCap??''} onChange={e=>setMaxCap(e.target.value===''?null:Number(e.target.value))}/></label></div>
       {assets.length ? (
         <AssetTable assets={assets} onSelect={(a) => select(a.id)} />
       ) : (
@@ -346,7 +320,7 @@ function Watchlist() {
         <div className="panelhead">
           <div>
             <h2>Your watchlist</h2>
-            <span>Assets saved in this browser’s demo workspace</span>
+            <span>Assets saved in your personal PostgreSQL workspace</span>
           </div>
           <span>{watched.result.data.length} saved</span>
         </div>
@@ -447,11 +421,15 @@ function FundamentalsTab({ data }: { data: Fundamentals }) {
           </h2>
           {data.fundamentals.map((metric) => (
             <div key={metric.code}>
-              <span>{metric.label}</span>
+              <span>{metric.label}<small> · {metric.available ? metric.stale ? "Stale" : "Stored" : "Unavailable"}</small></span>
               <b>{metric.value === null ? "—" : usd(metric.value)}</b>
             </div>
           ))}
           <p>{coverage}</p>
+          {data.fundamentals.map(metric => <p key={metric.code}>
+            {metric.label}: {metric.coverage}. Observed {metric.observedAt ? new Date(metric.observedAt).toLocaleString() : "time unknown"};
+            acquired {metric.acquiredAt ? new Date(metric.acquiredAt).toLocaleString() : "unavailable"}.
+          </p>)}
         </div>
         <Status
           metadata={{
@@ -466,7 +444,7 @@ function FundamentalsTab({ data }: { data: Fundamentals }) {
         <h2>How to read this</h2>
         <p>
           Values are only shown when the source covers this asset’s category.
-          Chain metrics describe network activity; protocol metrics describe the
+          Chain metrics describe protocols deployed on a chain; protocol metrics describe the
           protocol, not necessarily its token.
         </p>
       </article>
@@ -536,7 +514,8 @@ function TokenomicsTab({
           <>
             <p>{data.tokenomics.emissions.note}</p>
             {data.tokenomics.emissions.metrics.map(metric => <p key={metric.label}><b>{metric.label}: </b>{metric.value}</p>)}
-            <p>Source: {data.tokenomics.emissions.source}</p>
+            <p>Source: {data.tokenomics.emissions.source} · {data.tokenomics.emissions.status}</p>
+            <p>Observed: {data.tokenomics.emissions.observedAt ? new Date(data.tokenomics.emissions.observedAt).toLocaleString() : "Unavailable"}</p>
             <p>{data.tokenomics.unlocks.note}</p>
           </>
         )}
@@ -554,13 +533,15 @@ function AssetProfile({
   const { result, loading, error, reload } = useData<AssetDetail>(
     `/assets/${assetId}`,
   );
-  const [tab, setTab] = useState<"overview" | "fundamentals" | "tokenomics">(
+  const [range,setRange]=useState("90D");
+  useEffect(()=>{void api<{preferences:Record<string,{range:string}>}>("/workspace").then(r=>setRange(r.data.preferences["price-chart"]?.range??"90D")).catch(()=>{});},[]);
+  const [tab, setTab] = useState<"overview" | "fundamentals" | "tokenomics" | "notes">(
     "overview",
   );
   if (loading) return <Loading />;
   if (error || !result) return <Failure retry={reload} />;
   const { asset, priceHistory, returns, indicators, fundamentals } = result.data;
-  const chartStart = Date.parse(priceHistory.points.at(-1)?.observedAt ?? "") - 89 * 86_400_000;
+  const chartStart = Date.parse(priceHistory.points.at(-1)?.observedAt ?? "") - (range==="30D"?29:range==="1Y"?364:range==="All"?10000:89) * 86_400_000;
   const chartPrices = priceHistory.points.filter(point => Date.parse(point.observedAt) >= chartStart);
   return (
     <>
@@ -582,7 +563,7 @@ function AssetProfile({
         </div>
         <div>
           <strong>{usd(asset.priceUsd)}</strong>
-          <span className={asset.change24h < 0 ? "down" : "up"}>
+          <span className={asset.change24h === null ? "" : asset.change24h < 0 ? "down" : "up"}>
             {pct(asset.change24h)} 24h
           </span>
         </div>
@@ -599,7 +580,7 @@ function AssetProfile({
         ))}
       </nav>
       <nav className="asset-tabs" aria-label="Asset profile sections">
-        {(["overview", "fundamentals", "tokenomics"] as const).map((item) => (
+        {(["overview", "fundamentals", "tokenomics", "notes"] as const).map((item) => (
           <button
             key={item}
             className={tab === item ? "active" : ""}
@@ -631,6 +612,7 @@ function AssetProfile({
             <article className="panel">
               {priceHistory.points.length ? (
                 <>
+                  <div className="chart-ranges" aria-label="Price chart range">{["30D","90D","1Y","All"].map(value=><button key={value} className={range===value?"active":""} onClick={()=>{setRange(value);void api("/research/preferences/price-chart",{method:"PUT",body:JSON.stringify({range:value})});}}>{value}</button>)}</div>
                   <Sparkline prices={chartPrices} />
                   <div className="ohlcv">
                     <span>{chartPrices[0]?.observedAt.slice(0, 10)} – {chartPrices.at(-1)?.observedAt.slice(0, 10)}</span>
@@ -639,7 +621,9 @@ function AssetProfile({
                 </>
               ) : (
                 <div className="empty">
-                  Daily price history has not been archived yet. Snapshot metrics remain available.
+                  {priceHistory.metadata.unavailable
+                    ? "Daily price history is temporarily unavailable. Snapshot metrics remain available."
+                    : "Daily price history has not been archived yet. Snapshot metrics remain available."}
                 </div>
               )}
               <Status metadata={priceHistory.metadata} />
@@ -701,6 +685,7 @@ function AssetProfile({
           </section>
         </>
       )}
+      {tab === "notes" && <ThesisNotes assetId={assetId} />}
       {tab === "fundamentals" && <FundamentalsTab data={fundamentals} />}
       {tab === "tokenomics" && (
         <TokenomicsTab
@@ -754,7 +739,7 @@ function App() {
   const assetId = route.startsWith("asset/")
     ? decodeURIComponent(route.slice(6))
     : null;
-  const page: Page = assetId ? "assets" : (route as Page);
+  const page: Page = assetId ? "assets" : (route.split("?")[0] as Page);
   const navigate = (p: Page) => (location.hash = p);
   const select = (id: string) =>
     (location.hash = `asset/${encodeURIComponent(id)}`);
@@ -778,7 +763,7 @@ function App() {
         <small>
           DATA REFRESH
           <br />
-          <strong>ON DEMAND</strong>
+          <strong>SCHEDULED ARCHIVE</strong>
           <br />
           USD · ENGLISH
         </small>
@@ -805,8 +790,10 @@ function App() {
             {page === "overview" && (
               <Overview navigate={navigate} select={select} />
             )}{" "}
-            {page === "assets" && <Assets select={select} />}{" "}
+            {page === "assets" && <Assets key={route} select={select} />}{" "}
             {page === "watchlist" && <Watchlist />}{" "}
+            {page === "research" && <Research />}
+            {page === "data-health" && <DataHealth />}
           </>
         )}
         <footer>
@@ -817,4 +804,4 @@ function App() {
     </div>
   );
 }
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(<WorkspaceAccess><App /></WorkspaceAccess>);

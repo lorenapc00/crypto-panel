@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { DAY_MS, expectedDailyTime, parseDailyChart } from "./daily-history.js";
+import type { Pool } from "pg";
+import { DAY_MS, expectedDailyTime, ingestDailyHistory, parseDailyChart, profileDailyHistory } from "./daily-history.js";
 
 const midnight = Date.parse("2026-09-09T00:00:00Z");
 const now = midnight + 12 * 3600000;
@@ -36,4 +37,21 @@ test("freshness changes at the provider publication boundary even for populated 
   assert.equal(expectedDailyTime(midnight + 9 * 60000), populatedLastPoint);
   assert.equal(expectedDailyTime(midnight + 10 * 60000), midnight);
   assert.ok(populatedLastPoint < expectedDailyTime(now));
+});
+
+test("an empty archive is distinguished from an unavailable archive", async () => {
+  const database = { query: async () => ({ rows: [] }) } as unknown as Pool;
+  const history = await profileDailyHistory("bitcoin", now, database);
+  assert.deepEqual(history.points, []);
+  assert.equal(history.metadata.unavailable, false);
+  assert.equal(history.metadata.stale, true);
+  assert.equal(history.metadata.observedAt, null);
+});
+
+test("ingestion still fails before fetching when the archive cannot be read", async (t) => {
+  const failure = new Error("Database offline");
+  const database = { query: async () => { throw failure; } } as unknown as Pool;
+  const fetchImpl = t.mock.fn<typeof fetch>();
+  await assert.rejects(ingestDailyHistory("bitcoin", { database, fetchImpl }), error => error === failure);
+  assert.equal(fetchImpl.mock.callCount(), 0);
 });

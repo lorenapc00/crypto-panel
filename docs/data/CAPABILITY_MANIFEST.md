@@ -1,8 +1,8 @@
 # Data capabilities and the stage 0 decision
 
-Checked 2026-09-09. **Proceed to stage 1 with BTC history, market snapshots, scoped fundamentals, Hyperliquid catalogs, and sampled spot-pool discovery.** Broad perp-volume market-share rankings, advanced holder metrics, and macro vintages remain gated. These are build decisions; no scheduled archive or new product interface is running yet.
+Checked 2026-09-09. **Stage 0 approved BTC history, market snapshots, scoped fundamentals, Hyperliquid catalogs, and sampled spot-pool discovery.** Broad perp-volume market-share rankings, advanced holder metrics, and macro vintages remain gated. The implementation update below distinguishes that original capability decision from the running archive.
 
-**Implementation update:** the first stage 1 slice now provides versioned migrations, legacy-candle quarantine, raw-response provenance, immutable daily-series revisions, coverage-aware repository reads, and corrected daily history in the existing asset page. Production scheduling, discovery archiving and shared quota enforcement remain next. The evidence below describes the original capability spike.
+**Implementation update:** Stage 1 software is complete, with persistent research state, Data Health, shared quota accounting for worker/manual/probe requests, and supervised local worker/backup operation. The 120 job definitions include protocol/venue/pool catalogs, top-100 market/global and issuance snapshots, seven fundamental summaries, four priority price/volume histories, eight fundamental histories, native BTC book/funding, and 80 sampled token pair/promotion slots. Live validation recorded 112 successful jobs and eight empty slots skipped without quota or replay coverage. Sixteen normalized series are archived; irregular intervals remain visible. A backup restore and automatic worker restart were verified. Always-on hosting remains open. See the [worker runbook](DISCOVERY_WORKER.md), [operation procedures](../../ops/README.md) and [dated finalization evidence](stage1-finalization-2026-09-09.json). The evidence below describes the original capability spike unless a follow-up is identified.
 
 Evidence: [initial probes](capability-results-2026-09-09.json), [history and batch follow-up](capability-followup-2026-09-09.json), and [chain probes](capability-chains-2026-09-09.json). The three runs made 59 requests covering all 48 defined probes and ten additional discovered namespaces, with one repeated request after throttling. They produced 46 successful samples, 12 other HTTP failures, and one 429. Every result records its request, credential mode, UTC acquisition time, HTTP status, response hash, and available shape/coverage checks. Requests used no credentials. Success means a sample was received; it does not certify every asset, continuous service, metric comparability, or historical publication times. These reports are not the replay archive.
 
@@ -17,7 +17,7 @@ pnpm test
 
 The [probe definitions](../../scripts/capability-probes.json) specify exact GET URLs and read-only POST bodies. Output defaults to ignored `.reports/capabilities.json`; use `--output path` to preserve a dated result. `hl-namespaces` also probes every named namespace returned by the catalog; `hl-contexts-native` checks the native namespace separately. An explicit `--only` list never implies full provider coverage.
 
-Optional exported `COINGECKO_DEMO_API_KEY` and `FRED_API_KEY` are supported by the probe. It does not load `.env` or print keys, request headers, or error bodies. The subsequent daily-history adapter also supports the Demo key; older market/fundamental adapters do not. Negative HTTP results are evidence, not test failures. Transport failures, malformed successful responses, or throttling exit nonzero. A 429 stops further requests to that provider for that run; there are no automatic retries. The original run hit one CoinGecko 429, retained in the evidence. A later follow-up returned 401 for the same 730-day request. Default CoinGecko pacing was subsequently reduced to five requests/minute.
+Optional exported `COINGECKO_DEMO_API_KEY` and `FRED_API_KEY` are supported by the probe. It does not load `.env` or print keys, request headers, or error bodies. The subsequent daily-history adapter also supports the Demo key; scheduled CoinGecko market/global jobs also support it. Negative HTTP results are evidence, not test failures. Transport failures, malformed successful responses, or throttling exit nonzero. A 429 stops further requests to that provider for that run; there are no automatic retries. The original run hit one CoinGecko 429, retained in the evidence. A later follow-up returned 401 for the same 730-day request. Default CoinGecko pacing was subsequently reduced to five requests/minute.
 
 ## Capability manifest
 
@@ -118,13 +118,13 @@ Contracts use one unit of the underlying; retain `openInterest` in native units 
 | ALFRED/FRED `DFII10`, `DTWEXBGS`, `SP500` vintage queries | All 400 without a key | Free-key gate. Reprobe coverage and vintages after `FRED_API_KEY` is configured; not a paid-access finding. |
 | Glassnode SOPR | 401 without credentials | No verified feed. Advanced holder/valuation variants remain unavailable. |
 
-GeckoTerminal's public API documents an approximate ten calls/minute and offers new-pool endpoints. The SDK/API is beta; pin its recommended response version when implementing the adapter. [GeckoTerminal API](https://api.geckoterminal.com/docs/index.html). DEX Screener documents separate rate classes for promotional endpoints and market data. [DEX Screener API](https://docs.dexscreener.com/api/reference).
+The original GeckoTerminal API reference suggested approximately ten calls/minute. **Worker follow-up, 2026-09-09:** the current [provider FAQ](https://apiguide.geckoterminal.com/faq) states 30/minute; the local budget remains five/minute. The beta API adapter pins its response version. [GeckoTerminal API](https://api.geckoterminal.com/docs/index.html). DEX Screener documents separate rate classes for promotional endpoints and market data. [DEX Screener API](https://docs.dexscreener.com/api/reference).
 
 Pool/profile snapshots have no verified historical vintages. Neither provider validates launch age, sell restrictions, concentration, retained liquidity, or contract powers for this plan: those fields stay unknown. Data redistribution rights were not established; record provider terms/attribution separately from API accessibility. ALFRED can request earlier vintages, but no actual vintage response or series-specific licensing was verified here. [Vintage query contract](https://fred.stlouisfed.org/docs/api/fred/series_observations.html).
 
 ## Quota budget and universe decision
 
-The executable [budget](quota-budget.json) uses a **31-day month**, includes bootstrap calls, and separates documented limits from conservative local ceilings. `pnpm research:budget` recalculates totals and fails if a configured monthly ceiling is exceeded. These are proposed limits; enforcement belongs to the stage 1 worker.
+The executable [budget](quota-budget.json) uses a **31-day month**, includes bootstrap calls, and separates documented limits from conservative local ceilings. `pnpm research:budget` recalculates totals and fails if a configured monthly ceiling is exceeded. Every acquisition path now shares provider enforcement, including the manual-history and probe CLIs. The full job list below remains a design budget; only individually verified feeds in the worker runbook are scheduled.
 
 | Provider | Scheduled work | First-month calls | Local monthly ceiling / remaining |
 |---|---|---:|---:|
@@ -145,13 +145,23 @@ The starting 1,000 assets are a rank-selected coverage envelope, not every proje
 
 Hyperliquid requires a **weighted** bucket. The configured hourly cycle uses approximately 700 weight, including response-size increments for short funding requests; spread this over at least three minutes under the local 300-weight/minute ceiling. The documented provider ceiling is 1,200 weight/minute. Additional namespaces, books, pagination, or longer funding backfills require recalculation. [Weight rules](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/rate-limits-and-user-limits).
 
-Coin Metrics local pacing is 30 calls/minute; DefiLlama 10; GeckoTerminal 5; DEX Screener 30 across both endpoint classes; optional FRED 5; tip/inflation 1. Unknown published quotas remain unknown. All failed requests and retries count locally. Stage 1 must enforce both pacing and monthly ceilings, honor `Retry-After` with backoff, record missed intervals, and expose actual usage and incomplete coverage on Data Health. No browser-triggered backfills may consume this budget.
+Coin Metrics local pacing is 30 calls/minute; DefiLlama 10; GeckoTerminal 5; DEX Screener 30 across both endpoint classes; optional FRED 5; tip/inflation 1. Unknown published quotas remain unknown. Failures and retries count locally. Shared pacing/monthly ceilings, `Retry-After`, request-purpose evidence and run/gap records are implemented and surfaced on Data Health with individual-series coverage. A finalization CoinGecko global probe returned HTTP 200 and was charged to the ledger. API reads never trigger backfills.
 
 ## Next implementation slice
 
-1. Versioned transactional migrations; quarantine legacy candles before enabling refresh; add revision-aware series/provenance and coverage-start records.
-2. PostgreSQL worker with provider budgets, retries, run/gap records, and persisted-only API reads.
-3. Start native and named Hyperliquid catalogs, scoped protocol snapshots, and Solana/Base sampled pool discovery. Maintain baseline semantics and explicit missing coverage.
-4. Replace daily calculations with validated completed daily price samples, correct volume semantics and Wilder RSI; persist research state and expose Data Health.
+Stage 1 software and local supervision are complete. The remaining operational
+condition is always-on hosting with sustained coverage and a backup copy outside
+the archive machine. The active market feed remains one top-100 page; expanding
+to the 1,000-asset design requires verified Demo access. Broader fundamentals,
+OI/stablecoins, macro and advanced metrics follow their individual gates.
+
+Live normalization preserves irregular Hyperliquid TVL timestamps and flags them
+instead of manufacturing daily bars. DEX Screener Base Uniswap v4 pairs can use
+bytes32 pool IDs; token contracts still require their own valid chain identity.
+These findings came from archived response inspection and successful bounded
+retries; the original failures remain recorded quota evidence.
+Of the 16 normalized series, 11 have healthy spacing/coverage and five flag
+irregular steps. Four of those retain missing historical fee/revenue dates;
+successful current acquisition does not fill or conceal provider history gaps.
 
 Stage 2 can then ship BTC price-derived research and its signal-study primitive. MVRV and other verified inputs may follow with their individual definitions. Perp-volume market-share sorting and inaccessible metrics are excluded from initial interface commitments.

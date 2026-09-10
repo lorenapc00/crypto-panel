@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgres:16-alpine
+    restart: unless-stopped
     environment: { POSTGRES_DB: crypto_panel, POSTGRES_USER: crypto_panel, POSTGRES_PASSWORD: crypto_panel_dev }
     ports: ["127.0.0.1:5432:5432"]
   redis:

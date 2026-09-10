@@ -1,0 +1,19 @@
+[Unit]
+Description=Crypto Panel archive worker
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=crypto-panel
+WorkingDirectory=/opt/crypto-panel
+EnvironmentFile=/opt/crypto-panel/.env
+ExecStart=/usr/bin/node /opt/crypto-panel/apps/api/dist/worker.js
+Restart=always
+RestartSec=30
+TimeoutStopSec=45
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

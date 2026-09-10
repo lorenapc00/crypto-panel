@@ -1,7 +1,7 @@
-import { setTimeout as delay } from "node:timers/promises";
 import type { Pool } from "pg";
 import { pool } from "./db.js";
 import { archivePayload, readSeries, type SeriesDefinition, type SeriesPoint } from "./archive.js";
+import { meteredFetch } from './requests.js';
 
 export const DAY_MS = 86_400_000;
 export const dailySeriesId = (assetId: string, metricCode = "price_usd") => `coingecko:${assetId}:${metricCode}:daily-sample:v1`;
@@ -38,6 +38,21 @@ export function parseDailyChart(payload: unknown, now = Date.now()) {
 
 export async function dailyHistory(assetId: string, now = Date.now(), database: Pool = pool) {
   const series = await readSeries(dailySeriesId(assetId), {}, database);
+  return describeDailyHistory(series, now);
+}
+
+// Profiles can still show snapshots when the archive is offline. Ingestion keeps
+// using the strict reader above so database failures never trigger a backfill.
+export async function profileDailyHistory(assetId: string, now = Date.now(), database: Pool = pool) {
+  try {
+    return await dailyHistory(assetId, now, database);
+  } catch (error) {
+    console.error(`Daily price archive unavailable for ${assetId}:`, error);
+    return describeDailyHistory(null, now, true);
+  }
+}
+
+function describeDailyHistory(series: Awaited<ReturnType<typeof readSeries>>, now: number, unavailable = false) {
   const points = series?.points ?? [];
   const usable = points.filter(point => point.value !== null);
   const last = usable.at(-1)?.observedAt ?? null;
@@ -46,23 +61,18 @@ export async function dailyHistory(assetId: string, now = Date.now(), database: 
   if (points.length) missingIntervals += Math.max(0, Math.floor((expectedDailyTime(now) - Date.parse(points.at(-1)!.observedAt)) / DAY_MS));
   return {
     points: points.map(point => ({ observedAt: point.observedAt, close: point.value })),
-    metadata: { source: "CoinGecko", observedAt: last, coverage: "Completed daily USD price samples; historical reconstruction", stale: last === null || Date.parse(last) < expectedDailyTime(now), missingIntervals, intervalSeconds: DAY_MS / 1000, methodologyVersion: "daily-sample:v1", replayCoverageStart: series?.metadata.replayCoverageStart ?? null, classification: "historical-reconstruction" as const },
+    metadata: { source: "CoinGecko", observedAt: last, coverage: unavailable ? "Stored daily price history is temporarily unavailable" : "Completed daily USD price samples; historical reconstruction", stale: last === null || Date.parse(last) < expectedDailyTime(now), unavailable, missingIntervals, intervalSeconds: DAY_MS / 1000, methodologyVersion: "daily-sample:v1", replayCoverageStart: series?.metadata.replayCoverageStart ?? null, classification: "historical-reconstruction" as const },
   };
 }
 
-let lastRequestAt = 0;
 export async function ingestDailyHistory(assetId: string, options: { force?: boolean; database?: Pool; fetchImpl?: typeof fetch } = {}) {
   const database = options.database ?? pool;
   const existing = await dailyHistory(assetId, Date.now(), database);
   if (!options.force && !existing.metadata.stale) return { refreshed: false, inserted: 0 };
-  // Manual ingestion is sequential. The scheduled worker will own shared quota enforcement.
-  await delay(Math.max(0, lastRequestAt + 12_000 - Date.now()));
   const endpoint = `https://api.coingecko.com/api/v3/coins/${encodeURIComponent(assetId)}/market_chart?vs_currency=usd&days=365&interval=daily`;
   const headers: Record<string, string> = { accept: "application/json" };
   if (process.env.COINGECKO_DEMO_API_KEY) headers["x-cg-demo-api-key"] = process.env.COINGECKO_DEMO_API_KEY;
-  const requestedAt = new Date().toISOString();
-  lastRequestAt = Date.now();
-  const response = await (options.fetchImpl ?? fetch)(endpoint, { headers, signal: AbortSignal.timeout(25_000) });
+  const { response,requestedAt,requestId } = await meteredFetch('coingecko',endpoint,{headers},{database,fetchImpl:options.fetchImpl});
   if (!response.ok) throw new Error(`Daily history request failed: HTTP ${response.status}`);
   const rawPayload = await response.text();
   const receivedAt = new Date().toISOString();
@@ -72,5 +82,6 @@ export async function ingestDailyHistory(assetId: string, options: { force?: boo
     { definition: definition("price_usd"), points: parsed.prices },
     { definition: definition("volume_24h_usd"), points: parsed.volumes },
   ] }, database);
+  await database.query('update worker_requests set payload_id=$2 where id=$1',[requestId,result.payloadId]);
   return { refreshed: true, inserted: result.inserted };
 }
