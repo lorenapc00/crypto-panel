@@ -1,9 +1,10 @@
 # Planned work — CDI/macro feeds and Python signal research
 
 Recorded 2026-09-11. Two plans agreed with the user during the same session,
-in execution order. Stage A is approved and about to be implemented on the
-current stack; Stage B is parked until Stage A ships and a free `FRED_API_KEY`
-is obtained.
+in execution order. **Stage A shipped 2026-09-11** (commit `de01add` on
+`stage-6-backtest-lab`) — see its "Implementation and live verification" note
+below for what was built and confirmed live. **Stage B is next, parked**
+until explicitly resumed.
 
 **Revised 2026-09-11 after a critical review.** Every correction below was
 checked against the code or a live probe the same day. Main changes:
@@ -32,7 +33,7 @@ checked against the code or a live probe the same day. Main changes:
 
 ---
 
-## Stage A (active): CDI, USD/BRL and US macro data — production feeds and a new Macro tab
+## Stage A (shipped 2026-09-11): CDI, USD/BRL and US macro data — production feeds and a new Macro tab
 
 ### Context
 
