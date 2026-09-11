@@ -14,9 +14,14 @@ import { btcHistoryJob } from './feeds/bitcoin.js';
 import { capitalJobs } from './feeds/capital.js';
 import { perpJobs } from './feeds/perp.js';
 import { sentimentJobs } from './feeds/sentiment.js';
+import { bcbJobs } from './feeds/bcb.js';
+import { macroJobs } from './feeds/macro.js';
+import { fomcCalendarJob, fredReleaseDateJobs } from './feeds/calendar.js';
 import { runBacktests } from './backtest/executor.js';
 
-const jobs = [...discoveryJobs, ...snapshotJobs, ...historyJobs, ...venueJobs, ...spotJobs, btcHistoryJob, ...capitalJobs, ...perpJobs, ...sentimentJobs];
+const jobs = [...discoveryJobs, ...snapshotJobs, ...historyJobs, ...venueJobs, ...spotJobs, btcHistoryJob, ...capitalJobs, ...perpJobs, ...sentimentJobs,
+  ...bcbJobs, fomcCalendarJob,
+  ...(process.env.FRED_API_KEY ? [...macroJobs, ...fredReleaseDateJobs] : [])];
 const workerId=randomUUID();
 let lastHealth=0,registered=false;
 

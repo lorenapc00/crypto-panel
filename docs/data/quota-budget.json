@@ -252,11 +252,60 @@
       "notes": "Public RPC best effort; not a production SLA."
     },
     {
+      "id": "bcb",
+      "documentedLimit": {
+        "requestsPerMinute": null,
+        "source": "https://olinda.bcb.gov.br/olinda/servico/ajuda",
+        "note": "No documented numeric limit; a 10-year window cap per request is enforced (probed: a 2010-2026 request returns 406 naming this limit)."
+      },
+      "localLimit": {
+        "requestsPerMinute": 5,
+        "requestsPerMonth": 100
+      },
+      "jobs": [
+        {
+          "id": "cdi-daily",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        },
+        {
+          "id": "ptax-daily",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        }
+      ],
+      "bootstrapRequests": 4,
+      "enabled": true,
+      "notes": "CDI (SGS series 12) and USD/BRL PTAX sell (SGS series 1), one request each per day (62/31 days). Backfill to 2010-01-01 proceeds in <=10-year chunks via each job's request hook (up to 4 bootstrap requests total). Business days only; weekends and Brazilian holidays are simply absent, never forward-filled or recorded as gaps."
+    },
+    {
+      "id": "federalreserve",
+      "documentedLimit": {
+        "requestsPerMinute": null,
+        "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+        "note": "Official HTML calendar page, scraped (no RSS/ICS feed exists); no documented rate limit."
+      },
+      "localLimit": {
+        "requestsPerMinute": 1,
+        "requestsPerMonth": 10
+      },
+      "jobs": [
+        {
+          "id": "fomc-calendar",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 0.14285714285714285
+        }
+      ],
+      "bootstrapRequests": 1,
+      "enabled": true,
+      "notes": "Weekly scrape of the official FOMC meeting calendar page (~5/month). responseFormat:'text'; confirmed to serve without a redirect. Throws if zero meetings parse for the current year, so a layout change fails loudly instead of archiving an empty calendar."
+    },
+    {
       "id": "fred",
       "documentedLimit": {
         "requestsPerMinute": null,
         "source": "https://fred.stlouisfed.org/docs/api/fred/",
-        "note": "Free key required; numeric limit not verified in this spike."
+        "note": "Free key required; numeric limit not verified. Reprobed with a real key: DFII10, DTWEXBGS, SP500, NASDAQCOM daily plus CPI/Employment/GDP/PCE release-date lookups."
       },
       "localLimit": {
         "requestsPerMinute": 5,
@@ -264,14 +313,49 @@
       },
       "jobs": [
         {
-          "id": "three-series-vintage-window",
-          "requestsPerCycle": 3,
+          "id": "dfii10-daily",
+          "requestsPerCycle": 1,
           "cyclesPerDay": 1
+        },
+        {
+          "id": "dtwexbgs-daily",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        },
+        {
+          "id": "sp500-daily",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        },
+        {
+          "id": "nasdaqcom-daily",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        },
+        {
+          "id": "cpi-release-dates",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 0.14285714285714285
+        },
+        {
+          "id": "employment-release-dates",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 0.14285714285714285
+        },
+        {
+          "id": "gdp-release-dates",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 0.14285714285714285
+        },
+        {
+          "id": "pce-release-dates",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 0.14285714285714285
         }
       ],
-      "bootstrapRequests": 3,
-      "enabled": false,
-      "notes": "Reserved only. Reprobe DFII10, DTWEXBGS and SP500 with FRED_API_KEY. Verify license and vintage coverage per series. Pagination/revisions may require more calls."
+      "bootstrapRequests": 13,
+      "enabled": true,
+      "notes": "4 daily series (DFII10, DTWEXBGS, SP500, NASDAQCOM) + 4 weekly release-date jobs (CPI, Employment Situation, GDP, Personal Income and Outlays) \u2248 144 requests/31 days, under the 250/month local cap. bootstrapRequests covers the 4 series + 4 release-date calls + 4 series/vintagedates probes + 1 releases probe. The key is added only to the URL fetched at request time; job.endpoint (what gets archived) never carries it. Release IDs resolved via a fred/releases probe, not hardcoded from memory."
     },
     {
       "id": "glassnode",

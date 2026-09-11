@@ -22,6 +22,17 @@ export async function archiveDiscovery(database: Pool, run: Run, job: DiscoveryJ
     if (sample.assets?.length) await client.query(`insert into assets (id,symbol,name)
       select id,symbol,name from jsonb_to_recordset($1::jsonb) as a(id text,symbol text,name text) on conflict do nothing`,[JSON.stringify(sample.assets)]);
     if (sample.series?.length) await appendSeries(client,payloadId,job.provider,sample.series,job.id);
+    if (sample.calendar) {
+      const calendarSnapshot = await client.query(`insert into macro_calendar_snapshots
+        (dataset_id,source_id,payload_id) values ($1,$2,$3) returning id`, [job.id, job.provider, payloadId]);
+      if (sample.calendar.events.length) await client.query(`insert into macro_calendar_events
+        (snapshot_id,event_type,title,starts_on,ends_on,sep,source_url,methodology_version)
+        select $1,e.event_type,e.title,e.starts_on,e.ends_on,e.sep,e.source_url,e.methodology_version
+        from jsonb_to_recordset($2::jsonb) as e(event_type text,title text,starts_on date,ends_on date,sep boolean,source_url text,methodology_version text)`,
+      [calendarSnapshot.rows[0].id, JSON.stringify(sample.calendar.events.map(e => ({
+        event_type: e.eventType, title: e.title, starts_on: e.startsOn, ends_on: e.endsOn,
+        sep: e.sep, source_url: e.sourceUrl, methodology_version: e.methodologyVersion })))]);
+    }
     if (job.kind === 'market') await client.query(`insert into assets (id,symbol,name)
       select m.data->>'id',m.data->>'symbol',m.data->>'name'
       from jsonb_to_recordset($1::jsonb) as m(data jsonb)

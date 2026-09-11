@@ -1,12 +1,17 @@
 import type { ArchiveInput } from '../archive.js';
 export type Member = { key: string; status: 'observed' | 'active' | 'delisted'; data: Record<string, unknown> };
-export type DiscoverySample = { members: Member[]; notes: Record<string, unknown>; series?: ArchiveInput['series']; assets?: {id:string;symbol:string;name:string}[] };
+export type CalendarEvent = {
+  eventType: 'fomc-meeting' | 'copom-meeting' | 'cpi-release' | 'employment-release' | 'gdp-release' | 'pce-release';
+  title: string; startsOn: string; endsOn: string; sep: boolean | null; sourceUrl: string; methodologyVersion: string;
+};
+export type DiscoverySample = { members: Member[]; notes: Record<string, unknown>; series?: ArchiveInput['series']; assets?: {id:string;symbol:string;name:string}[]; calendar?: { events: CalendarEvent[] } };
 export type DiscoveryJob = {
   id: string; provider: string; kind: 'protocols' | 'namespaces' | 'instruments' | 'pools' | 'market' | 'global' | 'fundamental' | 'issuance' | 'history' | 'book' | 'funding' | 'enrichment' | 'openinterest';
   scope: string; intervalSeconds: number; membership: 'catalog' | 'sample';
   endpoint: string; body?: Record<string, unknown>; weight: number;
   methodologyVersion?: string;
   offsetSeconds?: number;
+  responseFormat?: 'json' | 'text';
   request?: (database: import('pg').Pool) => Promise<{endpoint:string;body?:Record<string,unknown>;parse?:DiscoveryJob['parse']} | null>;
   parse: (payload: unknown, receivedAt?: string) => DiscoverySample;
 };

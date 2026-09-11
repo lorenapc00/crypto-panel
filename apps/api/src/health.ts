@@ -11,7 +11,9 @@ export async function recordSeriesGaps(database:Pool) {
     join lateral (select min(observed_at) as first_at from series_observations where series_id=s.id) first on first.first_at is not null
     cross join lateral generate_series(greatest(first.first_at,clock_timestamp()-interval '10000 days'),${expected},s.interval_seconds*interval '1 second') grid(time)
     left join lateral (select value from series_observations where series_id=s.id and observed_at=grid.time order by recorded_at desc,id desc limit 1) point on true
-    where s.interval_seconds=86400 and point.value is null on conflict do nothing`);
+    where s.interval_seconds=86400 and point.value is null
+      and not (s.source_id in ('bcb','fred') and extract(dow from grid.time at time zone 'UTC') in (0,6))
+    on conflict do nothing`);
 }
 export async function seriesHealth(database:Pool) {
   return (await database.query(`select s.id,s.asset_id,a.symbol,s.metric_code,s.source_id,s.scope,s.unit,s.interval_seconds,s.methodology_version,

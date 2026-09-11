@@ -652,3 +652,14 @@ footer {
 .change-tag.perp-venue-namespace { border-color: #6a5a86; color: #b399e2; }
 .change-tag.perp-protocol-catalog { border-color: #725744; color: #edbd94; }
 .overview-changes button { margin-top: 8px; }
+
+.macro-workspace { display: grid; gap: 18px; margin-top: 12px; }
+.macro-intro { margin: 4px 0 0; }
+.macro-intro h2 { font-size: 24px; margin: 8px 0; }
+.macro-intro .eyebrow, .macro-intro p { color: #9ca9b9; font-size: 12px; line-height: 1.7; }
+.macro-workspace .panel { padding: 18px; }
+.macro-workspace .panel h2 { font-size: 18px; margin: 0 0 8px; }
+.macro-calendar-source { margin-top: 14px; }
+.macro-calendar-source h3 { font-size: 13px; font-weight: 500; color: #aebccc; margin: 0 0 6px; }
+.macro-calendar-source ul { margin: 0; padding-left: 18px; }
+.macro-calendar-source li { font-size: 12px; line-height: 1.9; color: #aebccc; }

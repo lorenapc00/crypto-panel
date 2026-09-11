@@ -19,12 +19,19 @@ export async function executeRun(database: Pool, run: Run, job: DiscoveryJob, fe
   }
   const request = await reserveRequest(database, run, job);
   if (!request) return { status: 'deferred' };
+  // The FRED key is added only to the URL actually fetched, never to job.endpoint:
+  // job.endpoint is what gets archived (source_payloads.endpoint, worker_requests.endpoint),
+  // and those tables are append-only, so a key written there could never be removed.
+  const fetchUrl = job.provider === 'fred' && process.env.FRED_API_KEY
+    ? (() => { const u = new URL(job.endpoint); u.searchParams.set('api_key', process.env.FRED_API_KEY!); return u.toString(); })()
+    : job.endpoint;
   let response: Response;
   let raw: string;
   try {
-    response = await fetchImpl(job.endpoint, {
+    response = await fetchImpl(fetchUrl, {
       method: job.body ? 'POST' : 'GET', body: job.body ? JSON.stringify(job.body) : undefined,
-      headers: { Accept: job.provider === 'geckoterminal' ? 'application/json;version=20230302' : 'application/json',
+      headers: { Accept: job.responseFormat === 'text' ? 'text/html'
+          : job.provider === 'geckoterminal' ? 'application/json;version=20230302' : 'application/json',
         ...(job.provider === 'coingecko' && process.env.COINGECKO_DEMO_API_KEY ? { 'x-cg-demo-api-key': process.env.COINGECKO_DEMO_API_KEY } : {}),
         ...(job.body ? { 'Content-Type': 'application/json' } : {}) },
       signal: AbortSignal.timeout(20000), redirect: 'error',
@@ -38,7 +45,8 @@ export async function executeRun(database: Pool, run: Run, job: DiscoveryJob, fe
     return { status: 'request-failed' };
   }
   let parsed: unknown, validJson = true;
-  try { parsed = JSON.parse(raw); } catch { parsed = null; validJson = false; }
+  if (job.responseFormat === 'text') { parsed = null; } // raw_body already preserves the real body below
+  else { try { parsed = JSON.parse(raw); } catch { parsed = null; validJson = false; } }
   // Keep even rejected response bodies as provenance; only validated responses
   // can create membership snapshots or start the production archive clock.
   const payload = await transaction(database, async client => {
@@ -60,8 +68,8 @@ export async function executeRun(database: Pool, run: Run, job: DiscoveryJob, fe
   }
   let sample;
   try {
-    if (!validJson) throw new Error('Invalid provider JSON');
-    sample = job.parse(parsed, payload.received_at);
+    if (job.responseFormat !== 'text' && !validJson) throw new Error('Invalid provider JSON');
+    sample = job.parse(job.responseFormat === 'text' ? raw : parsed, payload.received_at);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Invalid provider response';
     await database.query('update worker_requests set error=$2 where id=$1', [request.id, message]);
