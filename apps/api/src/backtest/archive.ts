@@ -12,13 +12,22 @@ import type { RegimePoint } from './calculations.js';
  *  This is the one fully backfillable dataset, so it is the only strategy input in stage 6. */
 export async function loadRegimeInputs(database: Pool, asOf?: string) {
   const view = btcView(await btcArchive(database, asOf), asOf);
-  const points = view.data.points as { observedAt: string; value: number | null; regime: string }[];
+  const points = view.data.points as {
+    observedAt: string; value: number | null; regime: string;
+    mayerMultiple: number | null; sma200: number | null; mvrv: number | null; weeklyRsi: number | null;
+  }[];
   const prices: Point[] = points.filter(p => p.value !== null).map(p => ({ observedAt: p.observedAt, value: p.value }));
   const regimes: RegimePoint[] = points.map(p => ({ observedAt: p.observedAt, regime: p.regime }));
+  // Per-day inputs for the custom portfolio engine; every field is already on the trend point.
+  const signals = points.map(p => ({
+    observedAt: p.observedAt, close: p.value, regime: p.regime,
+    mayer: p.mayerMultiple ?? null, sma200: p.sma200 ?? null, mvrv: p.mvrv ?? null, weeklyRsi: p.weeklyRsi ?? null,
+  }));
   const priceCoverage = view.data.coverage.find(c => c.metric === 'price_usd') ?? view.data.coverage[0];
   return {
     prices,
     regimes,
+    signals,
     dataset: {
       seriesId: btcSeriesId('price_usd'),
       source: 'Coin Metrics Community',

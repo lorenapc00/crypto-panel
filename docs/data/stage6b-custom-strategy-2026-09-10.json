@@ -1,0 +1,314 @@
+{
+  "checkedAt": "2026-09-11T00:32:11.944Z",
+  "scope": "Local supervised Mac; continuous hosting remains unverified",
+  "migration": 12,
+  "followUp": "Backtest Lab customizable strategy engine (portfolio-strategy:v1) — no migration",
+  "endpoints": {
+    "templates": 200,
+    "reproducedStatus": 200,
+    "reproduced": true,
+    "invalidSpecStatus": 400
+  },
+  "examples": {
+    "dca-hold": {
+      "status": "succeeded",
+      "inputHash": "adb938fd46b2152d8cb41933cea63a6f58d96729aa0797b6f52f352420d7280f",
+      "window": {
+        "to": "2026-09-09",
+        "from": "2011-02-24",
+        "years": 15.55,
+        "tradingDays": 5677,
+        "missingCloseDays": 0
+      },
+      "hasContributions": true,
+      "strategy": {
+        "moneyWeightedReturnPct": 93.36,
+        "cagrPct": null,
+        "endingEquityUsd": 276673464.74,
+        "totalContributedUsd": 94000,
+        "profitUsd": 276579464.74,
+        "profitPct": 294233.47,
+        "maxDrawdownPct": -91.75,
+        "timeInMarketPct": 100,
+        "avgCashDragPct": 0,
+        "trades": {
+          "buys": 188,
+          "sells": 0,
+          "total": 188,
+          "turnoverPerYear": 12.09
+        }
+      },
+      "benchmarks": {
+        "dcaHold": {
+          "moneyWeightedReturnPct": 93.36,
+          "cagrPct": null,
+          "endingEquityUsd": 276673464.74,
+          "totalContributedUsd": 94000,
+          "profitUsd": 276579464.74,
+          "profitPct": 294233.47,
+          "maxDrawdownPct": -91.75
+        },
+        "lumpSum": {
+          "moneyWeightedReturnPct": 107.53,
+          "cagrPct": 107.53,
+          "endingEquityUsd": 8017393260.89,
+          "totalContributedUsd": 94000,
+          "profitUsd": 8017299260.89,
+          "profitPct": 8529041.77,
+          "maxDrawdownPct": -92.75
+        }
+      },
+      "holdoutOutOfSample": {
+        "strategy": {
+          "moneyWeightedReturnPct": 1126.65,
+          "cagrPct": null,
+          "endingEquityUsd": 276673464.74,
+          "totalContributedUsd": 28000,
+          "profitUsd": 276645464.74,
+          "profitPct": 988019.52,
+          "maxDrawdownPct": -66.8
+        },
+        "dcaHold": {
+          "moneyWeightedReturnPct": 1126.65,
+          "cagrPct": null,
+          "endingEquityUsd": 276673464.74,
+          "totalContributedUsd": 28000,
+          "profitUsd": 276645464.74,
+          "profitPct": 988019.52,
+          "maxDrawdownPct": -66.8
+        }
+      },
+      "costSensitivity": [
+        {
+          "costBps": 25,
+          "profitPct": 294233.47,
+          "maxDrawdownPct": -91.75,
+          "moneyWeightedReturnPct": 93.36
+        },
+        {
+          "costBps": 50,
+          "profitPct": 293495.8,
+          "maxDrawdownPct": -91.75,
+          "moneyWeightedReturnPct": 93.33
+        },
+        {
+          "costBps": 100,
+          "profitPct": 292020.44,
+          "maxDrawdownPct": -91.75,
+          "moneyWeightedReturnPct": 93.26
+        }
+      ],
+      "ledger": {
+        "buys": 188,
+        "sells": 0
+      }
+    },
+    "dca-regime-exit": {
+      "status": "succeeded",
+      "inputHash": "97685682cd53a9e8aa25b55092141feacf4e3acb94be58b507b313527bb2a77b",
+      "window": {
+        "to": "2026-09-09",
+        "from": "2011-02-24",
+        "years": 15.55,
+        "tradingDays": 5677,
+        "missingCloseDays": 0
+      },
+      "hasContributions": true,
+      "strategy": {
+        "moneyWeightedReturnPct": 87.59,
+        "cagrPct": null,
+        "endingEquityUsd": 180398852.33,
+        "totalContributedUsd": 94000,
+        "profitUsd": 180304852.33,
+        "profitPct": 191813.67,
+        "maxDrawdownPct": -76.14,
+        "timeInMarketPct": 56.7,
+        "avgCashDragPct": 43.3,
+        "trades": {
+          "buys": 128,
+          "sells": 20,
+          "total": 148,
+          "turnoverPerYear": 9.52
+        }
+      },
+      "benchmarks": {
+        "dcaHold": {
+          "moneyWeightedReturnPct": 93.36,
+          "cagrPct": null,
+          "endingEquityUsd": 276673464.74,
+          "totalContributedUsd": 94000,
+          "profitUsd": 276579464.74,
+          "profitPct": 294233.47,
+          "maxDrawdownPct": -91.75
+        },
+        "lumpSum": {
+          "moneyWeightedReturnPct": 107.53,
+          "cagrPct": 107.53,
+          "endingEquityUsd": 8017393260.89,
+          "totalContributedUsd": 94000,
+          "profitUsd": 8017299260.89,
+          "profitPct": 8529041.77,
+          "maxDrawdownPct": -92.75
+        }
+      },
+      "holdoutOutOfSample": {
+        "strategy": {
+          "moneyWeightedReturnPct": 1009.03,
+          "cagrPct": null,
+          "endingEquityUsd": 180398852.33,
+          "totalContributedUsd": 28000,
+          "profitUsd": 180370852.33,
+          "profitPct": 644181.62,
+          "maxDrawdownPct": -38.67
+        },
+        "dcaHold": {
+          "moneyWeightedReturnPct": 1126.65,
+          "cagrPct": null,
+          "endingEquityUsd": 276673464.74,
+          "totalContributedUsd": 28000,
+          "profitUsd": 276645464.74,
+          "profitPct": 988019.52,
+          "maxDrawdownPct": -66.8
+        }
+      },
+      "costSensitivity": [
+        {
+          "costBps": 25,
+          "profitPct": 191813.67,
+          "maxDrawdownPct": -76.14,
+          "moneyWeightedReturnPct": 87.59
+        },
+        {
+          "costBps": 50,
+          "profitPct": 173359.53,
+          "maxDrawdownPct": -76.2,
+          "moneyWeightedReturnPct": 86.24
+        },
+        {
+          "costBps": 100,
+          "profitPct": 141499.98,
+          "maxDrawdownPct": -76.32,
+          "moneyWeightedReturnPct": 83.57
+        }
+      ],
+      "ledger": {
+        "buys": 128,
+        "sells": 20
+      }
+    },
+    "dca-sell-at-ath": {
+      "status": "succeeded",
+      "inputHash": "a62eed3ae69120c4cc7a5954798f74c13857da21de32981a68c4512eddca7b04",
+      "window": {
+        "to": "2026-09-09",
+        "from": "2011-02-24",
+        "years": 15.55,
+        "tradingDays": 5677,
+        "missingCloseDays": 0
+      },
+      "hasContributions": true,
+      "strategy": {
+        "moneyWeightedReturnPct": 40.55,
+        "cagrPct": null,
+        "endingEquityUsd": 3617015.77,
+        "totalContributedUsd": 94000,
+        "profitUsd": 3523015.77,
+        "profitPct": 3747.89,
+        "maxDrawdownPct": -81.64,
+        "timeInMarketPct": 87.5,
+        "avgCashDragPct": 12.5,
+        "trades": {
+          "buys": 188,
+          "sells": 33,
+          "total": 221,
+          "turnoverPerYear": 14.21
+        }
+      },
+      "benchmarks": {
+        "dcaHold": {
+          "moneyWeightedReturnPct": 93.36,
+          "cagrPct": null,
+          "endingEquityUsd": 276673464.74,
+          "totalContributedUsd": 94000,
+          "profitUsd": 276579464.74,
+          "profitPct": 294233.47,
+          "maxDrawdownPct": -91.75
+        },
+        "lumpSum": {
+          "moneyWeightedReturnPct": 107.53,
+          "cagrPct": 107.53,
+          "endingEquityUsd": 8017393260.89,
+          "totalContributedUsd": 94000,
+          "profitUsd": 8017299260.89,
+          "profitPct": 8529041.77,
+          "maxDrawdownPct": -92.75
+        }
+      },
+      "holdoutOutOfSample": {
+        "strategy": {
+          "moneyWeightedReturnPct": 329.66,
+          "cagrPct": null,
+          "endingEquityUsd": 3617015.77,
+          "totalContributedUsd": 28000,
+          "profitUsd": 3589015.77,
+          "profitPct": 12817.91,
+          "maxDrawdownPct": -66.74
+        },
+        "dcaHold": {
+          "moneyWeightedReturnPct": 1126.65,
+          "cagrPct": null,
+          "endingEquityUsd": 276673464.74,
+          "totalContributedUsd": 28000,
+          "profitUsd": 276645464.74,
+          "profitPct": 988019.52,
+          "maxDrawdownPct": -66.8
+        }
+      },
+      "costSensitivity": [
+        {
+          "costBps": 25,
+          "profitPct": 3747.89,
+          "maxDrawdownPct": -81.64,
+          "moneyWeightedReturnPct": 40.55
+        },
+        {
+          "costBps": 50,
+          "profitPct": 3237.67,
+          "maxDrawdownPct": -81.65,
+          "moneyWeightedReturnPct": 38.99
+        },
+        {
+          "costBps": 100,
+          "profitPct": 2413.4,
+          "maxDrawdownPct": -81.68,
+          "moneyWeightedReturnPct": 35.9
+        }
+      ],
+      "ledger": {
+        "buys": 188,
+        "sells": 33
+      }
+    }
+  },
+  "tests": {
+    "apiUnit": 112,
+    "apiDb": 60,
+    "browser": 18
+  },
+  "templates": {
+    "available": [
+      "btc-regime-filter",
+      "custom-strategy"
+    ],
+    "total": 6
+  },
+  "limitations": [
+    "The custom engine covers BTC only; every condition (regime, ATH, drawdown, Mayer, price vs SMA200, weekly RSI, MVRV) is derived from the archived Coin Metrics daily series.",
+    "Money-weighted return (IRR) is the headline for contribution strategies; it rewards well-timed contributions and is not a buy-and-hold CAGR.",
+    "Execution cost is a flat per-side basis-point assumption on every buy and sell; no slippage, spread, market impact or partial fills.",
+    "Uninvested cash earns nothing. The lump-sum benchmark assumes every future contribution was available on day one — hindsight capital, shown for contrast only.",
+    "Maximum drawdown is measured against a peak that steps up with each contribution, isolating market declines from contribution pace.",
+    "About one BTC cycle is covered — descriptive, not walk-forward-validated or statistically significant.",
+    "Acquisition remains locally supervised; an always-on host is still outstanding."
+  ]
+}

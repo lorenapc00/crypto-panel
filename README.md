@@ -107,8 +107,8 @@ and legacy upgrades, rollback, concurrent migrations, immutable revisions,
 cutoff replay, scope checks, and populated stale-history refresh. One-off price
 backfills are labeled historical reconstruction; they do not create production
 replay coverage. Repository `asOf` reads reject dates without declared coverage.
-Validation through Stage 6 Backtest Lab passes 97 unit/capability checks, 58 PostgreSQL cases and
-seventeen browser scenarios. Browser fixtures use a separate temporary schema and ports
+Validation through Stage 6 Backtest Lab passes 112 unit/capability checks, 60 PostgreSQL cases and
+eighteen browser scenarios. Browser fixtures use a separate temporary schema and ports
 3101/5175; they do not add research records to the personal workspace.
 
 ## Fundamentals and tokenomics
@@ -232,16 +232,20 @@ Open **Backtest Lab** for three modes. *Historical replay* composes the archived
 Market Overview, Emerging Projects, Spot Launches and Perp workspaces at a chosen
 `asOf` date and refuses each workspace whose coverage starts after that date;
 a cutoff before the BTC regime's own coverage is refused outright. *Signal study*
-is the stage 2 primitive, relocated here from BTC Cycles. *Strategy test* runs the
-one available template, **BTC regime filter vs BTC buy-and-hold**: hold BTC only
-while the confirmed daily regime is bullish (optionally also transitional),
-otherwise sit flat; the signal is the completed prior day's regime, so execution
-is next-day with no look-ahead; a flat per-side basis-point cost is charged on
-each switch and reported at 25/50/100 bps; results include CAGR, realized
-volatility, Sharpe, Sortino, maximum drawdown, trade turnover and a chronological
-holdout. Runs are queued in `backtest_runs`, executed by the worker, then frozen;
-an identical template version and parameter set returns the stored result instead
-of recomputing (SHA-256 input hash). The attention-basket, early-launch and
+is the stage 2 primitive, relocated here from BTC Cycles. *Strategy test* has two
+engines over the full Coin Metrics BTC price history. **BTC regime filter vs BTC
+buy-and-hold** holds BTC only while the confirmed daily regime is bullish
+(optionally also transitional), otherwise sits flat. **Custom strategy** is a
+portfolio simulator: a starting lump sum and a recurring contribution, your own
+entry rule (trigger + optional indicator guard — regime, new ATH, drawdown from
+ATH, Mayer multiple, price vs 200D SMA, weekly RSI, MVRV — + size) and exit rule,
+compared against buy-every-dollar DCA and a hindsight lump sum, with a
+money-weighted return (IRR), a trade ledger and a chronological holdout. Every
+signal reads the completed prior day and executes next-day with no look-ahead; a
+flat per-side basis-point cost is charged on each trade and reported at 25/50/100
+bps. Runs are queued in `backtest_runs`, executed by the worker, then frozen; an
+identical template version and parameter set returns the stored result instead of
+recomputing (SHA-256 input hash). The attention-basket, early-launch and
 perp-project/listing templates are listed as deferred until replay coverage
 accrues; expanded on-chain, unlock, ETF and derivatives feeds stay gated exactly
 as stage 0 left them. `GET /api/v1/backtest/templates`, `GET /api/v1/backtest/replay?asOf=`

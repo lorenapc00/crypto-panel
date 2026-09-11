@@ -1,5 +1,6 @@
 import { InputError, object } from '../research/validation.js';
 import { ACTIVE_REGIME_SETS, BACKTEST_STRATEGY_METHOD, type ActiveRegimeSet, type RegimeStrategyParams } from './calculations.js';
+import { PORTFOLIO_STRATEGY_METHOD, parseStrategySpec } from './strategy-spec.js';
 
 export type TemplateStatus = 'available' | 'deferred';
 export type BacktestTemplate = {
@@ -60,6 +61,15 @@ export const BACKTEST_TEMPLATES: BacktestTemplate[] = [
     status: 'available',
     gate: null,
     parse: parseRegimeStrategy,
+  },
+  {
+    key: 'custom-strategy',
+    label: 'Custom strategy (portfolio engine)',
+    summary: 'Compose a starting capital and recurring contribution with your own entry rule (trigger + optional indicator guard + size) and exit rule (indicator trigger + size). Compared against buy-every-dollar DCA and a hindsight lump sum, with a money-weighted return, a trade ledger and a chronological holdout.',
+    methodologyVersion: PORTFOLIO_STRATEGY_METHOD,
+    status: 'available',
+    gate: null,
+    parse: parseStrategySpec,
   },
   deferred('emerging-attention-basket', 'Weekly top-10 Emerging Projects attention basket', 'Equal-weight the ten highest-Attention eligible assets each week; compare with BTC and an equal-weight eligible-universe benchmark.', 'emerging-attention-basket:v0'),
   deferred('early-launch-event-study', 'Early spot-launch signal study', 'Forward 1D/7D/30D returns after a token first clears the launch shortlist.', 'early-launch-event-study:v0'),

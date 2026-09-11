@@ -118,10 +118,52 @@ test('the templates endpoint lists gates and the replay-coverage horizon', async
   await seedBtc(database);
   await withServer(database, async base => {
     const { data } = await fetch(`${base}/backtest/templates`).then(r => r.json()) as any;
-    assert.equal(data.templates.length, 5);
-    const regime = data.templates.find((t: any) => t.key === 'btc-regime-filter');
-    assert.equal(regime.status, 'available');
+    assert.equal(data.templates.length, 6);
+    assert.deepEqual(data.templates.filter((t: any) => t.status === 'available').map((t: any) => t.key).sort(), ['btc-regime-filter', 'custom-strategy']);
     assert.ok(data.templates.filter((t: any) => t.status === 'deferred').every((t: any) => t.gate));
     assert.ok(data.coverage.series.some((s: any) => s.id === 'coinmetrics:bitcoin:price_usd:daily:v1' && s.replayCoverageStart));
+  });
+}));
+
+const DCA_HOLD = { startCapitalUsd: 0, contribution: { amountUsd: 500, cadence: 'monthly', day: 1 },
+  entry: { trigger: 'on-contribution', guard: { type: 'none' }, size: { type: 'all-cash' } }, exit: { trigger: { type: 'none' } } };
+
+test('a custom DCA strategy is queued, executed and returns a money-weighted return and a ledger', async () => isolated(async database => {
+  await seedBtc(database);
+  await withServer(database, async base => {
+    const created = await post(base, '/backtest/runs', { templateKey: 'custom-strategy', params: DCA_HOLD });
+    assert.equal(created.status, 202);
+    const { data } = await created.json() as any;
+    assert.deepEqual(await runBacktests(database), [`${data.id}:succeeded`]);
+
+    const done = await fetch(`${base}/backtest/runs/${data.id}`).then(r => r.json()) as any;
+    assert.equal(done.data.status, 'succeeded');
+    assert.equal(done.data.result.methodologyVersion, 'portfolio-strategy:v1');
+    assert.equal(done.data.result.hasContributions, true);
+    assert.ok(Number.isFinite(done.data.result.strategy.metrics.moneyWeightedReturnPct));
+    assert.ok(done.data.result.strategy.metrics.totalContributedUsd > 0);
+    assert.ok(done.data.result.ledger.buys > 0);
+    // A plain buy-every-contribution strategy matches its own DCA-hold benchmark.
+    assert.equal(done.data.result.strategy.metrics.endingEquityUsd, done.data.result.benchmarks.dcaHold.metrics.endingEquityUsd);
+    assert.equal(done.data.result.costSensitivity.length, 3);
+
+    await assert.rejects(database.query("update backtest_runs set result='{}'::jsonb where id=$1", [data.id]), /immutable/);
+  });
+}));
+
+test('custom-strategy validates the spec and its conditions', async () => isolated(async database => {
+  await seedBtc(database);
+  await withServer(database, async base => {
+    assert.equal((await post(base, '/backtest/runs', { templateKey: 'custom-strategy', params: {} })).status, 400); // no capital or contribution
+    assert.equal((await post(base, '/backtest/runs', { templateKey: 'custom-strategy', params: { ...DCA_HOLD, exit: { trigger: { type: 'mayer', op: 'nope', value: 2 } } } })).status, 400);
+    assert.equal((await post(base, '/backtest/runs', { templateKey: 'custom-strategy', params: { ...DCA_HOLD, holdoutPct: 5 } })).status, 400);
+    assert.equal((await post(base, '/backtest/runs', { templateKey: 'custom-strategy', params: { ...DCA_HOLD, junk: 1 } })).status, 400);
+
+    const ath = { ...DCA_HOLD, exit: { trigger: { type: 'new-ath' }, size: { type: 'all' } } };
+    const a = await (await post(base, '/backtest/runs', { templateKey: 'custom-strategy', params: ath })).json() as any;
+    await runBacktests(database);
+    const b = await post(base, '/backtest/runs', { templateKey: 'custom-strategy', params: ath });
+    assert.equal(b.status, 200);
+    assert.equal((await b.json() as any).data.inputHash, a.data.inputHash);
   });
 }));

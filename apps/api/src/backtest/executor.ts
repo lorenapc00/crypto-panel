@@ -1,6 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import type { Pool } from 'pg';
 import { regimeStrategyBacktest, type RegimeStrategyParams } from './calculations.js';
+import { portfolioBacktest } from './portfolio.js';
+import type { StrategySpec } from './strategy-spec.js';
 import { loadRegimeInputs } from './archive.js';
 
 export type BacktestRun = {
@@ -27,11 +29,17 @@ export async function claimBacktest(database: Pool): Promise<BacktestRun | null>
 }
 
 async function compute(database: Pool, run: BacktestRun) {
-  if (run.template_key !== 'btc-regime-filter') throw new Error(`No executor for template ${run.template_key}`);
-  const params = run.input.params as unknown as RegimeStrategyParams;
   const inputs = await loadRegimeInputs(database);
-  const backtest = regimeStrategyBacktest({ prices: inputs.prices, regimes: inputs.regimes, params });
-  return { ...backtest, dataset: inputs.dataset, generatedAt: new Date().toISOString() };
+  const meta = { dataset: inputs.dataset, generatedAt: new Date().toISOString() };
+  if (run.template_key === 'btc-regime-filter') {
+    const backtest = regimeStrategyBacktest({ prices: inputs.prices, regimes: inputs.regimes, params: run.input.params as unknown as RegimeStrategyParams });
+    return { ...backtest, ...meta };
+  }
+  if (run.template_key === 'custom-strategy') {
+    const backtest = portfolioBacktest({ signals: inputs.signals, spec: run.input.params as unknown as StrategySpec });
+    return { ...backtest, ...meta };
+  }
+  throw new Error(`No executor for template ${run.template_key}`);
 }
 
 export async function executeBacktest(database: Pool, run: BacktestRun) {
