@@ -1,7 +1,8 @@
 import type { Pool } from 'pg';
-import { ReplayCoverageError } from '../archive.js';
+import { ReplayCoverageError, readSeries } from '../archive.js';
 import { btcArchive, btcView } from '../btc/routes.js';
 import { btcSeriesId } from '../feeds/bitcoin.js';
+import { fearGreedSeriesId } from '../feeds/sentiment.js';
 import { marketOverviewArchive } from '../overview.js';
 import { emergingArchive, launchesArchive } from '../altcoin/archive.js';
 import { perpProjectsArchive, perpListingsArchive } from '../perp/archive.js';
@@ -18,10 +19,18 @@ export async function loadRegimeInputs(database: Pool, asOf?: string) {
   }[];
   const prices: Point[] = points.filter(p => p.value !== null).map(p => ({ observedAt: p.observedAt, value: p.value }));
   const regimes: RegimePoint[] = points.map(p => ({ observedAt: p.observedAt, regime: p.regime }));
+  // Independent feed: an unconfigured or not-yet-covered sentiment series must not break
+  // the BTC-only regime filter or any custom strategy that doesn't reference it.
+  let fearGreedByDate = new Map<string, number>();
+  try {
+    const fearGreed = await readSeries(fearGreedSeriesId, { asOf, limit: 10000 }, database);
+    fearGreedByDate = new Map((fearGreed?.points ?? []).filter(p => p.value !== null).map(p => [p.observedAt.slice(0, 10), p.value as number]));
+  } catch (error) { if (!(error instanceof ReplayCoverageError)) throw error; }
   // Per-day inputs for the custom portfolio engine; every field is already on the trend point.
   const signals = points.map(p => ({
     observedAt: p.observedAt, close: p.value, regime: p.regime,
     mayer: p.mayerMultiple ?? null, sma200: p.sma200 ?? null, mvrv: p.mvrv ?? null, weeklyRsi: p.weeklyRsi ?? null,
+    fearGreed: fearGreedByDate.get(p.observedAt.slice(0, 10)) ?? null,
   }));
   const priceCoverage = view.data.coverage.find(c => c.metric === 'price_usd') ?? view.data.coverage[0];
   return {

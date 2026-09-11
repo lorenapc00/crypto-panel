@@ -190,3 +190,9 @@ Of the 517 archived Hyperliquid markets, only four have a curated, verified cryp
 underlying; the venue publishes no asset-class or pre-market field, and the non-native
 namespaces are largely equities, indices, FX and commodities. [Perp methods](PERP_DISCOVERY.md),
 [production evidence](stage4-perp-2026-09-10.json).
+
+### Alternative.me: Crypto Fear & Greed Index (checked 2026-09-10)
+
+A user-requested probe outside the original stage 0 list. `GET https://api.alternative.me/fng/?limit=0&format=json` returned HTTP 200, no key, no visible rate-limit headers across three rapid requests. One call returns the provider's **entire published history**: 3,141 daily values, 2018-02-01 through the request date, `{value: "0"-"100", value_classification, timestamp}`. The text classification's bucket edges are not documented precisely enough to reconstruct independently, so only the raw 0-100 `value` is archived and used; `value_classification` is not stored. License (from the provider's page): attribution required next to displayed data, commercial use allowed with attribution, no impersonation.
+
+**Build decision:** add as `provider alternative-me`, one daily job re-sending the full history (`docs/data/quota-budget.json`, 31 requests/month, well inside a 60/month local ceiling). Reuses `data_series`/`series_observations`/`replay_coverage` exactly like the DefiLlama stablecoin-supply feed — no new tables, migration `0013_fear_greed.sql` only adds the `sources`/`metric_definitions` rows and widens the existing asset-less-series scope check. Live local acquisition on 2026-09-11 archived 3,140 completed daily values (today's incomplete day excluded); this archive's own replay coverage begins at that acquisition, not at the provider's 2018-02-01 history start. See [Backtest Lab methods](BACKTEST_LAB.md#custom-strategy-engine-portfolio-strategyv1), [BTC methods](BTC_RESEARCH.md) and [dated evidence](stage6c-fear-greed-2026-09-10.json).

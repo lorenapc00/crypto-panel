@@ -71,6 +71,7 @@ const CONDITION_TYPES: { value: string; label: string; kind: 'plain' | 'regime' 
   { value: 'price-vs-sma200', label: 'Price vs 200D SMA', kind: 'side' },
   { value: 'weekly-rsi', label: 'Weekly RSI', kind: 'threshold' },
   { value: 'mvrv', label: 'MVRV', kind: 'threshold' },
+  { value: 'fear-greed', label: 'Fear & Greed Index', kind: 'threshold' },
 ];
 const REGIMES = ['bullish', 'transitional', 'bearish'];
 

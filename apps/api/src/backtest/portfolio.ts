@@ -10,13 +10,14 @@ export type Signal = {
   sma200: number | null;
   mvrv: number | null;
   weeklyRsi: number | null;
+  fearGreed: number | null;
 };
 
 const YEAR = 365 * DAY;
 const round = (value: number | null, places = 2) =>
   value === null || !Number.isFinite(value) ? null : Number(value.toFixed(places));
 
-type Row = { time: number; date: string; close: number; regime: string; mayer: number | null; sma200: number | null; mvrv: number | null; weeklyRsi: number | null };
+type Row = { time: number; date: string; close: number; regime: string; mayer: number | null; sma200: number | null; mvrv: number | null; weeklyRsi: number | null; fearGreed: number | null };
 
 /** Whether a condition's state holds on a given day. `null` inputs make a threshold
  *  condition simply false — it never blocks a guard nor fires a trigger on missing data. */
@@ -34,6 +35,7 @@ function conditionHolds(cond: Condition, row: Row, athToHere: number): boolean {
     case 'price-vs-sma200': return row.sma200 === null ? false : cond.side === 'above' ? row.close > row.sma200 : row.close < row.sma200;
     case 'weekly-rsi': return row.weeklyRsi === null ? false : cond.op === 'gte' ? row.weeklyRsi >= cond.value : row.weeklyRsi <= cond.value;
     case 'mvrv': return row.mvrv === null ? false : cond.op === 'gte' ? row.mvrv >= cond.value : row.mvrv <= cond.value;
+    case 'fear-greed': return row.fearGreed === null ? false : cond.op === 'gte' ? row.fearGreed >= cond.value : row.fearGreed <= cond.value;
   }
 }
 
@@ -225,7 +227,7 @@ export function portfolioBacktest(input: { signals: Signal[]; spec: StrategySpec
     if (time < from || time > to) continue;
     if (!rows.length && (signal.close === null || signal.regime === 'insufficient-history')) continue;
     if (signal.close === null) { missingCloseDays++; continue; }
-    rows.push({ time, date: signal.observedAt.slice(0, 10), close: signal.close, regime: signal.regime, mayer: signal.mayer, sma200: signal.sma200, mvrv: signal.mvrv, weeklyRsi: signal.weeklyRsi });
+    rows.push({ time, date: signal.observedAt.slice(0, 10), close: signal.close, regime: signal.regime, mayer: signal.mayer, sma200: signal.sma200, mvrv: signal.mvrv, weeklyRsi: signal.weeklyRsi, fearGreed: signal.fearGreed });
   }
   if (rows.length < 10) throw new Error('The strategy backtest needs at least ten completed daily prices inside the window');
 

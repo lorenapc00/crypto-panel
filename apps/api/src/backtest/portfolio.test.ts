@@ -7,10 +7,10 @@ const DAY = 86400000;
 const start = Date.parse('2020-01-01T00:00:00.000Z');
 const iso = (i: number) => new Date(start + i * DAY).toISOString();
 
-function signals(n: number, close: (i: number) => number, regime: (i: number) => string = () => 'bullish'): Signal[] {
+function signals(n: number, close: (i: number) => number, regime: (i: number) => string = () => 'bullish', fearGreed: (i: number) => number | null = () => 50): Signal[] {
   return Array.from({ length: n }, (_, i) => ({
     observedAt: iso(i), close: close(i), regime: regime(i),
-    mayer: close(i) / 100, sma200: 100, mvrv: 2, weeklyRsi: 50,
+    mayer: close(i) / 100, sma200: 100, mvrv: 2, weeklyRsi: 50, fearGreed: fearGreed(i),
   }));
 }
 
@@ -129,6 +129,22 @@ test('the three worked examples all produce a finite result and a ledger', () =>
     assert.ok(r.ledger.entries.length > 0);
     assert.equal(r.costSensitivity.length, 3);
   }
+});
+
+test('a fear-greed guard holds only above its threshold and gates entry accordingly', () => {
+  const r = portfolioBacktest({
+    signals: signals(60, i => 100 + i, () => 'bullish', i => (i < 30 ? 10 : 90)),
+    spec: dcaHold({ entry: { trigger: 'monthly', day: 1, guard: { type: 'fear-greed', op: 'gte', value: 75 }, size: { type: 'all-cash' }, redeploy: 'scheduled' } }),
+  });
+  assert.ok(r.ledger.entries.every(e => e.date >= iso(30).slice(0, 10)));
+});
+
+test('a null fear-greed input never satisfies the condition', () => {
+  const r = portfolioBacktest({
+    signals: signals(60, i => 100 + i, () => 'bullish', () => null),
+    spec: dcaHold({ entry: { trigger: 'monthly', day: 1, guard: { type: 'fear-greed', op: 'lte', value: 100 }, size: { type: 'all-cash' }, redeploy: 'scheduled' } }),
+  });
+  assert.equal(r.ledger.entries.length, 0);
 });
 
 test('too few completed prices is rejected', () => {

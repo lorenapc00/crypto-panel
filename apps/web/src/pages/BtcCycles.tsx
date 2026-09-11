@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { api, useData } from '../api';
 import { ResearchChart } from '../components/ResearchChart';
 import { BtcContext } from '../components/BtcContext';
+import { FearGreedPanel } from '../components/FearGreedPanel';
 
 type Point = { observedAt: string; value: number | null; sma50: number | null; sma200: number | null;
   sma20w: number | null; ema21w: number | null; sma200w: number | null; weeklyRsi: number | null;
@@ -64,6 +65,7 @@ export function BtcCycles() {
     <div className="btc-cycle-heading"><h2>Halving comparisons</h2><p>{d.methodology.cycles} <a href="https://bitcoin.org/en/halving" target="_blank" rel="noreferrer">Halving dates</a></p></div>
     <ResearchChart title="Cycle price · halving-day close = 100" x={charts.cycleX} lines={charts.cyclePrice} time={false} log={log} syncKey="btc-cycles" />
     <ResearchChart title="MVRV at equivalent cycle stages" x={charts.cycleX} lines={charts.cycleMvrv} time={false} syncKey="btc-cycles" height={230} />
+    <FearGreedPanel />
     <p className="btc-cycle-heading"><a href="#backtest">Signal studies and strategy backtests moved to Backtest Lab &rarr;</a></p>
     <section className="panel btc-method"><details><summary>Formulas, sources and coverage</summary><p>{d.methodology.regime}</p><p>{d.methodology.weekly}</p><p>{d.methodology.valuation}</p><p>{d.methodology.risk}</p><p>{d.methodology.replay}</p>
       <div className="btc-table-wrap"><table><thead><tr><th>Source metric</th><th>Populated dates</th><th>Values</th><th>Freshness</th><th>Archive replay starts</th></tr></thead><tbody>{d.coverage.map(c => <tr key={c.metric}><td>{c.formula}</td><td>{c.first?.slice(0, 10) ?? 'Unavailable'} – {c.last?.slice(0, 10) ?? 'Unavailable'}</td><td>{c.points}</td><td>{c.stale ? 'Stale / unavailable' : 'Current'}</td><td>{c.replayCoverageStart ?? 'Unavailable'}</td></tr>)}</tbody></table></div>

@@ -287,6 +287,27 @@
       "bootstrapRequests": 0,
       "enabled": false,
       "notes": "No verified free credentials/feed for required holder metrics; no scheduled requests."
+    },
+    {
+      "id": "alternative-me",
+      "documentedLimit": {
+        "requestsPerMinute": null,
+        "source": "https://alternative.me/crypto/fear-and-greed-index/",
+        "note": "No documented numeric rate limit; free public endpoint, no API key."
+      },
+      "localLimit": {
+        "requestsPerMinute": 5,
+        "requestsPerMonth": 60
+      },
+      "jobs": [
+        {
+          "id": "fear-greed-history",
+          "requestsPerCycle": 1,
+          "cyclesPerDay": 1
+        }
+      ],
+      "bootstrapRequests": 0,
+      "notes": "limit=0 returns the entire published daily history (3,141 values from 2018-02-01, confirmed 2026-09-10) in one call, re-fetched daily like the DefiLlama stablecoin history job; appendSeries dedupes unchanged values. Attribution to alternative.me required next to displayed values."
     }
   ]
 }

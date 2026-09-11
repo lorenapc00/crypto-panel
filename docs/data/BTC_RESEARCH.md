@@ -138,6 +138,28 @@ in a 31-day month, below the 4,000 local ceiling. Actual configured DefiLlama jo
 require 558 calls per 31 days before probes/retries. No provider quota guarantee
 or new paid access is assumed.
 
+## Fear & Greed Index
+
+`GET /api/v1/btc/sentiment` reads the archived Alternative.me Crypto Fear & Greed
+Index independently of the price/regime pipeline and the context request above —
+a failure or a cutoff before its own coverage affects only this panel. It returns
+the full daily series (`data.points`), the same series segmented by halving date
+(`data.cycles`, one entry per entry in `halvings`), the latest value, and coverage
+evidence. Only the raw 0–100 value is archived; the provider's text classification
+buckets are not independently verified and are not stored or reconstructed.
+
+The BTC Cycles page renders two charts: the full history synced to the price/MVRV
+charts (`btc-time`), and a per-cycle overlay indexed by days since each halving
+(`btc-cycles`), one line per cycle that has any data. The provider's published
+history starts 2018-02-01, so the 2012 and 2016 halving cycles show no data, or
+only their later days — the page states this rather than extrapolating. A
+`fear-greed` threshold condition (`op`, `value` 0–100) is available in the Backtest
+Lab custom-strategy rule builder as both an entry guard and an exit trigger; a
+day before this archive's coverage or the provider's own history is simply `null`
+and never satisfies the condition, the same rule as every other threshold
+indicator. [Capability probe and build decision](CAPABILITY_MANIFEST.md#alternativeme-crypto-fear--greed-index-checked-2026-09-10),
+[dated evidence](stage6c-fear-greed-2026-09-10.json).
+
 ## Validation and local acceptance
 
 `pnpm test`, `pnpm build`, PostgreSQL `test:db`, and web `test:e2e` cover the core

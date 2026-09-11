@@ -11,6 +11,7 @@ import { capitalJobs } from '../src/feeds/capital.js';
 import { discoveryJobs } from '../src/discovery/providers.js';
 import { venueJobs } from '../src/feeds/venue.js';
 import { perpJobs } from '../src/feeds/perp.js';
+import { sentimentJobs } from '../src/feeds/sentiment.js';
 import { runBacktests } from '../src/backtest/executor.js';
 
 if(!process.env.TEST_DATABASE_URL)throw new Error('Browser tests require TEST_DATABASE_URL');
@@ -24,7 +25,7 @@ const solanaPoolsJob=discoveryJobs.find(j=>j.id==='geckoterminal:pools:solana:v1
 const basePoolsJob=discoveryJobs.find(j=>j.id==='geckoterminal:pools:base:v1')!;
 const jobs=[...snapshotJobs.filter(j=>[marketDataset,globalDataset].includes(j.id)),historyJobs[0],btcHistoryJob,
   ...capitalJobs,instrumentsJob,venueJobs[0],venueJobs[1],solanaPoolsJob,basePoolsJob,
-  discoveryJobs.find(j=>j.id==='defillama:protocols:v1')!,discoveryJobs.find(j=>j.id==='hyperliquid:namespaces:v1')!,...perpJobs];
+  discoveryJobs.find(j=>j.id==='defillama:protocols:v1')!,discoveryJobs.find(j=>j.id==='hyperliquid:namespaces:v1')!,...perpJobs,...sentimentJobs];
 await configureWorker(database,jobs);
 const midnight=Math.floor(Date.now()/86400000)*86400000;
 // A second instrument acquisition turns one archived baseline into one real listing event.
@@ -61,7 +62,9 @@ for(const job of [...jobs,snapshotJobs.find(j=>j.id===globalDataset)!,instrument
       {id:'solana_PoolBeSecondaryDeepWorkPair0000000000000002',attributes:{address:'PoolBeSecondaryDeepWorkPair0000000000000002',name:'DEEPWORK / USDC',pool_created_at:new Date(midnight).toISOString(),reserve_in_usd:40000,volume_usd:{h24:90000},transactions:{h24:{buys:20,sells:15}}},relationships:{base_token:{data:{id:'solana_DeepWorkTokenMint000000000000000000000001'}},quote_token:{data:{id:'solana_EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'}}}},
       {id:'solana_PoolCeThinLaunchLiquidityPair000000000003',attributes:{address:'PoolCeThinLaunchLiquidityPair000000000003',name:'THINCOIN / SOL',pool_created_at:new Date(midnight).toISOString(),reserve_in_usd:12000,volume_usd:{h24:3000},transactions:{h24:{buys:4,sells:9}}},relationships:{base_token:{data:{id:'solana_ThinCoinMint00000000000000000000000000002'}},quote_token:{data:{id:'solana_So11111111111111111111111111111111111111112'}}}}]}:
     job.id==='geckoterminal:pools:base:v1'?{data:[
-      {id:'base_0x00000000000000000000000000000000000000a1',attributes:{address:'0x00000000000000000000000000000000000000A1',name:'BASEGEM / WETH',pool_created_at:new Date(midnight).toISOString(),reserve_in_usd:null,volume_usd:{h24:15000},transactions:{h24:{buys:8,sells:8}}},relationships:{base_token:{data:{id:'base_0x00000000000000000000000000000000000000b2'}},quote_token:{data:{id:'base_0x4200000000000000000000000000000000000006'}}}}]}:payload;
+      {id:'base_0x00000000000000000000000000000000000000a1',attributes:{address:'0x00000000000000000000000000000000000000A1',name:'BASEGEM / WETH',pool_created_at:new Date(midnight).toISOString(),reserve_in_usd:null,volume_usd:{h24:15000},transactions:{h24:{buys:8,sells:8}}},relationships:{base_token:{data:{id:'base_0x00000000000000000000000000000000000000b2'}},quote_token:{data:{id:'base_0x4200000000000000000000000000000000000006'}}}}]}:
+    job.provider==='alternative-me'?{data:Array.from({length:2600},(_,i)=>({value:String(10+((i*37)%81)),value_classification:'x',
+      timestamp:String((Math.floor(midnight/86400000)-2600+i)*86400)}))}:payload;
   const result=await executeRun(database,run,job,async()=>new Response(JSON.stringify(contextPayload)));
   if(result.status!=='succeeded')throw new Error(`Fixture failed: ${job.id} ${result.status}`);
 }

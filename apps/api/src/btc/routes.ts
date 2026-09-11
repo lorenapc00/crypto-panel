@@ -9,6 +9,7 @@ import { InputError, object, uuid } from '../research/validation.js';
 import { BTC_METHOD, DAY, btcTrend, cycleComparisons, type Point } from './calculations.js';
 import { signalStudy, STUDY_METHOD } from './study.js';
 import { btcContext } from './context.js';
+import { sentimentView } from './sentiment.js';
 
 export async function btcArchive(database: Pool, asOf?: string) {
   const client = await database.connect();
@@ -112,6 +113,10 @@ export async function btcRoute(database: Pool, req: IncomingMessage, res: Server
   if (url.pathname === '/api/v1/btc/context') {
     if (req.method !== 'GET') { send(res, 405, { error: 'Method not allowed' }); return true; }
     send(res, 200, await btcContext(database, cutoff(url.searchParams.get('asOf')))); return true;
+  }
+  if (url.pathname === '/api/v1/btc/sentiment') {
+    if (req.method !== 'GET') { send(res, 405, { error: 'Method not allowed' }); return true; }
+    send(res, 200, await sentimentView(database, cutoff(url.searchParams.get('asOf')))); return true;
   }
   if (url.pathname === '/api/v1/btc/cycles') {
     if (req.method !== 'GET') { send(res, 405, { error: 'Method not allowed' }); return true; }

@@ -13,7 +13,8 @@ export type Condition =
   | { type: 'mayer'; op: Op; value: number }
   | { type: 'price-vs-sma200'; side: 'above' | 'below' }
   | { type: 'weekly-rsi'; op: Op; value: number }
-  | { type: 'mvrv'; op: Op; value: number };
+  | { type: 'mvrv'; op: Op; value: number }
+  | { type: 'fear-greed'; op: Op; value: number };
 
 export type BuySize = { type: 'all-cash' } | { type: 'fixed'; value: number } | { type: 'pct-cash'; value: number };
 export type SellSize = { type: 'all' } | { type: 'pct'; value: number };
@@ -72,7 +73,7 @@ function regimeSet(value: unknown, field: string): string[] {
 
 function parseCondition(input: unknown, field: string): Condition {
   const row = object(input);
-  const type = enumValue(row.type, ['none', 'regime-in', 'regime-leave', 'new-ath', 'drawdown-from-ath', 'mayer', 'price-vs-sma200', 'weekly-rsi', 'mvrv'] as const, `${field}.type`);
+  const type = enumValue(row.type, ['none', 'regime-in', 'regime-leave', 'new-ath', 'drawdown-from-ath', 'mayer', 'price-vs-sma200', 'weekly-rsi', 'mvrv', 'fear-greed'] as const, `${field}.type`);
   const only = (keys: string[]) => {
     for (const key of Object.keys(row)) if (key !== 'type' && !keys.includes(key)) throw new InputError(`${field}: unsupported field "${key}"`);
   };
@@ -85,6 +86,7 @@ function parseCondition(input: unknown, field: string): Condition {
     case 'mayer': only(['op', 'value']); return { type, op: enumValue(row.op, ['gte', 'lte'] as const, `${field}.op`), value: number_(row.value, `${field}.value`, 0, 100) };
     case 'weekly-rsi': only(['op', 'value']); return { type, op: enumValue(row.op, ['gte', 'lte'] as const, `${field}.op`), value: number_(row.value, `${field}.value`, 0, 100) };
     case 'mvrv': only(['op', 'value']); return { type, op: enumValue(row.op, ['gte', 'lte'] as const, `${field}.op`), value: number_(row.value, `${field}.value`, 0, 100) };
+    case 'fear-greed': only(['op', 'value']); return { type, op: enumValue(row.op, ['gte', 'lte'] as const, `${field}.op`), value: number_(row.value, `${field}.value`, 0, 100) };
   }
 }
 

@@ -39,7 +39,7 @@ test("fresh and concurrent migrations apply once, with an intact ledger on rerun
   assert.equal(result.flat().length, expected);
   assert.equal((await database.query("select count(*)::int as count from schema_migrations")).rows[0].count, expected);
   assert.deepEqual(await migrate(database), []);
-  assert.equal((await database.query("select count(*)::int as count from metric_definitions")).rows[0].count, 14);
+  assert.equal((await database.query("select count(*)::int as count from metric_definitions")).rows[0].count, 15);
 }));
 
 test("unversioned upgrades retain original candles and block subsequent quarantine writes", async () => isolated(async database => {

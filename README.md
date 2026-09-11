@@ -107,8 +107,8 @@ and legacy upgrades, rollback, concurrent migrations, immutable revisions,
 cutoff replay, scope checks, and populated stale-history refresh. One-off price
 backfills are labeled historical reconstruction; they do not create production
 replay coverage. Repository `asOf` reads reject dates without declared coverage.
-Validation through Stage 6 Backtest Lab passes 112 unit/capability checks, 60 PostgreSQL cases and
-eighteen browser scenarios. Browser fixtures use a separate temporary schema and ports
+Validation through Stage 6 Backtest Lab passes 121 unit/capability checks, 63 PostgreSQL cases and
+nineteen browser scenarios. Browser fixtures use a separate temporary schema and ports
 3101/5175; they do not add research records to the personal workspace.
 
 ## Fundamentals and tokenomics
@@ -176,6 +176,13 @@ Historical constituents remain unavailable; supply changes are not measured net
 inflows. Each feed reports its own freshness, provenance and replay start.
 `GET /api/v1/btc/context` reads archived data with an optional guarded `asOf`.
 Aggregate histories can use `/api/v1/series?seriesId=...` without an asset identifier.
+BTC Cycles also charts the archived Alternative.me Crypto Fear & Greed Index —
+full history and a per-halving-cycle overlay (`GET /api/v1/btc/sentiment`) — with
+only the raw 0-100 value stored; the provider's published history starts
+2018-02-01, so the 2012/2016 halving cycles show partial or no data. The same
+indicator is available as a `fear-greed` threshold condition in the Backtest Lab
+custom-strategy rule builder. See [capability probe](docs/data/CAPABILITY_MANIFEST.md#alternativeme-crypto-fear--greed-index-checked-2026-09-10)
+and [dated evidence](docs/data/stage6c-fear-greed-2026-09-10.json).
 [Context execution evidence](docs/data/stage2-context-2026-09-09.json) records
 3,207 completed supply days and 337 current USD-pegged catalog members.
 Open **Market Overview** for composed market conditions: provider-global
@@ -238,7 +245,7 @@ buy-and-hold** holds BTC only while the confirmed daily regime is bullish
 (optionally also transitional), otherwise sits flat. **Custom strategy** is a
 portfolio simulator: a starting lump sum and a recurring contribution, your own
 entry rule (trigger + optional indicator guard — regime, new ATH, drawdown from
-ATH, Mayer multiple, price vs 200D SMA, weekly RSI, MVRV — + size) and exit rule,
+ATH, Mayer multiple, price vs 200D SMA, weekly RSI, MVRV, Fear & Greed Index — + size) and exit rule,
 compared against buy-every-dollar DCA and a hindsight lump sum, with a
 money-weighted return (IRR), a trade ledger and a chronological holdout. Every
 signal reads the completed prior day and executes next-day with no look-ahead; a

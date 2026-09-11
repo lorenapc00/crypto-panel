@@ -99,6 +99,7 @@ Spec (template `custom-strategy`, request body `params`):
 | `price-vs-sma200` | `side` (`above`/`below`) | close vs the 200D SMA |
 | `weekly-rsi` | `op`, `value` | completed-week Wilder RSI vs a level |
 | `mvrv` | `op`, `value` | Coin Metrics MVRV vs a level |
+| `fear-greed` | `op`, `value` | Alternative.me Crypto Fear & Greed Index (0-100) vs a level; `null` before this archive's or the provider's own coverage (2018-02-01), never satisfied |
 
 A threshold condition on a day whose input is not yet archived (early Mayer/RSI/MVRV)
 is simply false — it never blocks a guard nor fires a trigger on missing data.

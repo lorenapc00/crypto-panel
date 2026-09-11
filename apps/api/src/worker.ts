@@ -13,9 +13,10 @@ import { recordSeriesGaps } from './health.js';
 import { btcHistoryJob } from './feeds/bitcoin.js';
 import { capitalJobs } from './feeds/capital.js';
 import { perpJobs } from './feeds/perp.js';
+import { sentimentJobs } from './feeds/sentiment.js';
 import { runBacktests } from './backtest/executor.js';
 
-const jobs = [...discoveryJobs, ...snapshotJobs, ...historyJobs, ...venueJobs, ...spotJobs, btcHistoryJob, ...capitalJobs, ...perpJobs];
+const jobs = [...discoveryJobs, ...snapshotJobs, ...historyJobs, ...venueJobs, ...spotJobs, btcHistoryJob, ...capitalJobs, ...perpJobs, ...sentimentJobs];
 const workerId=randomUUID();
 let lastHealth=0,registered=false;
 

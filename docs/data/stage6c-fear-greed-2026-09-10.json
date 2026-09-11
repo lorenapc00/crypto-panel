@@ -1,0 +1,155 @@
+{
+  "checkedAt": "2026-09-11T01:40:31.303Z",
+  "scope": "Local supervised Mac; continuous hosting remains unverified",
+  "migration": 13,
+  "probe": {
+    "endpoint": "https://api.alternative.me/fng/?limit=0&format=json",
+    "freeAccess": true,
+    "historyStart": "2018-02-01",
+    "valuesArchived": 3140,
+    "noVisibleRateLimit": true,
+    "license": "Attribution required next to displayed data; commercial use allowed with attribution"
+  },
+  "sentimentEndpoint": {
+    "status": 200,
+    "coverage": {
+      "source": "alternative-me",
+      "seriesId": "alternative-me:fear-greed:index:daily:v1",
+      "first": "2018-02-01T00:00:00.000Z",
+      "last": "2026-09-10T00:00:00.000Z",
+      "values": 3140,
+      "missing": 0,
+      "replayCoverageStart": "2026-09-11T01:39:14.641Z",
+      "classification": "forward-tracking-with-reconstruction"
+    },
+    "coveredHalvingCycles": [
+      {
+        "date": "2016-07-09",
+        "n": 827
+      },
+      {
+        "date": "2020-05-11",
+        "n": 1440
+      },
+      {
+        "date": "2024-04-20",
+        "n": 873
+      }
+    ],
+    "replayBeforeCoverage": 409
+  },
+  "fearGreedStrategy": {
+    "spec": {
+      "contribution": {
+        "amountUsd": 500,
+        "cadence": "monthly",
+        "day": 1
+      },
+      "entry": {
+        "trigger": "monthly",
+        "day": 1,
+        "guard": {
+          "type": "fear-greed",
+          "op": "lte",
+          "value": 25
+        },
+        "size": {
+          "type": "all-cash"
+        },
+        "redeploy": "immediate"
+      },
+      "exit": {
+        "trigger": {
+          "type": "fear-greed",
+          "op": "gte",
+          "value": 75
+        },
+        "size": {
+          "type": "all"
+        }
+      }
+    },
+    "runId": "b2cfea8d-11ba-4014-ac5e-40fffc0cdaaa",
+    "status": "succeeded",
+    "window": {
+      "to": "2026-09-09",
+      "from": "2011-02-24",
+      "years": 15.55,
+      "tradingDays": 5677,
+      "missingCloseDays": 0
+    },
+    "strategy": {
+      "sharpe": null,
+      "cagrPct": null,
+      "sortino": null,
+      "profitPct": 4.27,
+      "profitUsd": 4015.57,
+      "volatilityPct": null,
+      "maxDrawdownPct": -71.35,
+      "endingEquityUsd": 98015.57,
+      "totalContributedUsd": 94000,
+      "moneyWeightedReturnPct": 0.53
+    },
+    "dcaHoldBenchmark": {
+      "sharpe": null,
+      "cagrPct": null,
+      "sortino": null,
+      "profitPct": 294233.47,
+      "profitUsd": 276579464.74,
+      "volatilityPct": null,
+      "maxDrawdownPct": -91.75,
+      "endingEquityUsd": 276673464.74,
+      "totalContributedUsd": 94000,
+      "moneyWeightedReturnPct": 93.36
+    },
+    "lumpSumBenchmark": {
+      "sharpe": 1.29,
+      "cagrPct": 107.53,
+      "sortino": 1.976,
+      "profitPct": 8529041.77,
+      "profitUsd": 8017299260.89,
+      "volatilityPct": 84.5,
+      "maxDrawdownPct": -92.75,
+      "endingEquityUsd": 8017393260.89,
+      "totalContributedUsd": 94000,
+      "moneyWeightedReturnPct": 107.53
+    },
+    "trades": {
+      "buys": 58,
+      "sells": 7,
+      "total": 65,
+      "turnoverPerYear": 4.18
+    },
+    "ledgerCounts": {
+      "buys": 58,
+      "sells": 7
+    }
+  },
+  "plainDcaForReference": {
+    "runId": "528f0d4c-11b6-4528-8c29-61d5485086e3",
+    "strategy": {
+      "sharpe": null,
+      "cagrPct": null,
+      "sortino": null,
+      "profitPct": 294233.47,
+      "profitUsd": 276579464.74,
+      "volatilityPct": null,
+      "maxDrawdownPct": -91.75,
+      "endingEquityUsd": 276673464.74,
+      "totalContributedUsd": 94000,
+      "moneyWeightedReturnPct": 93.36
+    }
+  },
+  "tests": {
+    "apiUnit": 121,
+    "apiDb": 63,
+    "browser": 19
+  },
+  "limitations": [
+    "Only the raw 0-100 Fear & Greed value is archived; the provider's text classification buckets are not independently verified and are not stored.",
+    "This archive's own replay coverage starts at first acquisition (2026-09-11); the provider's published history back to 2018-02-01 is historical reconstruction, not proof of prior availability.",
+    "The 2012 and 2016 halving cycles predate the provider's history and show no data.",
+    "Provider composite methodology (volatility, momentum/volume, social media, dominance, trends weighting) is not independently verified.",
+    "Acquisition remains locally supervised; an always-on host is still outstanding."
+  ]
+}

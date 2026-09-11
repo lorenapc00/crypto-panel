@@ -4,7 +4,7 @@ test('BTC charts render, synchronize zoom, export and retain range and scale aft
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
   await page.goto('/#btc');
   await expect(page.getByRole('heading', { name: 'Trend and cycle evidence' })).toBeVisible();
-  await expect(page.locator('.uplot')).toHaveCount(6);
+  await expect(page.locator('.uplot')).toHaveCount(8);
   await page.getByRole('button', { name: '90D', exact: true }).click();
   await expect(page.getByRole('button', { name: '90D', exact: true })).toHaveClass('active');
   const saved = page.waitForResponse(r => r.url().includes('/research/preferences/btc-chart') && r.request().method() === 'PUT');
@@ -82,4 +82,17 @@ test('signal studies show coverage counts, survive reload by saved ID and export
   expect((await pending).suggestedFilename()).toBe(`btc-study-${id}.json`);
   await page.getByText('Individual event outcomes and limitations', { exact: true }).click();
   await expect(page.getByRole('cell', { name: '2020-05-11', exact: true })).toBeVisible();
+});
+
+test('the Fear & Greed panel renders full-history and cycle charts with attribution', async ({ page }) => {
+  const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
+  await page.goto('/#btc');
+  const panel = page.getByRole('region', { name: 'Fear and Greed Index' });
+  await expect(panel.getByRole('heading', { name: 'Fear & Greed Index' })).toBeVisible();
+  await expect(panel.getByText('Latest value')).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Fear & Greed Index', exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Fear & Greed at equivalent cycle stage' })).toBeVisible();
+  await expect(panel.getByRole('link', { name: 'Alternative.me' })).toBeVisible();
+  await expect(panel.getByText('Attribution required next to displayed values', { exact: false })).toBeVisible();
+  expect(errors).toEqual([]);
 });
