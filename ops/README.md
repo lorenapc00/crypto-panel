@@ -15,6 +15,15 @@ check. The worker restarts after exit; backup checks create one verified daily
 backup. Jobs read `.env` without embedding credentials in the service definitions.
 Inspect services with `launchctl print gui/$(id -u)/local.cryptopanel.worker`.
 
+The supervised worker runs the compiled `apps/api/dist/worker.js` and does not
+hot-reload. After changing worker or backtest code, rebuild and restart it, or
+queued work (scheduled jobs, backtest runs) is never picked up:
+
+```bash
+pnpm --filter @crypto-panel/api build
+launchctl kickstart -k gui/$(id -u)/local.cryptopanel.worker
+```
+
 LaunchAgents run while the user is logged in. They cannot collect while this Mac
 is asleep, shut down, logged out, or Docker Desktop is stopped. This provides
 local supervision, not an always-on hosting guarantee. Enable Docker Desktop at

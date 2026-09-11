@@ -74,6 +74,24 @@ relabeling them. Add a new migration for future changes; do not edit applied
 files. Run migrations before starting the updated API. Deployments must include
 the `migrations/` directory alongside `src/` or compiled `dist/`.
 
+### Applying code changes to the running worker
+
+The `worker` and `dev:api` processes do **not** hot-reload compiled code. The
+supervised worker installed by `ops/` runs `apps/api/dist/worker.js`, so after
+changing any worker or backtest code you must rebuild **and restart the worker**,
+or queued work (scheduled jobs, backtest runs) sits unprocessed:
+
+```bash
+pnpm --filter @crypto-panel/api build
+# Restart the supervised LaunchAgent worker (launchd KeepAlive respawns it):
+launchctl kickstart -k gui/$(id -u)/local.cryptopanel.worker
+# Or, if running the worker manually, stop it and start it again:
+pnpm --filter @crypto-panel/api worker
+```
+
+`pnpm dev:api` reloads `src/` on save via `tsx watch`, so API-only changes need
+no manual restart; the worker does not watch.
+
 `pnpm test` runs local unit tests and asserts API test execution counts. Run
 PostgreSQL integration tests explicitly against the local development database:
 
@@ -89,8 +107,8 @@ and legacy upgrades, rollback, concurrent migrations, immutable revisions,
 cutoff replay, scope checks, and populated stale-history refresh. One-off price
 backfills are labeled historical reconstruction; they do not create production
 replay coverage. Repository `asOf` reads reject dates without declared coverage.
-Validation through Stage 5 broader altcoin research passes 86 unit/capability checks, 52 PostgreSQL cases and
-fifteen browser scenarios. Browser fixtures use a separate temporary schema and ports
+Validation through Stage 6 Backtest Lab passes 97 unit/capability checks, 58 PostgreSQL cases and
+seventeen browser scenarios. Browser fixtures use a separate temporary schema and ports
 3101/5175; they do not add research records to the personal workspace.
 
 ## Fundamentals and tokenomics
@@ -209,7 +227,28 @@ capture and sector-peer comparison stay visibly gated. `GET /api/v1/altcoin/emer
 and `GET /api/v1/altcoin/launches` read only stored data and accept a guarded
 `asOf`. See [altcoin methodology](docs/data/ALTCOIN_DISCOVERY.md) and
 [dated execution evidence](docs/data/stage5-altcoin-2026-09-10.json).
-Stage 6 Backtest Lab and expanded evidence is next.
+
+Open **Backtest Lab** for three modes. *Historical replay* composes the archived
+Market Overview, Emerging Projects, Spot Launches and Perp workspaces at a chosen
+`asOf` date and refuses each workspace whose coverage starts after that date;
+a cutoff before the BTC regime's own coverage is refused outright. *Signal study*
+is the stage 2 primitive, relocated here from BTC Cycles. *Strategy test* runs the
+one available template, **BTC regime filter vs BTC buy-and-hold**: hold BTC only
+while the confirmed daily regime is bullish (optionally also transitional),
+otherwise sit flat; the signal is the completed prior day's regime, so execution
+is next-day with no look-ahead; a flat per-side basis-point cost is charged on
+each switch and reported at 25/50/100 bps; results include CAGR, realized
+volatility, Sharpe, Sortino, maximum drawdown, trade turnover and a chronological
+holdout. Runs are queued in `backtest_runs`, executed by the worker, then frozen;
+an identical template version and parameter set returns the stored result instead
+of recomputing (SHA-256 input hash). The attention-basket, early-launch and
+perp-project/listing templates are listed as deferred until replay coverage
+accrues; expanded on-chain, unlock, ETF and derivatives feeds stay gated exactly
+as stage 0 left them. `GET /api/v1/backtest/templates`, `GET /api/v1/backtest/replay?asOf=`
+and `POST`/`GET /api/v1/backtest/runs` read only stored data. **The worker must be
+running for a submitted run to leave `queued`.** See
+[Backtest Lab methodology](docs/data/BACKTEST_LAB.md) and
+[dated execution evidence](docs/data/stage6-backtest-2026-09-10.json).
 
 See [archive operation and restore procedures](ops/README.md) for local Mac
 supervision, a Linux service template and seven-copy daily backup retention.
