@@ -12,9 +12,9 @@ export function download(name: string, content: string, type = 'application/json
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-export function ResearchChart({ title, x, lines, log = false, time = true, syncKey, bands = [], annotations = [], height = 290,
+export function ResearchChart({ title, x, lines, log = false, time = true, xLabel, syncKey, bands = [], annotations = [], height = 290,
   attribution = 'Coin Metrics Community · CC BY-NC 4.0 · Historical reconstruction' }:
-  { title: string; x: number[]; lines: Line[]; log?: boolean; time?: boolean; syncKey?: string;
+  { title: string; x: number[]; lines: Line[]; log?: boolean; time?: boolean; xLabel?: string; syncKey?: string;
     bands?: Band[]; annotations?: { x: number; label: string }[]; height?: number; attribution?: string }) {
   const host = useRef<HTMLDivElement>(null), chart = useRef<uPlot | null>(null);
   const visibleRange = useRef<HTMLParagraphElement>(null);
@@ -24,7 +24,7 @@ export function ResearchChart({ title, x, lines, log = false, time = true, syncK
     const plot = new uPlot({ width: Math.max(280, host.current.clientWidth), height,
       tzDate: ts => uPlot.tzDate(new Date(ts * 1000), 'UTC'),
       scales: { x: { time }, y: { distr: log ? 3 : 1 } },
-      series: [{ label: time ? 'UTC date' : 'Days since halving', value: (_u, v) => v == null ? '—' : time ? new Date(v * 1000).toISOString().slice(0, 10) : String(v) },
+      series: [{ label: xLabel ?? (time ? 'UTC date' : 'Days since halving'), value: (_u, v) => v == null ? '—' : time ? new Date(v * 1000).toISOString().slice(0, 10) : String(v) },
         ...lines.map(line => ({ label: line.label, stroke: line.color, width: 1.5, spanGaps: false, points: { show: false },
           value: (_u: uPlot, v: number | null) => v == null ? '—' : number(v) }))],
       axes: [{ stroke: '#9ca9b9', grid: { stroke: '#26303d' }, values: (_u, values) => values.map(v => time ? new Date(v * 1000).toISOString().slice(0, 10) : String(v)), space: time ? 105 : 65 },
@@ -68,7 +68,7 @@ export function ResearchChart({ title, x, lines, log = false, time = true, syncK
     const observer = new ResizeObserver(() => { if (host.current) plot.setSize({ width: Math.max(280, host.current.clientWidth), height }); });
     observer.observe(host.current);
     return () => { observer.disconnect(); if (syncKey) { groups.get(syncKey)?.delete(plot); if (!groups.get(syncKey)?.size) groups.delete(syncKey); } plot.destroy(); chart.current = null; };
-  }, [x, lines, log, time, syncKey, bands, annotations, height]);
+  }, [x, lines, log, time, xLabel, syncKey, bands, annotations, height]);
   const exportPng = () => {
     if (!chart.current) return;
     const source = chart.current.ctx.canvas, canvas = document.createElement('canvas');

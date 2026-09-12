@@ -17,7 +17,45 @@ const YEAR = 365 * DAY;
 const round = (value: number | null, places = 2) =>
   value === null || !Number.isFinite(value) ? null : Number(value.toFixed(places));
 
-type Row = { time: number; date: string; close: number; regime: string; mayer: number | null; sma200: number | null; mvrv: number | null; weeklyRsi: number | null; fearGreed: number | null };
+type Row = { time: number; date: string; close: number; regime: string; mayer: number | null; sma200: number | null; mvrv: number | null; weeklyRsi: number | null; fearGreed: number | null; percentiles?: Map<string, number | null> };
+
+const percentileKey = (metric: 'mayer' | 'mvrv', windowDays: number) => `${metric}:${windowDays}`;
+
+/** Every distinct (metric, windowDays) pair a spec's entry guard or exit trigger asks
+ *  for, so `portfolioBacktest` computes each rolling percentile series at most once. */
+function collectPercentileRequests(spec: StrategySpec): { metric: 'mayer' | 'mvrv'; windowDays: number }[] {
+  const reqs: { metric: 'mayer' | 'mvrv'; windowDays: number }[] = [];
+  for (const c of [spec.entry.guard, spec.exit.trigger]) {
+    if (c.type === 'mayer-percentile') reqs.push({ metric: 'mayer', windowDays: c.windowDays });
+    if (c.type === 'mvrv-percentile') reqs.push({ metric: 'mvrv', windowDays: c.windowDays });
+  }
+  return reqs;
+}
+
+/** Causal trailing-window percentile rank: for each index i, the fraction of non-null
+ *  values in (times[i]-windowMs, times[i]] that are <= values[i]. Computed over the
+ *  *full* signal history, never just the backtest's own from/to window -- otherwise a
+ *  window that starts close to `spec.from` would see an artificially short, expanding
+ *  lookback instead of a true trailing one (the same publication-lag-style causality
+ *  discipline as the Stage B Python features). */
+function rollingPercentileRank(times: number[], values: (number | null)[], windowMs: number): (number | null)[] {
+  const out: (number | null)[] = new Array(values.length).fill(null);
+  let start = 0;
+  for (let i = 0; i < values.length; i++) {
+    while (times[start] < times[i] - windowMs) start++;
+    const v = values[i];
+    if (v === null) continue;
+    let countLE = 0, total = 0;
+    for (let j = start; j <= i; j++) {
+      const vv = values[j];
+      if (vv === null) continue;
+      total++;
+      if (vv <= v) countLE++;
+    }
+    out[i] = total > 0 ? countLE / total : null;
+  }
+  return out;
+}
 
 /** Whether a condition's state holds on a given day. `null` inputs make a threshold
  *  condition simply false — it never blocks a guard nor fires a trigger on missing data. */
@@ -36,6 +74,11 @@ function conditionHolds(cond: Condition, row: Row, athToHere: number): boolean {
     case 'weekly-rsi': return row.weeklyRsi === null ? false : cond.op === 'gte' ? row.weeklyRsi >= cond.value : row.weeklyRsi <= cond.value;
     case 'mvrv': return row.mvrv === null ? false : cond.op === 'gte' ? row.mvrv >= cond.value : row.mvrv <= cond.value;
     case 'fear-greed': return row.fearGreed === null ? false : cond.op === 'gte' ? row.fearGreed >= cond.value : row.fearGreed <= cond.value;
+    case 'mayer-percentile': case 'mvrv-percentile': {
+      const metric = cond.type === 'mayer-percentile' ? 'mayer' : 'mvrv';
+      const p = row.percentiles?.get(percentileKey(metric, cond.windowDays));
+      return p == null ? false : cond.op === 'gte' ? p >= cond.percentile / 100 : p <= cond.percentile / 100;
+    }
   }
 }
 
@@ -220,6 +263,21 @@ export function portfolioBacktest(input: { signals: Signal[]; spec: StrategySpec
   const from = spec.from ? Date.parse(`${spec.from}T00:00:00.000Z`) : -Infinity;
   const to = spec.to ? Date.parse(`${spec.to}T00:00:00.000Z`) : Infinity;
 
+  // Percentile-based conditions need a lookup per (metric, windowDays), computed over
+  // the *entire* signal history before any from/to filtering (see rollingPercentileRank).
+  const percentileRequests = collectPercentileRequests(spec);
+  const percentileMaps = percentileRequests.length ? new Map<string, Map<number, number | null>>() : null;
+  if (percentileMaps) {
+    const allTimes = input.signals.map(s => Date.parse(s.observedAt));
+    for (const req of percentileRequests) {
+      const key = percentileKey(req.metric, req.windowDays);
+      if (percentileMaps.has(key)) continue;
+      const values = input.signals.map(s => req.metric === 'mayer' ? s.mayer : s.mvrv);
+      const ranks = rollingPercentileRank(allTimes, values, req.windowDays * DAY);
+      percentileMaps.set(key, new Map(allTimes.map((t, i) => [t, ranks[i]])));
+    }
+  }
+
   const rows: Row[] = [];
   let missingCloseDays = 0;
   for (const signal of input.signals) {
@@ -227,7 +285,10 @@ export function portfolioBacktest(input: { signals: Signal[]; spec: StrategySpec
     if (time < from || time > to) continue;
     if (!rows.length && (signal.close === null || signal.regime === 'insufficient-history')) continue;
     if (signal.close === null) { missingCloseDays++; continue; }
-    rows.push({ time, date: signal.observedAt.slice(0, 10), close: signal.close, regime: signal.regime, mayer: signal.mayer, sma200: signal.sma200, mvrv: signal.mvrv, weeklyRsi: signal.weeklyRsi, fearGreed: signal.fearGreed });
+    const percentiles = percentileMaps
+      ? new Map(percentileRequests.map(r => [percentileKey(r.metric, r.windowDays), percentileMaps.get(percentileKey(r.metric, r.windowDays))!.get(time) ?? null]))
+      : undefined;
+    rows.push({ time, date: signal.observedAt.slice(0, 10), close: signal.close, regime: signal.regime, mayer: signal.mayer, sma200: signal.sma200, mvrv: signal.mvrv, weeklyRsi: signal.weeklyRsi, fearGreed: signal.fearGreed, percentiles });
   }
   if (rows.length < 10) throw new Error('The strategy backtest needs at least ten completed daily prices inside the window');
 

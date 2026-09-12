@@ -161,16 +161,40 @@ vintage checks. None became accessible. `tokenomics_events` stays empty and the
 
 ## DCA Matrix (`#dca-matrix`)
 
-`GET /api/v1/backtest/dca-matrix` (guarded `asOf`) runs the same custom strategy
-engine (`portfolio-strategy:v1`) over a fixed 9x9 grid of entry guards and exit
-triggers (`apps/api/src/backtest/matrix.ts`) — monthly $1,000 DCA, 25bps cost,
-30% holdout, from 2018-01-01 — and returns one summary per cell, not the full
-per-run payload (equity curves, ledgers), which would be ~80x too heavy for a
-table this size. It is a live, re-runnable view of the sweep that produced the
-"fixed thresholds don't survive cross-cycle validation" finding recorded in
-`docs/data/PLANS_MACRO_AND_ML.md` (Stage B context) — the frontend tints each
-cell against the DCA-hold benchmark over the same window and opens a full
-breakdown, including the out-of-sample segment, on click.
+`GET /api/v1/backtest/dca-matrix` (guarded `asOf`) reproduces, live and in full,
+the one-off "BTC DCA Matrix" analysis published as an artifact on 2026-09-11
+(see [[crypto-panel-backtest-findings]] / `docs/data/PLANS_MACRO_AND_ML.md`,
+Stage B context) — not just its headline grid. `apps/api/src/backtest/matrix.ts`
+runs the same custom strategy engine (`portfolio-strategy:v1`) — monthly $1,000
+DCA, 25bps cost, 30% holdout, from 2018-01-01 — over five sections:
+
+- **Grid**: every one of 9 entry guards x 9 exit triggers (81 cells), summarized
+  per cell (not the full per-run payload — equity curves and ledgers would be
+  ~80x too heavy for a table this size). The frontend tints each cell against
+  the DCA-hold benchmark and a metric toggle (IRR / max drawdown / time in
+  market) recolors it; click a cell for the full breakdown including the
+  out-of-sample segment, plus top-5/bottom-5 rankings.
+- **Threshold sensitivity** (`mayerExitSensitivity`, `mvrvEntrySensitivity`):
+  sweeps the winning cell's exit (Mayer 1.4→3.8) and entry (MVRV 0.4→2.4) one
+  threshold at a time, holding the other rule fixed, to show whether the chosen
+  number sits on a narrow peak or a wide plateau.
+- **Robustness check** (`robustnessCheck`): the winning cell (MVRV≤1.0 entry,
+  Mayer≥2.4 exit) broken into the three halving-cycle segments (hardcoded public
+  halving dates 2020-05-11 / 2024-04-20 — not archived data, so no provenance
+  concern), an expanding-window chart of its edge over DCA-hold as the end date
+  creeps forward, and its full trade ledger (flags any still-open position).
+- **Adaptive comparison** (`adaptiveComparison`): a self-adjusting version using
+  the metric's own trailing-window percentile rank instead of a fixed number —
+  this needed two new `Condition` types, `mayer-percentile` / `mvrv-percentile`
+  (`strategy-spec.ts`), and a causal rolling-percentile precompute in
+  `portfolio.ts` (`rollingPercentileRank`, computed over the *full* signal
+  history before any `from`/`to` window filter, so an early window doesn't see
+  an artificially short lookback).
+
+All five sections are live-computed on every request (a few seconds, not
+persisted through `backtest_runs`) — re-running `export const dcaMatrix` against
+a later archive state reproduces the same live-report shape, not a frozen
+snapshot.
 
 ## Sources
 
