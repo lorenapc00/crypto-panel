@@ -21,8 +21,8 @@ pnpm dev:api # API: http://127.0.0.1:3100
 pnpm dev     # Web: http://127.0.0.1:5174
 ```
 
-The Crypto Panel deliberately uses ports 3100 (API) and 5174 (web), so it can
-run alongside another local project, which uses 3000 and 5173. This is one personal
+Crypto Panel deliberately uses non-default ports (3100 API, 5174 web) so it can
+run alongside other local projects without colliding. This is one personal
 workspace stored in PostgreSQL. The API binds to loopback by default. Optional
 `WORKSPACE_TOKEN` protects API access with a bearer token entered in the web app;
 the browser keeps that token only for its session. `WEB_ORIGINS` accepts a
