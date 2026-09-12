@@ -35,20 +35,23 @@ test('clicking a DCA Matrix cell shows the full backtest breakdown for that entr
   expect(errors).toEqual([]);
 });
 
-test('DCA Matrix shows both threshold-sensitivity sweeps, the robustness check and the adaptive comparison', async ({ page }) => {
+test('clicking the MVRV<=1.0/Mayer>=2.4 cell stress-tests it: both sensitivity sweeps, robustness and adaptive comparison', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
   await page.goto('/#dca-matrix');
 
-  const mayerSens = page.getByRole('region', { name: 'Mayer exit sensitivity' });
-  await expect(mayerSens.getByRole('heading', { name: 'Is 2.4 special? Mayer exit-threshold sensitivity' })).toBeVisible();
-  await expect(mayerSens.getByText(/MVRV ≤ 1.0.*entry, IRR peaks at/)).toBeVisible({ timeout: 15000 });
+  const matrix = page.getByRole('region', { name: 'DCA Matrix' });
+  const row = matrix.getByRole('row', { name: /MVRV <= 1.0/ });
+  await row.getByRole('button').nth(4).click(); // exit column: Mayer >= 2.4
 
   const mvrvSens = page.getByRole('region', { name: 'MVRV entry sensitivity' });
-  await expect(mvrvSens.getByRole('heading', { name: 'Is 1.0 special? MVRV entry-threshold sensitivity' })).toBeVisible();
-  await expect(mvrvSens.getByText(/Mayer ≥ 2.4.*exit, IRR peaks at/)).toBeVisible();
+  await expect(mvrvSens.getByRole('heading', { name: 'MVRV entry sensitivity' })).toBeVisible({ timeout: 15000 });
+  await expect(mvrvSens.getByText(/IRR peaks at/)).toBeVisible();
+
+  const mayerSens = page.getByRole('region', { name: 'Mayer exit sensitivity' });
+  await expect(mayerSens.getByRole('heading', { name: 'Mayer exit sensitivity' })).toBeVisible();
 
   const robustness = page.getByRole('region', { name: 'Robustness check' });
-  await expect(robustness.getByRole('heading', { name: /Robustness check/ })).toBeVisible();
+  await expect(robustness.getByRole('heading', { name: /Robustness check: is MVRV <= 1\.0 → Mayer >= 2\.4/ })).toBeVisible();
   await expect(robustness.getByText('Pre-2020 halving', { exact: true })).toBeVisible();
   await expect(robustness.getByText('2020 halving cycle', { exact: true })).toBeVisible();
   await expect(robustness.getByText('2024 halving cycle (current, incomplete)', { exact: true })).toBeVisible();
@@ -61,6 +64,25 @@ test('DCA Matrix shows both threshold-sensitivity sweeps, the robustness check a
   await expect(adaptive.getByRole('heading', { name: 'Does making the thresholds cycle-relative actually help?' })).toBeVisible();
   await expect(adaptive.getByRole('columnheader', { name: /Adaptive \(own trailing-\d+d/ })).toBeVisible();
   await expect(adaptive.getByRole('row', { name: /Full window/ })).toBeVisible();
+
+  expect(errors).toEqual([]);
+});
+
+test('clicking a non-Mayer/MVRV cell shows its own sensitivity sweeps but no adaptive section', async ({ page }) => {
+  const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
+  await page.goto('/#dca-matrix');
+
+  const matrix = page.getByRole('region', { name: 'DCA Matrix' });
+  const row = matrix.getByRole('row', { name: /Drawdown from ATH >= 20%/ });
+  await row.getByRole('button').nth(6).click(); // exit column: Weekly RSI >= 70
+
+  const ddSens = page.getByRole('region', { name: 'Drawdown from ATH entry sensitivity' });
+  await expect(ddSens.getByRole('heading', { name: 'Drawdown from ATH entry sensitivity' })).toBeVisible({ timeout: 15000 });
+  const rsiSens = page.getByRole('region', { name: 'Weekly RSI exit sensitivity' });
+  await expect(rsiSens.getByRole('heading', { name: 'Weekly RSI exit sensitivity' })).toBeVisible();
+
+  await expect(page.getByRole('region', { name: 'Robustness check' })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Adaptive comparison' })).toHaveCount(0);
 
   expect(errors).toEqual([]);
 });

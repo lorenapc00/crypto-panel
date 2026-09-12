@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { dcaMatrixFromSignals, mayerExitSensitivity, mvrvEntrySensitivity, robustnessCheck, adaptiveComparison, ENTRY_GUARDS, EXIT_TRIGGERS } from './matrix.js';
+import { dcaMatrixFromSignals, cellDeepDive, ENTRY_GUARDS, EXIT_TRIGGERS } from './matrix.js';
 import type { Signal } from './portfolio.js';
 
 const DAY = 86400000;
@@ -52,42 +52,60 @@ test('dcaMatrixFromSignals: a pure uptrend never triggers a guard-gated strategy
   assert.ok(noGuardHold.timeInMarketPct! >= 99, `expected near-full exposure, got ${noGuardHold.timeInMarketPct}`);
 });
 
-test('mayerExitSensitivity: one point per threshold, ascending 1.4 -> 3.8, both entry variants present', () => {
-  const s = mayerExitSensitivity(longSignals());
-  assert.equal(s.thresholds.length, 25);
-  assert.equal(s.thresholds[0], 1.4);
-  assert.equal(s.thresholds[s.thresholds.length - 1], 3.8);
-  assert.equal(s.mvrvEntry.length, 25);
-  assert.equal(s.noGuard.length, 25);
-});
-
-test('mvrvEntrySensitivity: one point per threshold, ascending 0.4 -> 2.4, trade counts never negative', () => {
-  const s = mvrvEntrySensitivity(longSignals());
-  assert.equal(s.thresholds.length, 21);
-  assert.equal(s.thresholds[0], 0.4);
-  assert.equal(s.thresholds[s.thresholds.length - 1], 2.4);
-  for (const t of s.trades) assert.ok(t === null || t >= 0);
-});
-
-test('robustnessCheck: three cycle segments in order, an expanding series ending at the data\'s own last date, and a ledger', () => {
+test('cellDeepDive: an unknown entry or exit key is rejected', () => {
   const sig = longSignals();
-  const r = robustnessCheck(sig);
-  assert.deepEqual(r.segments.map(s => s.label), ['Pre-2020 halving', '2020 halving cycle', '2024 halving cycle (current, incomplete)']);
-  assert.ok(r.expanding.length > 1);
-  assert.equal(r.expanding[r.expanding.length - 1].to, sig[sig.length - 1].observedAt.slice(0, 10));
-  // Expanding-window dates strictly increase -- each point really is a later cutoff, not a re-shuffled list.
-  for (let i = 1; i < r.expanding.length; i++) assert.ok(r.expanding[i].to > r.expanding[i - 1].to);
-  assert.ok(Array.isArray(r.ledger));
+  assert.throws(() => cellDeepDive(sig, 'not-a-key', 'none'));
+  assert.throws(() => cellDeepDive(sig, 'none', 'not-a-key'));
 });
 
-test('adaptiveComparison: four windows (three segments + full), each reporting dca/fixed/adaptive', () => {
-  const a = adaptiveComparison(longSignals());
-  assert.equal(a.rows.length, 4);
-  assert.equal(a.rows[3].label, 'Full window');
-  for (const row of a.rows) {
-    assert.ok(typeof row.dca === 'number' || row.dca === null);
-    assert.ok(typeof row.fixed === 'number' || row.fixed === null);
-    assert.ok(typeof row.adaptive === 'number' || row.adaptive === null);
-  }
-  assert.ok(Array.isArray(a.ledger));
+test('cellDeepDive: MVRV entry / Mayer exit -- two sweeps, robustness, and adaptive all present', () => {
+  const d = cellDeepDive(longSignals(), 'mvrv-lte1', 'mayer-gte2.4');
+  assert.equal(d.sweeps.length, 2);
+  assert.deepEqual(d.sweeps.map(s => s.side).sort(), ['entry', 'exit']);
+  const entrySweep = d.sweeps.find(s => s.side === 'entry')!;
+  assert.equal(entrySweep.metric, 'mvrv');
+  assert.equal(entrySweep.thresholds.length, 29); // 0.2 .. 3.0 step 0.1
+  assert.equal(entrySweep.thresholds[0], 0.2);
+  const exitSweep = d.sweeps.find(s => s.side === 'exit')!;
+  assert.equal(exitSweep.metric, 'mayer');
+  assert.equal(exitSweep.thresholds.length, 36); // 0.5 .. 4.0 step 0.1
+  assert.deepEqual(d.robustness.segments.map(s => s.label), ['Pre-2020 halving', '2020 halving cycle', '2024 halving cycle (current, incomplete)']);
+  assert.ok(d.adaptive);
+  assert.equal(d.adaptive!.rows.length, 4);
+});
+
+test('cellDeepDive: Mayer entry / MVRV exit (the swapped arrangement) also gets an adaptive comparison', () => {
+  const d = cellDeepDive(longSignals(), 'mayer-lte1', 'mvrv-gte3');
+  assert.ok(d.adaptive);
+});
+
+test('cellDeepDive: a non-threshold side contributes no sweep, but robustness always runs', () => {
+  const d = cellDeepDive(longSignals(), 'regime-bull', 'mayer-gte2.4');
+  assert.equal(d.sweeps.length, 1);
+  assert.equal(d.sweeps[0].side, 'exit');
+  assert.equal(d.sweeps[0].metric, 'mayer');
+  assert.equal(d.adaptive, null); // entry isn't mvrv, so no percentile pairing
+  assert.ok(d.robustness);
+});
+
+test('cellDeepDive: two non-threshold sides get zero sweeps and no adaptive section, but still a robustness check', () => {
+  const d = cellDeepDive(longSignals(), 'regime-bull', 'new-ath');
+  assert.equal(d.sweeps.length, 0);
+  assert.equal(d.adaptive, null);
+  assert.ok(d.robustness.segments.length === 3);
+});
+
+test('cellDeepDive: a Drawdown/RSI pairing sweeps both sides but never gets an adaptive section', () => {
+  const d = cellDeepDive(longSignals(), 'dd20', 'rsi-gte70');
+  assert.equal(d.sweeps.length, 2);
+  const dd = d.sweeps.find(s => s.metric === 'drawdown-from-ath')!;
+  assert.equal(dd.thresholds.length, 12); // 5 .. 60 step 5
+  const rsi = d.sweeps.find(s => s.metric === 'weekly-rsi')!;
+  assert.equal(rsi.thresholds.length, 17); // 10 .. 90 step 5
+  assert.equal(d.adaptive, null);
+});
+
+test('cellDeepDive: each sweep never carries a null thresholds array, and trade counts are never negative', () => {
+  const d = cellDeepDive(longSignals(), 'fg-lte25', 'fg-gte75');
+  for (const sweep of d.sweeps) for (const t of sweep.trades) assert.ok(t === null || t >= 0);
 });

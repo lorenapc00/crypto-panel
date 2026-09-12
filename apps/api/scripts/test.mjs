@@ -22,7 +22,7 @@ process.stdout.write(result.stdout ?? "");
 process.stderr.write(result.stderr ?? "");
 const count = Number(/^# tests (\d+)$/m.exec(result.stdout ?? "")?.[1] ?? 0);
 const skipped = Number(/^# skipped (\d+)$/m.exec(result.stdout ?? "")?.[1] ?? 0);
-const minimum = database ? 70 : 147;
+const minimum = database ? 70 : 150;
 if (result.error || result.status !== 0 || count < minimum || skipped) {
   console.error(`Test run failed or incomplete: ${count} cases, minimum ${minimum}, ${skipped} skipped`);
   process.exitCode = 1;

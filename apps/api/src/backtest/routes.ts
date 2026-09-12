@@ -7,7 +7,7 @@ import { ReplayCoverageError } from '../archive.js';
 import { BACKTEST_TEMPLATES, findTemplate } from './templates.js';
 import { backtestCoverage, replayComposition, loadRegimeInputs } from './archive.js';
 import { runBacktests } from './executor.js';
-import { dcaMatrix } from './matrix.js';
+import { dcaMatrix, dcaMatrixCell, ENTRY_GUARDS, EXIT_TRIGGERS } from './matrix.js';
 
 export async function backtestRoute(database: Pool, req: IncomingMessage, res: ServerResponse, url: URL): Promise<boolean> {
   const path = url.pathname.replace('/api/v1', '');
@@ -43,6 +43,20 @@ export async function backtestRoute(database: Pool, req: IncomingMessage, res: S
     if (req.method !== 'GET') throw new InputError('Method not allowed', 405);
     try {
       return send(res, 200, { data: await dcaMatrix(database, cutoff(url.searchParams.get('asOf'))) }), true;
+    } catch (error) {
+      if (error instanceof ReplayCoverageError) throw new InputError(error.message, 409);
+      throw error;
+    }
+  }
+
+  if (path === '/backtest/dca-matrix/cell') {
+    if (req.method !== 'GET') throw new InputError('Method not allowed', 405);
+    const entryKey = url.searchParams.get('entry');
+    const exitKey = url.searchParams.get('exit');
+    if (!entryKey || !ENTRY_GUARDS.some(e => e.key === entryKey)) throw new InputError('Unknown entry key');
+    if (!exitKey || !EXIT_TRIGGERS.some(x => x.key === exitKey)) throw new InputError('Unknown exit key');
+    try {
+      return send(res, 200, { data: await dcaMatrixCell(database, entryKey, exitKey, cutoff(url.searchParams.get('asOf'))) }), true;
     } catch (error) {
       if (error instanceof ReplayCoverageError) throw new InputError(error.message, 409);
       throw error;

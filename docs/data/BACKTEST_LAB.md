@@ -161,40 +161,58 @@ vintage checks. None became accessible. `tokenomics_events` stays empty and the
 
 ## DCA Matrix (`#dca-matrix`)
 
-`GET /api/v1/backtest/dca-matrix` (guarded `asOf`) reproduces, live and in full,
-the one-off "BTC DCA Matrix" analysis published as an artifact on 2026-09-11
-(see [[crypto-panel-backtest-findings]] / `docs/data/PLANS_MACRO_AND_ML.md`,
-Stage B context) — not just its headline grid. `apps/api/src/backtest/matrix.ts`
-runs the same custom strategy engine (`portfolio-strategy:v1`) — monthly $1,000
-DCA, 25bps cost, 30% holdout, from 2018-01-01 — over five sections:
+Started as a live reproduction of the one-off "BTC DCA Matrix" analysis
+published as an artifact on 2026-09-11 (see
+[[crypto-panel-backtest-findings]] / `docs/data/PLANS_MACRO_AND_ML.md`, Stage B
+context) — that analysis stress-tested exactly one combo (MVRV≤1.0 entry,
+Mayer≥2.4 exit). It's since generalized: click *any* of the 81 cells and get
+the same stress test for that cell's own entry/exit conditions, not just the
+winning one.
 
-- **Grid**: every one of 9 entry guards x 9 exit triggers (81 cells), summarized
-  per cell (not the full per-run payload — equity curves and ledgers would be
-  ~80x too heavy for a table this size). The frontend tints each cell against
-  the DCA-hold benchmark and a metric toggle (IRR / max drawdown / time in
-  market) recolors it; click a cell for the full breakdown including the
-  out-of-sample segment, plus top-5/bottom-5 rankings.
-- **Threshold sensitivity** (`mayerExitSensitivity`, `mvrvEntrySensitivity`):
-  sweeps the winning cell's exit (Mayer 1.4→3.8) and entry (MVRV 0.4→2.4) one
-  threshold at a time, holding the other rule fixed, to show whether the chosen
-  number sits on a narrow peak or a wide plateau.
-- **Robustness check** (`robustnessCheck`): the winning cell (MVRV≤1.0 entry,
-  Mayer≥2.4 exit) broken into the three halving-cycle segments (hardcoded public
-  halving dates 2020-05-11 / 2024-04-20 — not archived data, so no provenance
-  concern), an expanding-window chart of its edge over DCA-hold as the end date
-  creeps forward, and its full trade ledger (flags any still-open position).
-- **Adaptive comparison** (`adaptiveComparison`): a self-adjusting version using
-  the metric's own trailing-window percentile rank instead of a fixed number —
-  this needed two new `Condition` types, `mayer-percentile` / `mvrv-percentile`
-  (`strategy-spec.ts`), and a causal rolling-percentile precompute in
-  `portfolio.ts` (`rollingPercentileRank`, computed over the *full* signal
-  history before any `from`/`to` window filter, so an early window doesn't see
-  an artificially short lookback).
+`apps/api/src/backtest/matrix.ts` runs the same custom strategy engine
+(`portfolio-strategy:v1`) — monthly $1,000 DCA, 25bps cost, 30% holdout, from
+2018-01-01 — split into two requests:
 
-All five sections are live-computed on every request (a few seconds, not
-persisted through `backtest_runs`) — re-running `export const dcaMatrix` against
-a later archive state reproduces the same live-report shape, not a frozen
-snapshot.
+- **`GET /api/v1/backtest/dca-matrix`** (guarded `asOf`): the always-on grid,
+  every one of 9 entry guards x 9 exit triggers (81 cells), summarized per cell
+  (not the full per-run payload — equity curves and ledgers would be ~80x too
+  heavy for a table this size). The frontend tints each cell against the
+  DCA-hold benchmark, a metric toggle (IRR / max drawdown / time in market)
+  recolors it, and it shows top-5/bottom-5 rankings. Dropping the deep-dive
+  sections out of this route (they used to always run for the winning combo)
+  cut its own live-compute time roughly in half.
+- **`GET /api/v1/backtest/dca-matrix/cell?entry=&exit=`** (new, guarded
+  `asOf`): one clicked cell's deep dive, computed on demand (~0.5-3s depending
+  on the combo, benchmarked live). `cellDeepDive` in `matrix.ts`:
+  - **Threshold sensitivity** (`thresholdSweep`): for *each* side (entry,
+    exit) whose condition has a number to sweep — Mayer, MVRV,
+    Drawdown-from-ATH, Weekly RSI, or Fear & Greed, each with its own sweep
+    range in `THRESHOLD_CONFIG` — sweeps that one threshold, holding the
+    other side fixed two ways (the clicked cell's actual condition, and
+    neutral) to show whether the chosen number sits on a narrow peak or a
+    wide plateau. A cell with no threshold-bearing side (regime, new-ATH,
+    price-vs-SMA200, none) gets no sweep at all, just the robustness check.
+  - **Robustness check** (`robustnessCheck`): the clicked combo broken into
+    the three halving-cycle segments (hardcoded public halving dates
+    2020-05-11 / 2024-04-20 — not archived data, so no provenance concern),
+    an expanding-window chart of its edge over DCA-hold as the end date
+    creeps forward, and its full trade ledger (flags any still-open
+    position). Always runs, for any combo.
+  - **Adaptive comparison** (`adaptiveComparison`): a self-adjusting version
+    using the metric's own trailing-window percentile rank instead of a
+    fixed number, via two `Condition` types, `mayer-percentile` /
+    `mvrv-percentile` (`strategy-spec.ts`), and a causal rolling-percentile
+    precompute in `portfolio.ts` (`rollingPercentileRank`, computed over the
+    *full* signal history before any `from`/`to` window filter, so an early
+    window doesn't see an artificially short lookback). Only renders when
+    the clicked combo pairs a Mayer-type condition with an MVRV-type one
+    (either arrangement) — the percentile engine doesn't cover the other
+    three metrics, so those pairings skip this section rather than fake an
+    equivalent that doesn't exist.
+
+Both routes are live-computed on every request (nothing persisted through
+`backtest_runs`) — re-running either against a later archive state reproduces
+the same live-report shape, not a frozen snapshot.
 
 ## Sources
 
