@@ -11,7 +11,8 @@
     "ingest:market": "node --import tsx src/ingest.ts",
     "worker": "node --import tsx src/worker.ts",
     "worker:once": "node --import tsx src/worker.ts --once",
-    "research:probe": "node --import tsx ../../scripts/probe-capabilities.mjs"
+    "research:probe": "node --import tsx ../../scripts/probe-capabilities.mjs",
+    "export:ml-features": "node --import tsx scripts/export-ml-features.mts"
   },
   "dependencies": {
     "pg": "^8.16.3"

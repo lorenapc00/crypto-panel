@@ -3,8 +3,11 @@
 Recorded 2026-09-11. Two plans agreed with the user during the same session,
 in execution order. **Stage A shipped 2026-09-11** (commit `de01add` on
 `stage-6-backtest-lab`) — see its "Implementation and live verification" note
-below for what was built and confirmed live. **Stage B is next, parked**
-until explicitly resumed.
+below for what was built and confirmed live. **Stage B ran 2026-09-11** (same
+session, `research/btc-signal/`, not yet committed) — see its "Result recorded
+2026-09-11" note at the end of the Stage B section: **NO-GO**, a documented
+negative result per the exit criteria fixed in advance. No Phase 2 (serving)
+work starts.
 
 **Revised 2026-09-11 after a critical review.** Every correction below was
 checked against the code or a live probe the same day. Main changes:
@@ -375,7 +378,7 @@ local API server (not just fixtures):
 
 ---
 
-## Stage B (parked): BTC signal research — Python, BRL/CDI-aware, offline-only
+## Stage B (ran 2026-09-11, verdict NO-GO): BTC signal research — Python, BRL/CDI-aware, offline-only
 
 ### Context
 
@@ -618,6 +621,38 @@ Phase 1 ends with a written verdict. **Go requires all of:**
 
 If any of 1–5 fails, Phase 1 stops as a documented negative result, and no
 Phase 2 (serving) work starts.
+
+### Result, recorded 2026-09-11 (first full run)
+
+**Verdict: NO-GO.** Full repro steps, caveats and the per-fold table live in
+`research/btc-signal/README.md`; summarized here:
+
+| # | Criterion | Result |
+|---|---|---|
+| 1 | Beats monthly DCA and constant-mix in a majority of 9 folds | fails |
+| 2 | Pooled bootstrap 90% CI of ΔSharpe vs. (d) entirely above 0 | fails — CI was `[-1.08, -0.31]`, entirely *below* 0 |
+| 3 | Random-timing test p < 0.05 | fails — pooled p = 0.905 |
+| 4 | Criteria 1–2 hold at 50 and 100 bps | fails — mean fold Sharpe at 100bps (−0.047) no longer beats (d) |
+| 5 | Holdout ΔSharpe vs. (d) not negative | passes (+2.55), but alone doesn't overturn 1–4 |
+| 6 | Deflated Sharpe Ratio reported | DSR ≈ 0.0000 over 7,460 trials — the pooled Sharpe doesn't survive the multiple-testing correction |
+
+Pooled walk-forward Sharpe-vs-CDI: ridge −0.35, LightGBM −0.83 (ridge stayed
+the selected model; the challenger never beat it out-of-sample, so per the
+plan it was never adopted). Per
+`research/btc-signal/README.md`, treat the 2017 fold's result with extra
+caution: its training window still lost real rows to the PTAX backfill gap
+below at the time of this run. **No Phase 2 (serving) work starts.** This
+closes the BTC-signal Phase 1 research opened by this plan; a future revisit
+would need a new reason to reopen it (new features, a different horizon, or
+new data), not a rerun of this same protocol.
+
+**Known data caveat carried into this result:** the BCB USD/BRL PTAX archive
+had backfilled only to 2016-09-26 at run time (CDI was already complete to
+2010-01-04 — same chunking logic, just a day or two behind in the worker's
+own daily schedule). `scripts/export-ml-features.mts` and
+`scripts/run_experiment.py` both print the PTAX coverage they actually found;
+this is a live-data timing gap, not a code defect, and closes on its own as
+the worker's daily job keeps running.
 
 ### Explicit non-goals for this phase
 
