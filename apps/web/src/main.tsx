@@ -12,6 +12,7 @@ import { MarketOverview } from "./pages/MarketOverview";
 import { PerpDiscovery } from "./pages/PerpDiscovery";
 import { AltcoinDiscovery } from "./pages/AltcoinDiscovery";
 import { BacktestLab } from "./pages/BacktestLab";
+import { DcaMatrix } from "./pages/DcaMatrix";
 import { Macro } from "./pages/Macro";
 
 type Asset = {
@@ -94,13 +95,14 @@ type AssetDetail = {
   fundamentals: Fundamentals;
   tokenomicsEvents: TokenomicsEvent[];
 };
-type Page = "overview" | "btc" | "perp" | "altcoin" | "backtest" | "assets" | "watchlist" | "research" | "data-health" | "macro";
+type Page = "overview" | "btc" | "perp" | "altcoin" | "backtest" | "dca-matrix" | "assets" | "watchlist" | "research" | "data-health" | "macro";
 const pages: { id: Page; label: string }[] = [
   { id: "overview", label: "Market Overview" },
   { id: "btc", label: "BTC Cycles" },
   { id: "perp", label: "Perp Discovery" },
   { id: "altcoin", label: "Altcoin Discovery" },
   { id: "backtest", label: "Backtest Lab" },
+  { id: "dca-matrix", label: "DCA Matrix" },
   { id: "assets", label: "Assets" },
   { id: "watchlist", label: "Watchlist" },
   { id:"research",label:"Research" },
@@ -752,6 +754,7 @@ function App() {
             {page === "perp" && <PerpDiscovery />}
             {page === "altcoin" && <AltcoinDiscovery />}
             {page === "backtest" && <BacktestLab />}
+            {page === "dca-matrix" && <DcaMatrix />}
             {page === "data-health" && <DataHealth />}
             {page === "macro" && <Macro />}
           </>

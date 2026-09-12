@@ -159,6 +159,19 @@ liquidations and options data, and macro inputs behind a free FRED key and
 vintage checks. None became accessible. `tokenomics_events` stays empty and the
 `/analytics/*` routes stay explicitly unavailable.
 
+## DCA Matrix (`#dca-matrix`)
+
+`GET /api/v1/backtest/dca-matrix` (guarded `asOf`) runs the same custom strategy
+engine (`portfolio-strategy:v1`) over a fixed 9x9 grid of entry guards and exit
+triggers (`apps/api/src/backtest/matrix.ts`) — monthly $1,000 DCA, 25bps cost,
+30% holdout, from 2018-01-01 — and returns one summary per cell, not the full
+per-run payload (equity curves, ledgers), which would be ~80x too heavy for a
+table this size. It is a live, re-runnable view of the sweep that produced the
+"fixed thresholds don't survive cross-cycle validation" finding recorded in
+`docs/data/PLANS_MACRO_AND_ML.md` (Stage B context) — the frontend tints each
+cell against the DCA-hold benchmark over the same window and opens a full
+breakdown, including the out-of-sample segment, on click.
+
 ## Sources
 
 - Coin Metrics Community API — BTC `PriceUSD`, daily. CC BY-NC 4.0.

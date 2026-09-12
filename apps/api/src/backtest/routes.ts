@@ -7,6 +7,7 @@ import { ReplayCoverageError } from '../archive.js';
 import { BACKTEST_TEMPLATES, findTemplate } from './templates.js';
 import { backtestCoverage, replayComposition, loadRegimeInputs } from './archive.js';
 import { runBacktests } from './executor.js';
+import { dcaMatrix } from './matrix.js';
 
 export async function backtestRoute(database: Pool, req: IncomingMessage, res: ServerResponse, url: URL): Promise<boolean> {
   const path = url.pathname.replace('/api/v1', '');
@@ -32,6 +33,16 @@ export async function backtestRoute(database: Pool, req: IncomingMessage, res: S
       if (composition.everyWorkspaceRefused)
         throw new InputError('Historical replay predates production coverage for the BTC regime at this cutoff; no earlier dataset is replayable', 409);
       return send(res, 200, { data: composition }), true;
+    } catch (error) {
+      if (error instanceof ReplayCoverageError) throw new InputError(error.message, 409);
+      throw error;
+    }
+  }
+
+  if (path === '/backtest/dca-matrix') {
+    if (req.method !== 'GET') throw new InputError('Method not allowed', 405);
+    try {
+      return send(res, 200, { data: await dcaMatrix(database, cutoff(url.searchParams.get('asOf'))) }), true;
     } catch (error) {
       if (error instanceof ReplayCoverageError) throw new InputError(error.message, 409);
       throw error;

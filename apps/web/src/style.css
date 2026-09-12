@@ -663,3 +663,26 @@ footer {
 .macro-calendar-source h3 { font-size: 13px; font-weight: 500; color: #aebccc; margin: 0 0 6px; }
 .macro-calendar-source ul { margin: 0; padding-left: 18px; }
 .macro-calendar-source li { font-size: 12px; line-height: 1.9; color: #aebccc; }
+
+.dca-matrix-workspace { display: grid; gap: 14px; margin-top: 12px; }
+.dca-matrix-intro { margin: 4px 0 0; }
+.dca-matrix-intro h2 { font-size: 24px; margin: 8px 0; }
+.dca-matrix-intro .eyebrow, .dca-matrix-intro p { color: #9ca9b9; font-size: 12px; line-height: 1.7; }
+.dca-matrix-table-wrap { overflow: auto; }
+.dca-matrix-table { width: 100%; border-collapse: collapse; font-size: 11px; white-space: nowrap; }
+.dca-matrix-table th, .dca-matrix-table td { border: 1px solid #202a37; padding: 6px 8px; text-align: center; }
+.dca-matrix-table thead th { background: #111821; color: #9ca9b9; font-weight: 500; }
+.dca-matrix-table tbody th { text-align: left; background: #111821; color: #dfe6ee; font-weight: 500; }
+.dca-matrix-table td button { background: none; border: none; color: inherit; font: inherit; cursor: pointer; padding: 2px 4px; width: 100%; }
+.dca-matrix-table td button.dca-cell-selected { outline: 1px solid #e8ba68; border-radius: 2px; }
+.dca-matrix-table td.dca-cell-beats { background: rgba(113, 188, 166, 0.14); color: #9fe0c6; }
+.dca-matrix-table td.dca-cell-lags { background: rgba(206, 135, 155, 0.14); color: #e3a6b5; }
+.dca-matrix-table td.dca-cell-error { color: #5c6878; }
+.dca-matrix-legend { color: #9ca9b9; font-size: 11px; margin: 0; }
+.dca-matrix-detail { border: 1px solid #202a37; background: #111821; padding: 16px; }
+.dca-matrix-detail h3 { font-size: 15px; margin: 0 0 10px; }
+.dca-matrix-detail table { width: 100%; font-size: 12px; border-collapse: collapse; }
+.dca-matrix-detail td { padding: 4px 0; border-bottom: 1px solid #1c2530; }
+.dca-matrix-detail td:first-child { color: #9ca9b9; width: 45%; }
+.dca-matrix-dataset { color: #5c6878; font-size: 11px; margin: 0; }
+@media (max-width: 800px) { .dca-matrix-table { font-size: 10px; } }
